@@ -11,7 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111026202100) do
+ActiveRecord::Schema.define(:version => 20111026204137) do
+
+  create_table "activities", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "pages", :force => true do |t|
+    t.string   "name"
+    t.text     "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "activity_id"
+  end
+
+  add_index "pages", ["activity_id"], :name => "index_pages_on_activity_id"
 
   create_table "users", :force => true do |t|
     t.string   "crypted_password",          :limit => 40
