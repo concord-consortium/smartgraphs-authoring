@@ -9,6 +9,14 @@ class Page < ActiveRecord::Base
   end
 
   belongs_to :activity
+  
+  def to_hash
+    {
+      'type' => 'Page',
+      'name' => name,
+      'text' => text.to_s
+    }
+  end
 
   # --- Permissions --- #
 

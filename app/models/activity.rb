@@ -11,6 +11,16 @@ class Activity < ActiveRecord::Base
   
   children :pages
 
+  def to_hash
+    {
+      'type' => 'Activity',
+      'name' => name,
+      'pages' => pages.map do |page|
+        page.to_hash
+      end
+    }
+  end
+
   # --- Permissions --- #
 
   def create_permitted?
