@@ -1,6 +1,8 @@
 .bundle
+.rvmrc
 db/*.sqlite3
 log/*.log
 tmp/
 app/views/taglibs/auto/**/*
+config/database.yml
 config/hobo_routes.rb
