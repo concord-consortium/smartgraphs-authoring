@@ -7,7 +7,7 @@ class Activity < ActiveRecord::Base
     timestamps
   end
 
-  has_many :pages
+  has_many :pages, :order => :position
   
   children :pages
 

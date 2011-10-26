@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111026204137) do
+ActiveRecord::Schema.define(:version => 20111026215339) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(:version => 20111026204137) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "activity_id"
+    t.integer  "position"
   end
 
   add_index "pages", ["activity_id"], :name => "index_pages_on_activity_id"

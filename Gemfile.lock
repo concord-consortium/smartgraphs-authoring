@@ -28,6 +28,7 @@ GEM
       activemodel (= 3.0.10)
       activesupport (= 3.0.10)
     activesupport (3.0.10)
+    acts_as_list (0.1.4)
     arel (2.0.10)
     builder (2.1.2)
     capistrano (2.8.0)
@@ -117,6 +118,7 @@ PLATFORMS
 
 DEPENDENCIES
   capistrano-ext
+  acts_as_list
   hobo (= 1.3.0.RC2)
   mysql
   rails (= 3.0.10)

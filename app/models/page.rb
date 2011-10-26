@@ -10,6 +10,8 @@ class Page < ActiveRecord::Base
 
   belongs_to :activity
   
+  acts_as_list
+  
   def to_hash
     {
       'type' => 'Page',
