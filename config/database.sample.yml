@@ -17,7 +17,8 @@ test:
 
 production:
   adapter: mysql
-  user: sg_authoring_pro
+  username: sg_authoring
+  database: sg_authoring_pro
   password: password
   host: seymour.concord.org
   reconnect: true
