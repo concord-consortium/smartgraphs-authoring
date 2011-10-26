@@ -1,7 +1,6 @@
 require "bundler/capistrano"
 require 'capistrano/ext/multistage'
 require 'haml'
-require File.expand_path('../../lib/yaml_editor', __FILE__)
 
 set :stages, %w(staging production)
 
@@ -260,10 +259,6 @@ namespace :rake_tasks do
   end  
 end
 
-before 'deploy:restart', 'deploy:set_permissions'
 before 'deploy:update_code', 'deploy:make_directory_structure'
 after 'deploy:update_code', 'deploy:shared_symlinks'
-after 'deploy:symlink', 'deploy:create_asset_packages'
-after 'deploy:create_asset_packages', 'deploy:cleanup'
-after 'installer:create', 'deploy:restart'
 

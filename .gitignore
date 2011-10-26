@@ -3,6 +3,7 @@
 db/*.sqlite3
 log/*.log
 tmp/
+bin/
 app/views/taglibs/auto/**/*
 config/database.yml
 config/hobo_routes.rb
