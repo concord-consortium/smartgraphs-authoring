@@ -1,6 +1,14 @@
 --- 
-delivery_method: :test
-smtp_settings: 
+# change this to :smtp to actually send emails
+:delivery_method: :test
+
+# you'll need to set the hostname
+# this is used as the domain the emails come from
+:default_url_options:
+  :host: example.com
+
+# you might need to do this to use a external smtp server
+:smtp_settings: 
   password: your_smtp_password
   address: mail.rigse.org
   port: 25
