@@ -1,0 +1,9 @@
+--- 
+delivery_method: :test
+smtp_settings: 
+  password: your_smtp_password
+  address: mail.rigse.org
+  port: 25
+  authentication: :login
+  user_name: your_smtp_username
+  domain: rigse.org
