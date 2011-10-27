@@ -1,3 +1,17 @@
+## update SmartGraphs runtime ##
+
+1. checkout Smartgraphs repository
+2. follow steps in Smartgraphs/readme
+3. inside of the Smartgraphs folder
+    rm -r tmp/build/static
+    bundle exec sc-build smartgraphs -r --languages=en
+    cp -r tmp/build/static ../smartgraphs-authoring/public
+4. You might want check the existing files in the public folder and decide if they should be replaced
+   or kept.
+
+Currently after doing this you can run SmartGraphs going going to:
+/static/smartgraphs/en/82b404e9816653aae3437852c272301c88eb986a/index.html
+
 ## configuring & installing on a VM ##
 
 * get setup with git and rvm
