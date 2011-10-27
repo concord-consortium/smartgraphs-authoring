@@ -259,6 +259,13 @@ namespace :rake_tasks do
   end  
 end
 
+namespace :hobo do
+  desc 'invoke the generate_taglibs rake task'
+  task :generate_taglibs do
+    run("cd #{deploy_to}/current; bundle exec rake hobo:generate_taglibs RAILS_ENV=#{rails_env}")
+  end
+end
+
 before 'deploy:update_code', 'deploy:make_directory_structure'
 after 'deploy:update_code', 'deploy:shared_symlinks'
-
+before 'deploy:restart', 'hobo:generate_taglibs'
