@@ -71,7 +71,7 @@ end
 set(:scm_passphrase) do
   Capistrano::CLI.password_prompt( "Enter your git password: ")
 end
-set :repository, "git://github.com/concord-consortium/sg-authoring.git"
+set :repository, "git://github.com/concord-consortium/smartgraphs-authoring.git"
 set :deploy_via, :remote_cache
 
 #############################################################
