@@ -37,6 +37,6 @@ end
 # group :development, :test do
 #   gem 'webrat'
 # end
-gem "hobo", "= 1.3.0.RC2"
+gem "hobo", "= 1.3.0.RC3"
 gem "rspec-rails", ">= 2.5.0", :group => [:test, :development]
 gem "acts_as_list"
