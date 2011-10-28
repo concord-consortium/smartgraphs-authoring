@@ -266,6 +266,13 @@ namespace :hobo do
   end
 end
 
+namespace :converter do
+  desc 'install the smartgraph-generator node package and convert binary'
+  task :install do
+    run("npm install git://github.com/concord-consortium/smartgraphs-generator.git")
+  end
+end
+
 before 'deploy:update_code', 'deploy:make_directory_structure'
 after 'deploy:update_code', 'deploy:shared_symlinks'
 before 'deploy:restart', 'hobo:generate_taglibs'
