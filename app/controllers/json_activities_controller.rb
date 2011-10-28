@@ -6,6 +6,15 @@ class JsonActivitiesController < ApplicationController
 
   auto_actions :all
 
+  def show
+    hobo_show do |format|
+      format.json {
+        render :text => @json_activity.json
+      }
+      format.html {}
+    end
+  end
+
   def preview
     File.open "#{Rails.root}/public/static/smartgraphs/en/817dd27df90f8bee344663d0bd63f4993512bbd2/index.html" do |file|
       template = ERB.new file.read
