@@ -11,10 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111026215339) do
+ActiveRecord::Schema.define(:version => 20111028140627) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "json_activities", :force => true do |t|
+    t.string   "name"
+    t.text     "json"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
