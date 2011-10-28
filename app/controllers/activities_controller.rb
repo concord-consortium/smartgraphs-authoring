@@ -38,7 +38,7 @@ class ActivitiesController < ApplicationController
     #
     # and that will work for you...
     #
-    authored_activity_json = Converter.new("$HOME/node_modules/.bin/sg-convert").convert(Activity.find(params[:id]).to_json)
+    authored_activity_json = Converter.new("#{Rails.root}/smartgraphs-generator/bin/sg-convert").convert(Activity.find(params[:id]).to_hash.to_json)
     File.open "#{Rails.root}/public/static/smartgraphs/en/5a2301d099b8d537c51560051dd2bc99eb4b582f/index.html" do |file|
       template = ERB.new file.read
       render :text => template.result(binding)

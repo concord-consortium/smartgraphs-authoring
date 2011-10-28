@@ -1,0 +1,3 @@
+[submodule "smartgraphs-generator"]
+	path = smartgraphs-generator
+	url = git://github.com/concord-consortium/smartgraphs-generator.git
