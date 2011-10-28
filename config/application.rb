@@ -9,6 +9,8 @@ Bundler.require(:default, Rails.env) if defined?(Bundler)
 module SgAuthoring
   class Application < Rails::Application
   
+    config.hobo.app_name = "SmartGraphs Authoring"
+  
     config.generators do |g|
       g.test_framework :rspec, :fixtures => true
       g.fallbacks[:rspec] = :test_unit
