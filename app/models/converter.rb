@@ -4,8 +4,8 @@ class Converter
     attr_accessor :converter_call
 
   # initialize(path to binary, array of CLI args)
-  def initialize(path=File.join('/','bin','cat'),args=[])
-    self.converter_call = [path] + args
+  def initialize(call="/bin/cat")
+    self.converter_call = call
   end
 
   # convert(string)
