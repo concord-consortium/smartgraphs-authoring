@@ -10,10 +10,14 @@
     <link rel="apple-touch-icon" href="/static/sproutcore/foundation/en/1e3562c3eded0e237a64955cae12d1a7789e90d1/images/sproutcore-logo.png" />
 	  <link rel="apple-touch-startup-image" media="screen and (orientation:portrait)" href="/static/sproutcore/foundation/en/1e3562c3eded0e237a64955cae12d1a7789e90d1/images/sproutcore-startup-portrait.png" /> 
 	  <link rel="apple-touch-startup-image" media="screen and (orientation:landscape)" href="/static/sproutcore/foundation/en/1e3562c3eded0e237a64955cae12d1a7789e90d1/images/sproutcore-startup-landscape.png" />
-	  <link rel="shortcut icon" href="" type="image/x-icon" />
     
     <title>Smartgraphs</title>
   <script type="text/javascript">
+   // uncomment this line to dynmically replace the JSON content on the server
+   window.authoredActivityJSON="<%= authored_activity_json %>";
+</script>
+
+<script type="text/javascript">
 /* >>>>>>>>>> BEGIN source/core.js */
 // ==========================================================================
 // Project:   SproutCore - JavaScript Application Framework
@@ -123,7 +127,7 @@ SC.setupBodyClassNames = function() {
   <link href="/static/cc/cc/en/63c9faac9d0b97eaa986cd01c2d35c0377eed80d/stylesheet.css" rel="stylesheet" type="text/css" />
   <link href="/static/sproutcore/ace/en/38877857d497055a9819b8f0d2bd71131f5ab2e2/stylesheet.css" rel="stylesheet" type="text/css" />
   <link href="/static/pig/en/aaa2036d9820bacbc85107807851544740ec501b/stylesheet.css" rel="stylesheet" type="text/css" />
-  <link href="/static/smartgraphs/en/82b404e9816653aae3437852c272301c88eb986a/stylesheet.css" rel="stylesheet" type="text/css" />
+  <link href="/static/smartgraphs/en/817dd27df90f8bee344663d0bd63f4993512bbd2/stylesheet.css" rel="stylesheet" type="text/css" />
    
     
   </head>
@@ -147,7 +151,8 @@ if (SC.setupBodyClassNames) SC.setupBodyClassNames() ;
 <div id="loading">
 <div class='app-loading'>
   <!-- loading spinner courtesy of http://loadinfo.net/ -->
-  <img src="/static/smartgraphs/en/82b404e9816653aae3437852c272301c88eb986a/resources/images/app_loading.gif"
+  <img src="/static/smartgraphs/en/817dd27df90f8bee344663d0bd63f4993512bbd2/resources/images/app_loading.gif"
+       alt="loading"
        style='margin-top: -63px; margin-left:-24px'>
   <p class='sc-theme sc-view' style='margin-top: 3px; width: 200px; margin-left: -100px;'>
     Loading Smartgraphs...
@@ -164,7 +169,7 @@ if (SC.setupBodyClassNames) SC.setupBodyClassNames() ;
   <script type="text/javascript" src="/static/sproutcore/empty_theme/en/ded52cb3e6a67934b7f5561e5397d9af187bd369/javascript.js"></script>
   <script type="text/javascript" src="/static/sproutcore/ace/en/38877857d497055a9819b8f0d2bd71131f5ab2e2/javascript.js"></script>
   <script type="text/javascript" src="/static/pig/en/aaa2036d9820bacbc85107807851544740ec501b/javascript.js"></script>
-  <script type="text/javascript" src="/static/smartgraphs/en/82b404e9816653aae3437852c272301c88eb986a/javascript.js"></script>
+  <script type="text/javascript" src="/static/smartgraphs/en/817dd27df90f8bee344663d0bd63f4993512bbd2/javascript.js"></script>
 <script type="text/javascript">String.preferredLanguage = "en";</script>
 	</body>
 </html>
