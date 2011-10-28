@@ -3,6 +3,8 @@ SgAuthoring::Application.routes.draw do
 
   match 'search' => 'front#search', :as => 'site_search'
 
+  get 'activities/:id/preview(.:format)' => 'activities#preview', :as => 'preview_activity'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

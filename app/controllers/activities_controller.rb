@@ -16,4 +16,10 @@ class ActivitiesController < ApplicationController
     end
   end
 
+  def preview
+    File.open "#{Rails.root}/public/static/smartgraphs/en/82b404e9816653aae3437852c272301c88eb986a/index.html" do |file|
+      render :text => file.read
+    end
+  end
+
 end
