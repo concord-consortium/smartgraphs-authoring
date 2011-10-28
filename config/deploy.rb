@@ -269,3 +269,4 @@ end
 before 'deploy:update_code', 'deploy:make_directory_structure'
 after 'deploy:update_code', 'deploy:shared_symlinks'
 before 'deploy:restart', 'hobo:generate_taglibs'
+after 'deploy:migrate', 'hobo:generate_taglibs'
