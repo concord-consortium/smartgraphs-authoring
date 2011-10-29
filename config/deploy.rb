@@ -271,6 +271,10 @@ namespace :converter do
   task :install do
     run("npm install git://github.com/concord-consortium/smartgraphs-generator.git")
   end
+  
+  task :submod_install do
+    run("cd #{deploy_to}/current/smartgraphs-generator; npm install")
+  end
 end
 
 before 'deploy:update_code', 'deploy:make_directory_structure'
