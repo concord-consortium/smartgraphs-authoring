@@ -13,10 +13,14 @@ class Converter
   # process
   def convert(string)
     retval = "{}"
-    IO.popen(self.converter_call, 'r+') do |pipe|
-      pipe.puts(string)
-      pipe.close_write
-      pipe.flush
+    IO.popen(self.converter_call, 'r+', :err=>[:child, :out]) do |pipe|
+      begin
+        pipe.puts(string)
+        pipe.close_write
+        pipe.flush
+      rescue
+        # failed to write but we might still get a useful error
+      end
       retval= pipe.read
       pipe.flush
       pipe.close_read
