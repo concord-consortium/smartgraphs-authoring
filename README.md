@@ -1,3 +1,18 @@
+## getting started ##
+1. checkout the project from github
+2. install [node][] for your platform. Try [homebrew][] on osx, then
+   'brew install node'
+3. install smartgraphs-generator using 'npm install' from this
+   directory.
+4. start up the server 'rails s'
+
+### Notes ###
+You might need to update your npm version before step 6 works.
+You can try 
+    npm -g update npm
+but that might fail, so then you can also try
+    curl http://npmjs.org/install.sh | sudo sh
+
 ## update SmartGraphs runtime ##
 
 1. checkout Smartgraphs repository
@@ -9,18 +24,6 @@
 4. You might want check the existing files in the public folder and decide if they should be replaced
    or kept. Currently after doing this you can run SmartGraphs going going to:
 /static/smartgraphs/en/82b404e9816653aae3437852c272301c88eb986a/index.html
-5. install [node][] for your platform. Try [homebrew][] on osx, then
-   'brew install node'
-6. install smartgraphs-generator using 'npm install' from this
-   directory. 
- 
-### Notes ###
-You might need to update your npm version before step 6 works.
-You can try 
-    npm -g update npm
-but that might fail, so then you can also try
-    curl http://npmjs.org/install.sh | sudo sh
-
 
 ## configuring & installing on a VM ##
 
