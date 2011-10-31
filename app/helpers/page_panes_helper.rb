@@ -1,0 +1,2 @@
+module PagePanesHelper
+end

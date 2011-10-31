@@ -25,3 +25,20 @@
     </append-body:>
   </old-card>
 </extend>
+
+<def tag="card" for="PagePane">
+  <!-- By default a recursive tag inside a polymorphic definition just calls the base card 
+       So we have to explicitly set the type-->
+  <card:pane for-type="&this.pane.class"/>
+</def>
+
+<extend tag="form" for="Page">
+  <old-form merge>
+    <after-field-list:>
+      <collection:page_panes/>
+      <a action="new" to="&this.image_panes" param="new-link">
+        <ht key="image_pane.actions.new" >New Image Pane element</ht>
+      </a>
+    </after-field-list:>
+  </old-form>
+</extend>

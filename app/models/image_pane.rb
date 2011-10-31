@@ -1,41 +1,27 @@
-class Page < ActiveRecord::Base
+class ImagePane < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
 
   fields do
     name :string
-    text :text
+    url :string
     timestamps
   end
 
-  belongs_to :activity
+  has_one :page_pane, :as => :pane
+  has_one :page, :through => :page_pane
 
-  has_many :page_panes
-  has_many :image_panes, :through => :page_panes, :source => :pane, :source_type => 'ImagePane'
-  
-  children :page_panes
-  
-  acts_as_list
-  
   class << self
     alias :orig_reverse_reflection :reverse_reflection
 
     def reverse_reflection(association)
       case association.to_sym
-      when :image_panes
-        ImagePane.reflections[:page]
+      when :page
+        Page.reflections[:image_panes]
       else
         self.orig_reverse_reflection(association)
       end
     end
-  end
-  
-  def to_hash
-    {
-      'type' => 'Page',
-      'name' => name,
-      'text' => text.to_s
-    }
   end
 
   # --- Permissions --- #
