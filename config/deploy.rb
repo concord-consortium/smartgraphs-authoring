@@ -271,13 +271,10 @@ namespace :converter do
   task :install do
     run("cd #{deploy_to}/current; npm install")
   end
-  
-  task :submod_install do
-    run("cd #{deploy_to}/current/smartgraphs-generator; npm install")
-  end
 end
 
 before 'deploy:update_code', 'deploy:make_directory_structure'
+after 'deploy:update_code', 'converter:install'
 after 'deploy:update_code', 'deploy:shared_symlinks'
 before 'deploy:restart', 'hobo:generate_taglibs'
 after 'deploy:migrate', 'hobo:generate_taglibs'
