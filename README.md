@@ -7,10 +7,13 @@
     bundle exec sc-build smartgraphs -r --languages=en
     cp -r tmp/build/static ../smartgraphs-authoring/public
 4. You might want check the existing files in the public folder and decide if they should be replaced
-   or kept.
-
-Currently after doing this you can run SmartGraphs going going to:
+   or kept. Currently after doing this you can run SmartGraphs going going to:
 /static/smartgraphs/en/82b404e9816653aae3437852c272301c88eb986a/index.html
+5. install [node][] for your platform. Try [homebrew][] on osx, then
+   'brew install node'
+6. install smartgraphs-generator using 'npm install' from this
+   directory.
+
 
 ## configuring & installing on a VM ##
 
@@ -61,3 +64,5 @@ change <VM_NAME> and change <SECRET>
 ruby-vm8.concord.org  proxied through seymour as sg-authoring.staging.concord.org
 
 [provisioning a vm at cc]:http://confluence.concord.org/display/TSC/Provisioning+a+new+virtual+server+via+VMWare+and+Chef?focusedCommentId=4128819#comment-4128819)
+[node]:http://nodejs.org/
+[homebrew]:http://mxcl.github.com/homebrew/

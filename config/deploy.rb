@@ -269,7 +269,7 @@ end
 namespace :converter do
   desc 'install the smartgraph-generator node package and convert binary'
   task :install do
-    run("npm install git://github.com/concord-consortium/smartgraphs-generator.git")
+    run("cd #{deploy_to}/current; npm install")
   end
   
   task :submod_install do

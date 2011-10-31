@@ -7,3 +7,4 @@ bin/
 app/views/taglibs/auto/**/*
 config/database.yml
 config/hobo_routes.rb
+node_modules

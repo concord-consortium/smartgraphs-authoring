@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Converter do
   before(:each) do
-    @converter = Converter.new() # will create converter to /bin/cat
+    @converter = Converter.new('/bin/cat') # will create converter to /bin/cat
   end
   
   describe "convert with cat" do

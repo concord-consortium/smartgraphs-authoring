@@ -1,0 +1,7 @@
+{ "name" : "node_deps_for_sg_authoring",
+  "description" : "package file which installs authoring dependency: smartgraphs-generator",
+  "version" : "0.0.1",
+  "dependencies" : {
+    "smartgraphs-generator" : "git://github.com/concord-consortium/smartgraphs-generator.git#head"
+  }
+}

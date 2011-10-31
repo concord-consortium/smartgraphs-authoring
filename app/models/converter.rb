@@ -1,10 +1,11 @@
 # Dummy class to wrap external json conversion process
 # in this first instance we are just shelling out to cat.
 class Converter
+  DefaultConverterPath = File.join(Rails.root,'node_modules','smartgraphs-generator','bin','sg-convert')
   attr_accessor :converter_call
 
   # initialize(path to binary, array of CLI args)
-  def initialize(call="/bin/cat")
+  def initialize(call=DefaultConverterPath)
     self.converter_call = call
   end
 
