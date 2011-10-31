@@ -17,3 +17,11 @@
     </footer:>
   </old-page>
 </extend>
+
+<extend tag="card" for="Activity">
+  <old-card merge>
+    <append-body:>
+      <a action='preview'>View in SmartGraphs Runtime</a>
+    </append-body:>
+  </old-card>
+</extend>

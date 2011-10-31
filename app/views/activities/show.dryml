@@ -1,0 +1,5 @@
+<show-page>
+  <before-edit-link:>
+    <a action='preview'>View in SmartGraphs Runtime</a>
+  </before-edit-link:>
+</show-page>
