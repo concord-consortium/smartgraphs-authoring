@@ -18,13 +18,10 @@ class Converter
       begin
         pipe.puts(string)
         pipe.close_write
-        pipe.flush
       rescue
         # failed to write but we might still get a useful error
       end
       retval= pipe.read
-      pipe.flush
-      pipe.close_read
     end
     return retval.chomp
   end
