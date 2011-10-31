@@ -12,7 +12,14 @@
 5. install [node][] for your platform. Try [homebrew][] on osx, then
    'brew install node'
 6. install smartgraphs-generator using 'npm install' from this
-   directory.
+   directory. 
+ 
+### Notes ###
+You might need to update your npm version before step 6 works.
+You can try 
+    npm -g update npm
+but that might fail, so then you can also try
+    curl http://npmjs.org/install.sh | sudo sh
 
 
 ## configuring & installing on a VM ##
