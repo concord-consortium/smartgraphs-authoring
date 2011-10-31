@@ -201,6 +201,7 @@ namespace :deploy do
     run "mkdir -p #{shared_path}/public/installers"
     run "mkdir -p #{shared_path}/config/initializers"
     run "mkdir -p #{shared_path}/system/attachments" # paperclip file attachment location
+    run "mkdir -p #{shared_path}/node_modules" # node dependencies
     run "touch #{shared_path}/config/database.yml"
     run "touch #{shared_path}/config/settings.yml"
     run "touch #{shared_path}/config/installer.yml"
@@ -233,6 +234,7 @@ namespace :deploy do
     # This is part of the setup necessary for using newrelics reporting gem
     # run "ln -nfs #{shared_path}/config/newrelic.yml #{release_path}/config/newrelic.yml"
     run "ln -nfs #{shared_path}/config/newrelic.yml #{release_path}/config/newrelic.yml"
+    run "ln -nfs #{shared_path}/node_modules #{release_path}/node_modules"
 
     # support for running SproutCore app from the public directory
     run "ln -nfs #{shared_path}/public/static #{release_path}/public/static"
@@ -274,7 +276,7 @@ namespace :converter do
 end
 
 before 'deploy:update_code', 'deploy:make_directory_structure'
-after 'deploy:update_code', 'converter:install'
 after 'deploy:update_code', 'deploy:shared_symlinks'
 before 'deploy:restart', 'hobo:generate_taglibs'
+before 'deploy:restart', 'converter:install'
 after 'deploy:migrate', 'hobo:generate_taglibs'
