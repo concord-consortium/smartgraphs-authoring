@@ -271,7 +271,7 @@ end
 namespace :converter do
   desc 'install the smartgraph-generator node package and convert binary'
   task :install do
-    run("cd #{deploy_to}/current; npm install")
+    run("cd #{deploy_to}/current; rm -rf node_modules/smartgraphs-generator; npm install")
   end
 end
 
