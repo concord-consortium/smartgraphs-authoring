@@ -5,6 +5,8 @@ class ImagePane < ActiveRecord::Base
   fields do
     name :string
     url :string
+    license :string
+    attribution :string 
     timestamps
   end
 
@@ -28,7 +30,9 @@ class ImagePane < ActiveRecord::Base
     {
       'type' => 'ImagePane',
       'name' => name,
-      'url' => url
+      'url' => url,
+      'license' => license,
+      'attribution' => attribution
     }
   end
 
