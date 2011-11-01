@@ -7,7 +7,7 @@ class ActivitiesController < ApplicationController
   def show
     hobo_show do |format|
       format.json {
-        render :text => @activity.to_hash.to_json
+        render :text => JSON.pretty_generate(@activity.to_hash)
       }
       format.yaml {
         render :text => @activity.to_hash.to_yaml

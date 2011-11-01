@@ -31,11 +31,17 @@ class Page < ActiveRecord::Base
   end
   
   def to_hash
-    {
+    hash = {
       'type' => 'Page',
       'name' => name,
       'text' => text.to_s
     }
+    unless page_panes.empty?
+      hash['panes'] = page_panes.map do |page_pane|
+        page_pane.pane.to_hash
+      end
+    end
+    hash
   end
 
   # --- Permissions --- #

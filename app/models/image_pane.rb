@@ -24,6 +24,14 @@ class ImagePane < ActiveRecord::Base
     end
   end
 
+  def to_hash
+    {
+      'type' => 'ImagePane',
+      'name' => name,
+      'url' => url
+    }
+  end
+
   # --- Permissions --- #
 
   def create_permitted?
