@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111031195638) do
+ActiveRecord::Schema.define(:version => 20111101012618) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(:version => 20111031195638) do
     t.integer  "page_id"
     t.integer  "pane_id"
     t.string   "pane_type"
+    t.integer  "position"
   end
 
   add_index "page_panes", ["page_id"], :name => "index_page_panes_on_page_id"

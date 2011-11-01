@@ -9,6 +9,8 @@ class PagePane < ActiveRecord::Base
   belongs_to :page
   belongs_to :pane, :polymorphic => true
 
+  acts_as_list
+
   # --- Permissions --- #
 
   def create_permitted?

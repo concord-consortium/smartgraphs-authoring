@@ -10,7 +10,7 @@ class Page < ActiveRecord::Base
 
   belongs_to :activity
 
-  has_many :page_panes
+  has_many :page_panes, :order => :position
   has_many :image_panes, :through => :page_panes, :source => :pane, :source_type => 'ImagePane'
   
   children :page_panes
