@@ -8,7 +8,7 @@ class Activity < ActiveRecord::Base
   end
 
   has_many :pages, :order => :position
-  
+
   children :pages
 
   def to_hash

@@ -6,7 +6,7 @@ class ImagePane < ActiveRecord::Base
     name :string
     url :string
     license :string
-    attribution :string 
+    attribution :string
     timestamps
   end
 

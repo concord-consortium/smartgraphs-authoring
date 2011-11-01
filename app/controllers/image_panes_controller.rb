@@ -12,7 +12,7 @@ class ImagePanesController < ApplicationController
     new_pane.page = owner
     hobo_new_for :page, new_pane
   end
-  
+
   def create_for_page
     id = params["page_id"]
     owner = Page.find(id)

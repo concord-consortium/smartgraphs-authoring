@@ -12,11 +12,11 @@ class Page < ActiveRecord::Base
 
   has_many :page_panes, :order => :position
   has_many :image_panes, :through => :page_panes, :source => :pane, :source_type => 'ImagePane'
-  
+
   children :page_panes
-  
+
   acts_as_list
-  
+
   class << self
     alias :orig_reverse_reflection :reverse_reflection
 
@@ -29,7 +29,7 @@ class Page < ActiveRecord::Base
       end
     end
   end
-  
+
   def to_hash
     hash = {
       'type' => 'Page',
