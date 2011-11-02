@@ -41,9 +41,11 @@ class PredefinedGraphPane < ActiveRecord::Base
       'type' => 'PredefinedGraphPane',
       'title' => title,
       'yLabel' => y_label,
+      'yUnits' => y_unit.name,
       'yMin' => y_min,
       'yMax' => y_max,
       'xLabel' => x_label,
+      'xUnits' => x_unit.name,
       'xMin' => x_min,
       'xMax' => x_max
     }

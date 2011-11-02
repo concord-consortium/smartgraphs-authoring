@@ -3,7 +3,7 @@ class Unit < ActiveRecord::Base
   hobo_model # Don't put anything above this
 
   fields do
-    name         :string
+    name         :string, :unique
     abbreviation :string
     timestamps
   end
