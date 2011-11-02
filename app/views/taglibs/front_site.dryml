@@ -39,6 +39,9 @@
       <a action="new" to="&this.image_panes" param="new-link">
         <ht key="image_pane.actions.new" >New Image Pane element</ht>
       </a>
+      <a action="new" to="&this.predefined_graph_panes" param="new-link">
+        <ht key="predefined_graph_pane.actions.new" >New Predefined Graph Pane element</ht>
+      </a>
     </after-field-list:>
   </old-form>
 </extend>
