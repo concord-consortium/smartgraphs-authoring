@@ -2,7 +2,7 @@ class PredefinedGraphPanesController < ApplicationController
 
   hobo_model_controller
 
-  auto_actions :all
+  auto_actions :all, :except => :index
   auto_actions_for :page, [ :index, :new, :create ]
 
   def new_for_page

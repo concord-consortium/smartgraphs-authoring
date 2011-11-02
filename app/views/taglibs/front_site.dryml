@@ -8,6 +8,11 @@
 
 <set-theme name="clean"/>
 
+<!-- remove the position from all lists since it isn't needed to be viewed or modified-->
+<extend tag="field-list">
+  <old-field-list merge skip="position"/>
+</extend>
+
 <extend tag="page">
   <old-page merge>
     <footer:>
