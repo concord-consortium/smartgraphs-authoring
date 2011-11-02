@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111102190003) do
+ActiveRecord::Schema.define(:version => 20111102205105) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -68,6 +68,18 @@ ActiveRecord::Schema.define(:version => 20111102190003) do
     t.float    "x_min"
     t.float    "x_max"
     t.float    "x_ticks"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "y_unit_id"
+    t.integer  "x_unit_id"
+  end
+
+  add_index "predefined_graph_panes", ["x_unit_id"], :name => "index_predefined_graph_panes_on_x_unit_id"
+  add_index "predefined_graph_panes", ["y_unit_id"], :name => "index_predefined_graph_panes_on_y_unit_id"
+
+  create_table "units", :force => true do |t|
+    t.string   "name"
+    t.string   "abbreviation"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

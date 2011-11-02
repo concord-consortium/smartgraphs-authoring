@@ -1,22 +1,18 @@
-class Activity < ActiveRecord::Base
+class Unit < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
 
   fields do
-    name :string
+    name         :string
+    abbreviation :string
     timestamps
   end
 
-  has_many :pages, :order => :position
-
-  children :pages
-
   def to_hash
     {
-      'type' => 'Activity',
+      'type' => 'Unit',
       'name' => name,
-      'pages' => pages.map(&:to_hash),
-      'units' => Unit.find(:all).map(&:to_hash)
+      'abbreviation' => abbreviation
     }
   end
 

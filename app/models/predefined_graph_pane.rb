@@ -17,6 +17,9 @@ class PredefinedGraphPane < ActiveRecord::Base
     timestamps
   end
 
+  belongs_to :y_unit, :class_name => 'Unit'
+  belongs_to :x_unit, :class_name => 'Unit'
+
   has_one :page_pane, :as => :pane, :dependent => :destroy
   has_one :page, :through => :page_pane
 
