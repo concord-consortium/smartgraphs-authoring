@@ -16,7 +16,7 @@ class JsonActivitiesController < ApplicationController
   end
 
   show_action :preview do
-    File.open "#{Rails.root}/public/static/smartgraphs/en/5a2301d099b8d537c51560051dd2bc99eb4b582f/index.html" do |file|
+    File.open "#{Rails.root}/public/static/smartgraphs/en/91e6a62b8f173d9eb06154969e859e6b06989f75/index.html" do |file|
       template = ERB.new file.read
       authored_activity_json = JsonActivity.find(params[:id]).json
       render :text => template.result(binding)
