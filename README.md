@@ -4,7 +4,14 @@
    'brew install node'
 3. install smartgraphs-generator using 'npm install' from this
    directory.
-4. start up the server 'rails s'
+4. setup rvm in the usual way
+    echo 'rvm use 1.9.2@smartgraphs --create' > .rvmrc; cd ..; cd -
+5. run bundle install --binstubs
+6. copy the database.sample.yml
+    cp config/database.sample.yml config/database.yml
+7. migrate the database
+    bin/rake db:migrate
+6. start up the server 'rails s'
 
 ### Notes ###
 You might need to update your npm version before step 6 works.
@@ -24,6 +31,8 @@ but that might fail, so then you can also try
 4. You might want check the existing files in the public folder and decide if they should be replaced
    or kept. Currently after doing this you can run SmartGraphs going going to:
 /static/smartgraphs/en/82b404e9816653aae3437852c272301c88eb986a/index.html
+5. you'll need to update the activities_controller and json_activities_controller to point to the new
+   location of the index.html
 
 ## configuring & installing on a VM ##
 
