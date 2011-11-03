@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111102205105) do
+ActiveRecord::Schema.define(:version => 20111103203816) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(:version => 20111102205105) do
     t.datetime "updated_at"
     t.integer  "y_unit_id"
     t.integer  "x_unit_id"
+    t.text     "data"
   end
 
   add_index "predefined_graph_panes", ["x_unit_id"], :name => "index_predefined_graph_panes_on_x_unit_id"
