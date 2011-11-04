@@ -37,16 +37,23 @@
   <card:pane for-type="&this.pane.class"/>
 </def>
 
+<def tag="add-panes-toolbar">
+  <a action="new" to="&this.image_panes">
+    <ht key="image_pane.actions.new" >New Image Pane element</ht>
+  </a>
+  <a action="new" to="&this.predefined_graph_panes">
+    <ht key="predefined_graph_pane.actions.new" >New Predefined Graph Pane element</ht>
+  </a>
+  <a action="new" to="&this.table_panes">
+    <ht key="table_pane.actions.new" >New Table Pane element</ht>
+  </a>
+</def>
+
 <extend tag="form" for="Page">
   <old-form merge>
     <after-field-list:>
-      <collection:page_panes/>
-      <a action="new" to="&this.image_panes" param="new-link">
-        <ht key="image_pane.actions.new" >New Image Pane element</ht>
-      </a>
-      <a action="new" to="&this.predefined_graph_panes" param="new-link">
-        <ht key="predefined_graph_pane.actions.new" >New Predefined Graph Pane element</ht>
-      </a>
+      <sortable-collection:page_panes/>
+      <add-panes-toolbar/>
     </after-field-list:>
   </old-form>
 </extend>

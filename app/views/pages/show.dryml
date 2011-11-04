@@ -1,0 +1,5 @@
+<show-page>
+  <append-collection-section:>
+    <add-panes-toolbar/>
+  </append-collection-section:>
+</show-page>

@@ -13,6 +13,7 @@ class Page < ActiveRecord::Base
   has_many :page_panes, :order => :position
   has_many :image_panes, :through => :page_panes, :source => :pane, :source_type => 'ImagePane'
   has_many :predefined_graph_panes, :through => :page_panes, :source => :pane, :source_type => 'PredefinedGraphPane'
+  has_many :table_panes, :through => :page_panes, :source => :pane, :source_type => 'TablePane'
 
   children :page_panes
 
@@ -27,6 +28,8 @@ class Page < ActiveRecord::Base
         ImagePane.reflections[:page]
       when :predefined_graph_panes
         PredefinedGraphPane.reflections[:page]
+      when :table_panes
+        TablePane.reflections[:page]
       else
         self.orig_reverse_reflection(association)
       end
