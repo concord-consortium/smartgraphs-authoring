@@ -10,6 +10,12 @@ class TablePane < ActiveRecord::Base
   has_one :page_pane, :as => :pane
   has_one :page, :through => :page_pane
 
+  def to_hash
+    {
+      'type' => 'TablePane',
+      'title' => title
+    }
+  end
 
   class << self
     alias :orig_reverse_reflection :reverse_reflection
