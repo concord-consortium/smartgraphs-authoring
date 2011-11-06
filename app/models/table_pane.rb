@@ -10,24 +10,13 @@ class TablePane < ActiveRecord::Base
   has_one :page_pane, :as => :pane
   has_one :page, :through => :page_pane
 
+  reverse_association_of :page, 'Page#table_panes'
+
   def to_hash
     {
       'type' => 'TablePane',
       'title' => title
     }
-  end
-
-  class << self
-    alias :orig_reverse_reflection :reverse_reflection
-
-    def reverse_reflection(association)
-      case association.to_sym
-      when :page
-        Page.reflections[:table_panes]
-      else
-        self.orig_reverse_reflection(association)
-      end
-    end
   end
 
   # --- Permissions --- #

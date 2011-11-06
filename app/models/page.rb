@@ -11,30 +11,20 @@ class Page < ActiveRecord::Base
   belongs_to :activity
 
   has_many :page_panes, :order => :position
+
   has_many :image_panes, :through => :page_panes, :source => :pane, :source_type => 'ImagePane'
+  reverse_association_of :image_panes, 'ImagePane#page'
+
   has_many :predefined_graph_panes, :through => :page_panes, :source => :pane, :source_type => 'PredefinedGraphPane'
+  reverse_association_of :predefined_graph_panes, 'PredefinedGraphPane#page'
+
   has_many :table_panes, :through => :page_panes, :source => :pane, :source_type => 'TablePane'
+  reverse_association_of :table_panes, 'TablePane#page'
 
   children :page_panes
 
   acts_as_list
 
-  class << self
-    alias :orig_reverse_reflection :reverse_reflection
-
-    def reverse_reflection(association)
-      case association.to_sym
-      when :image_panes
-        ImagePane.reflections[:page]
-      when :predefined_graph_panes
-        PredefinedGraphPane.reflections[:page]
-      when :table_panes
-        TablePane.reflections[:page]
-      else
-        self.orig_reverse_reflection(association)
-      end
-    end
-  end
 
   def to_hash
     hash = {

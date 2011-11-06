@@ -25,18 +25,7 @@ class PredefinedGraphPane < ActiveRecord::Base
   has_one :page_pane, :as => :pane, :dependent => :destroy
   has_one :page, :through => :page_pane
 
-  class << self
-    alias :orig_reverse_reflection :reverse_reflection
-
-    def reverse_reflection(association)
-      case association.to_sym
-      when :page
-        Page.reflections[:predefined_graph_panes]
-      else
-        self.orig_reverse_reflection(association)
-      end
-    end
-  end
+  reverse_association_of :page, 'Page#predefined_graph_panes'
 
   def to_hash
     {
