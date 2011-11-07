@@ -9,6 +9,7 @@ group :development, :test do
   gem 'sqlite3'
   gem "capistrano-ext",                 :require => "capistrano"
   gem "haml"
+  gem 'ruby-debug19', :require => 'ruby-debug'
 end
 
 group :production do
