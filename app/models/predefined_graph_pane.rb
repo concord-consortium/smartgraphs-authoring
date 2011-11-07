@@ -27,8 +27,6 @@ class PredefinedGraphPane < ActiveRecord::Base
 
   reverse_association_of :page, 'Page#predefined_graph_panes'
 
-  validates_presence_of :y_unit, :x_unit
-
   def to_hash
     {
       'type' => 'PredefinedGraphPane',
