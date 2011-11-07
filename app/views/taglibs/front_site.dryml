@@ -37,6 +37,12 @@
   <card:pane for-type="&this.pane.class"/>
 </def>
 
+<def tag="card" for="PageSequence">
+  <!-- By default a recursive tag inside a polymorphic definition just calls the base card 
+       So we have to explicitly set the type-->
+  <card:pane for-type="&this.sequence.class"/>
+</def>
+
 <def tag="add-panes-toolbar">
   <a action="new" to="&this.image_panes">
     <ht key="image_pane.actions.new" >New Image Pane element</ht>
@@ -49,11 +55,20 @@
   </a>
 </def>
 
+<def tag="add-sequences-toolbar">
+  <!-- Limit Page Sequence to 1 member of the collection -->
+  <a action="new" to="&this.instruction_sequences" if="&this.instruction_sequences.empty?">
+    <ht key="instruction_sequence.actions.new" >New Instruction Sequence element</ht>
+  </a>
+</def>
+
 <extend tag="form" for="Page">
   <old-form merge>
     <after-field-list:>
       <sortable-collection:page_panes/>
       <add-panes-toolbar/>
+      <sortable-collection:page_sequences/>
+      <add-sequences-toolbar/>
     </after-field-list:>
   </old-form>
 </extend>

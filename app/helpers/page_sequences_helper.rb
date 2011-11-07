@@ -1,0 +1,2 @@
+module PageSequencesHelper
+end
