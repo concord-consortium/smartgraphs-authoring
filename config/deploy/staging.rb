@@ -8,7 +8,7 @@ set :gateway, "otto.concord.org"
 #############################################################
 
 set :deploy_to, "/web/portal"
-set :branch, "master"
+set :branch, "staging"
 
 #############################################################
 #  Servers
