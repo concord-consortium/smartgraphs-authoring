@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
       define_method "new_for_#{owner_association}" do
         owner, association = find_owner_and_association(owner_association)
-        new_record = association.new
+        new_record = association.user_new(current_user)
         new_record.send "#{owner_association}=", owner
         hobo_new_for owner_association, new_record
       end
