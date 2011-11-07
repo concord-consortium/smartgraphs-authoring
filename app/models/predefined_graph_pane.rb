@@ -34,11 +34,11 @@ class PredefinedGraphPane < ActiveRecord::Base
       'type' => 'PredefinedGraphPane',
       'title' => title,
       'yLabel' => y_label,
-      'yUnits' => y_unit.name,
+      'yUnits' => y_unit ? y_unit.name : nil,
       'yMin' => y_min,
       'yMax' => y_max,
       'xLabel' => x_label,
-      'xUnits' => x_unit.name,
+      'xUnits' => x_unit ? x_unit.name : nil,
       'xMin' => x_min,
       'xMax' => x_max,
       'data' => data.split("\n").map {|point| point.split(',').map{|value| value.to_f}}
