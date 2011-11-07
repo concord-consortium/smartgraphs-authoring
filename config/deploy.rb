@@ -2,7 +2,7 @@ require "bundler/capistrano"
 require 'capistrano/ext/multistage'
 require 'haml'
 
-set :stages, %w(staging production)
+set :stages, %w(staging production dev)
 
 set :default_stage, "staging"
 
