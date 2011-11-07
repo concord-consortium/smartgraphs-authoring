@@ -3,17 +3,17 @@ class PredefinedGraphPane < ActiveRecord::Base
   hobo_model # Don't put anything above this
 
   fields do
-    title :string
-    y_label :string
+    title :string, :required
+    y_label :string, :required
     # need to add y units
-    y_min :float
-    y_max :float
-    y_ticks :float
-    x_label :string
+    y_min :float, :required
+    y_max :float, :required
+    y_ticks :float, :required
+    x_label :string, :required
     # need to add x units
-    x_min :float
-    x_max :float
-    x_ticks :float
+    x_min :float, :required
+    x_max :float, :required
+    x_ticks :float, :required
 
     data :text
     timestamps
@@ -26,6 +26,8 @@ class PredefinedGraphPane < ActiveRecord::Base
   has_one :page, :through => :page_pane
 
   reverse_association_of :page, 'Page#predefined_graph_panes'
+
+  validates_presence_of :y_unit, :x_unit
 
   def to_hash
     {
