@@ -29,3 +29,6 @@ en:
         title: this is not displayed in the runtime
       page:
         name: this is not displayed in the runtime
+      predefined_graph_pane:
+        x_ticks: number of ticks on the x axis
+        y_ticks: number of ticks on the y axis
