@@ -23,3 +23,9 @@ en:
 #    attribute_help:
 #      user:
 #        email_address: We will never share your address with third parties
+  activerecord:
+    attribute_help:
+      table_pane:
+        title: this is not displayed in the runtime
+      page:
+        name: this is not displayed in the runtime
