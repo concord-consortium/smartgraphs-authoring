@@ -51,6 +51,16 @@
   </card:sequence>
 </def>
 
+<def tag="card" for="SequenceHint">
+  <!-- By default a recursive tag inside a polymorphic definition just calls the base card
+       So we have to explicitly set the type-->
+  <card:hint for-type="&this.hint.class" merge>
+    <append-heading:>
+      <delete-button label="Delete" param/>
+    </append-heading:>
+  </card:hint>
+</def>
+
 <def tag="add-panes-toolbar">
   <a action="new" to="&this.image_panes">
     <ht key="image_pane.actions.new" >New Image Pane element</ht>
@@ -75,6 +85,12 @@
   </unless>
 </def>
 
+<def tag="add-hints-toolbar">
+    <a action="new" to="&this.text_hints">
+      <ht key="text_hint.actions.new" >New Text Hint element</ht>
+    </a>
+</def>
+
 <extend tag="form" for="Page">
   <old-form merge>
     <after-field-list:>
@@ -82,6 +98,15 @@
       <add-panes-toolbar/>
       <collection:page_sequences/>
       <add-sequences-toolbar/>
+    </after-field-list:>
+  </old-form>
+</extend>
+
+<extend tag="form" for="PickAPointSequence">
+  <old-form merge>
+    <after-field-list:>
+      <sortable-collection:sequence_hints/>
+      <add-hints-toolbar/>
     </after-field-list:>
   </old-form>
 </extend>

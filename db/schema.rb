@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111108164213) do
+ActiveRecord::Schema.define(:version => 20111108185104) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -75,6 +75,22 @@ ActiveRecord::Schema.define(:version => 20111108164213) do
 
   add_index "pages", ["activity_id"], :name => "index_pages_on_activity_id"
 
+  create_table "pick_a_point_sequences", :force => true do |t|
+    t.string   "title"
+    t.text     "initialPrompt"
+    t.float    "correctAnswerX"
+    t.float    "correctAnswerY"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "give_up_hint_id"
+    t.string   "give_up_hint_type"
+    t.integer  "confirm_correct_hint_id"
+    t.string   "confirm_correct_hint_type"
+  end
+
+  add_index "pick_a_point_sequences", ["confirm_correct_hint_type", "confirm_correct_hint_id"], :name => "index_confirm_correct_hints"
+  add_index "pick_a_point_sequences", ["give_up_hint_type", "give_up_hint_id"], :name => "index_give_up_hints"
+
   create_table "predefined_graph_panes", :force => true do |t|
     t.string   "title"
     t.string   "y_label"
@@ -95,8 +111,27 @@ ActiveRecord::Schema.define(:version => 20111108164213) do
   add_index "predefined_graph_panes", ["x_unit_id"], :name => "index_predefined_graph_panes_on_x_unit_id"
   add_index "predefined_graph_panes", ["y_unit_id"], :name => "index_predefined_graph_panes_on_y_unit_id"
 
+  create_table "sequence_hints", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "pick_a_point_sequence_id"
+    t.integer  "hint_id"
+    t.string   "hint_type"
+    t.integer  "position"
+  end
+
+  add_index "sequence_hints", ["hint_type", "hint_id"], :name => "index_hints"
+  add_index "sequence_hints", ["pick_a_point_sequence_id"], :name => "index_sequence_hints_on_pick_a_point_sequence_id"
+
   create_table "table_panes", :force => true do |t|
     t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "text_hints", :force => true do |t|
+    t.string   "name"
+    t.text     "text"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
