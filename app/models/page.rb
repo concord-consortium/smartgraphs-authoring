@@ -26,6 +26,9 @@ class Page < ActiveRecord::Base
   has_many :instruction_sequences, :through => :page_sequences, :source => :sequence, :source_type => 'InstructionSequence'
   reverse_association_of :instruction_sequences, 'InstructionSequence#page'
 
+  has_many :pick_a_point_sequences, :through => :page_sequences, :source => :sequence, :source_type => 'PickAPointSequence'
+  reverse_association_of :pick_a_point_sequences, 'PickAPointSequence#page'
+
   children :page_sequences, :page_panes
 
   acts_as_list

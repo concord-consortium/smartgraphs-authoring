@@ -65,9 +65,14 @@
 
 <def tag="add-sequences-toolbar">
   <!-- Limit Page Sequence to 1 member of the collection -->
-  <a action="new" to="&this.instruction_sequences" if="&this.instruction_sequences.empty?">
-    <ht key="instruction_sequence.actions.new" >New Instruction Sequence element</ht>
-  </a>
+  <unless test="&this.page_sequences">
+    <a action="new" to="&this.instruction_sequences">
+      <ht key="instruction_sequence.actions.new" >New Instruction Sequence element</ht>
+    </a>
+    <a action="new" to="&this.pick_a_point_sequences">
+      <ht key="pick_a_point_sequence.actions.new" >New Pick-A-Point Sequence element</ht>
+    </a>
+  </unless>
 </def>
 
 <extend tag="form" for="Page">
