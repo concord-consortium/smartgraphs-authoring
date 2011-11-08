@@ -1,5 +1,5 @@
 <show-page>
-  <field-list:>
+  <field-list: fields="&this.field_order">
     <data-tag: with="&this.gsub('&#10;', '<br>').html_safe"/>
   </field-list:>
 </show-page>
