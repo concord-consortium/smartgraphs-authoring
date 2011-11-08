@@ -15,10 +15,12 @@
 
 ### Notes ###
 You might need to update your npm version before step 6 works.
-You can try 
+You can try
     npm -g update npm
 but that might fail, so then you can also try
     curl http://npmjs.org/install.sh | sudo sh
+
+To learn about Hobo, check out the pdf "Rapid Rails 3 with Hobo" at http://hobocentral.net/books/
 
 ## update SmartGraphs runtime ##
 
@@ -55,7 +57,7 @@ but that might fail, so then you can also try
 You should be able to paste this into your clean chef node.
 change <VM_NAME> and change <SECRET>
 
-    { "apache" : { 
+    { "apache" : {
         "listen_ports" : [ "80", "8080"]
       },
       "cc_rails_app" : { "checkout" : true,
