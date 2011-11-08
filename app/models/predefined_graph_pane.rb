@@ -43,6 +43,8 @@ class PredefinedGraphPane < ActiveRecord::Base
       'xUnits' => x_unit ? x_unit.name : nil,
       'xMin' => x_min,
       'xMax' => x_max,
+      'yTicks' => y_ticks,
+      'xTicks' => x_ticks,
       'data' => data.split("\n").map {|point| point.split(',').map{|value| value.to_f}}
     }
   end
