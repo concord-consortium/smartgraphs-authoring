@@ -7,7 +7,7 @@ class PageSequence < ActiveRecord::Base
   end
 
   belongs_to :page
-  belongs_to :sequence, :polymorphic => true
+  belongs_to :sequence, :polymorphic => true, :index => 'index_sequences'
 
   # --- Permissions --- #
 

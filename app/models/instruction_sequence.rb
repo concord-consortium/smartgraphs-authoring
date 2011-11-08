@@ -19,6 +19,10 @@ class InstructionSequence < ActiveRecord::Base
     }
   end
 
+  def name
+    text
+  end
+
   # --- Permissions --- #
 
   def create_permitted?

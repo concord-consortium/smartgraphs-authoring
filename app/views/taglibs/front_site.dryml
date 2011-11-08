@@ -34,13 +34,21 @@
 <def tag="card" for="PagePane">
   <!-- By default a recursive tag inside a polymorphic definition just calls the base card
        So we have to explicitly set the type-->
-  <card:pane for-type="&this.pane.class"/>
+  <card:pane for-type="&this.pane.class" merge>
+    <append-heading:>
+      <delete-button label="Delete" param/>
+    </append-heading:>
+  </card:pane>
 </def>
 
 <def tag="card" for="PageSequence">
   <!-- By default a recursive tag inside a polymorphic definition just calls the base card
        So we have to explicitly set the type-->
-  <card:pane for-type="&this.sequence.class"/>
+  <card:sequence for-type="&this.sequence.class" merge>
+    <append-heading:>
+      <delete-button label="Delete" param/>
+    </append-heading:>
+  </card:sequence>
 </def>
 
 <def tag="add-panes-toolbar">

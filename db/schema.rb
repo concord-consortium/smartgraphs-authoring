@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111107220407) do
+ActiveRecord::Schema.define(:version => 20111108164213) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -59,11 +59,10 @@ ActiveRecord::Schema.define(:version => 20111107220407) do
     t.integer  "page_id"
     t.integer  "sequence_id"
     t.string   "sequence_type"
-    t.integer  "position"
   end
 
   add_index "page_sequences", ["page_id"], :name => "index_page_sequences_on_page_id"
-  add_index "page_sequences", ["sequence_type", "sequence_id"], :name => "index_page_sequences_on_sequence_type_and_sequence_id"
+  add_index "page_sequences", ["sequence_type", "sequence_id"], :name => "index_sequences"
 
   create_table "pages", :force => true do |t|
     t.string   "name"
