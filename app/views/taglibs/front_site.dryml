@@ -75,7 +75,7 @@
     <after-field-list:>
       <sortable-collection:page_panes/>
       <add-panes-toolbar/>
-      <sortable-collection:page_sequences/>
+      <collection:page_sequences/>
       <add-sequences-toolbar/>
     </after-field-list:>
   </old-form>
