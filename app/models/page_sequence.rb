@@ -9,8 +9,6 @@ class PageSequence < ActiveRecord::Base
   belongs_to :page
   belongs_to :sequence, :polymorphic => true
 
-  acts_as_list
-
   # --- Permissions --- #
 
   def create_permitted?

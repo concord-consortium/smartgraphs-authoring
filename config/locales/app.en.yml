@@ -24,6 +24,10 @@ en:
 #      user:
 #        email_address: We will never share your address with third parties
   activerecord:
+    attributes:
+      page:
+        page_panes: Page Panes
+        page_sequences: Page Sequence
     attribute_help:
       table_pane:
         title: this is not displayed in the runtime
