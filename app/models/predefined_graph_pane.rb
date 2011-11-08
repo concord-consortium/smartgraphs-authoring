@@ -27,6 +27,10 @@ class PredefinedGraphPane < ActiveRecord::Base
 
   reverse_association_of :page, 'Page#predefined_graph_panes'
 
+  def field_order
+    "title, y_label, y_unit, y_min, y_max, y_ticks, x_label, x_unit, x_min, x_max, x_ticks, data"
+  end
+
   def to_hash
     {
       'type' => 'PredefinedGraphPane',

@@ -32,7 +32,7 @@
 </extend>
 
 <def tag="card" for="PagePane">
-  <!-- By default a recursive tag inside a polymorphic definition just calls the base card 
+  <!-- By default a recursive tag inside a polymorphic definition just calls the base card
        So we have to explicitly set the type-->
   <card:pane for-type="&this.pane.class"/>
 </def>
@@ -55,5 +55,14 @@
       <sortable-collection:page_panes/>
       <add-panes-toolbar/>
     </after-field-list:>
+  </old-form>
+</extend>
+
+<extend tag="form" for="PredefinedGraphPane">
+  <old-form merge>
+    <field-list: fields="&this.field_order">
+      <y_unit-tag: include-none blank-message="No units"/>
+      <x_unit-tag: include-none blank-message="No units"/>
+    </field-list:>
   </old-form>
 </extend>
