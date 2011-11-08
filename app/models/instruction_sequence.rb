@@ -7,7 +7,7 @@ class InstructionSequence < ActiveRecord::Base
     timestamps
   end
 
-  has_one :page_sequence, :as => :sequence
+  has_one :page_sequence, :as => :sequence, :dependent => :destroy
 
   has_one :page, :through => :page_sequence
   reverse_association_of :page, 'Page#instruction_sequences'

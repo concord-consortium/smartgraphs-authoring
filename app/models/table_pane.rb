@@ -7,7 +7,7 @@ class TablePane < ActiveRecord::Base
     timestamps
   end
 
-  has_one :page_pane, :as => :pane
+  has_one :page_pane, :as => :pane, :dependent => :destroy
   has_one :page, :through => :page_pane
 
   reverse_association_of :page, 'Page#table_panes'
