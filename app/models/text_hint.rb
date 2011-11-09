@@ -16,6 +16,13 @@ class TextHint < ActiveRecord::Base
 #  has_one :give_up_sequence, :as => :give_up_hint
 #  has_one :confirm_correct_sequence, :as => :confirm_correct_hint
 
+  def to_hash
+    {
+      'name' => name.to_s,
+      'text' => text.to_s
+    }
+  end
+
   # --- Permissions --- #
 
   def create_permitted?

@@ -26,6 +26,22 @@ class PickAPointSequence < ActiveRecord::Base
 
   children :sequence_hints
 
+  def to_hash
+    hash = {
+      'type' => 'PickAPointSequence',
+      'initialPrompt' => initial_prompt.to_s,
+      'correctAnswerPoint' => [correct_answer_x, correct_answer_y],
+      'giveUp' => {'text' => give_up },
+      'confirmCorrect' => {'text' => confirm_correct }
+    }
+    unless sequence_hints.empty?
+      hash['hints'] = sequence_hints.map do |sequence_hint|
+        sequence_hint.hint.to_hash
+      end
+    end
+    hash
+  end
+
   # --- Permissions --- #
 
   def create_permitted?
