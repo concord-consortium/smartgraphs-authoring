@@ -15,7 +15,7 @@
 
 ### Notes ###
 You might need to update your npm version before step 6 works.
-You can try 
+You can try
     npm -g update npm
 but that might fail, so then you can also try
     curl http://npmjs.org/install.sh | sudo sh
@@ -30,9 +30,13 @@ but that might fail, so then you can also try
     cp -r tmp/build/static ../smartgraphs-authoring/public
 4. You might want check the existing files in the public folder and decide if they should be replaced
    or kept. Currently after doing this you can run SmartGraphs going going to:
-/static/smartgraphs/en/82b404e9816653aae3437852c272301c88eb986a/index.html
-5. you'll need to update the activities_controller and json_activities_controller to point to the new
-   location of the index.html
+    /static/smartgraphs/en/82b404e9816653aae3437852c272301c88eb986a/index.html
+5. Move the index.html file from the newly-built smartgraphs folder to the root of the smartgraphs-authoring
+   applications public folder, and rename it smartgraphs-runtime.html
+    # from inside smartgraphs-authoring
+    mv public/static/smartgraphs/en/{build-number}/index.html public/smartgraphs-runtime.html
+6. Add the following line to smartgraphs-runtime.html, just after the opening of the first script tag (currently ln 16)
+    window.authoredActivityJSON=<%= authored_activity_json %>;
 
 ## configuring & installing on a VM ##
 
@@ -55,7 +59,7 @@ but that might fail, so then you can also try
 You should be able to paste this into your clean chef node.
 change <VM_NAME> and change <SECRET>
 
-    { "apache" : { 
+    { "apache" : {
         "listen_ports" : [ "80", "8080"]
       },
       "cc_rails_app" : { "checkout" : true,
