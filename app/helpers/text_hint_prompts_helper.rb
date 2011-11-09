@@ -1,0 +1,2 @@
+module TextHintPromptsHelper
+end

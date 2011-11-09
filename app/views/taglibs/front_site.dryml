@@ -61,6 +61,16 @@
   </card:hint>
 </def>
 
+<def tag="card" for="TextHintPrompt">
+  <!-- By default a recursive tag inside a polymorphic definition just calls the base card
+       So we have to explicitly set the type-->
+  <card:prompt for-type="&this.prompt.class" merge>
+    <append-heading:>
+      <delete-button label="Delete" param/>
+    </append-heading:>
+  </card:prompt>
+</def>
+
 <def tag="add-panes-toolbar">
   <a action="new" to="&this.image_panes">
     <ht key="image_pane.actions.new" >New Image Pane element</ht>
@@ -91,6 +101,12 @@
     </a>
 </def>
 
+<def tag="add-prompts-toolbar">
+    <a action="new" to="&this.range_visual_prompts">
+      <ht key="range_visual_prompt.actions.new" >New Range Visual Prompt element</ht>
+    </a>
+</def>
+
 <extend tag="form" for="Page">
   <old-form merge>
     <after-field-list:>
@@ -107,6 +123,15 @@
     <after-field-list:>
       <sortable-collection:sequence_hints/>
       <add-hints-toolbar/>
+    </after-field-list:>
+  </old-form>
+</extend>
+
+<extend tag="form" for="TextHint">
+  <old-form merge>
+    <after-field-list:>
+      <sortable-collection:text_hint_prompts/>
+      <add-prompts-toolbar/>
     </after-field-list:>
   </old-form>
 </extend>

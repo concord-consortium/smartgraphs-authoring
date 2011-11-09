@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111108185104) do
+ActiveRecord::Schema.define(:version => 20111109205641) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -106,6 +106,15 @@ ActiveRecord::Schema.define(:version => 20111108185104) do
   add_index "predefined_graph_panes", ["x_unit_id"], :name => "index_predefined_graph_panes_on_x_unit_id"
   add_index "predefined_graph_panes", ["y_unit_id"], :name => "index_predefined_graph_panes_on_y_unit_id"
 
+  create_table "range_visual_prompts", :force => true do |t|
+    t.string   "name"
+    t.float    "x_min"
+    t.float    "x_max"
+    t.string   "color"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "sequence_hints", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -123,6 +132,17 @@ ActiveRecord::Schema.define(:version => 20111108185104) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "text_hint_prompts", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "text_hint_id"
+    t.integer  "prompt_id"
+    t.string   "prompt_type"
+  end
+
+  add_index "text_hint_prompts", ["prompt_type", "prompt_id"], :name => "index_prompts"
+  add_index "text_hint_prompts", ["text_hint_id"], :name => "index_text_hint_prompts_on_text_hint_id"
 
   create_table "text_hints", :force => true do |t|
     t.string   "name"
