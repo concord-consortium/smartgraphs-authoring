@@ -23,7 +23,7 @@ class ActivitiesController < ApplicationController
         render :text => JSON.pretty_generate(JSON.parse(sg_runtime_json))
       }
       format.html {
-        File.open "#{Rails.root}/public/static/smartgraphs/en/91e6a62b8f173d9eb06154969e859e6b06989f75/index.html" do |file|
+        File.open "#{Rails.root}/public/static/smartgraphs/en/4b16f9339305b3d2916641c6012a3a41df4c0874/index.html" do |file|
           # the 'authored_activity_json' variable name is used in the template so can't be changed without
           # changing the template
           authored_activity_json = sg_runtime_json
