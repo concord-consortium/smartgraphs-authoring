@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111104152214) do
+ActiveRecord::Schema.define(:version => 20111107220407) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -26,6 +26,12 @@ ActiveRecord::Schema.define(:version => 20111104152214) do
     t.datetime "updated_at"
     t.string   "license"
     t.string   "attribution"
+  end
+
+  create_table "instruction_sequences", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "text"
   end
 
   create_table "json_activities", :force => true do |t|
@@ -46,6 +52,18 @@ ActiveRecord::Schema.define(:version => 20111104152214) do
 
   add_index "page_panes", ["page_id"], :name => "index_page_panes_on_page_id"
   add_index "page_panes", ["pane_type", "pane_id"], :name => "index_page_panes_on_pane_type_and_pane_id"
+
+  create_table "page_sequences", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "page_id"
+    t.integer  "sequence_id"
+    t.string   "sequence_type"
+    t.integer  "position"
+  end
+
+  add_index "page_sequences", ["page_id"], :name => "index_page_sequences_on_page_id"
+  add_index "page_sequences", ["sequence_type", "sequence_id"], :name => "index_page_sequences_on_sequence_type_and_sequence_id"
 
   create_table "pages", :force => true do |t|
     t.string   "name"

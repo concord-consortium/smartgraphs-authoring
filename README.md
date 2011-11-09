@@ -20,6 +20,8 @@ You can try
 but that might fail, so then you can also try
     curl http://npmjs.org/install.sh | sudo sh
 
+To learn about Hobo, check out the pdf "Rapid Rails 3 with Hobo" at http://hobocentral.net/books/
+
 ## update SmartGraphs runtime ##
 
 1. checkout Smartgraphs repository

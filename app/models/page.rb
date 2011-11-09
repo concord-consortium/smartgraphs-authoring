@@ -21,7 +21,12 @@ class Page < ActiveRecord::Base
   has_many :table_panes, :through => :page_panes, :source => :pane, :source_type => 'TablePane'
   reverse_association_of :table_panes, 'TablePane#page'
 
-  children :page_panes
+  has_many :page_sequences, :order => :position
+
+  has_many :instruction_sequences, :through => :page_sequences, :source => :sequence, :source_type => 'InstructionSequence'
+  reverse_association_of :instruction_sequences, 'InstructionSequence#page'
+
+  children :page_sequences, :page_panes
 
   acts_as_list
 
@@ -36,6 +41,9 @@ class Page < ActiveRecord::Base
       hash['panes'] = page_panes.map do |page_pane|
         page_pane.pane.to_hash
       end
+    end
+    unless page_sequences.empty?
+      hash['sequence'] = page_sequences.first.sequence.to_hash
     end
     hash
   end

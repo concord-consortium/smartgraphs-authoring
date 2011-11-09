@@ -1,5 +1,8 @@
 <show-page>
   <append-collection-section:>
-    <add-panes-toolbar/>
+    <add-sequences-toolbar/>
   </append-collection-section:>
+  <append-page_panes-collection-section:>
+    <add-panes-toolbar/>
+  </append-page_panes-collection-section:>
 </show-page>
