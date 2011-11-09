@@ -1,0 +1,2 @@
+module PickAPointSequencesHelper
+end

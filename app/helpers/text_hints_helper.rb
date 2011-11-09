@@ -1,0 +1,2 @@
+module TextHintsHelper
+end

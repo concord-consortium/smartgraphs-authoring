@@ -1,23 +1,15 @@
-class TablePane < ActiveRecord::Base
+class SequenceHint < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
 
   fields do
-    title :string
     timestamps
   end
 
-  has_one :page_pane, :as => :pane, :dependent => :destroy
-  has_one :page, :through => :page_pane
+  belongs_to :pick_a_point_sequence
+  belongs_to :hint, :polymorphic => true, :index => 'index_hints'
 
-  reverse_association_of :page, 'Page#table_panes'
-
-  def to_hash
-    {
-      'type' => 'TablePane',
-      'title' => title
-    }
-  end
+  acts_as_list
 
   # --- Permissions --- #
 

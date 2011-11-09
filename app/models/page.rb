@@ -21,10 +21,13 @@ class Page < ActiveRecord::Base
   has_many :table_panes, :through => :page_panes, :source => :pane, :source_type => 'TablePane'
   reverse_association_of :table_panes, 'TablePane#page'
 
-  has_many :page_sequences, :order => :position
+  has_many :page_sequences
 
   has_many :instruction_sequences, :through => :page_sequences, :source => :sequence, :source_type => 'InstructionSequence'
   reverse_association_of :instruction_sequences, 'InstructionSequence#page'
+
+  has_many :pick_a_point_sequences, :through => :page_sequences, :source => :sequence, :source_type => 'PickAPointSequence'
+  reverse_association_of :pick_a_point_sequences, 'PickAPointSequence#page'
 
   children :page_sequences, :page_panes
 
