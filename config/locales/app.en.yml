@@ -28,6 +28,10 @@ en:
       page:
         page_panes: Page Panes
         page_sequences: Page Sequence
+      text_hint:
+        text_hint_prompts: Prompts
+      pick_a_point_sequence:
+        sequence_hints: Hints
     attribute_help:
       table_pane:
         title: this is not displayed in the runtime
