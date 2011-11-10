@@ -16,6 +16,12 @@ class NumericSequence < ActiveRecord::Base
   has_one :page, :through => :page_sequence
   reverse_association_of :page, 'Page#numeric_sequences'
 
+  has_many :sequence_hints, :order => :position
+  has_many :text_hints, :through => :sequence_hints, :source => :hint, :source_type => 'TextHint'
+  reverse_association_of :text_hints, 'TextHint#numeric_sequence'
+
+  children :sequence_hints
+
   # --- Permissions --- #
 
   def create_permitted?

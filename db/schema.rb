@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111110212844) do
+ActiveRecord::Schema.define(:version => 20111110222210) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -165,9 +165,11 @@ ActiveRecord::Schema.define(:version => 20111110212844) do
     t.integer  "hint_id"
     t.string   "hint_type"
     t.integer  "position"
+    t.integer  "numeric_sequence_id"
   end
 
   add_index "sequence_hints", ["hint_type", "hint_id"], :name => "index_hints"
+  add_index "sequence_hints", ["numeric_sequence_id"], :name => "index_sequence_hints_on_numeric_sequence_id"
   add_index "sequence_hints", ["pick_a_point_sequence_id"], :name => "index_sequence_hints_on_pick_a_point_sequence_id"
 
   create_table "table_panes", :force => true do |t|

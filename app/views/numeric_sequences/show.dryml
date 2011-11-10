@@ -1,0 +1,14 @@
+<show-page>
+  <!-- <append-initial_prompt_prompts-collection-section:>
+    <add-initial-prompt-prompts-toolbar />
+  </append-initial_prompt_prompts-collection-section:>
+  <append-give_up_prompts-collection-section:>
+    <add-give-up-prompts-toolbar />
+  </append-give_up_prompts-collection-section:>
+  <append-confirm_correct_prompts-collection-section:>
+    <add-confirm-correct-prompts-toolbar />
+  </append-confirm_correct_prompts-collection-section:> -->
+  <append-collection-section:>
+    <add-hints-toolbar/>
+  </append-collection-section:>
+</show-page>
