@@ -11,13 +11,35 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111109205641) do
+ActiveRecord::Schema.define(:version => 20111110172132) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "confirm_correct_prompts", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "pick_a_point_sequence_id"
+    t.integer  "prompt_id"
+    t.string   "prompt_type"
+  end
+
+  add_index "confirm_correct_prompts", ["pick_a_point_sequence_id"], :name => "index_confirm_correct_prompts_on_pick_a_point_sequence_id"
+  add_index "confirm_correct_prompts", ["prompt_type", "prompt_id"], :name => "index_confirm_correct_prompts"
+
+  create_table "give_up_prompts", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "pick_a_point_sequence_id"
+    t.integer  "prompt_id"
+    t.string   "prompt_type"
+  end
+
+  add_index "give_up_prompts", ["pick_a_point_sequence_id"], :name => "index_give_up_prompts_on_pick_a_point_sequence_id"
+  add_index "give_up_prompts", ["prompt_type", "prompt_id"], :name => "index_give_up_prompts"
 
   create_table "image_panes", :force => true do |t|
     t.string   "name"
@@ -27,6 +49,17 @@ ActiveRecord::Schema.define(:version => 20111109205641) do
     t.string   "license"
     t.string   "attribution"
   end
+
+  create_table "initial_prompt_prompts", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "pick_a_point_sequence_id"
+    t.integer  "prompt_id"
+    t.string   "prompt_type"
+  end
+
+  add_index "initial_prompt_prompts", ["pick_a_point_sequence_id"], :name => "index_initial_prompt_prompts_on_pick_a_point_sequence_id"
+  add_index "initial_prompt_prompts", ["prompt_type", "prompt_id"], :name => "index_initial_prompt_prompts"
 
   create_table "instruction_sequences", :force => true do |t|
     t.datetime "created_at"

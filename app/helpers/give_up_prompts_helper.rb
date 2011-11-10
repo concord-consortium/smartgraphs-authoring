@@ -1,0 +1,2 @@
+module GiveUpPromptsHelper
+end

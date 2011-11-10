@@ -1,0 +1,2 @@
+module InitialPromptPromptsHelper
+end

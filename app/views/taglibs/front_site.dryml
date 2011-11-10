@@ -71,6 +71,36 @@
   </card:prompt>
 </def>
 
+<def tag="card" for="InitialPromptPrompt">
+  <!-- By default a recursive tag inside a polymorphic definition just calls the base card
+       So we have to explicitly set the type-->
+  <card:prompt for-type="&this.prompt.class" merge>
+    <append-heading:>
+      <delete-button label="Delete" param/>
+    </append-heading:>
+  </card:prompt>
+</def>
+
+<def tag="card" for="GiveUpPrompt">
+  <!-- By default a recursive tag inside a polymorphic definition just calls the base card
+       So we have to explicitly set the type-->
+  <card:prompt for-type="&this.prompt.class" merge>
+    <append-heading:>
+      <delete-button label="Delete" param/>
+    </append-heading:>
+  </card:prompt>
+</def>
+
+<def tag="card" for="ConfirmCorrectPrompt">
+  <!-- By default a recursive tag inside a polymorphic definition just calls the base card
+       So we have to explicitly set the type-->
+  <card:prompt for-type="&this.prompt.class" merge>
+    <append-heading:>
+      <delete-button label="Delete" param/>
+    </append-heading:>
+  </card:prompt>
+</def>
+
 <def tag="add-panes-toolbar">
   <a action="new" to="&this.image_panes">
     <ht key="image_pane.actions.new" >New Image Pane element</ht>
@@ -107,6 +137,24 @@
     </a>
 </def>
 
+<def tag="add-initial-prompt-prompts-toolbar">
+    <a action="new" to="&this.initial_range_visual_prompts">
+      <ht key="range_visual_prompt.actions.new" >New Range Visual Prompt element</ht>
+    </a>
+</def>
+
+<def tag="add-confirm-correct-prompts-toolbar">
+    <a action="new" to="&this.confirm_range_visual_prompts">
+      <ht key="range_visual_prompt.actions.new" >New Range Visual Prompt element</ht>
+    </a>
+</def>
+
+<def tag="add-give-up-prompts-toolbar">
+    <a action="new" to="&this.give_up_range_visual_prompts">
+      <ht key="range_visual_prompt.actions.new" >New Range Visual Prompt element</ht>
+    </a>
+</def>
+
 <extend tag="form" for="Page">
   <old-form merge>
     <after-field-list:>
@@ -121,8 +169,37 @@
 <extend tag="form" for="PickAPointSequence">
   <old-form merge>
     <after-field-list:>
+      <h3>
+        <ht key="sequence_hint.collection.heading" count="&this.sequence_hints.count" >
+          <human-collection-name collection="sequence_hints" your/>
+        </ht>
+      </h3>
       <sortable-collection:sequence_hints/>
       <add-hints-toolbar/>
+
+      <h3>
+        <ht key="initial_prompt_prompt.collection.heading" count="&this.initial_prompt_prompts.count" >
+          <human-collection-name collection="initial_prompt_prompts" your/>
+        </ht>
+      </h3>
+      <collection:initial_prompt_prompts/>
+      <add-initial-prompt-prompts-toolbar/>
+
+      <h3>
+        <ht key="give_up_prompt.collection.heading" count="&this.give_up_prompts.count" >
+          <human-collection-name collection="give_up_prompts" your/>
+        </ht>
+      </h3>
+      <collection:give_up_prompts/>
+      <add-give-up-prompts-toolbar/>
+
+      <h3>
+        <ht key="confirm_correct_prompt.collection.heading" count="&this.confirm_correct_prompts.count" >
+          <human-collection-name collection="confirm_correct_prompts" your/>
+        </ht>
+      </h3>
+      <collection:confirm_correct_prompts/>
+      <add-confirm-correct-prompts-toolbar/>
     </after-field-list:>
   </old-form>
 </extend>
