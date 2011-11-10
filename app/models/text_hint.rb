@@ -13,9 +13,6 @@ class TextHint < ActiveRecord::Base
   has_one :pick_a_point_sequence, :through => :sequence_hint
   reverse_association_of :pick_a_point_sequence, 'PickAPointSequence#text_hints'
 
-#  has_one :give_up_sequence, :as => :give_up_hint
-#  has_one :confirm_correct_sequence, :as => :confirm_correct_hint
-
   has_many :text_hint_prompts
   has_many :range_visual_prompts, :through => :text_hint_prompts, :source => :prompt, :source_type => 'RangeVisualPrompt'
   reverse_association_of :range_visual_prompts, 'RangeVisualPrompt#text_hint'
