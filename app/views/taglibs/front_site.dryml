@@ -207,7 +207,7 @@
 <extend tag="form" for="TextHint">
   <old-form merge>
     <after-field-list:>
-      <sortable-collection:text_hint_prompts/>
+      <collection:text_hint_prompts/>
       <add-prompts-toolbar/>
     </after-field-list:>
   </old-form>
