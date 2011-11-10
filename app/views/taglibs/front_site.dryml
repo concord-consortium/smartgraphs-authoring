@@ -122,6 +122,9 @@
     <a action="new" to="&this.pick_a_point_sequences">
       <ht key="pick_a_point_sequence.actions.new" >New Pick-A-Point Sequence element</ht>
     </a>
+    <a action="new" to="&this.numeric_sequences">
+      <ht key="numeric_sequence.actions.new" >New Numeric Sequence element</ht>
+    </a>
   </unless>
 </def>
 

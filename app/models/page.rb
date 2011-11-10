@@ -29,10 +29,12 @@ class Page < ActiveRecord::Base
   has_many :pick_a_point_sequences, :through => :page_sequences, :source => :sequence, :source_type => 'PickAPointSequence'
   reverse_association_of :pick_a_point_sequences, 'PickAPointSequence#page'
 
+  has_many :numeric_sequences, :through => :page_sequences, :source => :sequence, :source_type => 'NumericSequence'
+  reverse_association_of :numeric_sequences, 'NumericSequence#page'
+
   children :page_sequences, :page_panes
 
   acts_as_list
-
 
   def to_hash
     hash = {
