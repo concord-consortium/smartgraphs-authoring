@@ -34,6 +34,31 @@ class NumericSequence < ActiveRecord::Base
 
   children :sequence_hints, :initial_prompt_prompts, :confirm_correct_prompts, :give_up_prompts
 
+  def to_hash
+    hash = {
+      'type' => 'NumericSequence',
+      'initialPrompt' => {'text' => initial_prompt.to_s },
+      'correctAnswer' => correct_answer,
+      'giveUp' => {'text' => give_up.to_s },
+      'confirmCorrect' => {'text' => confirm_correct.to_s }
+    }
+    unless sequence_hints.empty?
+      hash['hints'] = sequence_hints.map do |sequence_hint|
+        sequence_hint.hint.to_hash
+      end
+    end
+    unless initial_prompt_prompts.empty?
+      hash['initialPrompt']['visualPrompts'] = initial_prompt_prompts.map {|p| p.prompt.to_hash }
+    end
+    unless give_up_prompts.empty?
+      hash['giveUp']['visualPrompts'] = give_up_prompts.map {|p| p.prompt.to_hash }
+    end
+    unless confirm_correct_prompts.empty?
+      hash['confirmCorrect']['visualPrompts'] = confirm_correct_prompts.map {|p| p.prompt.to_hash }
+    end
+    hash
+  end
+
   # --- Permissions --- #
 
   def create_permitted?
