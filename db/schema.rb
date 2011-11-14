@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111110225115) do
+ActiveRecord::Schema.define(:version => 20111114172340) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -163,6 +163,25 @@ ActiveRecord::Schema.define(:version => 20111110225115) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "sensor_graph_panes", :force => true do |t|
+    t.string   "title"
+    t.string   "y_label"
+    t.float    "y_min"
+    t.float    "y_max"
+    t.float    "y_ticks"
+    t.string   "x_label"
+    t.float    "x_min"
+    t.float    "x_max"
+    t.float    "x_ticks"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "y_unit_id"
+    t.integer  "x_unit_id"
+  end
+
+  add_index "sensor_graph_panes", ["x_unit_id"], :name => "index_sensor_graph_panes_on_x_unit_id"
+  add_index "sensor_graph_panes", ["y_unit_id"], :name => "index_sensor_graph_panes_on_y_unit_id"
 
   create_table "sequence_hints", :force => true do |t|
     t.datetime "created_at"
