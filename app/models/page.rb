@@ -35,6 +35,9 @@ class Page < ActiveRecord::Base
   has_many :numeric_sequences, :through => :page_sequences, :source => :sequence, :source_type => 'NumericSequence'
   reverse_association_of :numeric_sequences, 'NumericSequence#page'
 
+  has_many :constructed_response_sequences, :through => :page_sequences, :source => :sequence, :source_type => 'ConstructedResponseSequence'
+  reverse_association_of :constructed_response_sequences, 'ConstructedResponseSequence#page'
+
   children :page_sequences, :page_panes
 
   acts_as_list

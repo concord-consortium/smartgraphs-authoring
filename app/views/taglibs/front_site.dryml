@@ -128,6 +128,9 @@
     <a action="new" to="&this.numeric_sequences">
       <ht key="numeric_sequence.actions.new" >New Numeric Sequence element</ht>
     </a>
+    <a action="new" to="&this.constructed_response_sequences">
+      <ht key="constructed_response_sequence.actions.new" >New Constructed Response Sequence element</ht>
+    </a>
   </unless>
 </def>
 
