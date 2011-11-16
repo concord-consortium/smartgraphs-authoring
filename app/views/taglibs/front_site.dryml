@@ -101,14 +101,6 @@
   </card:prompt>
 </def>
 
-<extend tag="card" for="ConstructedResponse">
-  <old-card merge>
-    <append-heading:>
-      <delete-button label="Delete" param/>
-    </append-heading:>
-  </old-card>
-</extend>
-
 <def tag="add-panes-toolbar">
   <a action="new" to="&this.image_panes">
     <ht key="image_pane.actions.new" >New Image Pane element</ht>
@@ -172,12 +164,6 @@
     </a>
 </def>
 
-<def tag="add-constructed-response-toolbar">
-    <a action="new" to="&this.constructed_responses">
-      <ht key="constructed_response.actions.new" >New Constructed Response element</ht>
-    </a>
-</def>
-
 <extend tag="form" for="Page">
   <old-form merge>
     <after-field-list:>
@@ -185,15 +171,6 @@
       <add-panes-toolbar/>
       <collection:page_sequences/>
       <add-sequences-toolbar/>
-    </after-field-list:>
-  </old-form>
-</extend>
-
-<extend tag="form" for="ConstructedResponseSequence">
-  <old-form merge>
-    <after-field-list:>
-      <sortable-collection:constructed_responses/>
-      <add-constructed-response-toolbar/>
     </after-field-list:>
   </old-form>
 </extend>

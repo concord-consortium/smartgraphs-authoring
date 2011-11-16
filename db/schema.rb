@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111116175131) do
+ActiveRecord::Schema.define(:version => 20111116203226) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -37,18 +37,8 @@ ActiveRecord::Schema.define(:version => 20111116175131) do
     t.text     "initial_prompt"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "constructed_responses", :force => true do |t|
-    t.string   "title"
     t.text     "initial_content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "constructed_response_sequence_id"
-    t.integer  "position"
   end
-
-  add_index "constructed_responses", ["constructed_response_sequence_id"], :name => "index_constructed_responses_on_constructed_response_sequence_id"
 
   create_table "give_up_prompts", :force => true do |t|
     t.datetime "created_at"

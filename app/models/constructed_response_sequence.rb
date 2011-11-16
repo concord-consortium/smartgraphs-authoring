@@ -5,6 +5,7 @@ class ConstructedResponseSequence < ActiveRecord::Base
   fields do
     title         :string
     initial_prompt :text
+    initial_content :text
     timestamps
   end
 
@@ -13,27 +14,13 @@ class ConstructedResponseSequence < ActiveRecord::Base
   has_one :page, :through => :page_sequence
   reverse_association_of :page, 'Page#constructed_response_sequences'
 
-  has_many :constructed_responses, :order => :position
-
-  children :constructed_responses
-
   def to_hash
     hash = {
       'type' => 'ConstructedResponseSequence',
-      'initialPrompt' => initial_prompt
+      'initialPrompt' => initial_prompt,
     }
-    if constructed_responses
-      hash['responses'] = constructed_responses.map{|cr| cr.to_hash }
-    else
-      hash['responses'] = []
-    end
+    hash['initialContent'] = initial_content if initial_content
     hash
-  end
-
-  after_create :create_default_constructed_response
-
-  def create_default_constructed_response
-    default = ConstructedResponse.create(:title => "Default", :constructed_response_sequence => self)
   end
 
   # --- Permissions --- #

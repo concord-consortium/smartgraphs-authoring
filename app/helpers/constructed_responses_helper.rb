@@ -1,2 +1,0 @@
-module ConstructedResponsesHelper
-end
