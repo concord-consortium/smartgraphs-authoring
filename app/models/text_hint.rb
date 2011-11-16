@@ -20,6 +20,9 @@ class TextHint < ActiveRecord::Base
   has_many :range_visual_prompts, :through => :text_hint_prompts, :source => :prompt, :source_type => 'RangeVisualPrompt'
   reverse_association_of :range_visual_prompts, 'RangeVisualPrompt#text_hint'
 
+  has_many :point_circle_visual_prompts, :through => :text_hint_prompts, :source => :prompt, :source_type => 'PointCircleVisualPrompt'
+  reverse_association_of :point_circle_visual_prompts, 'PointCircleVisualPrompt#text_hint'
+
   children :text_hint_prompts
 
   def to_hash
@@ -27,9 +30,9 @@ class TextHint < ActiveRecord::Base
       'name' => name.to_s,
       'text' => text.to_s
     }
-    unless range_visual_prompts.empty?
-      hash['visualPrompts'] = range_visual_prompts.map do |prompt|
-        prompt.to_hash
+    unless text_hint_prompts.empty?
+      hash['visualPrompts'] = text_hint_prompts.map do |prompt|
+        prompt.prompt.to_hash
       end
     end
     hash

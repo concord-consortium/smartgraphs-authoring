@@ -144,11 +144,17 @@
     <a action="new" to="&this.range_visual_prompts">
       <ht key="range_visual_prompt.actions.new" >New Range Visual Prompt element</ht>
     </a>
+    <a action="new" to="&this.point_circle_visual_prompts">
+      <ht key="point_circle_visual_prompt.actions.new" >New Point Circle Visual Prompt element</ht>
+    </a>
 </def>
 
 <def tag="add-initial-prompt-prompts-toolbar">
     <a action="new" to="&this.initial_range_visual_prompts">
       <ht key="range_visual_prompt.actions.new" >New Range Visual Prompt element</ht>
+    </a>
+    <a action="new" to="&this.initial_point_circle_visual_prompts">
+      <ht key="point_circle_visual_prompt.actions.new" >New Point Circle Visual Prompt element</ht>
     </a>
 </def>
 
@@ -156,11 +162,17 @@
     <a action="new" to="&this.confirm_range_visual_prompts">
       <ht key="range_visual_prompt.actions.new" >New Range Visual Prompt element</ht>
     </a>
+    <a action="new" to="&this.confirm_point_circle_visual_prompts">
+      <ht key="point_circle_visual_prompt.actions.new" >New Point Circle Visual Prompt element</ht>
+    </a>
 </def>
 
 <def tag="add-give-up-prompts-toolbar">
     <a action="new" to="&this.give_up_range_visual_prompts">
       <ht key="range_visual_prompt.actions.new" >New Range Visual Prompt element</ht>
+    </a>
+    <a action="new" to="&this.give_up_point_circle_visual_prompts">
+      <ht key="point_circle_visual_prompt.actions.new" >New Point Circle Visual Prompt element</ht>
     </a>
 </def>
 
