@@ -101,6 +101,14 @@
   </card:prompt>
 </def>
 
+<extend tag="card" for="ConstructedResponse">
+  <old-card merge>
+    <append-heading:>
+      <delete-button label="Delete" param/>
+    </append-heading:>
+  </old-card>
+</extend>
+
 <def tag="add-panes-toolbar">
   <a action="new" to="&this.image_panes">
     <ht key="image_pane.actions.new" >New Image Pane element</ht>

@@ -11,7 +11,7 @@ class ConstructedResponse < ActiveRecord::Base
   belongs_to :constructed_response_sequence
 
   acts_as_list
-  never_show :position
+  never_show :position, :constructed_response_sequence
 
   def to_hash
     hash = {
