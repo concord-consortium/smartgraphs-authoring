@@ -18,6 +18,9 @@ class Page < ActiveRecord::Base
   has_many :predefined_graph_panes, :through => :page_panes, :source => :pane, :source_type => 'PredefinedGraphPane'
   reverse_association_of :predefined_graph_panes, 'PredefinedGraphPane#page'
 
+  has_many :sensor_graph_panes, :through => :page_panes, :source => :pane, :source_type => 'SensorGraphPane'
+  reverse_association_of :sensor_graph_panes, 'SensorGraphPane#page'
+
   has_many :table_panes, :through => :page_panes, :source => :pane, :source_type => 'TablePane'
   reverse_association_of :table_panes, 'TablePane#page'
 
@@ -31,6 +34,9 @@ class Page < ActiveRecord::Base
 
   has_many :numeric_sequences, :through => :page_sequences, :source => :sequence, :source_type => 'NumericSequence'
   reverse_association_of :numeric_sequences, 'NumericSequence#page'
+
+  has_many :constructed_response_sequences, :through => :page_sequences, :source => :sequence, :source_type => 'ConstructedResponseSequence'
+  reverse_association_of :constructed_response_sequences, 'ConstructedResponseSequence#page'
 
   children :page_sequences, :page_panes
 

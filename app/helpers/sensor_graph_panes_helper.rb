@@ -1,0 +1,2 @@
+module SensorGraphPanesHelper
+end
