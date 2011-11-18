@@ -46,6 +46,7 @@ def create_page(page_def)
 
   page_url = current_url
   page_def[:panes].each{|pane_def| create_pane(pane_def); visit page_url } if page_def[:panes]
+  create_sequence(page_def[:sequence]) if page_def[:sequence]
 end
 
 def create_pane(pane_def)
@@ -94,5 +95,27 @@ def create_pane(pane_def)
     click_link 'New Table pane'
     fill_in 'table_pane_title', :with => pane_def[:title]
     click_button 'Create Table pane'
+  end
+end
+
+def create_sequence(sequence_def)
+  case sequence_def[:type]
+  when "InstructionSequence"
+    click_link 'New Instruction sequence'
+    fill_in 'instruction_sequence_text', :with => sequence_def[:text]
+    click_button 'Create Instruction sequence'
+  when "PickAPointSequence"
+    click_link 'New Pick a point sequence'
+    fill_in 'pick_a_point_sequence_title', :with => sequence_def[:title]
+    fill_in 'pick_a_point_sequence_initial_prompt', :with => sequence_def[:initialPrompt]
+    fill_in 'pick_a_point_sequence_correct_answer_x', :with => sequence_def[:correctAnswerX]
+    fill_in 'pick_a_point_sequence_correct_answer_y', :with => sequence_def[:correctAnswerY]
+    fill_in 'pick_a_point_sequence_give_up', :with => sequence_def[:giveUp]
+    fill_in 'pick_a_point_sequence_confirm_correct', :with => sequence_def[:confirmCorrect]
+    click_button 'Create Pick a point sequence'
+  when "NumericSequence"
+    pending "numeric implementation"
+  when "ConstructedResponseSequence"
+    pending "constructed response implementation"
   end
 end
