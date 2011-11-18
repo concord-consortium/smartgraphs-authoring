@@ -25,8 +25,17 @@ def create_activity(activity_def)
   click_button 'Create Activity'
 
   activity_url = current_url
+  activity_def[:units].each{|unit_def| create_unit(unit_def); visit activity_url } if activity_def[:units]
   activity_def[:pages].each{|page_def| create_page(page_def); visit activity_url } if activity_def[:pages]
   return Activity.last
+end
+
+def create_unit(unit_def)
+  visit '/units'
+  click_link 'New Unit'
+  fill_in 'unit_name', :with => unit_def[:name]
+  fill_in 'unit_abbreviation', :with => unit_def[:abbreviation]
+  click_button 'Create Unit'
 end
 
 def create_page(page_def)
@@ -49,10 +58,41 @@ def create_pane(pane_def)
     fill_in 'image_pane_attribution', :with => pane_def[:attribution]
     click_button 'Create Image pane'
   when "PredefinedGraphPane"
-    pending "Predefined graph implementation"
-  when "SensorGraph"
-    pending "SensorGraph implementation"
+    click_link 'New Predefined graph pane'
+    fill_in 'predefined_graph_pane_title', :with => pane_def[:title]
+    fill_in 'predefined_graph_pane_data', :with => pane_def[:data]
+
+    fill_in 'predefined_graph_pane_y_label', :with => pane_def[:y][:label]
+    fill_in 'predefined_graph_pane_y_min', :with => pane_def[:y][:min]
+    fill_in 'predefined_graph_pane_y_max', :with => pane_def[:y][:max]
+    fill_in 'predefined_graph_pane_y_ticks', :with => pane_def[:y][:ticks]
+    select pane_def[:y][:unit], :from => 'predefined_graph_pane[y_unit_id]'
+
+    fill_in 'predefined_graph_pane_x_label', :with => pane_def[:x][:label]
+    fill_in 'predefined_graph_pane_x_min', :with => pane_def[:x][:min]
+    fill_in 'predefined_graph_pane_x_max', :with => pane_def[:x][:max]
+    fill_in 'predefined_graph_pane_x_ticks', :with => pane_def[:x][:ticks]
+    select pane_def[:x][:unit], :from => 'predefined_graph_pane[x_unit_id]'
+    click_button 'Create Predefined graph pane'
+  when "SensorGraphPane"
+    click_link 'New Sensor graph pane'
+    fill_in 'sensor_graph_pane_title', :with => pane_def[:title]
+
+    fill_in 'sensor_graph_pane_y_label', :with => pane_def[:y][:label]
+    fill_in 'sensor_graph_pane_y_min', :with => pane_def[:y][:min]
+    fill_in 'sensor_graph_pane_y_max', :with => pane_def[:y][:max]
+    fill_in 'sensor_graph_pane_y_ticks', :with => pane_def[:y][:ticks]
+    select pane_def[:y][:unit], :from => 'sensor_graph_pane[y_unit_id]'
+
+    fill_in 'sensor_graph_pane_x_label', :with => pane_def[:x][:label]
+    fill_in 'sensor_graph_pane_x_min', :with => pane_def[:x][:min]
+    fill_in 'sensor_graph_pane_x_max', :with => pane_def[:x][:max]
+    fill_in 'sensor_graph_pane_x_ticks', :with => pane_def[:x][:ticks]
+    select pane_def[:x][:unit], :from => 'sensor_graph_pane[x_unit_id]'
+    click_button 'Create Sensor graph pane'
   when "TablePane"
-    pending "TablePane implementation"
+    click_link 'New Table pane'
+    fill_in 'table_pane_title', :with => pane_def[:title]
+    click_button 'Create Table pane'
   end
 end

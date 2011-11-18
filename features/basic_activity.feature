@@ -17,20 +17,3 @@ Feature: Basic Activities
       """
     Then I should get correct json
 
-  Scenario: Create an activity with an image pane
-    Given I am on the Activities page
-    When I create a new activity:
-      """
-      --- 
-      :name: Simple Activity Image Pane
-      :pages:
-      - :name: Simple Page 1
-        :text: In this page...
-        :panes:
-        - :type: ImagePane
-          :name: Image Pane
-          :url: http://www.concord.org/images/foo.png
-          :license: Creative Commons
-          :attribution: The Concord Consortium
-      """
-    Then I should get correct json
