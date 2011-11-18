@@ -1,0 +1,21 @@
+{
+  "type": "Activity",
+  "name": "Simple Activity Image Pane",
+  "pages": [
+    {
+      "type": "Page",
+      "name": "Simple Page 1",
+      "text": "In this page...",
+      "panes": [
+        {
+          "type": "ImagePane",
+          "name": "Image Pane",
+          "url": "http://www.concord.org/images/foo.png",
+          "license": "Creative Commons",
+          "attribution": "The Concord Consortium"
+        }
+      ]
+    }
+  ],
+  "units": []
+}

@@ -10,6 +10,11 @@ group :development, :test do
   gem "capistrano-ext",                 :require => "capistrano"
   gem "haml"
   gem 'ruby-debug19', :require => 'ruby-debug'
+  gem 'cucumber'
+  gem 'cucumber-rails'
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'launchy'
 end
 
 group :production do
