@@ -147,6 +147,9 @@
     <a action="new" to="&this.point_circle_visual_prompts">
       <ht key="point_circle_visual_prompt.actions.new" >New Point Circle Visual Prompt element</ht>
     </a>
+    <a action="new" to="&this.point_axis_line_visual_prompts">
+      <ht key="point_axis_line_visual_prompt.actions.new" >New Point Axis Line Visual Prompt element</ht>
+    </a>
 </def>
 
 <def tag="add-initial-prompt-prompts-toolbar">
@@ -155,6 +158,9 @@
     </a>
     <a action="new" to="&this.initial_point_circle_visual_prompts">
       <ht key="point_circle_visual_prompt.actions.new" >New Point Circle Visual Prompt element</ht>
+    </a>
+    <a action="new" to="&this.initial_point_axis_line_visual_prompts">
+      <ht key="point_axis_line_visual_prompt.actions.new" >New Point Axis Line Visual Prompt element</ht>
     </a>
 </def>
 
@@ -165,6 +171,9 @@
     <a action="new" to="&this.confirm_point_circle_visual_prompts">
       <ht key="point_circle_visual_prompt.actions.new" >New Point Circle Visual Prompt element</ht>
     </a>
+    <a action="new" to="&this.confirm_point_axis_line_visual_prompts">
+      <ht key="point_axis_line_visual_prompt.actions.new" >New Point Axis Line Visual Prompt element</ht>
+    </a>
 </def>
 
 <def tag="add-give-up-prompts-toolbar">
@@ -173,6 +182,9 @@
     </a>
     <a action="new" to="&this.give_up_point_circle_visual_prompts">
       <ht key="point_circle_visual_prompt.actions.new" >New Point Circle Visual Prompt element</ht>
+    </a>
+    <a action="new" to="&this.give_up_point_axis_line_visual_prompts">
+      <ht key="point_axis_line_visual_prompt.actions.new" >New Point Axis Line Visual Prompt element</ht>
     </a>
 </def>
 

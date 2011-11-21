@@ -23,6 +23,9 @@ class TextHint < ActiveRecord::Base
   has_many :point_circle_visual_prompts, :through => :text_hint_prompts, :source => :prompt, :source_type => 'PointCircleVisualPrompt'
   reverse_association_of :point_circle_visual_prompts, 'PointCircleVisualPrompt#text_hint'
 
+  has_many :point_axis_line_visual_prompts, :through => :text_hint_prompts, :source => :prompt, :source_type => 'PointAxisLineVisualPrompt'
+  reverse_association_of :point_axis_line_visual_prompts, 'PointAxisLineVisualPrompt#text_hint'
+
   children :text_hint_prompts
 
   def to_hash
