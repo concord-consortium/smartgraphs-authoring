@@ -114,8 +114,18 @@ def create_sequence(sequence_def)
     fill_in 'pick_a_point_sequence_confirm_correct', :with => sequence_def[:confirmCorrect]
     click_button 'Create Pick a point sequence'
   when "NumericSequence"
-    pending "numeric implementation"
+    click_link 'New Numeric sequence'
+    fill_in 'numeric_sequence_title', :with => sequence_def[:title]
+    fill_in 'numeric_sequence_initial_prompt', :with => sequence_def[:initialPrompt]
+    fill_in 'numeric_sequence_correct_answer', :with => sequence_def[:correctAnswer]
+    fill_in 'numeric_sequence_give_up', :with => sequence_def[:giveUp]
+    fill_in 'numeric_sequence_confirm_correct', :with => sequence_def[:confirmCorrect]
+    click_button 'Create Numeric sequence'
   when "ConstructedResponseSequence"
-    pending "constructed response implementation"
+    click_link 'New Constructed response sequence'
+    fill_in 'constructed_response_sequence_title', :with => sequence_def[:title]
+    fill_in 'constructed_response_sequence_initial_prompt', :with => sequence_def[:initialPrompt]
+    fill_in 'constructed_response_sequence_initial_content', :with => sequence_def[:initialContent]
+    click_button 'Create Constructed response sequence'
   end
 end
