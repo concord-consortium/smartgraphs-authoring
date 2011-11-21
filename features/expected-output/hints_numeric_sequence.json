@@ -1,6 +1,6 @@
 {
   "type": "Activity",
-  "name": "Sequences Pick A Point Sequence",
+  "name": "Hints Numeric Sequence",
   "pages": [
     {
       "type": "Page",
@@ -29,9 +29,9 @@
         }
       ],
       "sequence": {
-        "type": "PickAPointSequence",
+        "type": "NumericSequence",
         "initialPrompt": {
-          "text": "Pick the middle point."
+          "text": "What is the value at x=2?"
         },
         "confirmCorrect": {
           "text": "Yes, that's right!"
@@ -39,7 +39,17 @@
         "giveUp": {
           "text": "That's not right."
         },
-        "correctAnswerPoint": [2.0, 200.0]
+        "correctAnswer": 200.0,
+        "hints": [
+          {
+            "name": "Hint 1",
+            "text": "Almost. Check the y axis."
+          },
+          {
+            "name": "Hint 2",
+            "text": "Line it up."
+          }
+        ]
       }
     }
   ],

@@ -1,6 +1,6 @@
 {
   "type": "Activity",
-  "name": "Sequences Pick A Point Sequence",
+  "name": "Hints Pick A Point",
   "pages": [
     {
       "type": "Page",
@@ -39,7 +39,17 @@
         "giveUp": {
           "text": "That's not right."
         },
-        "correctAnswerPoint": [2.0, 200.0]
+        "correctAnswerPoint": [2.0, 200.0],
+        "hints": [
+          {
+            "name": "Hint 1",
+            "text": "Almost. Check the y axis."
+          },
+          {
+            "name": "Hint 2",
+            "text": "Line it up."
+          }
+        ]
       }
     }
   ],

@@ -128,4 +128,16 @@ def create_sequence(sequence_def)
     fill_in 'constructed_response_sequence_initial_content', :with => sequence_def[:initialContent]
     click_button 'Create Constructed response sequence'
   end
+
+  sequence_url = current_url
+  sequence_def[:hints].each{|hint_def| create_hint(hint_def); visit sequence_url } if sequence_def[:hints]
+end
+
+def create_hint(hint_def)
+  click_link 'New Text hint'
+  fill_in 'text_hint_name', :with => hint_def[:name]
+  fill_in 'text_hint_text', :with => hint_def[:text]
+  click_button 'Create Text hint'
+
+  # TODO Create visual prompts
 end
