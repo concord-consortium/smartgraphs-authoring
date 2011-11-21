@@ -130,6 +130,17 @@ def create_sequence(sequence_def)
   end
 
   sequence_url = current_url
+  [:initialPromptPrompts, :giveUpPrompts, :confirmCorrectPrompts].each do |p|
+    if sequence_def[p]
+      # be sure to limit the prompt creation to one of the aside sections
+      # eg initial-prompt-prompts-collection-section
+      context = ".#{p.to_s.underscore.gsub(/_/,'-')}-collection-section"
+      sequence_def[p].each do |prompt_def|
+        create_prompt(prompt_def, context)
+        visit sequence_url
+      end
+    end
+  end
   sequence_def[:hints].each{|hint_def| create_hint(hint_def); visit sequence_url } if sequence_def[:hints]
 end
 
@@ -139,5 +150,29 @@ def create_hint(hint_def)
   fill_in 'text_hint_text', :with => hint_def[:text]
   click_button 'Create Text hint'
 
-  # TODO Create visual prompts
+  # Create visual prompts
+  hint_url = current_url
+  hint_def[:prompts].each{|prompt_def| create_prompt(prompt_def); visit hint_url } if hint_def[:prompts]
+end
+
+def create_prompt(prompt_def, context = nil)
+  case prompt_def[:type]
+  when "RangeVisualPrompt"
+    if context
+      within(context) do
+        click_link 'New Range visual prompt'
+      end
+    else
+      click_link 'New Range visual prompt'
+    end
+    fill_in 'range_visual_prompt_name', :with => prompt_def[:name]
+    fill_in 'range_visual_prompt_x_min', :with => prompt_def[:minX]
+    fill_in 'range_visual_prompt_x_max', :with => prompt_def[:maxX]
+    fill_in 'range_visual_prompt_color', :with => prompt_def[:color]
+    click_button 'Create Range visual prompt'
+  when "PointCircleVisualPrompt"
+    pending
+  when "PointAxisLineVisualPrompt"
+    pending
+  end
 end
