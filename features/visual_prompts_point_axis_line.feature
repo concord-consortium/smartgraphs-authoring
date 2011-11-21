@@ -1,14 +1,14 @@
-Feature: Visual Prompts Activities
+Feature: Point Axis Line Prompts Activities
   In order to be productive
   An author
-  Should create activities with visual prompts
+  Should create activities with point axis line visual prompts
 
   Scenario: Create an activity with a pick a point sequence with range visual prompts
     Given I am on the Activities page
     When I create a new activity:
       """
       --- 
-      :name: Visual Prompt Range Pick A Point
+      :name: Visual Prompt Point Axis Line Pick A Point
       :units:
       - :name: Time
         :abbreviation: s
@@ -42,36 +42,40 @@ Feature: Visual Prompts Activities
           :title: Pick a point
           :initialPrompt: Pick the middle point.
           :initialPromptPrompts:
-          - :type: RangeVisualPrompt
+          - :type: PointAxisLineVisualPrompt
             :name: Red prompt
-            :minX: 0
-            :maxX: 5
+            :pointX: 1
+            :pointY: 100
             :color: red
+            :axis: X Axis
           :correctAnswerX: 2
           :correctAnswerY: 200
           :giveUp: That's not right.
           :giveUpPrompts:
-          - :type: RangeVisualPrompt
+          - :type: PointAxisLineVisualPrompt
             :name: Green prompt
-            :minX: 2
-            :maxX: 3
+            :pointX: 2
+            :pointY: 200
             :color: green
+            :axis: X Axis
           :confirmCorrect: Yes, that's right!
           :confirmCorrectPrompts:
-          - :type: RangeVisualPrompt
+          - :type: PointAxisLineVisualPrompt
             :name: Blue prompt
-            :minX: 1
-            :maxX: 4
+            :pointX: 3
+            :pointY: 300
             :color: blue
+            :axis: Y Axis
           :hints:
           - :name: Hint 1
             :text: Almost. Check the y axis.
             :prompts:
-            - :type: RangeVisualPrompt
+            - :type: PointAxisLineVisualPrompt
               :name: Yellow prompt
-              :minX: -1
-              :maxX: 6
+              :pointX: 4
+              :pointY: 400
               :color: yellow
+              :axis: Y Axis
       """
     Then I should get correct json
 
@@ -80,7 +84,7 @@ Feature: Visual Prompts Activities
     When I create a new activity:
       """
       --- 
-      :name: Visual Prompt Range Numeric
+      :name: Visual Prompt Point Axis Line Numeric
       :units:
       - :name: Time
         :abbreviation: s
@@ -114,35 +118,39 @@ Feature: Visual Prompts Activities
           :title: Numeric
           :initialPrompt: Pick the middle point.
           :initialPromptPrompts:
-          - :type: RangeVisualPrompt
+          - :type: PointAxisLineVisualPrompt
             :name: Red prompt
-            :minX: 0
-            :maxX: 5
+            :pointX: 1
+            :pointY: 100
             :color: red
+            :axis: X Axis
           :correctAnswer: 200
           :giveUp: That's not right.
           :giveUpPrompts:
-          - :type: RangeVisualPrompt
+          - :type: PointAxisLineVisualPrompt
             :name: Green prompt
-            :minX: 2
-            :maxX: 3
+            :pointX: 2
+            :pointY: 200
             :color: green
+            :axis: X Axis
           :confirmCorrect: Yes, that's right!
           :confirmCorrectPrompts:
-          - :type: RangeVisualPrompt
+          - :type: PointAxisLineVisualPrompt
             :name: Blue prompt
-            :minX: 1
-            :maxX: 4
+            :pointX: 3
+            :pointY: 300
             :color: blue
+            :axis: Y Axis
           :hints:
           - :name: Hint 1
             :text: Almost. Check the y axis.
             :prompts:
-            - :type: RangeVisualPrompt
+            - :type: PointAxisLineVisualPrompt
               :name: Yellow prompt
-              :minX: -1
-              :maxX: 6
+              :pointX: 4
+              :pointY: 400
               :color: yellow
+              :axis: Y Axis
       """
     Then I should get correct json
 

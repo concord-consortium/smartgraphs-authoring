@@ -171,8 +171,31 @@ def create_prompt(prompt_def, context = nil)
     fill_in 'range_visual_prompt_color', :with => prompt_def[:color]
     click_button 'Create Range visual prompt'
   when "PointCircleVisualPrompt"
-    pending
+    if context
+      within(context) do
+        click_link 'New Point circle visual prompt'
+      end
+    else
+      click_link 'New Point circle visual prompt'
+    end
+    fill_in 'point_circle_visual_prompt_name', :with => prompt_def[:name]
+    fill_in 'point_circle_visual_prompt_point_x', :with => prompt_def[:pointX]
+    fill_in 'point_circle_visual_prompt_point_y', :with => prompt_def[:pointY]
+    fill_in 'point_circle_visual_prompt_color', :with => prompt_def[:color]
+    click_button 'Create Point circle visual prompt'
   when "PointAxisLineVisualPrompt"
-    pending
+    if context
+      within(context) do
+        click_link 'New Point axis line visual prompt'
+      end
+    else
+      click_link 'New Point axis line visual prompt'
+    end
+    fill_in 'point_axis_line_visual_prompt_name', :with => prompt_def[:name]
+    fill_in 'point_axis_line_visual_prompt_point_x', :with => prompt_def[:pointX]
+    fill_in 'point_axis_line_visual_prompt_point_y', :with => prompt_def[:pointY]
+    fill_in 'point_axis_line_visual_prompt_color', :with => prompt_def[:color]
+    select prompt_def[:axis], :from => 'point_axis_line_visual_prompt[axis]'
+    click_button 'Create Point axis line visual prompt'
   end
 end
