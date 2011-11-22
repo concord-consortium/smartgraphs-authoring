@@ -111,6 +111,9 @@
   <a action="new" to="&this.sensor_graph_panes">
     <ht key="sensor_graph_pane.actions.new" >New Sensor Graph Pane element</ht>
   </a>
+  <a action="new" to="&this.prediction_graph_panes">
+    <ht key="prediction_graph_pane.actions.new" >New Prediction Graph Pane element</ht>
+  </a>
   <a action="new" to="&this.table_panes">
     <ht key="table_pane.actions.new" >New Table Pane element</ht>
   </a>
