@@ -46,6 +46,7 @@ def create_page(page_def)
 
   page_url = current_url
   page_def[:panes].each{|pane_def| create_pane(pane_def); visit page_url } if page_def[:panes]
+  create_sequence(page_def[:sequence]) if page_def[:sequence]
 end
 
 def create_pane(pane_def)
@@ -94,5 +95,107 @@ def create_pane(pane_def)
     click_link 'New Table pane'
     fill_in 'table_pane_title', :with => pane_def[:title]
     click_button 'Create Table pane'
+  end
+end
+
+def create_sequence(sequence_def)
+  case sequence_def[:type]
+  when "InstructionSequence"
+    click_link 'New Instruction sequence'
+    fill_in 'instruction_sequence_text', :with => sequence_def[:text]
+    click_button 'Create Instruction sequence'
+  when "PickAPointSequence"
+    click_link 'New Pick a point sequence'
+    fill_in 'pick_a_point_sequence_title', :with => sequence_def[:title]
+    fill_in 'pick_a_point_sequence_initial_prompt', :with => sequence_def[:initialPrompt]
+    fill_in 'pick_a_point_sequence_correct_answer_x', :with => sequence_def[:correctAnswerX]
+    fill_in 'pick_a_point_sequence_correct_answer_y', :with => sequence_def[:correctAnswerY]
+    fill_in 'pick_a_point_sequence_give_up', :with => sequence_def[:giveUp]
+    fill_in 'pick_a_point_sequence_confirm_correct', :with => sequence_def[:confirmCorrect]
+    click_button 'Create Pick a point sequence'
+  when "NumericSequence"
+    click_link 'New Numeric sequence'
+    fill_in 'numeric_sequence_title', :with => sequence_def[:title]
+    fill_in 'numeric_sequence_initial_prompt', :with => sequence_def[:initialPrompt]
+    fill_in 'numeric_sequence_correct_answer', :with => sequence_def[:correctAnswer]
+    fill_in 'numeric_sequence_give_up', :with => sequence_def[:giveUp]
+    fill_in 'numeric_sequence_confirm_correct', :with => sequence_def[:confirmCorrect]
+    click_button 'Create Numeric sequence'
+  when "ConstructedResponseSequence"
+    click_link 'New Constructed response sequence'
+    fill_in 'constructed_response_sequence_title', :with => sequence_def[:title]
+    fill_in 'constructed_response_sequence_initial_prompt', :with => sequence_def[:initialPrompt]
+    fill_in 'constructed_response_sequence_initial_content', :with => sequence_def[:initialContent]
+    click_button 'Create Constructed response sequence'
+  end
+
+  sequence_url = current_url
+  [:initialPromptPrompts, :giveUpPrompts, :confirmCorrectPrompts].each do |p|
+    if sequence_def[p]
+      # be sure to limit the prompt creation to one of the aside sections
+      # eg initial-prompt-prompts-collection-section
+      context = ".#{p.to_s.underscore.gsub(/_/,'-')}-collection-section"
+      sequence_def[p].each do |prompt_def|
+        create_prompt(prompt_def, context)
+        visit sequence_url
+      end
+    end
+  end
+  sequence_def[:hints].each{|hint_def| create_hint(hint_def); visit sequence_url } if sequence_def[:hints]
+end
+
+def create_hint(hint_def)
+  click_link 'New Text hint'
+  fill_in 'text_hint_name', :with => hint_def[:name]
+  fill_in 'text_hint_text', :with => hint_def[:text]
+  click_button 'Create Text hint'
+
+  # Create visual prompts
+  hint_url = current_url
+  hint_def[:prompts].each{|prompt_def| create_prompt(prompt_def); visit hint_url } if hint_def[:prompts]
+end
+
+def create_prompt(prompt_def, context = nil)
+  case prompt_def[:type]
+  when "RangeVisualPrompt"
+    if context
+      within(context) do
+        click_link 'New Range visual prompt'
+      end
+    else
+      click_link 'New Range visual prompt'
+    end
+    fill_in 'range_visual_prompt_name', :with => prompt_def[:name]
+    fill_in 'range_visual_prompt_x_min', :with => prompt_def[:minX]
+    fill_in 'range_visual_prompt_x_max', :with => prompt_def[:maxX]
+    fill_in 'range_visual_prompt_color', :with => prompt_def[:color]
+    click_button 'Create Range visual prompt'
+  when "PointCircleVisualPrompt"
+    if context
+      within(context) do
+        click_link 'New Point circle visual prompt'
+      end
+    else
+      click_link 'New Point circle visual prompt'
+    end
+    fill_in 'point_circle_visual_prompt_name', :with => prompt_def[:name]
+    fill_in 'point_circle_visual_prompt_point_x', :with => prompt_def[:pointX]
+    fill_in 'point_circle_visual_prompt_point_y', :with => prompt_def[:pointY]
+    fill_in 'point_circle_visual_prompt_color', :with => prompt_def[:color]
+    click_button 'Create Point circle visual prompt'
+  when "PointAxisLineVisualPrompt"
+    if context
+      within(context) do
+        click_link 'New Point axis line visual prompt'
+      end
+    else
+      click_link 'New Point axis line visual prompt'
+    end
+    fill_in 'point_axis_line_visual_prompt_name', :with => prompt_def[:name]
+    fill_in 'point_axis_line_visual_prompt_point_x', :with => prompt_def[:pointX]
+    fill_in 'point_axis_line_visual_prompt_point_y', :with => prompt_def[:pointY]
+    fill_in 'point_axis_line_visual_prompt_color', :with => prompt_def[:color]
+    select prompt_def[:axis], :from => 'point_axis_line_visual_prompt[axis]'
+    click_button 'Create Point axis line visual prompt'
   end
 end

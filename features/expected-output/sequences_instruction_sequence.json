@@ -1,0 +1,16 @@
+{
+  "type": "Activity",
+  "name": "Sequences Instruction Sequence",
+  "pages": [
+    {
+      "type": "Page",
+      "name": "Simple Page 1",
+      "text": "In this page...",
+      "sequence": {
+        "type": "InstructionSequence",
+        "text": "Click ok..."
+      }
+    }
+  ],
+  "units": []
+}

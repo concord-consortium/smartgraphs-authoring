@@ -1,0 +1,17 @@
+{
+  "type": "Activity",
+  "name": "Sequences Constructed Response Sequence",
+  "pages": [
+    {
+      "type": "Page",
+      "name": "Simple Page 1",
+      "text": "In this page...",
+      "sequence": {
+        "type": "ConstructedResponseSequence",
+        "initialPrompt": "Tell me about...",
+        "initialContent": "When I was..."
+      }
+    }
+  ],
+  "units": []
+}
