@@ -91,6 +91,22 @@ def create_pane(pane_def)
     fill_in 'sensor_graph_pane_x_ticks', :with => pane_def[:x][:ticks]
     select pane_def[:x][:unit], :from => 'sensor_graph_pane[x_unit_id]'
     click_button 'Create Sensor graph pane'
+  when "PredictionGraphPane"
+    click_link 'New Prediction graph pane'
+    fill_in 'prediction_graph_pane_title', :with => pane_def[:title]
+
+    fill_in 'prediction_graph_pane_y_label', :with => pane_def[:y][:label]
+    fill_in 'prediction_graph_pane_y_min', :with => pane_def[:y][:min]
+    fill_in 'prediction_graph_pane_y_max', :with => pane_def[:y][:max]
+    fill_in 'prediction_graph_pane_y_ticks', :with => pane_def[:y][:ticks]
+    select pane_def[:y][:unit], :from => 'prediction_graph_pane[y_unit_id]'
+
+    fill_in 'prediction_graph_pane_x_label', :with => pane_def[:x][:label]
+    fill_in 'prediction_graph_pane_x_min', :with => pane_def[:x][:min]
+    fill_in 'prediction_graph_pane_x_max', :with => pane_def[:x][:max]
+    fill_in 'prediction_graph_pane_x_ticks', :with => pane_def[:x][:ticks]
+    select pane_def[:x][:unit], :from => 'prediction_graph_pane[x_unit_id]'
+    click_button 'Create Prediction graph pane'
   when "TablePane"
     click_link 'New Table pane'
     fill_in 'table_pane_title', :with => pane_def[:title]
