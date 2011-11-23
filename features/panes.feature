@@ -134,6 +134,7 @@ Feature: Pane Activities
             :min: 0
             :max: 10
             :ticks: 1
+          :prediction_type: Straight Lines
       """
     Then I should get correct json
 

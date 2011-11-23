@@ -12,6 +12,7 @@ class PredictionGraphPane < ActiveRecord::Base
     x_min   :float
     x_max   :float
     x_ticks :float
+    prediction_type  enum_string(:straight_lines, :connecting_points, :continuous_curves)
     timestamps
   end
 
@@ -24,7 +25,7 @@ class PredictionGraphPane < ActiveRecord::Base
   reverse_association_of :page, 'Page#prediction_graph_panes'
 
   def field_order
-    "title, y_label, y_unit, y_min, y_max, y_ticks, x_label, x_unit, x_min, x_max, x_ticks, data"
+    "title, y_label, y_unit, y_min, y_max, y_ticks, x_label, x_unit, x_min, x_max, x_ticks, prediction_type"
   end
 
   def to_hash
@@ -40,7 +41,8 @@ class PredictionGraphPane < ActiveRecord::Base
       'xMin' => x_min,
       'xMax' => x_max,
       'yTicks' => y_ticks,
-      'xTicks' => x_ticks
+      'xTicks' => x_ticks,
+      'predictionType' => prediction_type
     }
   end
 

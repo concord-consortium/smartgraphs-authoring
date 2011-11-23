@@ -106,6 +106,9 @@ def create_pane(pane_def)
     fill_in 'prediction_graph_pane_x_max', :with => pane_def[:x][:max]
     fill_in 'prediction_graph_pane_x_ticks', :with => pane_def[:x][:ticks]
     select pane_def[:x][:unit], :from => 'prediction_graph_pane[x_unit_id]'
+
+    select pane_def[:prediction_type], :from => 'prediction_graph_pane[prediction_type]'
+
     click_button 'Create Prediction graph pane'
   when "TablePane"
     click_link 'New Table pane'
