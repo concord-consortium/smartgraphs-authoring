@@ -135,6 +135,42 @@ Feature: Pane Activities
             :max: 10
             :ticks: 1
           :prediction_type: Straight Lines
+      - :name: Simple Page 2
+        :text: In this page...
+        :panes:
+        - :type: PredictionGraphPane
+          :title: Graph Pane
+          :y:
+            :label: Distance
+            :unit: Distance
+            :min: 0
+            :max: 10
+            :ticks: 1
+          :x:
+            :label: Time
+            :unit: Time
+            :min: 0
+            :max: 10
+            :ticks: 1
+          :prediction_type: Connecting Points
+      - :name: Simple Page 3
+        :text: In this page...
+        :panes:
+        - :type: PredictionGraphPane
+          :title: Graph Pane
+          :y:
+            :label: Distance
+            :unit: Distance
+            :min: 0
+            :max: 10
+            :ticks: 1
+          :x:
+            :label: Time
+            :unit: Time
+            :min: 0
+            :max: 10
+            :ticks: 1
+          :prediction_type: Continuous Curves
       """
     Then I should get correct json
 
