@@ -12,7 +12,7 @@ class PredictionGraphPane < ActiveRecord::Base
     x_min   :float
     x_max   :float
     x_ticks :float
-    prediction_type  enum_string(:straight_lines, :connecting_points, :continuous_curves)
+    prediction_type  enum_string(:connecting_points, :continuous_curves)
     timestamps
   end
 
