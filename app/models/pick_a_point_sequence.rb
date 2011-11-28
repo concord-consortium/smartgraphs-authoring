@@ -5,11 +5,24 @@ class PickAPointSequence < ActiveRecord::Base
   fields do
     title            :string
     initial_prompt   :text
-    correct_answer_x :float
-    correct_answer_y :float
     give_up          :text
     confirm_correct  :text
+
+    # support for a distinct point
+    correct_answer_x :float
+    correct_answer_y :float
+
+    # support for a point within a range
+    correct_answer_x_min :float
+    correct_answer_y_min :float
+    correct_answer_x_max :float
+    correct_answer_y_max :float
+
     timestamps
+  end
+
+  def field_order
+    "title, initial_prompt, give_up, confirm_correct, correct_answer_x, correct_answer_y, correct_answer_x_min, correct_answer_y_min, correct_answer_x_max, correct_answer_y_max"
   end
 
   has_one :page_sequence, :as => :sequence, :dependent => :destroy
@@ -57,10 +70,19 @@ class PickAPointSequence < ActiveRecord::Base
     hash = {
       'type' => 'PickAPointSequence',
       'initialPrompt' => {'text' => initial_prompt.to_s },
-      'correctAnswerPoint' => [correct_answer_x, correct_answer_y],
       'giveUp' => {'text' => give_up.to_s },
       'confirmCorrect' => {'text' => confirm_correct.to_s }
     }
+    if correct_answer_x && correct_answer_y
+      hash['correctAnswerPoint'] = [correct_answer_x, correct_answer_y]
+    elsif correct_answer_x_min || correct_answer_y_min || correct_answer_x_max || correct_answer_y_max
+      hash['correctAnswerRange'] = {
+        'xMin' => (correct_answer_x_min || 'null'),
+        'yMin' => (correct_answer_y_min || 'null'),
+        'xMax' => (correct_answer_x_max || 'null'),
+        'yMax' => (correct_answer_y_max || 'null')
+      }
+    end
     unless sequence_hints.empty?
       hash['hints'] = sequence_hints.map do |sequence_hint|
         sequence_hint.hint.to_hash

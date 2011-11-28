@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111122235849) do
+ActiveRecord::Schema.define(:version => 20111128183132) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -141,6 +141,10 @@ ActiveRecord::Schema.define(:version => 20111122235849) do
     t.text     "confirm_correct"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "correct_answer_x_min"
+    t.float    "correct_answer_y_min"
+    t.float    "correct_answer_x_max"
+    t.float    "correct_answer_y_max"
   end
 
   create_table "point_axis_line_visual_prompts", :force => true do |t|

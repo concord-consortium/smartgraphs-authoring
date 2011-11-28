@@ -202,8 +202,35 @@
   </old-form>
 </extend>
 
+<extend tag="labelled-item">
+  <if test="&this_parent.class == PickAPointSequence">
+    <if test="&scope.field_name.to_s == 'correct_answer_x'">
+      <tr>
+        <th><h3>A specific Point:</h3></th>
+        <td>
+          <if test="&scope.in_form">
+            <div>Fill in the x and y values for the correct point. If you're using a correct range, leave these blank.</div>
+          </if>
+        </td>
+      </tr>
+    </if>
+    <if test="&scope.field_name.to_s == 'correct_answer_x_min'">
+      <tr>
+        <th><h3>Within a Range:</h3></th>
+        <td>
+          <if test="&scope.in_form">
+            <div>Fill in at least one of the range boundaries. If you're using a specific point, leave these blank.</div>
+          </if>
+        </td>
+      </tr>
+    </if>
+  </if>
+  <old-labelled-item merge/>
+</extend>
+
 <extend tag="form" for="PickAPointSequence">
   <old-form merge>
+    <field-list: fields="&this.field_order" />
     <after-field-list:>
       <h3>
         <ht key="sequence_hint.collection.heading" count="&this.sequence_hints.count" >

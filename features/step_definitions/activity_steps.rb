@@ -127,10 +127,19 @@ def create_sequence(sequence_def)
     click_link 'New Pick a point sequence'
     fill_in 'pick_a_point_sequence_title', :with => sequence_def[:title]
     fill_in 'pick_a_point_sequence_initial_prompt', :with => sequence_def[:initialPrompt]
-    fill_in 'pick_a_point_sequence_correct_answer_x', :with => sequence_def[:correctAnswerX]
-    fill_in 'pick_a_point_sequence_correct_answer_y', :with => sequence_def[:correctAnswerY]
     fill_in 'pick_a_point_sequence_give_up', :with => sequence_def[:giveUp]
     fill_in 'pick_a_point_sequence_confirm_correct', :with => sequence_def[:confirmCorrect]
+
+    if sequence_def[:correctAnswerX] || sequence_def[:correctAnswerY]
+      fill_in 'pick_a_point_sequence_correct_answer_x', :with => sequence_def[:correctAnswerX]
+      fill_in 'pick_a_point_sequence_correct_answer_y', :with => sequence_def[:correctAnswerY]
+    else
+      fill_in 'pick_a_point_sequence_correct_answer_x_min', :with => sequence_def[:correctAnswerXMin]
+      fill_in 'pick_a_point_sequence_correct_answer_y_min', :with => sequence_def[:correctAnswerYMin]
+      fill_in 'pick_a_point_sequence_correct_answer_x_max', :with => sequence_def[:correctAnswerXMax]
+      fill_in 'pick_a_point_sequence_correct_answer_y_max', :with => sequence_def[:correctAnswerYMax]
+    end
+
     click_button 'Create Pick a point sequence'
   when "NumericSequence"
     click_link 'New Numeric sequence'
