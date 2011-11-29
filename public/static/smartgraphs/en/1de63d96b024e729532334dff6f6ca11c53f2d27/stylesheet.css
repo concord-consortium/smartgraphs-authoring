@@ -1,4 +1,4 @@
-.road{background-image:url('/static/smartgraphs/en/e7a10e4b391281f5ecccd9c96849693e438463f0/resources/images/road.png');}
+.road{background-image:url('/static/smartgraphs/en/1de63d96b024e729532334dff6f6ca11c53f2d27/resources/images/road.png');}
 body.sc-theme{background-color:#B4C0D7;overflow:hidden;}.sc-theme .app-loading{background-color:#B4C0D7;position:absolute;top:0;right:0;bottom:0;left:0;}
 .app-loading img,.app-loading p{position:absolute;top:50%;left:50%;}.app-loading p{height:24px;text-align:center;font-size:18px;line-height:1.0;color:#666;font-style:bold;}
 .sc-theme .sc-pane.sc-main{background:#B4C0D7;}.sc-theme .sc-label-view.loading{font-size:18px;line-height:1.0;color:#666;font-style:bold;}
@@ -20,7 +20,7 @@ body.sc-theme{background-color:#B4C0D7;overflow:hidden;}.sc-theme .app-loading{b
 .text-wrapper .text-field-view-wrapper,.sc-view.dialog-text .sc-radio-view{margin:10px;}
 .sc-view.hint{color:#666;font-style:italic;}.sc-view.dialog-text{margin:10px 0 10px 0;border:1px solid #ccc;background-color:#EFEDDD;}
 .sc-view.dialog-text .sc-view{color:black;font-size:14px;}.sc-theme .sc-label-view.pane-label{font-size:18px;line-height:1.0;color:#666;}
-.sc-theme .sc-label-view.sensor-message{font-size:24px;font-style:italic;line-height:1.0;color:#666;background-image:url('/static/smartgraphs/en/e7a10e4b391281f5ecccd9c96849693e438463f0/resources/images/small_loading_icon.gif');background-repeat:no-repeat;background-position:left top;}
+.sc-theme .sc-label-view.sensor-message{font-size:24px;font-style:italic;line-height:1.0;color:#666;background-image:url('/static/smartgraphs/en/1de63d96b024e729532334dff6f6ca11c53f2d27/resources/images/small_loading_icon.gif');background-repeat:no-repeat;background-position:left top;}
 .smartgraph-table .sc-list-item-view.sc-regular-size{font-size:12px;}.smartgraph-table .sc-label-view.sc-regular-size{font-size:16px;}
 .smartgraph-table .sc-view.table-background{background-color:#eee;border:1px solid #ccc;z-index:1;}
 .smartgraph-table .sc-view.table-background.table-background-top{background-color:#eee;border-bottom-width:0;z-index:2;}
