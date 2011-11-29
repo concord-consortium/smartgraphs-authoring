@@ -21,4 +21,19 @@ class ApplicationController < ActionController::Base
       end
     end
   end
+
+  def get_included_graphs(included_graphs_params)
+    # now process any included graphs
+    included = []
+    if included_graphs_params
+      included_graphs_params.each do |text_id|
+        if text_id =~ /^@(.*?)\|(\d+)/
+          puts "#{$1}.constantize.find(#{$2})"
+          graph = $1.constantize.find($2)
+          included << graph
+        end
+      end
+    end
+    return included
+  end
 end
