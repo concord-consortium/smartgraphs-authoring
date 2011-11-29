@@ -104,3 +104,55 @@ Feature: Pane Activities
           :title: Table Pane
       """
     Then I should get correct json
+
+  Scenario: Create an activity with a prediction graph pane
+    Given I am on the Activities page
+    When I create a new activity:
+      """
+      --- 
+      :name: Panes Prediction Graph Pane
+      :units:
+      - :name: Time
+        :abbreviation: s
+      - :name: Distance
+        :abbreviation: m
+      :pages:
+      - :name: Simple Page 2
+        :text: In this page...
+        :panes:
+        - :type: PredictionGraphPane
+          :title: Graph Pane
+          :y:
+            :label: Distance
+            :unit: Distance
+            :min: 0
+            :max: 10
+            :ticks: 1
+          :x:
+            :label: Time
+            :unit: Time
+            :min: 0
+            :max: 10
+            :ticks: 1
+          :prediction_type: Connecting Points
+      - :name: Simple Page 3
+        :text: In this page...
+        :panes:
+        - :type: PredictionGraphPane
+          :title: Graph Pane
+          :y:
+            :label: Distance
+            :unit: Distance
+            :min: 0
+            :max: 10
+            :ticks: 1
+          :x:
+            :label: Time
+            :unit: Time
+            :min: 0
+            :max: 10
+            :ticks: 1
+          :prediction_type: Continuous Curves
+      """
+    Then I should get correct json
+

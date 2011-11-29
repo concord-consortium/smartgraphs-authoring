@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111117164647) do
+ActiveRecord::Schema.define(:version => 20111128183132) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -141,6 +141,10 @@ ActiveRecord::Schema.define(:version => 20111117164647) do
     t.text     "confirm_correct"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "correct_answer_x_min"
+    t.float    "correct_answer_y_min"
+    t.float    "correct_answer_x_max"
+    t.float    "correct_answer_y_max"
   end
 
   create_table "point_axis_line_visual_prompts", :force => true do |t|
@@ -181,6 +185,26 @@ ActiveRecord::Schema.define(:version => 20111117164647) do
 
   add_index "predefined_graph_panes", ["x_unit_id"], :name => "index_predefined_graph_panes_on_x_unit_id"
   add_index "predefined_graph_panes", ["y_unit_id"], :name => "index_predefined_graph_panes_on_y_unit_id"
+
+  create_table "prediction_graph_panes", :force => true do |t|
+    t.string   "title"
+    t.string   "y_label"
+    t.float    "y_min"
+    t.float    "y_max"
+    t.float    "y_ticks"
+    t.string   "x_label"
+    t.float    "x_min"
+    t.float    "x_max"
+    t.float    "x_ticks"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "y_unit_id"
+    t.integer  "x_unit_id"
+    t.string   "prediction_type"
+  end
+
+  add_index "prediction_graph_panes", ["x_unit_id"], :name => "index_prediction_graph_panes_on_x_unit_id"
+  add_index "prediction_graph_panes", ["y_unit_id"], :name => "index_prediction_graph_panes_on_y_unit_id"
 
   create_table "range_visual_prompts", :force => true do |t|
     t.string   "name"

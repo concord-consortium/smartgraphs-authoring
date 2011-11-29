@@ -91,6 +91,25 @@ def create_pane(pane_def)
     fill_in 'sensor_graph_pane_x_ticks', :with => pane_def[:x][:ticks]
     select pane_def[:x][:unit], :from => 'sensor_graph_pane[x_unit_id]'
     click_button 'Create Sensor graph pane'
+  when "PredictionGraphPane"
+    click_link 'New Prediction graph pane'
+    fill_in 'prediction_graph_pane_title', :with => pane_def[:title]
+
+    fill_in 'prediction_graph_pane_y_label', :with => pane_def[:y][:label]
+    fill_in 'prediction_graph_pane_y_min', :with => pane_def[:y][:min]
+    fill_in 'prediction_graph_pane_y_max', :with => pane_def[:y][:max]
+    fill_in 'prediction_graph_pane_y_ticks', :with => pane_def[:y][:ticks]
+    select pane_def[:y][:unit], :from => 'prediction_graph_pane[y_unit_id]'
+
+    fill_in 'prediction_graph_pane_x_label', :with => pane_def[:x][:label]
+    fill_in 'prediction_graph_pane_x_min', :with => pane_def[:x][:min]
+    fill_in 'prediction_graph_pane_x_max', :with => pane_def[:x][:max]
+    fill_in 'prediction_graph_pane_x_ticks', :with => pane_def[:x][:ticks]
+    select pane_def[:x][:unit], :from => 'prediction_graph_pane[x_unit_id]'
+
+    select pane_def[:prediction_type], :from => 'prediction_graph_pane[prediction_type]'
+
+    click_button 'Create Prediction graph pane'
   when "TablePane"
     click_link 'New Table pane'
     fill_in 'table_pane_title', :with => pane_def[:title]
@@ -108,10 +127,19 @@ def create_sequence(sequence_def)
     click_link 'New Pick a point sequence'
     fill_in 'pick_a_point_sequence_title', :with => sequence_def[:title]
     fill_in 'pick_a_point_sequence_initial_prompt', :with => sequence_def[:initialPrompt]
-    fill_in 'pick_a_point_sequence_correct_answer_x', :with => sequence_def[:correctAnswerX]
-    fill_in 'pick_a_point_sequence_correct_answer_y', :with => sequence_def[:correctAnswerY]
     fill_in 'pick_a_point_sequence_give_up', :with => sequence_def[:giveUp]
     fill_in 'pick_a_point_sequence_confirm_correct', :with => sequence_def[:confirmCorrect]
+
+    if sequence_def[:correctAnswerX] || sequence_def[:correctAnswerY]
+      fill_in 'pick_a_point_sequence_correct_answer_x', :with => sequence_def[:correctAnswerX]
+      fill_in 'pick_a_point_sequence_correct_answer_y', :with => sequence_def[:correctAnswerY]
+    else
+      fill_in 'pick_a_point_sequence_correct_answer_x_min', :with => sequence_def[:correctAnswerXMin]
+      fill_in 'pick_a_point_sequence_correct_answer_y_min', :with => sequence_def[:correctAnswerYMin]
+      fill_in 'pick_a_point_sequence_correct_answer_x_max', :with => sequence_def[:correctAnswerXMax]
+      fill_in 'pick_a_point_sequence_correct_answer_y_max', :with => sequence_def[:correctAnswerYMax]
+    end
+
     click_button 'Create Pick a point sequence'
   when "NumericSequence"
     click_link 'New Numeric sequence'

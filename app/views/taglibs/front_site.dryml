@@ -111,6 +111,9 @@
   <a action="new" to="&this.sensor_graph_panes">
     <ht key="sensor_graph_pane.actions.new" >New Sensor Graph Pane element</ht>
   </a>
+  <a action="new" to="&this.prediction_graph_panes">
+    <ht key="prediction_graph_pane.actions.new" >New Prediction Graph Pane element</ht>
+  </a>
   <a action="new" to="&this.table_panes">
     <ht key="table_pane.actions.new" >New Table Pane element</ht>
   </a>
@@ -199,8 +202,35 @@
   </old-form>
 </extend>
 
+<extend tag="labelled-item">
+  <if test="&this_parent.class == PickAPointSequence">
+    <if test="&scope.field_name.to_s == 'correct_answer_x'">
+      <tr>
+        <th><h3>A specific Point:</h3></th>
+        <td>
+          <if test="&scope.in_form">
+            <div>Fill in the x and y values for the correct point. If you're using a correct range, leave these blank.</div>
+          </if>
+        </td>
+      </tr>
+    </if>
+    <if test="&scope.field_name.to_s == 'correct_answer_x_min'">
+      <tr>
+        <th><h3>Within a Range:</h3></th>
+        <td>
+          <if test="&scope.in_form">
+            <div>Fill in at least one of the range boundaries. If you're using a specific point, leave these blank.</div>
+          </if>
+        </td>
+      </tr>
+    </if>
+  </if>
+  <old-labelled-item merge/>
+</extend>
+
 <extend tag="form" for="PickAPointSequence">
   <old-form merge>
+    <field-list: fields="&this.field_order" />
     <after-field-list:>
       <h3>
         <ht key="sequence_hint.collection.heading" count="&this.sequence_hints.count" >
@@ -284,6 +314,24 @@
 </extend>
 
 <extend tag="form" for="PredefinedGraphPane">
+  <old-form merge>
+    <field-list: fields="&this.field_order">
+      <y_unit-tag: include-none blank-message="No units"/>
+      <x_unit-tag: include-none blank-message="No units"/>
+    </field-list:>
+  </old-form>
+</extend>
+
+<extend tag="form" for="PredictionGraphPane">
+  <old-form merge>
+    <field-list: fields="&this.field_order">
+      <y_unit-tag: include-none blank-message="No units"/>
+      <x_unit-tag: include-none blank-message="No units"/>
+    </field-list:>
+  </old-form>
+</extend>
+
+<extend tag="form" for="SensorGraphPane">
   <old-form merge>
     <field-list: fields="&this.field_order">
       <y_unit-tag: include-none blank-message="No units"/>

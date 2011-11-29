@@ -21,6 +21,9 @@ class Page < ActiveRecord::Base
   has_many :sensor_graph_panes, :through => :page_panes, :source => :pane, :source_type => 'SensorGraphPane'
   reverse_association_of :sensor_graph_panes, 'SensorGraphPane#page'
 
+  has_many :prediction_graph_panes, :through => :page_panes, :source => :pane, :source_type => 'PredictionGraphPane'
+  reverse_association_of :prediction_graph_panes, 'PredictionGraphPane#page'
+
   has_many :table_panes, :through => :page_panes, :source => :pane, :source_type => 'TablePane'
   reverse_association_of :table_panes, 'TablePane#page'
 

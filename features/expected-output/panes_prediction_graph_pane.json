@@ -1,0 +1,62 @@
+{
+  "type": "Activity",
+  "name": "Panes Prediction Graph Pane",
+  "pages": [
+    {
+      "type": "Page",
+      "name": "Simple Page 2",
+      "text": "In this page...",
+      "panes": [
+        {
+          "type": "PredictionGraphPane",
+          "title": "Graph Pane",
+          "yLabel": "Distance",
+          "yUnits": "Distance",
+          "yMin": 0.0,
+          "yMax": 10.0,
+          "yTicks": 1.0,
+          "xLabel": "Time",
+          "xUnits": "Time",
+          "xMin": 0.0,
+          "xMax": 10.0,
+          "xTicks": 1.0,
+          "predictionType": "connecting_points"
+        }
+      ]
+    },
+    {
+      "type": "Page",
+      "name": "Simple Page 3",
+      "text": "In this page...",
+      "panes": [
+        {
+          "type": "PredictionGraphPane",
+          "title": "Graph Pane",
+          "yLabel": "Distance",
+          "yUnits": "Distance",
+          "yMin": 0.0,
+          "yMax": 10.0,
+          "yTicks": 1.0,
+          "xLabel": "Time",
+          "xUnits": "Time",
+          "xMin": 0.0,
+          "xMax": 10.0,
+          "xTicks": 1.0,
+          "predictionType": "continuous_curves"
+        }
+      ]
+    }
+  ],
+  "units": [
+    {
+      "type": "Unit",
+      "name": "Time",
+      "abbreviation": "s"
+    },
+    {
+      "type": "Unit",
+      "name": "Distance",
+      "abbreviation": "m"
+    }
+  ]
+}
