@@ -14,7 +14,8 @@ Then /^I should get correct json$/ do
   expected_json = JSON.parse(File.read(File.join(File.dirname(__FILE__), "..", "expected-output", filename)))
   activity_url = activity_path(:id => @activity.id, :format => 'json')
   visit activity_url
-  actual_json = JSON.parse(page.driver.response.body)
+  body = page.driver.respond_to?('response') ? page.driver.response.body : page.driver.body
+  actual_json = JSON.parse(body.gsub(/.*<pre>/,'').gsub(/<\/pre>.*/,''))
   actual_json.should == expected_json
 end
 
@@ -74,6 +75,9 @@ def create_pane(pane_def)
     fill_in 'predefined_graph_pane_x_max', :with => pane_def[:x][:max]
     fill_in 'predefined_graph_pane_x_ticks', :with => pane_def[:x][:ticks]
     select pane_def[:x][:unit], :from => 'predefined_graph_pane[x_unit_id]'
+
+    select_included_graphs(pane_def[:included_graphs])
+
     click_button 'Create Predefined graph pane'
   when "SensorGraphPane"
     click_link 'New Sensor graph pane'
@@ -90,6 +94,9 @@ def create_pane(pane_def)
     fill_in 'sensor_graph_pane_x_max', :with => pane_def[:x][:max]
     fill_in 'sensor_graph_pane_x_ticks', :with => pane_def[:x][:ticks]
     select pane_def[:x][:unit], :from => 'sensor_graph_pane[x_unit_id]'
+
+    select_included_graphs(pane_def[:included_graphs])
+
     click_button 'Create Sensor graph pane'
   when "PredictionGraphPane"
     click_link 'New Prediction graph pane'
@@ -109,11 +116,21 @@ def create_pane(pane_def)
 
     select pane_def[:prediction_type], :from => 'prediction_graph_pane[prediction_type]'
 
+    select_included_graphs(pane_def[:included_graphs])
+
     click_button 'Create Prediction graph pane'
   when "TablePane"
     click_link 'New Table pane'
     fill_in 'table_pane_title', :with => pane_def[:title]
     click_button 'Create Table pane'
+  end
+end
+
+def select_included_graphs(included_def = [])
+  (included_def || []).each do |graph_name|
+    # select the graph to be included
+    select_node = find(:css, '.select-many select')
+    select_node.find(:xpath, XPath::HTML.option(graph_name), :message => "cannot select option with text '#{graph_name}'").select_option
   end
 end
 
