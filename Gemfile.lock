@@ -176,6 +176,7 @@ DEPENDENCIES
   cucumber
   cucumber-rails
   database_cleaner
+  ffi (= 1.0.9)
   haml
   hobo (= 1.3.0.RC2)
   launchy
