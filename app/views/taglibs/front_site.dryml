@@ -104,16 +104,16 @@
 <def tag="add-panes-toolbar">
   <a action="new" to="&this.image_panes">
     <ht key="image_pane.actions.new" >New Image Pane element</ht>
-  </a>
+  </a><br/>
   <a action="new" to="&this.predefined_graph_panes">
     <ht key="predefined_graph_pane.actions.new" >New Predefined Graph Pane element</ht>
-  </a>
+  </a><br/>
   <a action="new" to="&this.sensor_graph_panes">
     <ht key="sensor_graph_pane.actions.new" >New Sensor Graph Pane element</ht>
-  </a>
+  </a><br/>
   <a action="new" to="&this.prediction_graph_panes">
     <ht key="prediction_graph_pane.actions.new" >New Prediction Graph Pane element</ht>
-  </a>
+  </a><br/>
   <a action="new" to="&this.table_panes">
     <ht key="table_pane.actions.new" >New Table Pane element</ht>
   </a>
@@ -124,13 +124,13 @@
   <unless test="&this.page_sequences">
     <a action="new" to="&this.instruction_sequences">
       <ht key="instruction_sequence.actions.new" >New Instruction Sequence element</ht>
-    </a>
+    </a><br/>
     <a action="new" to="&this.pick_a_point_sequences">
       <ht key="pick_a_point_sequence.actions.new" >New Pick-A-Point Sequence element</ht>
-    </a>
+    </a><br/>
     <a action="new" to="&this.numeric_sequences">
       <ht key="numeric_sequence.actions.new" >New Numeric Sequence element</ht>
-    </a>
+    </a><br/>
     <a action="new" to="&this.constructed_response_sequences">
       <ht key="constructed_response_sequence.actions.new" >New Constructed Response Sequence element</ht>
     </a>
@@ -146,10 +146,10 @@
 <def tag="add-prompts-toolbar">
     <a action="new" to="&this.range_visual_prompts">
       <ht key="range_visual_prompt.actions.new" >New Range Visual Prompt element</ht>
-    </a>
+    </a><br/>
     <a action="new" to="&this.point_circle_visual_prompts">
       <ht key="point_circle_visual_prompt.actions.new" >New Point Circle Visual Prompt element</ht>
-    </a>
+    </a><br/>
     <a action="new" to="&this.point_axis_line_visual_prompts">
       <ht key="point_axis_line_visual_prompt.actions.new" >New Point Axis Line Visual Prompt element</ht>
     </a>
@@ -158,10 +158,10 @@
 <def tag="add-initial-prompt-prompts-toolbar">
     <a action="new" to="&this.initial_range_visual_prompts">
       <ht key="range_visual_prompt.actions.new" >New Range Visual Prompt element</ht>
-    </a>
+    </a><br/>
     <a action="new" to="&this.initial_point_circle_visual_prompts">
       <ht key="point_circle_visual_prompt.actions.new" >New Point Circle Visual Prompt element</ht>
-    </a>
+    </a><br/>
     <a action="new" to="&this.initial_point_axis_line_visual_prompts">
       <ht key="point_axis_line_visual_prompt.actions.new" >New Point Axis Line Visual Prompt element</ht>
     </a>
@@ -170,10 +170,10 @@
 <def tag="add-confirm-correct-prompts-toolbar">
     <a action="new" to="&this.confirm_range_visual_prompts">
       <ht key="range_visual_prompt.actions.new" >New Range Visual Prompt element</ht>
-    </a>
+    </a><br/>
     <a action="new" to="&this.confirm_point_circle_visual_prompts">
       <ht key="point_circle_visual_prompt.actions.new" >New Point Circle Visual Prompt element</ht>
-    </a>
+    </a><br/>
     <a action="new" to="&this.confirm_point_axis_line_visual_prompts">
       <ht key="point_axis_line_visual_prompt.actions.new" >New Point Axis Line Visual Prompt element</ht>
     </a>
@@ -182,10 +182,10 @@
 <def tag="add-give-up-prompts-toolbar">
     <a action="new" to="&this.give_up_range_visual_prompts">
       <ht key="range_visual_prompt.actions.new" >New Range Visual Prompt element</ht>
-    </a>
+    </a><br/>
     <a action="new" to="&this.give_up_point_circle_visual_prompts">
       <ht key="point_circle_visual_prompt.actions.new" >New Point Circle Visual Prompt element</ht>
-    </a>
+    </a><br/>
     <a action="new" to="&this.give_up_point_axis_line_visual_prompts">
       <ht key="point_axis_line_visual_prompt.actions.new" >New Point Axis Line Visual Prompt element</ht>
     </a>
