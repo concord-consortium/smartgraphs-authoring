@@ -27,12 +27,15 @@ class PredefinedGraphPane < ActiveRecord::Base
 
   reverse_association_of :page, 'Page#predefined_graph_panes'
 
+  has_many :annotation_inclusions, :as => :including_graph, :dependent => :destroy
+  has_many :included_graphs, :through => :annotation_inclusions
+
   def field_order
     "title, y_label, y_unit, y_min, y_max, y_ticks, x_label, x_unit, x_min, x_max, x_ticks, data"
   end
 
   def to_hash
-    {
+    hash = {
       'type' => 'PredefinedGraphPane',
       'title' => title,
       'yLabel' => y_label,
@@ -47,6 +50,10 @@ class PredefinedGraphPane < ActiveRecord::Base
       'xTicks' => x_ticks,
       'data' => data.split("\n").map {|point| point.split(',').map{|value| value.to_f}}
     }
+    if included_graphs.size > 0
+      hash['includeAnnotationsFrom'] = included_graphs.map{|graph| graph.get_indexed_path }
+    end
+    return hash
   end
 
   before_validation do

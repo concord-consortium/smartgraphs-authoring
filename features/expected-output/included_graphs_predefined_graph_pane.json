@@ -1,0 +1,68 @@
+{
+  "type": "Activity",
+  "name": "Included Graphs Predefined Graph Pane",
+  "pages": [
+    {
+      "type": "Page",
+      "name": "Simple Page 1",
+      "text": "In this page...",
+      "panes": [
+        {
+          "type": "PredictionGraphPane",
+          "title": "Prediction 1",
+          "yLabel": "Distance",
+          "yUnits": "Distance",
+          "yMin": 0.0,
+          "yMax": 10.0,
+          "yTicks": 1.0,
+          "xLabel": "Time",
+          "xUnits": "Time",
+          "xMin": 0.0,
+          "xMax": 10.0,
+          "xTicks": 1.0,
+          "predictionType": "continuous_curves"
+        }
+      ]
+    },
+    {
+      "type": "Page",
+      "name": "Simple Page 2",
+      "text": "In this page...",
+      "panes": [
+        {
+          "type": "PredefinedGraphPane",
+          "title": "Graph Pane",
+          "yLabel": "Distance",
+          "yUnits": "Distance",
+          "yMin": 0.0,
+          "yMax": 10.0,
+          "yTicks": 1.0,
+          "xLabel": "Time",
+          "xUnits": "Time",
+          "xMin": 0.0,
+          "xMax": 10.0,
+          "xTicks": 1.0,
+          "data": [
+            [1.0, 100.0],
+            [2.0, 200.0],
+            [3.0, 300.0],
+            [4.0, 400.0]
+          ],
+          "includeAnnotationsFrom": ["page/1/pane/1"]
+        }
+      ]
+    }
+  ],
+  "units": [
+    {
+      "type": "Unit",
+      "name": "Time",
+      "abbreviation": "s"
+    },
+    {
+      "type": "Unit",
+      "name": "Distance",
+      "abbreviation": "m"
+    }
+  ]
+}

@@ -11,13 +11,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111128183132) do
+ActiveRecord::Schema.define(:version => 20111129003633) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "annotation_inclusions", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "included_graph_id"
+    t.integer  "including_graph_id"
+    t.string   "including_graph_type"
+    t.integer  "position"
+  end
+
+  add_index "annotation_inclusions", ["included_graph_id"], :name => "included_graph_idx"
+  add_index "annotation_inclusions", ["including_graph_type", "including_graph_id"], :name => "including_graph_idx"
 
   create_table "confirm_correct_prompts", :force => true do |t|
     t.datetime "created_at"

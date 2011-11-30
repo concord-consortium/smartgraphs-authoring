@@ -6,6 +6,7 @@ gem 'rails', '3.0.10'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 group :development, :test do
+  gem 'ffi', '1.0.9'
   gem 'sqlite3'
   gem "capistrano-ext",                 :require => "capistrano"
   gem "haml"

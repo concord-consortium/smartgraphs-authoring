@@ -104,16 +104,16 @@
 <def tag="add-panes-toolbar">
   <a action="new" to="&this.image_panes">
     <ht key="image_pane.actions.new" >New Image Pane element</ht>
-  </a>
+  </a><br/>
   <a action="new" to="&this.predefined_graph_panes">
     <ht key="predefined_graph_pane.actions.new" >New Predefined Graph Pane element</ht>
-  </a>
+  </a><br/>
   <a action="new" to="&this.sensor_graph_panes">
     <ht key="sensor_graph_pane.actions.new" >New Sensor Graph Pane element</ht>
-  </a>
+  </a><br/>
   <a action="new" to="&this.prediction_graph_panes">
     <ht key="prediction_graph_pane.actions.new" >New Prediction Graph Pane element</ht>
-  </a>
+  </a><br/>
   <a action="new" to="&this.table_panes">
     <ht key="table_pane.actions.new" >New Table Pane element</ht>
   </a>
@@ -124,13 +124,13 @@
   <unless test="&this.page_sequences">
     <a action="new" to="&this.instruction_sequences">
       <ht key="instruction_sequence.actions.new" >New Instruction Sequence element</ht>
-    </a>
+    </a><br/>
     <a action="new" to="&this.pick_a_point_sequences">
       <ht key="pick_a_point_sequence.actions.new" >New Pick-A-Point Sequence element</ht>
-    </a>
+    </a><br/>
     <a action="new" to="&this.numeric_sequences">
       <ht key="numeric_sequence.actions.new" >New Numeric Sequence element</ht>
-    </a>
+    </a><br/>
     <a action="new" to="&this.constructed_response_sequences">
       <ht key="constructed_response_sequence.actions.new" >New Constructed Response Sequence element</ht>
     </a>
@@ -146,10 +146,10 @@
 <def tag="add-prompts-toolbar">
     <a action="new" to="&this.range_visual_prompts">
       <ht key="range_visual_prompt.actions.new" >New Range Visual Prompt element</ht>
-    </a>
+    </a><br/>
     <a action="new" to="&this.point_circle_visual_prompts">
       <ht key="point_circle_visual_prompt.actions.new" >New Point Circle Visual Prompt element</ht>
-    </a>
+    </a><br/>
     <a action="new" to="&this.point_axis_line_visual_prompts">
       <ht key="point_axis_line_visual_prompt.actions.new" >New Point Axis Line Visual Prompt element</ht>
     </a>
@@ -158,10 +158,10 @@
 <def tag="add-initial-prompt-prompts-toolbar">
     <a action="new" to="&this.initial_range_visual_prompts">
       <ht key="range_visual_prompt.actions.new" >New Range Visual Prompt element</ht>
-    </a>
+    </a><br/>
     <a action="new" to="&this.initial_point_circle_visual_prompts">
       <ht key="point_circle_visual_prompt.actions.new" >New Point Circle Visual Prompt element</ht>
-    </a>
+    </a><br/>
     <a action="new" to="&this.initial_point_axis_line_visual_prompts">
       <ht key="point_axis_line_visual_prompt.actions.new" >New Point Axis Line Visual Prompt element</ht>
     </a>
@@ -170,10 +170,10 @@
 <def tag="add-confirm-correct-prompts-toolbar">
     <a action="new" to="&this.confirm_range_visual_prompts">
       <ht key="range_visual_prompt.actions.new" >New Range Visual Prompt element</ht>
-    </a>
+    </a><br/>
     <a action="new" to="&this.confirm_point_circle_visual_prompts">
       <ht key="point_circle_visual_prompt.actions.new" >New Point Circle Visual Prompt element</ht>
-    </a>
+    </a><br/>
     <a action="new" to="&this.confirm_point_axis_line_visual_prompts">
       <ht key="point_axis_line_visual_prompt.actions.new" >New Point Axis Line Visual Prompt element</ht>
     </a>
@@ -182,10 +182,10 @@
 <def tag="add-give-up-prompts-toolbar">
     <a action="new" to="&this.give_up_range_visual_prompts">
       <ht key="range_visual_prompt.actions.new" >New Range Visual Prompt element</ht>
-    </a>
+    </a><br/>
     <a action="new" to="&this.give_up_point_circle_visual_prompts">
       <ht key="point_circle_visual_prompt.actions.new" >New Point Circle Visual Prompt element</ht>
-    </a>
+    </a><br/>
     <a action="new" to="&this.give_up_point_axis_line_visual_prompts">
       <ht key="point_axis_line_visual_prompt.actions.new" >New Point Axis Line Visual Prompt element</ht>
     </a>
@@ -319,6 +319,10 @@
       <y_unit-tag: include-none blank-message="No units"/>
       <x_unit-tag: include-none blank-message="No units"/>
     </field-list:>
+    <after-field-list:>
+      <h3>Included prediction graphs</h3>
+      <custom-poly-select-many:included_graphs prompt="Include graph data from:" options="&PredictionGraphPane.get_all_prediction_graph_panes_before(this)"/>
+    </after-field-list:>
   </old-form>
 </extend>
 
@@ -328,6 +332,10 @@
       <y_unit-tag: include-none blank-message="No units"/>
       <x_unit-tag: include-none blank-message="No units"/>
     </field-list:>
+    <after-field-list:>
+      <h3>Included prediction graphs</h3>
+      <custom-poly-select-many:included_graphs prompt="Include graph data from:" options="&PredictionGraphPane.get_all_prediction_graph_panes_before(this)"/>
+    </after-field-list:>
   </old-form>
 </extend>
 
@@ -337,5 +345,81 @@
       <y_unit-tag: include-none blank-message="No units"/>
       <x_unit-tag: include-none blank-message="No units"/>
     </field-list:>
+    <after-field-list:>
+      <h3>Included prediction graphs</h3>
+      <custom-poly-select-many:included_graphs prompt="Include graph data from:" options="&PredictionGraphPane.get_all_prediction_graph_panes_before(this)"/>
+    </after-field-list:>
   </old-form>
 </extend>
+
+<extend tag="show-page" for="SensorGraphPane">
+  <old-show-page merge>
+    <field-list: fields="&this.field_order" />
+    <after-field-list:>
+      <h3>Included Prediction Graphs</h3>
+      <collection:included_graphs />
+    </after-field-list:>
+  </old-show-page>
+</extend>
+
+<extend tag="show-page" for="PredefinedGraphPane">
+  <old-show-page merge>
+    <field-list: fields="&this.field_order">
+      <data-tag: with="&this.gsub('&#10;', '<br>').html_safe"/>
+    </field-list:>
+    <after-field-list:>
+      <h3>Included Prediction Graphs</h3>
+      <collection:included_graphs />
+    </after-field-list:>
+  </old-show-page>
+</extend>
+
+<extend tag="show-page" for="PredictionGraphPane">
+  <old-show-page merge>
+    <field-list: fields="&this.field_order" />
+    <after-field-list:>
+      <h3>Included Prediction Graphs</h3>
+      <collection:included_graphs />
+    </after-field-list:>
+  </old-show-page>
+</extend>
+
+<def tag="custom-poly-select-many" attrs="options, targets, remove-label, prompt, disabled, name"><%
+  prompt ||= ht("#{this_field_reflection.klass.to_s.underscore}.form.select_many.prompt", :default=>"Add #{this_field.titleize.singularize}")
+  options ||= this_field_reflection.klass.all(:conditions =>this.send(:conditions)).select {|x| can_view?(x)}
+  name ||= param_name_for_this
+
+  values = this
+  remove_label ||= t("hobo.actions.remove", :default=>'Remove')
+  -%>
+  <div class="input select-many" merge-attrs>
+    <div style="display:none" class="item-proto">
+      <div class="item" param="proto-item">
+        <span></span>
+        <input type="hidden" name="#{name}[]" param="proto-hidden"/>
+        <input type="button" class="remove-item" value="#{remove_label}" param="proto-remove-button"/>
+      </div>
+    </div>
+    <div class="items">
+      <div class="item" param="item" repeat>
+        <span><%= h this.to_s %></span>
+        <input type="hidden" name="#{name}[]" value="@#{h this.class.to_s}|#{h this.id}" disabled="&disabled"
+               param="hidden"/>
+        <input type="button" class="remove-item" value="#{remove_label}" disabled="&disabled"
+               param="remove-button"/>
+      </div>
+    </div>
+    <select merge-attrs="&{:disabled => disabled}">
+      <option value=""><prompt/></option>
+      <repeat with="&options">
+        <if test="&this.in?(values)">
+          <optgroup class="disabled-option" label="#{h this.to_s}" alt="@#{this.id}">&nbsp;</optgroup>
+        </if>
+        <else>
+          <option value="@#{h this.class.to_s}|#{this.id}"><%= h this.to_s %></option>
+        </else>
+      </repeat>
+    </select>
+  </div>
+</def>
+

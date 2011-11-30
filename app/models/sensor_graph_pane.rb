@@ -23,12 +23,15 @@ class SensorGraphPane < ActiveRecord::Base
 
   reverse_association_of :page, 'Page#sensor_graph_panes'
 
+  has_many :annotation_inclusions, :as => :including_graph, :dependent => :destroy
+  has_many :included_graphs, :through => :annotation_inclusions
+
   def field_order
     "title, y_label, y_unit, y_min, y_max, y_ticks, x_label, x_unit, x_min, x_max, x_ticks"
   end
 
   def to_hash
-    {
+    hash = {
       'type' => 'SensorGraphPane',
       'title' => title,
       'yLabel' => y_label,
@@ -42,6 +45,10 @@ class SensorGraphPane < ActiveRecord::Base
       'yTicks' => y_ticks,
       'xTicks' => x_ticks
     }
+    if included_graphs.size > 0
+      hash['includeAnnotationsFrom'] = included_graphs.map{|graph| graph.get_indexed_path }
+    end
+    return hash
   end
 
   # --- Permissions --- #
