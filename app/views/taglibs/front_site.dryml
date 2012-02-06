@@ -26,7 +26,7 @@
 <extend tag="card" for="Activity">
   <old-card merge>
     <append-body:>
-      <a action='preview'>View in SmartGraphs Runtime</a>
+       <a action='author_preview'>View as author</a> or <a action='student_preview'>view as student</a> in SmartGraphs
     </append-body:>
   </old-card>
 </extend>
