@@ -15,7 +15,11 @@ class ActivitiesController < ApplicationController
       format.html {}
     end
   end
-
+  
+  def template_filename
+    "#{Rails.root}/public/smartgraphs-runtime.html"
+  end
+  
   def sg_runtime_json
     Converter.new().convert(Activity.find(params[:id]).to_hash.to_json)
   end
@@ -36,7 +40,9 @@ class ActivitiesController < ApplicationController
       }
       format.html {
         authored_activity_json = sg_runtime_json
-        render :text => templated_json("#{Rails.root}/public/smartgraphs-runtime.html", binding)
+        show_outline = true
+        show_edit_button = true
+        render :text => templated_json(template_filename, binding)
       }
     end
   end
@@ -48,7 +54,9 @@ class ActivitiesController < ApplicationController
       }
       format.html {
         authored_activity_json = sg_runtime_json
-        render :text => templated_json("#{Rails.root}/public/smartgraphs-runtime.html", binding)
+        show_outline = false
+        show_edit_button = false
+        render :text => templated_json(template_filename, binding)
       }
     end
   end
