@@ -37,8 +37,11 @@ To learn about Hobo, check out the pdf "Rapid Rails 3 with Hobo" at http://hoboc
    applications public folder, and rename it smartgraphs-runtime.html
     # from inside smartgraphs-authoring
     mv public/static/smartgraphs/en/{build-number}/index.html public/smartgraphs-runtime.html
-6. Add the following line to smartgraphs-runtime.html, just after the opening of the first script tag (currently ln 16)
-    window.authoredActivityJSON=<%= authored_activity_json %>;
+6. Add the following lines to smartgraphs-runtime.html, just after the opening of the first script tag (currently line
+   16):   
+    window.authoredActivityJSON = <%= authored_activity_json %>;
+    window.showOutline = <%= show_outline %>;
+    window.showEditButton = <%= show_edit_button %>;
 
 ## configuring & installing on a VM ##
 
