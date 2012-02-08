@@ -133,6 +133,9 @@
     </a><br/>
     <a action="new" to="&this.constructed_response_sequences">
       <ht key="constructed_response_sequence.actions.new" >New Constructed Response Sequence element</ht>
+    </a><br/>
+    <a action="new" to="&this.multiple_choice_sequences">
+      <ht key="multiple_choice_sequence.actions.new" >New Multiple Choice Sequence element</ht>
     </a>
   </unless>
 </def>
