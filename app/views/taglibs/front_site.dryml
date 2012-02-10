@@ -427,7 +427,21 @@
 </def>
 
 
-<!-- noah experimenting -->
+<!-- MultipleChoiceSequence -->
+
+<def tag="card" for="MultipleChoiceChoice">
+  <card class="multiple-choice-choice" param="default" merge>
+    <div class="#{this.correct ? 'correct' : 'incorrect'}">
+      <header: param>
+        <h4 param="heading"><name/></h4>
+        <div param="actions">
+          <delete-button label="X" param/>
+        </div>
+      </header:>
+    </div>
+  </card>
+</def>
+
 <extend tag="show-page" for="MultipleChoiceSequence">
   <old-show-page merge>
     <collection-section:> 
@@ -474,19 +488,6 @@
   </old-show-page>
 </extend>
 
-
-<def tag="card" for="MultipleChoiceChoice">
-  <card class="multiple-choice-choice" param="default" merge>
-    <div class="#{this.correct ? 'correct' : 'incorrect'}">
-      <header: param>
-        <h4 param="heading"><name/></h4>
-        <div param="actions">
-          <delete-button label="X" param/>
-        </div>
-      </header:>
-    </div>
-  </card>
-</def>
 
 <extend tag="edit-page" for="MultipleChoiceSequence">
   <old-edit-page merge>
