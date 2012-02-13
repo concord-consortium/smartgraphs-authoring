@@ -444,32 +444,35 @@
 
 <extend tag="show-page" for="MultipleChoiceSequence">
   <old-show-page merge>
-    <collection-section:> 
-                <h3 param="collection-heading">
-                  <ht key="multiple_choice_choice.collection.heading" count="&this.multiple_choice_choices.count" >
-                    <human-collection-name collection="multiple_choice_choices" your/>
-                  </ht>
-                </h3>
+    <collection-section:>
+
+              <!-- choices -->
+              <h3 param="collection-heading">
+                <ht key="multiple_choice_choice.collection.heading" count="&this.multiple_choice_choices.count" >
+                  <human-collection-name collection="multiple_choice_choices" your/>
+                </ht>
+              </h3>
 
               <sortable-collection:multiple_choice_choices param="collection"/>
-                <section param="add-to-collection" if="&can_create?(@multiple_choice_sequence.multiple_choice_choices)">
-                  <h3 param="add-form-heading">
-                    <ht key="multiple_choice_choice.collection.add_form_heading" count="1">
-                      Add a Multiple Choice choice
-                    </ht>
-                  </h3>
-                  <form with="&@multiple_choice_choice || new_for_current_user(@multiple_choice_sequence.multiple_choice_choices)" owner="multiple_choice_sequence" without-cancel param>
-                    <field-list: skip="multiple_choice_sequence, position"/>
-                    <submit: label="#{ht 'multiple_choice_choice.actions.add', :default=>['Add'] }"/>
-                  </form>
-                </section>
-            
+              <section param="add-to-collection" if="&can_create?(@multiple_choice_sequence.multiple_choice_choices)">
+                <h3 param="add-form-heading">
+                  <ht key="multiple_choice_choice.collection.add_form_heading" count="1">
+                    Add a Multiple Choice choice
+                  </ht>
+                </h3>
+                <form with="&@multiple_choice_choice || new_for_current_user(@multiple_choice_sequence.multiple_choice_choices)" owner="multiple_choice_sequence" without-cancel param>
+                  <field-list: skip="multiple_choice_sequence, position"/>
+                  <submit: label="#{ht 'multiple_choice_choice.actions.add', :default=>['Add'] }"/>
+                </form>
+              </section>
+
+              <!-- sequential feedback if enabled -->
+              <if test="&this.use_sequential_feedback">
                 <h3 param="collection-heading">
                   <ht key="multiple_choice_hint.collection.heading" count="&this.multiple_choice_hints.count" >
                     <human-collection-name collection="multiple_choice_hints" your/>
                   </ht>
                 </h3>
-
                 <sortable-collection:multiple_choice_hints param="collection"/>
                 <section param="add-to-collection" if="&can_create?(@multiple_choice_sequence.multiple_choice_hints)">
                   <h3 param="add-form-heading">
@@ -482,7 +485,9 @@
                     <submit: label="#{ht 'multiple_choice_hint.actions.add', :default=>['Add'] }"/>
                   </form>
                 </section>
+              </if>
     </collection-section:>
+
     <multiple_choice_hints-collection-section:>
     </multiple_choice_hints-collection-section>
   </old-show-page>
@@ -512,26 +517,26 @@
                   </form>
                 </section>
               </section>
-              <section param="collection-section">
-                <h3 param="collection-heading">
-                  <ht key="multiple_choice_hint.collection.heading" count="&this.multiple_choice_hints.count" >
-                    <human-collection-name collection="multiple_choice_hints" your/>
-                  </ht>
-                </h3>
 
-                <sortable-collection:multiple_choice_hints param="collection"/>
-                <section param="add-to-collection" if="&can_create?(@multiple_choice_sequence.multiple_choice_hints)">
-                  <h3 param="add-form-heading">
-                    <ht key="multiple_choice_hint.collection.add_form_heading" count="1">
-                      Add a Multiple Choice choice
-                    </ht>
-                  </h3>
-                  <form with="&@multiple_choice_hint || new_for_current_user(@multiple_choice_sequence.multiple_choice_hints)" owner="multiple_choice_sequence" without-cancel param>
-                    <field-list: skip="multiple_choice_sequence, position"/>
-                    <submit: label="#{ht 'multiple_choice_hint.actions.add', :default=>['Add'] }"/>
-                  </form>
-                </section>
-              </section>
-            </after-content-body:>
+              <!--<section param="collection-section">-->
+                <!--<h3 param="collection-heading">-->
+                  <!--<ht key="multiple_choice_hint.collection.heading" count="&this.multiple_choice_hints.count" >-->
+                    <!--<human-collection-name collection="multiple_choice_hints" your/>-->
+                  <!--</ht>-->
+                <!--</h3>-->
+                  <!--<sortable-collection:multiple_choice_hints param="collection"/>-->
+                  <!--<section param="add-to-collection" if="&can_create?(@multiple_choice_sequence.multiple_choice_hints)">-->
+                    <!--<h3 param="add-form-heading">-->
+                      <!--<ht key="multiple_choice_hint.collection.add_form_heading" count="1">-->
+                        <!--Add a Multiple Choice choice-->
+                      <!--</ht>-->
+                    <!--</h3>-->
+                    <!--<form with="&@multiple_choice_hint || new_for_current_user(@multiple_choice_sequence.multiple_choice_hints)" owner="multiple_choice_sequence" without-cancel param>-->
+                      <!--<field-list: skip="multiple_choice_sequence, position"/>-->
+                      <!--<submit: label="#{ht 'multiple_choice_hint.actions.add', :default=>['Add'] }"/>-->
+                    <!--</form>-->
+                  <!--</section>-->
+              <!--</section>-->
+    </after-content-body:>
   </old-edit-page>
 </extend>

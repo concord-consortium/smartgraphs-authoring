@@ -32,6 +32,10 @@ class MultipleChoiceChoice < ActiveRecord::Base
   end
 
   def view_permitted?(field)
+    case field.to_s
+    when 'feedback'
+      return false if multiple_choice_sequence.use_sequential_feedback
+    end
     true
   end
 

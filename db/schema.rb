@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120210220352) do
+ActiveRecord::Schema.define(:version => 20120213184749) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -129,6 +129,7 @@ ActiveRecord::Schema.define(:version => 20120210220352) do
     t.datetime "updated_at"
     t.text     "give_up"
     t.text     "confirm_correct"
+    t.boolean  "use_sequential_feedback", :default => true
   end
 
   create_table "numeric_sequences", :force => true do |t|

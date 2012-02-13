@@ -6,6 +6,7 @@ class MultipleChoiceSequence < ActiveRecord::Base
     initial_prompt :text
     give_up :text
     confirm_correct :text
+    use_sequential_feedback :boolean, :default => true
     timestamps
   end
 
