@@ -59,35 +59,3 @@ describe MultipleChoiceSequence do
 
   end
 end
-
-__END__
-{
-"type": "MultipleChoiceWithSequentialHintsSequence",
-  "initialPrompt": "<p>Which of the following choices is choice \"B\"?</p>",
-  "choices": [
-    "Choice A",
-    "Choice B",
-    "Choice C"
-  ],
-  "correctAnswerIndex": 1,
-  "giveUp": {
-    "text": "<p>Incorrect. The correct choice B is choice B.</p>"
-  },
-  "confirmCorrect": {
-    "text": "<p>That's right. I wanted choice B, you gave it to me.</p>"
-  },
-  "hints": [
-    {
-      "name": "Hint 1",
-      "text": "<p>You can try harder than that.</p>"
-    },
-    {
-      "name": "Hint 2",
-      "text": "<p>I'm starting to worry about you.</p>"
-    },
-    {
-      "name": "Hint 3",
-      "text": "<p>C'mon, you can do it. Or so I used to think.</p>"
-    }
-  ]
-}
