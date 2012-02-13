@@ -17,6 +17,18 @@ class MultipleChoiceChoice < ActiveRecord::Base
   def to_hash
     name
   end
+
+  def hint_hash
+    {
+      "name" => hint_name,
+      "choiceIndex" => (position - 1),
+      "text" => feedback
+    }
+  end
+
+  def hint_name
+    "Choice #{name} Hint"
+  end
   # --- Permissions --- #
 
   def create_permitted?

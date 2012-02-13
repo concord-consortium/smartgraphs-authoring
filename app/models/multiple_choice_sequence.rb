@@ -31,8 +31,15 @@ class MultipleChoiceSequence < ActiveRecord::Base
       'correctAnswerIndex' => correct_answer_index,
       'giveUp' => give_up,
       'confirmCorrect' => confirm_correct,
-      'hints' => multiple_choice_hints.map { |h| h.to_hash }
+      'hints' => hints
     }
+  end
+
+  def hints
+    if use_sequential_feedback
+      return multiple_choice_hints.map { |h| h.to_hash   }
+    end
+    multiple_choice_choices.map { |c| c.hint_hash }
   end
 
   # return the first correct answer
