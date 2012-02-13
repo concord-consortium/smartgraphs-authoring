@@ -3,9 +3,10 @@ class MultipleChoiceChoice < ActiveRecord::Base
   hobo_model # Don't put anything above this
 
   fields do
-    name :string
-    #position    :integer
-    correct :boolean
+    name      :string
+    #position :integer
+    correct   :boolean
+    feedback  :text
     timestamps
   end
   inline_booleans true

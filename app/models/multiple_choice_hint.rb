@@ -10,7 +10,6 @@ class MultipleChoiceHint < ActiveRecord::Base
 
   acts_as_list
   belongs_to :multiple_choice_sequence, :index => 'multiple_choice_sequence_multiple_choice_hint_index'
-  belongs_to :multiple_choice_choice,   :index => 'choice_hint_index'
 
   # --- Permissions --- #
 

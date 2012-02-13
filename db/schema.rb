@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120210203553) do
+ActiveRecord::Schema.define(:version => 20120210220352) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(:version => 20120210203553) do
     t.datetime "updated_at"
     t.integer  "multiple_choice_sequence_id"
     t.boolean  "correct"
+    t.text     "feedback"
   end
 
   add_index "multiple_choice_choices", ["multiple_choice_sequence_id"], :name => "multiple_choice_sequence_multiple_choice_choice_index"
