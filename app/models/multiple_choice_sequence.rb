@@ -48,9 +48,15 @@ class MultipleChoiceSequence < ActiveRecord::Base
   end
 
   def correct_answer_index
-    return correct_answer.position
+    if correct_answer
+      return correct_answer.position
+    end
+    # TODO: What do we do? Its an error condition right?
   end
 
+  def has_correct_answer?
+    return !correct_answer.nil?
+  end
 
   # --- Permissions --- #
 

@@ -47,8 +47,10 @@ class MultipleChoiceChoice < ActiveRecord::Base
     case field.to_s
     when 'feedback'
       return false if multiple_choice_sequence.use_sequential_feedback
+    when 'correct'
+      return false if multiple_choice_sequence.has_correct_answer?
     end
-    true
+    return true
   end
 
 end
