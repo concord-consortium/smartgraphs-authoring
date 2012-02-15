@@ -16,7 +16,7 @@ class Activity < ActiveRecord::Base
     {
       'type' => 'Activity',
       'name' => name,
-      'AuthorName' => author_name_for_hash,
+      'authorName' => author_name_for_hash,
       'pages' => pages.map(&:to_hash),
       'units' => Unit.find(:all).map(&:to_hash)
     }
