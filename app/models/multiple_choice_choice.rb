@@ -10,7 +10,7 @@ class MultipleChoiceChoice < ActiveRecord::Base
     timestamps
   end
   inline_booleans true
-  acts_as_list
+  acts_as_list :scope => :multiple_choice_sequence
   belongs_to :multiple_choice_sequence, :index => 'multiple_choice_sequence_multiple_choice_choice_index'
 
 
