@@ -11,12 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111129003633) do
+ActiveRecord::Schema.define(:version => 20120214194223) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "author_name"
   end
 
   create_table "annotation_inclusions", :force => true do |t|
@@ -98,6 +99,38 @@ ActiveRecord::Schema.define(:version => 20111129003633) do
     t.text     "json"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "multiple_choice_choices", :force => true do |t|
+    t.string   "name"
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "multiple_choice_sequence_id"
+    t.boolean  "correct"
+    t.text     "feedback"
+  end
+
+  add_index "multiple_choice_choices", ["multiple_choice_sequence_id"], :name => "multiple_choice_sequence_multiple_choice_choice_index"
+
+  create_table "multiple_choice_hints", :force => true do |t|
+    t.string   "name"
+    t.text     "hint_text"
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "multiple_choice_sequence_id"
+  end
+
+  add_index "multiple_choice_hints", ["multiple_choice_sequence_id"], :name => "multiple_choice_sequence_multiple_choice_hint_index"
+
+  create_table "multiple_choice_sequences", :force => true do |t|
+    t.text     "initial_prompt"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "give_up"
+    t.text     "confirm_correct"
+    t.boolean  "use_sequential_feedback", :default => true
   end
 
   create_table "numeric_sequences", :force => true do |t|

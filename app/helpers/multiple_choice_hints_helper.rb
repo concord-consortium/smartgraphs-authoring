@@ -1,0 +1,2 @@
+module MultipleChoiceHintsHelper
+end

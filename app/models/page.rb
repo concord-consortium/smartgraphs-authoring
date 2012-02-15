@@ -41,6 +41,9 @@ class Page < ActiveRecord::Base
   has_many :constructed_response_sequences, :through => :page_sequences, :source => :sequence, :source_type => 'ConstructedResponseSequence'
   reverse_association_of :constructed_response_sequences, 'ConstructedResponseSequence#page'
 
+  has_many :multiple_choice_sequences, :through => :page_sequences, :source => :sequence, :source_type => 'MultipleChoiceSequence'
+  reverse_association_of :multiple_choice_sequences, 'MultipleChoiceSequence#page'
+
   children :page_sequences, :page_panes
 
   acts_as_list
