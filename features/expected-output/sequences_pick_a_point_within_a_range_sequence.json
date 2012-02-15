@@ -1,6 +1,7 @@
 {
   "type": "Activity",
   "name": "Sequences Pick A Point Within A Range Sequence",
+  "authorName": "",
   "pages": [
     {
       "type": "Page",

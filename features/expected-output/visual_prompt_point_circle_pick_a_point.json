@@ -1,6 +1,7 @@
 {
   "type": "Activity",
   "name": "Visual Prompt Point Circle Pick A Point",
+  "authorName": "",
   "pages": [
     {
       "type": "Page",

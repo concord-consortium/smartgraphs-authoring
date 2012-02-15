@@ -1,6 +1,7 @@
 {
   "type": "Activity",
   "name": "Panes Image Pane",
+  "authorName": "",
   "pages": [
     {
       "type": "Page",
