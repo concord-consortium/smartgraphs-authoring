@@ -16,18 +16,13 @@ class Activity < ActiveRecord::Base
     {
       'type' => 'Activity',
       'name' => name,
-      'AuthorName' => author_name_for_hash,
+      'authorName' => author_name,
       'pages' => pages.map(&:to_hash),
       'units' => Unit.find(:all).map(&:to_hash)
     }
   end
 
   # --- Permissions --- #
-
-  def author_name_for_hash
-    return author_name unless author_name.nil? || author_name.empty?
-    return "SmartGraphs Authoring Team"
-  end
 
   def create_permitted?
     acting_user.administrator?
