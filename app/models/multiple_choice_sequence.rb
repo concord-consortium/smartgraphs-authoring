@@ -49,7 +49,7 @@ class MultipleChoiceSequence < ActiveRecord::Base
 
   def correct_answer_index
     if correct_answer
-      return correct_answer.position
+      return correct_answer.position - 1
     end
     # TODO: What do we do? Its an error condition right?
   end
