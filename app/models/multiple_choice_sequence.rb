@@ -25,7 +25,7 @@ class MultipleChoiceSequence < ActiveRecord::Base
 
   def to_hash
     {
-      'type' => 'MultipleChoiceWithSequentialHintsSequence',
+      'type' => type,
       'initialPrompt' => initial_prompt,
       'choices' => multiple_choice_choices.map { |c| c.to_hash },
       'correctAnswerIndex' => correct_answer_index,
@@ -35,6 +35,14 @@ class MultipleChoiceSequence < ActiveRecord::Base
     }
   end
 
+  def type
+    if use_sequential_feedback then
+      'MultipleChoiceWithSequentialHintsSequence'
+    else
+      'MultipleChoiceWithCustomHintsSequence'
+    end
+  end
+  
   def hints
     if use_sequential_feedback
       return multiple_choice_hints.map { |h| h.to_hash   }
