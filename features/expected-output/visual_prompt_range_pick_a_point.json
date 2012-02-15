@@ -1,6 +1,7 @@
 {
   "type": "Activity",
   "name": "Visual Prompt Range Pick A Point",
+  "authorName": "",
   "pages": [
     {
       "type": "Page",

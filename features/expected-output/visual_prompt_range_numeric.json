@@ -1,6 +1,7 @@
 {
   "type": "Activity",
   "name": "Visual Prompt Range Numeric",
+  "authorName": "",
   "pages": [
     {
       "type": "Page",
