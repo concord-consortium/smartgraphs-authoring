@@ -1,0 +1,39 @@
+{
+  "type": "Activity",
+  "name": "Sequences Multiple Choice Sequence Custom",
+  "authorName": "",
+  "units" : [],
+  "pages": [
+    {
+      "type": "Page",
+      "name": "Page 1",
+      "text": "In this page...",
+      "sequence": {
+        "type": "MultipleChoiceWithCustomHintsSequence",
+        "initialPrompt": "Whats the blah blah.",
+        "confirmCorrect": "Yes, that's right!",
+        "giveUp": "That's not right.",
+        "hints": [{
+          "name": "Choice choice a Hint",
+          "choiceIndex":0,
+          "text": "this aint right"
+        },{
+          "name": "Choice choice b Hint",
+          "choiceIndex":1,
+          "text": "You got it!"
+        },{
+          "name": "Choice choice c Hint",
+          "choiceIndex":2,
+          "text": "try choice B instead."
+        }],
+        "choices": [
+          "choice a",
+          "choice b",
+          "choice c"
+        ],
+        "correctAnswerIndex": 1
+      }
+    }
+  ]
+}
+

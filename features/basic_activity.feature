@@ -9,6 +9,7 @@ Feature: Basic Activities
       """
       --- 
       :name: Simple Activity
+      :author_name: Mr. Author
       :pages:
       - :name: Simple Page 1
         :text: In this page...

@@ -1,7 +1,7 @@
 {
   "type": "Activity",
   "name": "Simple Activity",
-  "authorName": "",
+  "authorName": "Mr. Author",
   "pages": [
     {
       "type": "Page",
