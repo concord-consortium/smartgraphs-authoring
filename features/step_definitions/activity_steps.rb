@@ -191,37 +191,7 @@ def create_sequence(sequence_def)
     fill_in 'constructed_response_sequence_initial_content', :with => sequence_def[:initialContent]
     click_button 'Create Constructed response sequence'
   when "MultipleChoiceSequence"
-    click_link 'New Multiple choice sequence'
-    fill_in 'multiple_choice_sequence_initial_prompt', :with => sequence_def[:initialPrompt]
-    fill_in 'multiple_choice_sequence_give_up', :with => sequence_def[:giveUp]
-    fill_in 'multiple_choice_sequence_confirm_correct', :with => sequence_def[:confirmCorrect]
-    if sequence_def[:useSequentialFeedback] == true
-      check 'multiple_choice_sequence_use_sequential_feedback'
-    else
-      uncheck 'multiple_choice_sequence_use_sequential_feedback' 
-    end
-    click_button 'Create Multiple choice sequence'
-    sequence_def[:choices].each do |choice_def|
-      within('form.new.multiple-choice-choice') do
-        fill_in 'multiple_choice_choice_name', :with => choice_def[:name]
-        check('multiple_choice_choice_correct') if (choice_def[:correct] == true)
-        unless (sequence_def[:useSequentialFeedback] == true)
-          fill_in 'multiple_choice_choice_feedback', :with => choice_def[:feedback]
-        end
-        click_button 'Add'
-      end
-    end
-    if (sequence_def[:useSequentialFeedback] == true)
-      within('form.new.multiple-choice-hint') do
-        sequence_def[:hints].each do |hint_def|
-          fill_in 'multiple_choice_hint_name', :with => hint_def[:name]
-          fill_in 'multiple_choice_hint_hint_text', :with => hint_def[:feedback]
-          click_button 'Add'
-        end
-      end
-    end
-    # multiple choice handles hints differently, so delete them from the hash
-    sequence_def.delete(:hints)
+    exrtact_multiple_choice_sequence!(sequence_def)
   end
 
   sequence_url = current_url
@@ -295,57 +265,38 @@ def create_prompt(prompt_def, context = nil)
   end
 end
 
-def create_multiple_choice_sequence(sequence_def)
-  case sequence_def[:type]
-  when "InstructionSequence"
-    click_link 'New Instruction sequence'
-    fill_in 'instruction_sequence_text', :with => sequence_def[:text]
-    click_button 'Create Instruction sequence'
-  when "PickAPointSequence"
-    click_link 'New Pick a point sequence'
-    fill_in 'pick_a_point_sequence_title', :with => sequence_def[:title]
-    fill_in 'pick_a_point_sequence_initial_prompt', :with => sequence_def[:initialPrompt]
-    fill_in 'pick_a_point_sequence_give_up', :with => sequence_def[:giveUp]
-    fill_in 'pick_a_point_sequence_confirm_correct', :with => sequence_def[:confirmCorrect]
-
-    if sequence_def[:correctAnswerX] || sequence_def[:correctAnswerY]
-      fill_in 'pick_a_point_sequence_correct_answer_x', :with => sequence_def[:correctAnswerX]
-      fill_in 'pick_a_point_sequence_correct_answer_y', :with => sequence_def[:correctAnswerY]
+# side-effect: Will remove :hints from mc_seq_def hash
+# TODO: something safer?
+def exrtact_multiple_choice_sequence!(mc_seq_def)
+    click_link 'New Multiple choice sequence'
+    fill_in 'multiple_choice_sequence_initial_prompt', :with => mc_seq_def[:initialPrompt]
+    fill_in 'multiple_choice_sequence_give_up', :with => mc_seq_def[:giveUp]
+    fill_in 'multiple_choice_sequence_confirm_correct', :with => mc_seq_def[:confirmCorrect]
+    if mc_seq_def[:useSequentialFeedback] == true
+      check 'multiple_choice_sequence_use_sequential_feedback'
     else
-      fill_in 'pick_a_point_sequence_correct_answer_x_min', :with => sequence_def[:correctAnswerXMin]
-      fill_in 'pick_a_point_sequence_correct_answer_y_min', :with => sequence_def[:correctAnswerYMin]
-      fill_in 'pick_a_point_sequence_correct_answer_x_max', :with => sequence_def[:correctAnswerXMax]
-      fill_in 'pick_a_point_sequence_correct_answer_y_max', :with => sequence_def[:correctAnswerYMax]
+      uncheck 'multiple_choice_sequence_use_sequential_feedback' 
     end
-
-    click_button 'Create Pick a point sequence'
-  when "NumericSequence"
-    click_link 'New Numeric sequence'
-    fill_in 'numeric_sequence_title', :with => sequence_def[:title]
-    fill_in 'numeric_sequence_initial_prompt', :with => sequence_def[:initialPrompt]
-    fill_in 'numeric_sequence_correct_answer', :with => sequence_def[:correctAnswer]
-    fill_in 'numeric_sequence_give_up', :with => sequence_def[:giveUp]
-    fill_in 'numeric_sequence_confirm_correct', :with => sequence_def[:confirmCorrect]
-    click_button 'Create Numeric sequence'
-  when "ConstructedResponseSequence"
-    click_link 'New Constructed response sequence'
-    fill_in 'constructed_response_sequence_title', :with => sequence_def[:title]
-    fill_in 'constructed_response_sequence_initial_prompt', :with => sequence_def[:initialPrompt]
-    fill_in 'constructed_response_sequence_initial_content', :with => sequence_def[:initialContent]
-    click_button 'Create Constructed response sequence'
-  end
-
-  sequence_url = current_url
-  [:initialPromptPrompts, :giveUpPrompts, :confirmCorrectPrompts].each do |p|
-    if sequence_def[p]
-      # be sure to limit the prompt creation to one of the aside sections
-      # eg initial-prompt-prompts-collection-section
-      context = ".#{p.to_s.underscore.gsub(/_/,'-')}-collection-section"
-      sequence_def[p].each do |prompt_def|
-        create_prompt(prompt_def, context)
-        visit sequence_url
+    click_button 'Create Multiple choice sequence'
+    mc_seq_def[:choices].each do |choice_def|
+      within('form.new.multiple-choice-choice') do
+        fill_in 'multiple_choice_choice_name', :with => choice_def[:name]
+        check('multiple_choice_choice_correct') if (choice_def[:correct] == true)
+        unless (mc_seq_def[:useSequentialFeedback] == true)
+          fill_in 'multiple_choice_choice_feedback', :with => choice_def[:feedback]
+        end
+        click_button 'Add'
       end
     end
+    if (mc_seq_def[:useSequentialFeedback] == true)
+      within('form.new.multiple-choice-hint') do
+        mc_seq_def[:hints].each do |hint_def|
+          fill_in 'multiple_choice_hint_name', :with => hint_def[:name]
+          fill_in 'multiple_choice_hint_hint_text', :with => hint_def[:feedback]
+          click_button 'Add'
+        end
+      end
+    end
+    # multiple choice handles hints differently, so delete them from the hash
+    mc_seq_def.delete(:hints)
   end
-  sequence_def[:hints].each{|hint_def| create_hint(hint_def); visit sequence_url } if sequence_def[:hints]
-end
