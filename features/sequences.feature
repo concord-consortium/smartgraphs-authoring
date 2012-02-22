@@ -171,3 +171,70 @@ Feature: Sequences Activities
       """
     Then I should get correct json
 
+  @javascript
+  Scenario: Create an activity with a multiple choice sequence with sequential feedback
+    Given I am on the Activities page
+    When I create a new activity:
+      """
+      --- 
+      :name: Sequences Multiple Choice Sequence Sequential
+      :pages:
+      - :name: Page 1
+        :text: In this page...
+        :sequence:
+          :type: "MultipleChoiceSequence"
+          :initialPrompt: Whats the blah blah.
+          :giveUp: That's not right.
+          :confirmCorrect: Yes, that's right!
+          :useSequentialFeedback: true
+          :choices:
+          - :name: choice a
+            :correct: false
+            :feedback: this aint right
+          - :name: choice b
+            :correct: true
+            :feedback: You got it!
+          - :name: choice c
+            :correct: false
+            :feedback: try choice B instead.
+          :hints:
+          - :name: feedback 1
+            :feedback: this aint right
+          - :name: feedback 2
+            :feedback: try choice B instead.
+      """
+    Then I should get correct json
+  @javascript
+  Scenario: Create an activity with a multiple choice sequence with custom feedback
+    Given I am on the Activities page
+    When I create a new activity:
+      """
+      --- 
+      :name: Sequences Multiple Choice Sequence Custom
+      :pages:
+      - :name: Page 1
+        :text: In this page...
+        :sequence:
+          :type: "MultipleChoiceSequence"
+          :initialPrompt: Whats the blah blah.
+          :giveUp: That's not right.
+          :confirmCorrect: Yes, that's right!
+          :useSequentialFeedback: false
+          :choices:
+          - :name: choice a
+            :correct: false
+            :feedback: this aint right
+          - :name: choice b
+            :correct: true
+            :feedback: You got it!
+          - :name: choice c
+            :correct: false
+            :feedback: try choice B instead.
+          :hints:
+          - :name: feedback 1
+            :feedback: this aint right
+          - :name: feedback 2
+            :feedback: try choice B instead.
+      """
+    Then I should get correct json
+

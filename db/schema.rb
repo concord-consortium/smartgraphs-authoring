@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120214194223) do
+ActiveRecord::Schema.define(:version => 20120222162528) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -292,6 +292,22 @@ ActiveRecord::Schema.define(:version => 20120214194223) do
   add_index "sequence_hints", ["hint_type", "hint_id"], :name => "index_hints"
   add_index "sequence_hints", ["numeric_sequence_id"], :name => "index_sequence_hints_on_numeric_sequence_id"
   add_index "sequence_hints", ["pick_a_point_sequence_id"], :name => "index_sequence_hints_on_pick_a_point_sequence_id"
+
+  create_table "slope_tool_sequences", :force => true do |t|
+    t.boolean  "student_selects_points",                 :default => true
+    t.text     "first_question"
+    t.boolean  "student_must_select_endpoints_of_range", :default => false
+    t.string   "slope_variable_name"
+    t.float    "x_min",                                  :default => 0.0
+    t.float    "y_min",                                  :default => 0.0
+    t.float    "x_max",                                  :default => 10.0
+    t.float    "y_max",                                  :default => 10.0
+    t.boolean  "selected_points_must_be_adjacent",       :default => false
+    t.float    "tolerance",                              :default => 0.1
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "case_type",                              :default => "A"
+  end
 
   create_table "table_panes", :force => true do |t|
     t.string   "title"

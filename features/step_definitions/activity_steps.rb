@@ -1,3 +1,14 @@
+module BetterHashDiff
+  def diff(other)
+    self.keys.inject({}) do |memo, key|
+      unless self[key] == other[key]
+        memo[key] = [self[key], other[key]] 
+      end
+      memo
+    end
+  end
+end
+
 Given /^I am on the [A|a]ctivities page$/ do
   visit '/activities'
 end
@@ -16,6 +27,11 @@ Then /^I should get correct json$/ do
   visit activity_url
   body = page.driver.respond_to?('response') ? page.driver.response.body : page.driver.body
   actual_json = JSON.parse(body.gsub(/.*<pre>/,'').gsub(/<\/pre>.*/,''))
+  # Uncomment if you want slightly better 
+  # display of hash differences:
+  #actual_json.extend BetterHashDiff
+  #expected_json.extend BetterHashDiff
+  #pp actual_json.diff(expected_json)
   actual_json.should == expected_json
 end
 
@@ -23,6 +39,7 @@ def create_activity(activity_def)
   visit '/activities'
   click_link 'New Activity'
   fill_in 'activity_name', :with => activity_def[:name]
+  fill_in 'activity_author_name', :with => activity_def[:author_name]
   click_button 'Create Activity'
 
   activity_url = current_url
@@ -48,6 +65,7 @@ def create_page(page_def)
   page_url = current_url
   page_def[:panes].each{|pane_def| create_pane(pane_def); visit page_url } if page_def[:panes]
   create_sequence(page_def[:sequence]) if page_def[:sequence]
+  create_multiple_choice_sequencese(page_def[:multiple_choice_sequence]) if page_def[:multiple_choice_sequence]
 end
 
 def create_pane(pane_def)
@@ -172,6 +190,8 @@ def create_sequence(sequence_def)
     fill_in 'constructed_response_sequence_initial_prompt', :with => sequence_def[:initialPrompt]
     fill_in 'constructed_response_sequence_initial_content', :with => sequence_def[:initialContent]
     click_button 'Create Constructed response sequence'
+  when "MultipleChoiceSequence"
+    exrtact_multiple_choice_sequence!(sequence_def)
   end
 
   sequence_url = current_url
@@ -244,3 +264,39 @@ def create_prompt(prompt_def, context = nil)
     click_button 'Create Point axis line visual prompt'
   end
 end
+
+# side-effect: Will remove :hints from mc_seq_def hash
+# TODO: something safer?
+def exrtact_multiple_choice_sequence!(mc_seq_def)
+    click_link 'New Multiple choice sequence'
+    fill_in 'multiple_choice_sequence_initial_prompt', :with => mc_seq_def[:initialPrompt]
+    fill_in 'multiple_choice_sequence_give_up', :with => mc_seq_def[:giveUp]
+    fill_in 'multiple_choice_sequence_confirm_correct', :with => mc_seq_def[:confirmCorrect]
+    if mc_seq_def[:useSequentialFeedback] == true
+      check 'multiple_choice_sequence_use_sequential_feedback'
+    else
+      uncheck 'multiple_choice_sequence_use_sequential_feedback' 
+    end
+    click_button 'Create Multiple choice sequence'
+    mc_seq_def[:choices].each do |choice_def|
+      within('form.new.multiple-choice-choice') do
+        fill_in 'multiple_choice_choice_name', :with => choice_def[:name]
+        check('multiple_choice_choice_correct') if (choice_def[:correct] == true)
+        unless (mc_seq_def[:useSequentialFeedback] == true)
+          fill_in 'multiple_choice_choice_feedback', :with => choice_def[:feedback]
+        end
+        click_button 'Add'
+      end
+    end
+    if (mc_seq_def[:useSequentialFeedback] == true)
+      within('form.new.multiple-choice-hint') do
+        mc_seq_def[:hints].each do |hint_def|
+          fill_in 'multiple_choice_hint_name', :with => hint_def[:name]
+          fill_in 'multiple_choice_hint_hint_text', :with => hint_def[:feedback]
+          click_button 'Add'
+        end
+      end
+    end
+    # multiple choice handles hints differently, so delete them from the hash
+    mc_seq_def.delete(:hints)
+  end
