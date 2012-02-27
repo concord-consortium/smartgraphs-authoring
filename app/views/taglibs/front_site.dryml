@@ -136,7 +136,10 @@
     </a><br/>
     <a action="new" to="&this.multiple_choice_sequences">
       <ht key="multiple_choice_sequence.actions.new" >New Multiple Choice Sequence element</ht>
-    </a>
+    </a><br/>
+    <a action="new" to="&this.slope_tool_sequences">
+      <ht key="slope_tool_sequence.actions.new" >New Multiple Choice Sequence element</ht>
+    </a><br/>
   </unless>
 </def>
 
@@ -493,4 +496,23 @@
   </old-show-page>
 </extend>
 
+<!--<extend tag="form" for="SlopeToolSequence">-->
+  <!--<old-form merge>-->
+    <!--<error-messages param/>-->
+    <!--<field-list fields="case_type, first_question, student_must_select_endpoints_of_range, slope_variable_name, x_min, y_min, x_max, y_max, selected_points_must_be_adjacent, tolerance" param/>-->
+    <!--<select-menu:case_type selected="&this.case_type" options="&SlopeToolSequence::CaseTypes"/>-->
+    <!--<div param="actions">-->
+      <!--<submit label="#{ht 'slope_tool_sequence.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>-->
+    <!--</div>-->
+  <!--</old-form>-->
+<!--</extend>-->
 
+<extend tag="show-page">
+  <old-show-page merge>
+    <append-content-header:>
+      <if test="&this.respond_to? :parent"> 
+        <%= link_to "back to #{@this.parent}", @this.parent %>
+      </if>
+    </append-content-header:>
+  </old-show-page>
+</extend>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120222162528) do
+ActiveRecord::Schema.define(:version => 20120223143505) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -294,7 +294,6 @@ ActiveRecord::Schema.define(:version => 20120222162528) do
   add_index "sequence_hints", ["pick_a_point_sequence_id"], :name => "index_sequence_hints_on_pick_a_point_sequence_id"
 
   create_table "slope_tool_sequences", :force => true do |t|
-    t.boolean  "student_selects_points",                 :default => true
     t.text     "first_question"
     t.boolean  "student_must_select_endpoints_of_range", :default => false
     t.string   "slope_variable_name"

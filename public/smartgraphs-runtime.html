@@ -7,18 +7,16 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <link rel="apple-touch-icon" href="/static/sproutcore/foundation/en/1e3562c3eded0e237a64955cae12d1a7789e90d1/source/images/sproutcore-logo.png" />
-	  <link rel="apple-touch-startup-image" media="screen and (orientation:portrait)" href="/static/sproutcore/foundation/en/1e3562c3eded0e237a64955cae12d1a7789e90d1/source/images/sproutcore-startup-portrait.png" /> 
-	  <link rel="apple-touch-startup-image" media="screen and (orientation:landscape)" href="/static/sproutcore/foundation/en/1e3562c3eded0e237a64955cae12d1a7789e90d1/source/images/sproutcore-startup-landscape.png" />
+    <link rel="apple-touch-icon" href="/static/sproutcore/foundation/en/1e3562c3eded0e237a64955cae12d1a7789e90d1/images/sproutcore-logo.png" />
+	  <link rel="apple-touch-startup-image" media="screen and (orientation:portrait)" href="/static/sproutcore/foundation/en/1e3562c3eded0e237a64955cae12d1a7789e90d1/images/sproutcore-startup-portrait.png" /> 
+	  <link rel="apple-touch-startup-image" media="screen and (orientation:landscape)" href="/static/sproutcore/foundation/en/1e3562c3eded0e237a64955cae12d1a7789e90d1/images/sproutcore-startup-landscape.png" />
 	  <link rel="shortcut icon" href="" type="image/x-icon" />
     
     <title>Smartgraphs</title>
-
-  <script type="text/javascript">String.preferredLanguage = "en";</script>
-<script type="text/javascript">
-  window.authoredActivityJSON=<%= authored_activity_json %>;
-  window.showOutline=<%= show_outline %>;
-  window.showEditButton=<%= show_edit_button %>;
+  <script type="text/javascript">
+    window.authoredActivityJSON=<%= authored_activity_json %>;
+    window.showOutline=<%= show_outline %>;
+    window.showEditButton=<%= show_edit_button %>;
 /* >>>>>>>>>> BEGIN source/core.js */
 // ==========================================================================
 // Project:   SproutCore - JavaScript Application Framework
@@ -118,12 +116,16 @@ SC.setupBodyClassNames = function() {
   el.className = classNames.join(' ') ;
 } ;
 
+/* >>>>>>>>>> BEGIN bundle_loaded.js */
+; if ((typeof SC !== 'undefined') && SC && SC.bundleDidLoad) SC.bundleDidLoad('sproutcore/bootstrap');
 
 </script>
-<script type="text/javascript">SC.buildMode = "production"; 
- SC.urlPrefix = null; </script>
+<script type="text/javascript">SC.buildMode = "production";</script>
 
-     <link href="/static/smartgraphs/en/eb20ef67e2341f28d40f3e7f0201b84c7f15f339/stylesheet-packed.css" rel="stylesheet" type="text/css" />
+     <link href="/static/raphael_views/g_raphael/en/0e28f379ab8ab3eea0249d2d2c9eba7a152944c1/stylesheet-packed.css" rel="stylesheet" type="text/css" />
+  <link href="/static/sproutcore/ace/en/78c6261d5d9b6ba0b0946fa62735e14bd2c0f1a7/stylesheet.css" rel="stylesheet" type="text/css" />
+  <link href="/static/pig/en/7e152ed802779a81a817a3505c70ab1a52bc375d/stylesheet.css" rel="stylesheet" type="text/css" />
+  <link href="/static/smartgraphs/en/cb7b7e85384b8fb48d393cb9837ddb4500cb3f7c/stylesheet.css" rel="stylesheet" type="text/css" />
    
     
   </head>
@@ -147,7 +149,7 @@ if (SC.setupBodyClassNames) SC.setupBodyClassNames() ;
 <div id="loading">
 <div class='app-loading'>
   <!-- loading spinner courtesy of http://loadinfo.net/ -->
-  <img src="/static/smartgraphs/en/eb20ef67e2341f28d40f3e7f0201b84c7f15f339/source/resources/images/app_loading.gif"
+  <img src="/static/smartgraphs/en/cb7b7e85384b8fb48d393cb9837ddb4500cb3f7c/resources/images/app_loading.gif"
        style='margin-top: -63px; margin-left:-24px'>
   <p class='sc-theme sc-view' style='margin-top: 3px; width: 200px; margin-left: -100px;'>
     Loading Smartgraphs...
@@ -156,7 +158,14 @@ if (SC.setupBodyClassNames) SC.setupBodyClassNames() ;
 
 
 </div>
-  <script type="text/javascript" src="/static/smartgraphs/en/eb20ef67e2341f28d40f3e7f0201b84c7f15f339/javascript-packed.js"></script>
+  <script type="text/javascript" src="/static/raphael_views/g_raphael/en/0e28f379ab8ab3eea0249d2d2c9eba7a152944c1/javascript-packed.js"></script>
+  <script type="text/javascript" src="/static/sproutcore/statechart/en/86100c88ef2ac57b2f8aca95405665ee88f897d0/javascript.js"></script>
+  <script type="text/javascript" src="/static/raphael_views/raphael_views/en/1efc1f77b97df48468d556050e0e2ed182c3c91d/javascript.js"></script>
+  <script type="text/javascript" src="/static/sproutcore/empty_theme/en/ded52cb3e6a67934b7f5561e5397d9af187bd369/javascript.js"></script>
+  <script type="text/javascript" src="/static/sproutcore/ace/en/78c6261d5d9b6ba0b0946fa62735e14bd2c0f1a7/javascript.js"></script>
+  <script type="text/javascript" src="/static/pig/en/7e152ed802779a81a817a3505c70ab1a52bc375d/javascript.js"></script>
+  <script type="text/javascript" src="/static/smartgraphs/en/cb7b7e85384b8fb48d393cb9837ddb4500cb3f7c/javascript.js"></script>
+<script type="text/javascript">String.preferredLanguage = "en";</script>
   <script type="text/javascript" src="http://use.typekit.com/hdw8ayt.js"></script>
   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 	</body>
