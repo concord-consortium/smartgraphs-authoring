@@ -44,6 +44,9 @@ class Page < ActiveRecord::Base
   has_many :multiple_choice_sequences, :through => :page_sequences, :source => :sequence, :source_type => 'MultipleChoiceSequence'
   reverse_association_of :multiple_choice_sequences, 'MultipleChoiceSequence#page'
 
+  has_many :slope_tool_sequences, :through => :page_sequences, :source => :sequence, :source_type => 'SlopeToolSequence'
+  reverse_association_of :slope_tool_sequences, 'SlopeToolSequence#page'
+
   children :page_sequences, :page_panes
 
   acts_as_list

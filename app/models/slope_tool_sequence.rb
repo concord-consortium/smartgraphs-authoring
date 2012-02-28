@@ -1,13 +1,10 @@
 class SlopeToolSequence < ActiveRecord::Base
-  CaseA="A"
-  CaseB="B"
-  CaseC="C"
-  CaseTypes = [CaseA, CaseB, CaseC]
-
   hobo_model # Don't put anything above this
 
+  CaseType = HoboFields::Types::EnumString.for(:case_a, :case_b, :case_c)
+
   fields do
-    case_type                              :string,   :default => 'A'
+    case_type                              SlopeToolSequence::CaseType,   :default => 'A'
     first_question                         :text
     student_must_select_endpoints_of_range :boolean,  :default => false
     slope_variable_name                    :string
@@ -20,7 +17,13 @@ class SlopeToolSequence < ActiveRecord::Base
     timestamps
   end
 
+  has_one :page_sequence, :as => :sequence, :dependent => :destroy
+  has_one :page, :through => :page_sequence
+  reverse_association_of :page, 'Page#slope_tool_sequences'
 
+  def parent
+    page
+  end
   #first_question_is_slope_question       :boolean,  :default => true
   def first_question_is_slope_question
     return case case_type
