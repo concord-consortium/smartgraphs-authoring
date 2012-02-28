@@ -25,22 +25,22 @@ class SlopeToolSequence < ActiveRecord::Base
     page
   end
   #first_question_is_slope_question       :boolean,  :default => true
-  def first_question_is_slope_question
-    return case case_type
-      when CaseA then true
-      when CaseC then true
-      else false
-    end
-  end
+  # def first_question_is_slope_question
+  #   return case case_type
+  #     when CaseA then true
+  #     when CaseC then true
+  #     else false
+  #   end
+  # end
 
-  #student_selects_points                 :boolean,  :default => true
-  def student_selects_points
-    return case case_type
-      when CaseA then true
-      when CaseB then true
-      else false
-    end
-  end
+  # #student_selects_points                 :boolean,  :default => true
+  # def student_selects_points
+  #   return case case_type
+  #     when CaseA then true
+  #     when CaseB then true
+  #     else false
+  #   end
+  # end
 
 
   def validate_case_type(c_type)
