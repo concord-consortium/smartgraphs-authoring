@@ -4,7 +4,7 @@ class SlopeToolSequence < ActiveRecord::Base
   CaseType = HoboFields::Types::EnumString.for(:case_a, :case_b, :case_c)
 
   fields do
-    case_type                              SlopeToolSequence::CaseType,   :default => 'A'
+    case_type                              SlopeToolSequence::CaseType,   :default => :case_a
     first_question                         :text
     student_must_select_endpoints_of_range :boolean,  :default => false
     slope_variable_name                    :string
@@ -38,16 +38,18 @@ class SlopeToolSequence < ActiveRecord::Base
         # "tolerance": 0.1
   def to_hash
     {
-      'type' => type,
-      'firstQuestionIsSlopeQuestion' => first_question_is_slope_question,
-      'firstQuestion' => first_question,
-      'studentSelectsPoints' => student_selects_points,
-      'slopeVariableName' => slope_variable_name,
+      'type'                              => type,
+      'firstQuestionIsSlopeQuestion'      => first_question_is_slope_question,
+      'firstQuestion'                     => first_question,
+      'studentSelectsPoints'              => student_selects_points,
+      'studentMustSelectEndpointsOfRange' => student_must_select_endpoints_of_range,
+      'slopeVariableName'                 => slope_variable_name,
+
       'xMin' => x_min,
       'xMax' => x_max,
       'yMin' => y_min,
       'yMax' => y_max,
-      'selectedPointsMustBeAdjacent' => selected_points_must_be_adjacent,
+      'selectedPointsMustBeAdjacent'      => selected_points_must_be_adjacent,
       'tolerance' => tolerance
     }
   end
@@ -59,8 +61,8 @@ class SlopeToolSequence < ActiveRecord::Base
   #first_question_is_slope_question       :boolean,  :default => true
   def first_question_is_slope_question
     return case case_type
-      when :case_a then true
-      when :case_c then true
+      when "case_a" then true
+      when "case_c" then true
       else false
     end
   end
@@ -68,8 +70,8 @@ class SlopeToolSequence < ActiveRecord::Base
   #student_selects_points                 :boolean,  :default => true
   def student_selects_points
     return case case_type
-      when :case_a then true
-      when :case_b then true
+      when "case_a" then true
+      when "case_b" then true
       else false
     end
   end
