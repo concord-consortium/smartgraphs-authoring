@@ -45,10 +45,10 @@ en:
           Choose one of the following forms for this tool:
           Case A: Start by asking a slope question about a specific region of the graph.
           Case B: Start by being asking the student to pick points.
-          Case C: Student is asked for the average slope over the entire range of the graph.
+          Case C: Student is asked for the average slope for the selected region.
 
   slope_tool_sequence/case_types:
     case_a: "A: Ask a slope question."
     case_b: "B: Ask student to pick a point."
-    case_c: "C: Ask for average slope of graph."
+    case_c: "C: Ask for average slope for the region."
 
