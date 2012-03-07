@@ -21,6 +21,8 @@ class PickAPointSequence < ActiveRecord::Base
     timestamps
   end
 
+  validates :title, :length => { :minimum => 2 }
+
   def field_order
     "title, initial_prompt, give_up, confirm_correct, correct_answer_x, correct_answer_y, correct_answer_x_min, correct_answer_y_min, correct_answer_x_max, correct_answer_y_max"
   end
