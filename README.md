@@ -43,6 +43,9 @@ To learn about Hobo, check out the pdf "Rapid Rails 3 with Hobo" at http://hoboc
     window.showOutline = <%= show_outline %>;
     window.showEditButton = <%= show_edit_button %>;
 
+## handy hobo notes ##
+* after substantial modification of a model, run `hobo g migration` to update the schema.
+
 ## configuring & installing on a VM ##
 
 * get setup with git and rvm

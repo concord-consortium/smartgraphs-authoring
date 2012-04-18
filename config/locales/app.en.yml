@@ -47,6 +47,17 @@ en:
           Case B: Start by being asking the student to pick points.
           Case C: Student is asked for the average slope for the selected region.
 
+#  Slope tool types:
+#  CaseType        = HoboFields::Types::EnumString.for(:case_a, :case_b,   :case_c)
+#  PointConstraint = HoboFields::Types::EnumString.for(:any,    :endpoints, :adjacent)
+    # student_must_select_endpoints_of_range :boolean,  :default => false
+    # selected_points_must_be_adjacent       :boolean,  :default => false
+
+  slope_tool_sequence/point_constraints:
+    any:      "Any point within the range."
+    endpoints: "Endpoints of the range."
+    adjacent: "adjacent points within the range."
+
   slope_tool_sequence/case_types:
     case_a: "A: Ask a slope question."
     case_b: "B: Ask student to pick a point."

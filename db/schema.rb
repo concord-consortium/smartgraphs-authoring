@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120223143505) do
+ActiveRecord::Schema.define(:version => 20120418181541) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -295,17 +295,16 @@ ActiveRecord::Schema.define(:version => 20120223143505) do
 
   create_table "slope_tool_sequences", :force => true do |t|
     t.text     "first_question"
-    t.boolean  "student_must_select_endpoints_of_range", :default => false
     t.string   "slope_variable_name"
-    t.float    "x_min",                                  :default => 0.0
-    t.float    "y_min",                                  :default => 0.0
-    t.float    "x_max",                                  :default => 10.0
-    t.float    "y_max",                                  :default => 10.0
-    t.boolean  "selected_points_must_be_adjacent",       :default => false
-    t.float    "tolerance",                              :default => 0.1
+    t.float    "x_min",               :default => 0.0
+    t.float    "y_min",               :default => 0.0
+    t.float    "x_max",               :default => 10.0
+    t.float    "y_max",               :default => 10.0
+    t.float    "tolerance",           :default => 0.1
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "case_type",                              :default => "A"
+    t.string   "case_type",           :default => "case_a"
+    t.string   "point_constraints",   :default => "any"
   end
 
   create_table "table_panes", :force => true do |t|
