@@ -2,17 +2,19 @@ class SlopeToolSequence < ActiveRecord::Base
   hobo_model # Don't put anything above this
 
   CaseType = HoboFields::Types::EnumString.for(:case_a, :case_b, :case_c)
+  PointConstraint = HoboFields::Types::EnumString.for(:any,    :endpoints, :adjacent)
 
   fields do
     case_type                              SlopeToolSequence::CaseType,   :default => :case_a
+    point_constraints                      SlopeToolSequence::PointConstraint  :default => :any
+
     first_question                         :text
-    student_must_select_endpoints_of_range :boolean,  :default => false
     slope_variable_name                    :string
     x_min                                  :float,    :default => 0
     y_min                                  :float,    :default => 0
     x_max                                  :float,    :default => 10
     y_max                                  :float,    :default => 10
-    selected_points_must_be_adjacent       :boolean,  :default => false
+    
     tolerance                              :float,    :default => 0.1
     timestamps
   end
@@ -76,6 +78,19 @@ class SlopeToolSequence < ActiveRecord::Base
     end
   end
 
+  # student_must_select_endpoints_of_range :boolean,  :default => false
+  def student_must_select_endpoints_of_range
+    point_constraints == "endpoints"
+  end
+
+  # selected_points_must_be_adjacent       :boolean,  :default => false
+  def selected_points_must_be_adjacent
+    point_constraints == "adjacent"
+  end
+
+  def validate_point_constraints
+    return true if PointConstraints.include? c_type
+  end
 
   def validate_case_type(c_type)
     return true if CaseTypes.include? c_type
