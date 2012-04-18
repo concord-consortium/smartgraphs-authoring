@@ -1,11 +1,11 @@
 class SlopeToolSequence < ActiveRecord::Base
   hobo_model # Don't put anything above this
 
-  CaseType = HoboFields::Types::EnumString.for(:case_a, :case_b, :case_c)
+  CaseType        = HoboFields::Types::EnumString.for(:case_a, :case_b,    :case_c)
   PointConstraint = HoboFields::Types::EnumString.for(:any,    :endpoints, :adjacent)
 
   fields do
-    case_type                              SlopeToolSequence::CaseType,   :default => :case_a
+    case_type                              SlopeToolSequence::CaseType,        :default => :case_a
     point_constraints                      SlopeToolSequence::PointConstraint  :default => :any
 
     first_question                         :text
