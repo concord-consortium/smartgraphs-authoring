@@ -10,7 +10,13 @@ group :development, :test do
   gem 'sqlite3'
   gem "capistrano-ext",                 :require => "capistrano"
   gem "haml"
-  gem 'ruby-debug19', :require => 'ruby-debug'
+  # gem 'ruby-debug19', :require => 'ruby-debug'
+  # Frustrated with debugs intemate ruby version deps? use pry.
+  # use 'binding.pry' instead of 'debugger'
+  # not interested in Pry's awesomesouce?!?
+  # feel the awesome: http://pry.github.com/screencasts.html
+  gem 'pry'
+  gem 'pry-doc'
   gem 'cucumber'
   gem 'cucumber-rails'
   gem 'capybara'
