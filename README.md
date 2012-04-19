@@ -22,6 +22,12 @@ but that might fail, so then you can also try
 
 To learn about Hobo, check out the pdf "Rapid Rails 3 with Hobo" at http://hobocentral.net/books/
 
+Trouble installing Nokogiri? You can try this:
+    source ./source ./nokogiri_brew.sh
+
+Or just read that file, and follow along.
+
+
 ## update SmartGraphs runtime ##
 
 1. checkout Smartgraphs repository
