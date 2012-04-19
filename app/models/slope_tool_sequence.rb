@@ -5,8 +5,8 @@ class SlopeToolSequence < ActiveRecord::Base
   PointConstraint = HoboFields::Types::EnumString.for(:any,    :endpoints, :adjacent)
 
   fields do
-    case_type                              SlopeToolSequence::CaseType,         :default => :case_a
-    point_constraints                      SlopeToolSequence::PointConstraint,  :default => :any
+    case_type                              SlopeToolSequence::CaseType,         :default => "case_a"
+    point_constraints                      SlopeToolSequence::PointConstraint,  :default => "any"
 
     first_question                         :text
     slope_variable_name                    :string

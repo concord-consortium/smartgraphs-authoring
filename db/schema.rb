@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120418181541) do
+ActiveRecord::Schema.define(:version => 20120419160216) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -141,6 +141,7 @@ ActiveRecord::Schema.define(:version => 20120418181541) do
     t.float    "correct_answer"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "tolerance"
   end
 
   create_table "page_panes", :force => true do |t|

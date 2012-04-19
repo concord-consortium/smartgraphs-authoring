@@ -8,6 +8,7 @@ class NumericSequence < ActiveRecord::Base
     give_up         :text
     confirm_correct :text
     correct_answer  :float
+    tolerance       :float
     timestamps
   end
 
@@ -57,6 +58,7 @@ class NumericSequence < ActiveRecord::Base
       'type' => 'NumericSequence',
       'initialPrompt' => {'text' => initial_prompt.to_s },
       'correctAnswer' => correct_answer,
+      'tolerance' => tolerance,
       'giveUp' => {'text' => give_up.to_s },
       'confirmCorrect' => {'text' => confirm_correct.to_s }
     }
