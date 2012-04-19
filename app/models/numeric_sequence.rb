@@ -8,7 +8,7 @@ class NumericSequence < ActiveRecord::Base
     give_up         :text
     confirm_correct :text
     correct_answer  :float
-    tolerance       :float, :default => 0.1
+    tolerance       :float
     timestamps
   end
 
