@@ -181,6 +181,7 @@ def create_sequence(sequence_def)
     fill_in 'numeric_sequence_title', :with => sequence_def[:title]
     fill_in 'numeric_sequence_initial_prompt', :with => sequence_def[:initialPrompt]
     fill_in 'numeric_sequence_correct_answer', :with => sequence_def[:correctAnswer]
+    fill_in 'numeric_sequence_tolerance', :with => sequence_def[:tolerance]
     fill_in 'numeric_sequence_give_up', :with => sequence_def[:giveUp]
     fill_in 'numeric_sequence_confirm_correct', :with => sequence_def[:confirmCorrect]
     click_button 'Create Numeric sequence'
@@ -191,7 +192,7 @@ def create_sequence(sequence_def)
     fill_in 'constructed_response_sequence_initial_content', :with => sequence_def[:initialContent]
     click_button 'Create Constructed response sequence'
   when "MultipleChoiceSequence"
-    exrtact_multiple_choice_sequence!(sequence_def)
+    extract_multiple_choice_sequence!(sequence_def)
   end
 
   sequence_url = current_url
@@ -267,7 +268,7 @@ end
 
 # side-effect: Will remove :hints from mc_seq_def hash
 # TODO: something safer?
-def exrtact_multiple_choice_sequence!(mc_seq_def)
+def extract_multiple_choice_sequence!(mc_seq_def)
     click_link 'New Multiple choice sequence'
     fill_in 'multiple_choice_sequence_initial_prompt', :with => mc_seq_def[:initialPrompt]
     fill_in 'multiple_choice_sequence_give_up', :with => mc_seq_def[:giveUp]
