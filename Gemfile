@@ -17,9 +17,9 @@ group :development, :test do
   # feel the awesome: http://pry.github.com/screencasts.html
   gem 'pry'
   gem 'pry-doc'
-  gem 'cucumber'
+  # gem 'cucumber'
   gem 'cucumber-rails'
-  gem 'capybara'
+  # gem 'capybara'
   gem 'database_cleaner'
   gem 'launchy'
   gem 'awesome_print'
