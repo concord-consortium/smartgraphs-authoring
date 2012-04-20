@@ -1,6 +1,10 @@
 class Page < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
+  
+  # standard owner and admin permissions
+  # defined in models/standard_permissions.rb
+  include StandardPermissions
 
   fields do
     name :string
@@ -66,24 +70,6 @@ class Page < ActiveRecord::Base
       hash['sequence'] = page_sequences.first.sequence.to_hash
     end
     hash
-  end
-
-  # --- Permissions --- #
-
-  def create_permitted?
-    acting_user.administrator?
-  end
-
-  def update_permitted?
-    acting_user.administrator?
-  end
-
-  def destroy_permitted?
-    acting_user.administrator?
-  end
-
-  def view_permitted?(field)
-    true
   end
 
 end

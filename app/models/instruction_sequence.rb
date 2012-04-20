@@ -2,6 +2,10 @@ class InstructionSequence < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
 
+  # standard owner and admin permissions
+  # defined in models/standard_permissions.rb
+  include StandardPermissions
+
   fields do
     text :text
     timestamps
@@ -21,24 +25,6 @@ class InstructionSequence < ActiveRecord::Base
 
   def name
     text
-  end
-
-  # --- Permissions --- #
-
-  def create_permitted?
-    acting_user.administrator?
-  end
-
-  def update_permitted?
-    acting_user.administrator?
-  end
-
-  def destroy_permitted?
-    acting_user.administrator?
-  end
-
-  def view_permitted?(field)
-    true
   end
 
 end

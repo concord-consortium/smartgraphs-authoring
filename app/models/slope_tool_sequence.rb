@@ -1,5 +1,9 @@
 class SlopeToolSequence < ActiveRecord::Base
   hobo_model # Don't put anything above this
+  
+  # standard owner and admin permissions
+  # defined in models/standard_permissions.rb
+  include StandardPermissions
 
   CaseType        = HoboFields::Types::EnumString.for(:case_a, :case_b,    :case_c)
   PointConstraint = HoboFields::Types::EnumString.for(:any,    :endpoints, :adjacent)
@@ -26,18 +30,7 @@ class SlopeToolSequence < ActiveRecord::Base
   def parent
     page
   end
-        # "type": "SlopeToolSequence",
-        # "firstQuestionIsSlopeQuestion": true,
-        # "firstQuestion": "What is the average velocity between 0 to 10 seconds?",
-        # "studentSelectsPoints": true,
-        # "studentMustSelectEndpointsOfRange": true,
-        # "slopeVariableName": "velocity",
-        # "xMin": 0,
-        # "xMax": 10,
-        # "yMin": 0,
-        # "yMax": 12,
-        # "selectedPointsMustBeAdjacent": false,
-        # "tolerance": 0.1
+
   def to_hash
     {
       'type'                              => type,
@@ -94,24 +87,6 @@ class SlopeToolSequence < ActiveRecord::Base
 
   def validate_case_type(c_type)
     return true if CaseTypes.include? c_type
-  end
-
-  # --- Permissions --- #
-
-  def create_permitted?
-    acting_user.administrator?
-  end
-
-  def update_permitted?
-    acting_user.administrator?
-  end
-
-  def destroy_permitted?
-    acting_user.administrator?
-  end
-
-  def view_permitted?(field)
-    true
   end
 
 end

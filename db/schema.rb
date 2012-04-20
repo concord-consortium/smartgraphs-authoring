@@ -11,14 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120420134147) do
+ActiveRecord::Schema.define(:version => 20120420204407) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "author_name"
+    t.integer  "owner_id"
   end
+
+  add_index "activities", ["owner_id"], :name => "index_activities_on_owner_id"
 
   create_table "annotation_inclusions", :force => true do |t|
     t.datetime "created_at"
@@ -27,10 +30,12 @@ ActiveRecord::Schema.define(:version => 20120420134147) do
     t.integer  "including_graph_id"
     t.string   "including_graph_type"
     t.integer  "position"
+    t.integer  "owner_id"
   end
 
   add_index "annotation_inclusions", ["included_graph_id"], :name => "included_graph_idx"
   add_index "annotation_inclusions", ["including_graph_type", "including_graph_id"], :name => "including_graph_idx"
+  add_index "annotation_inclusions", ["owner_id"], :name => "index_annotation_inclusions_on_owner_id"
 
   create_table "confirm_correct_prompts", :force => true do |t|
     t.datetime "created_at"
@@ -39,9 +44,11 @@ ActiveRecord::Schema.define(:version => 20120420134147) do
     t.integer  "prompt_id"
     t.string   "prompt_type"
     t.integer  "numeric_sequence_id"
+    t.integer  "owner_id"
   end
 
   add_index "confirm_correct_prompts", ["numeric_sequence_id"], :name => "index_confirm_correct_prompts_on_numeric_sequence_id"
+  add_index "confirm_correct_prompts", ["owner_id"], :name => "index_confirm_correct_prompts_on_owner_id"
   add_index "confirm_correct_prompts", ["pick_a_point_sequence_id"], :name => "index_confirm_correct_prompts_on_pick_a_point_sequence_id"
   add_index "confirm_correct_prompts", ["prompt_type", "prompt_id"], :name => "index_confirm_correct_prompts"
 
@@ -51,7 +58,10 @@ ActiveRecord::Schema.define(:version => 20120420134147) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "initial_content"
+    t.integer  "owner_id"
   end
+
+  add_index "constructed_response_sequences", ["owner_id"], :name => "index_constructed_response_sequences_on_owner_id"
 
   create_table "give_up_prompts", :force => true do |t|
     t.datetime "created_at"
@@ -60,9 +70,11 @@ ActiveRecord::Schema.define(:version => 20120420134147) do
     t.integer  "prompt_id"
     t.string   "prompt_type"
     t.integer  "numeric_sequence_id"
+    t.integer  "owner_id"
   end
 
   add_index "give_up_prompts", ["numeric_sequence_id"], :name => "index_give_up_prompts_on_numeric_sequence_id"
+  add_index "give_up_prompts", ["owner_id"], :name => "index_give_up_prompts_on_owner_id"
   add_index "give_up_prompts", ["pick_a_point_sequence_id"], :name => "index_give_up_prompts_on_pick_a_point_sequence_id"
   add_index "give_up_prompts", ["prompt_type", "prompt_id"], :name => "index_give_up_prompts"
 
@@ -73,7 +85,10 @@ ActiveRecord::Schema.define(:version => 20120420134147) do
     t.datetime "updated_at"
     t.string   "license"
     t.string   "attribution"
+    t.integer  "owner_id"
   end
+
+  add_index "image_panes", ["owner_id"], :name => "index_image_panes_on_owner_id"
 
   create_table "initial_prompt_prompts", :force => true do |t|
     t.datetime "created_at"
@@ -82,9 +97,11 @@ ActiveRecord::Schema.define(:version => 20120420134147) do
     t.integer  "prompt_id"
     t.string   "prompt_type"
     t.integer  "numeric_sequence_id"
+    t.integer  "owner_id"
   end
 
   add_index "initial_prompt_prompts", ["numeric_sequence_id"], :name => "index_initial_prompt_prompts_on_numeric_sequence_id"
+  add_index "initial_prompt_prompts", ["owner_id"], :name => "index_initial_prompt_prompts_on_owner_id"
   add_index "initial_prompt_prompts", ["pick_a_point_sequence_id"], :name => "index_initial_prompt_prompts_on_pick_a_point_sequence_id"
   add_index "initial_prompt_prompts", ["prompt_type", "prompt_id"], :name => "index_initial_prompt_prompts"
 
@@ -92,14 +109,20 @@ ActiveRecord::Schema.define(:version => 20120420134147) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "text"
+    t.integer  "owner_id"
   end
+
+  add_index "instruction_sequences", ["owner_id"], :name => "index_instruction_sequences_on_owner_id"
 
   create_table "json_activities", :force => true do |t|
     t.string   "name"
     t.text     "json"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "owner_id"
   end
+
+  add_index "json_activities", ["owner_id"], :name => "index_json_activities_on_owner_id"
 
   create_table "multiple_choice_choices", :force => true do |t|
     t.string   "name"
@@ -109,9 +132,11 @@ ActiveRecord::Schema.define(:version => 20120420134147) do
     t.integer  "multiple_choice_sequence_id"
     t.boolean  "correct"
     t.text     "feedback"
+    t.integer  "owner_id"
   end
 
   add_index "multiple_choice_choices", ["multiple_choice_sequence_id"], :name => "multiple_choice_sequence_multiple_choice_choice_index"
+  add_index "multiple_choice_choices", ["owner_id"], :name => "index_multiple_choice_choices_on_owner_id"
 
   create_table "multiple_choice_hints", :force => true do |t|
     t.string   "name"
@@ -120,9 +145,11 @@ ActiveRecord::Schema.define(:version => 20120420134147) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "multiple_choice_sequence_id"
+    t.integer  "owner_id"
   end
 
   add_index "multiple_choice_hints", ["multiple_choice_sequence_id"], :name => "multiple_choice_sequence_multiple_choice_hint_index"
+  add_index "multiple_choice_hints", ["owner_id"], :name => "index_multiple_choice_hints_on_owner_id"
 
   create_table "multiple_choice_sequences", :force => true do |t|
     t.text     "initial_prompt"
@@ -131,7 +158,10 @@ ActiveRecord::Schema.define(:version => 20120420134147) do
     t.text     "give_up"
     t.text     "confirm_correct"
     t.boolean  "use_sequential_feedback", :default => true
+    t.integer  "owner_id"
   end
+
+  add_index "multiple_choice_sequences", ["owner_id"], :name => "index_multiple_choice_sequences_on_owner_id"
 
   create_table "numeric_sequences", :force => true do |t|
     t.string   "title"
@@ -142,7 +172,10 @@ ActiveRecord::Schema.define(:version => 20120420134147) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.float    "tolerance",       :default => 0.01
+    t.integer  "owner_id"
   end
+
+  add_index "numeric_sequences", ["owner_id"], :name => "index_numeric_sequences_on_owner_id"
 
   create_table "page_panes", :force => true do |t|
     t.datetime "created_at"
@@ -151,8 +184,10 @@ ActiveRecord::Schema.define(:version => 20120420134147) do
     t.integer  "pane_id"
     t.string   "pane_type"
     t.integer  "position"
+    t.integer  "owner_id"
   end
 
+  add_index "page_panes", ["owner_id"], :name => "index_page_panes_on_owner_id"
   add_index "page_panes", ["page_id"], :name => "index_page_panes_on_page_id"
   add_index "page_panes", ["pane_type", "pane_id"], :name => "index_page_panes_on_pane_type_and_pane_id"
 
@@ -162,8 +197,10 @@ ActiveRecord::Schema.define(:version => 20120420134147) do
     t.integer  "page_id"
     t.integer  "sequence_id"
     t.string   "sequence_type"
+    t.integer  "owner_id"
   end
 
+  add_index "page_sequences", ["owner_id"], :name => "index_page_sequences_on_owner_id"
   add_index "page_sequences", ["page_id"], :name => "index_page_sequences_on_page_id"
   add_index "page_sequences", ["sequence_type", "sequence_id"], :name => "index_sequences"
 
@@ -174,9 +211,11 @@ ActiveRecord::Schema.define(:version => 20120420134147) do
     t.datetime "updated_at"
     t.integer  "activity_id"
     t.integer  "position"
+    t.integer  "owner_id"
   end
 
   add_index "pages", ["activity_id"], :name => "index_pages_on_activity_id"
+  add_index "pages", ["owner_id"], :name => "index_pages_on_owner_id"
 
   create_table "pick_a_point_sequences", :force => true do |t|
     t.string   "title"
@@ -191,7 +230,10 @@ ActiveRecord::Schema.define(:version => 20120420134147) do
     t.float    "correct_answer_y_min"
     t.float    "correct_answer_x_max"
     t.float    "correct_answer_y_max"
+    t.integer  "owner_id"
   end
+
+  add_index "pick_a_point_sequences", ["owner_id"], :name => "index_pick_a_point_sequences_on_owner_id"
 
   create_table "point_axis_line_visual_prompts", :force => true do |t|
     t.string   "name"
@@ -201,7 +243,10 @@ ActiveRecord::Schema.define(:version => 20120420134147) do
     t.string   "axis"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "owner_id"
   end
+
+  add_index "point_axis_line_visual_prompts", ["owner_id"], :name => "index_point_axis_line_visual_prompts_on_owner_id"
 
   create_table "point_circle_visual_prompts", :force => true do |t|
     t.string   "name"
@@ -210,7 +255,10 @@ ActiveRecord::Schema.define(:version => 20120420134147) do
     t.string   "color"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "owner_id"
   end
+
+  add_index "point_circle_visual_prompts", ["owner_id"], :name => "index_point_circle_visual_prompts_on_owner_id"
 
   create_table "predefined_graph_panes", :force => true do |t|
     t.string   "title"
@@ -227,8 +275,10 @@ ActiveRecord::Schema.define(:version => 20120420134147) do
     t.integer  "y_unit_id"
     t.integer  "x_unit_id"
     t.text     "data"
+    t.integer  "owner_id"
   end
 
+  add_index "predefined_graph_panes", ["owner_id"], :name => "index_predefined_graph_panes_on_owner_id"
   add_index "predefined_graph_panes", ["x_unit_id"], :name => "index_predefined_graph_panes_on_x_unit_id"
   add_index "predefined_graph_panes", ["y_unit_id"], :name => "index_predefined_graph_panes_on_y_unit_id"
 
@@ -247,8 +297,10 @@ ActiveRecord::Schema.define(:version => 20120420134147) do
     t.integer  "y_unit_id"
     t.integer  "x_unit_id"
     t.string   "prediction_type"
+    t.integer  "owner_id"
   end
 
+  add_index "prediction_graph_panes", ["owner_id"], :name => "index_prediction_graph_panes_on_owner_id"
   add_index "prediction_graph_panes", ["x_unit_id"], :name => "index_prediction_graph_panes_on_x_unit_id"
   add_index "prediction_graph_panes", ["y_unit_id"], :name => "index_prediction_graph_panes_on_y_unit_id"
 
@@ -259,7 +311,10 @@ ActiveRecord::Schema.define(:version => 20120420134147) do
     t.string   "color"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "owner_id"
   end
+
+  add_index "range_visual_prompts", ["owner_id"], :name => "index_range_visual_prompts_on_owner_id"
 
   create_table "sensor_graph_panes", :force => true do |t|
     t.string   "title"
@@ -275,8 +330,10 @@ ActiveRecord::Schema.define(:version => 20120420134147) do
     t.datetime "updated_at"
     t.integer  "y_unit_id"
     t.integer  "x_unit_id"
+    t.integer  "owner_id"
   end
 
+  add_index "sensor_graph_panes", ["owner_id"], :name => "index_sensor_graph_panes_on_owner_id"
   add_index "sensor_graph_panes", ["x_unit_id"], :name => "index_sensor_graph_panes_on_x_unit_id"
   add_index "sensor_graph_panes", ["y_unit_id"], :name => "index_sensor_graph_panes_on_y_unit_id"
 
@@ -288,10 +345,12 @@ ActiveRecord::Schema.define(:version => 20120420134147) do
     t.string   "hint_type"
     t.integer  "position"
     t.integer  "numeric_sequence_id"
+    t.integer  "owner_id"
   end
 
   add_index "sequence_hints", ["hint_type", "hint_id"], :name => "index_hints"
   add_index "sequence_hints", ["numeric_sequence_id"], :name => "index_sequence_hints_on_numeric_sequence_id"
+  add_index "sequence_hints", ["owner_id"], :name => "index_sequence_hints_on_owner_id"
   add_index "sequence_hints", ["pick_a_point_sequence_id"], :name => "index_sequence_hints_on_pick_a_point_sequence_id"
 
   create_table "slope_tool_sequences", :force => true do |t|
@@ -306,13 +365,19 @@ ActiveRecord::Schema.define(:version => 20120420134147) do
     t.datetime "updated_at"
     t.string   "case_type",           :default => "case_a"
     t.string   "point_constraints",   :default => "any"
+    t.integer  "owner_id"
   end
+
+  add_index "slope_tool_sequences", ["owner_id"], :name => "index_slope_tool_sequences_on_owner_id"
 
   create_table "table_panes", :force => true do |t|
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "owner_id"
   end
+
+  add_index "table_panes", ["owner_id"], :name => "index_table_panes_on_owner_id"
 
   create_table "text_hint_prompts", :force => true do |t|
     t.datetime "created_at"
@@ -320,8 +385,10 @@ ActiveRecord::Schema.define(:version => 20120420134147) do
     t.integer  "text_hint_id"
     t.integer  "prompt_id"
     t.string   "prompt_type"
+    t.integer  "owner_id"
   end
 
+  add_index "text_hint_prompts", ["owner_id"], :name => "index_text_hint_prompts_on_owner_id"
   add_index "text_hint_prompts", ["prompt_type", "prompt_id"], :name => "index_prompts"
   add_index "text_hint_prompts", ["text_hint_id"], :name => "index_text_hint_prompts_on_text_hint_id"
 
@@ -330,7 +397,10 @@ ActiveRecord::Schema.define(:version => 20120420134147) do
     t.text     "text"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "owner_id"
   end
+
+  add_index "text_hints", ["owner_id"], :name => "index_text_hints_on_owner_id"
 
   create_table "units", :force => true do |t|
     t.string   "name"
