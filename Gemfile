@@ -1,56 +1,31 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.0.10'
+gem "hobo", "= 1.3.0.RC2"
+gem "acts_as_list"
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
-group :development, :test do
+group :development do
   gem 'ffi', '1.0.9'
   gem 'sqlite3'
-  gem "capistrano-ext",                 :require => "capistrano"
+  gem "capistrano-ext", :require => "capistrano"
   gem "haml"
   # gem 'ruby-debug19', :require => 'ruby-debug'
-  # Frustrated with debugs intemate ruby version deps? use pry.
+  # ruby-debug has ruby version deps.
   # use 'binding.pry' instead of 'debugger'
-  # not interested in Pry's awesomesouce?!?
-  # feel the awesome: http://pry.github.com/screencasts.html
+  # see: http://pry.github.com/screencasts.html
   gem 'pry'
   gem 'pry-doc'
-  # gem 'cucumber'
+  gem 'awesome_print'
+end
+
+group :test do
+  gem 'sqlite3'
   gem 'cucumber-rails'
-  # gem 'capybara'
+  gem "rspec-rails", ">= 2.5.0"
   gem 'database_cleaner'
   gem 'launchy'
-  gem 'awesome_print'
 end
 
 group :production do
   gem 'mysql'
 end
-
-# Use unicorn as the web server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger (ruby-debug for Ruby 1.8.7+, ruby-debug19 for Ruby 1.9.2+)
-# gem 'ruby-debug'
-# gem 'ruby-debug19', :require => 'ruby-debug'
-
-# Bundle the extra gems:
-# gem 'bj'
-# gem 'nokogiri'
-# gem 'sqlite3-ruby', :require => 'sqlite3'
-# gem 'aws-s3', :require => 'aws/s3'
-
-# Bundle gems for the local environment. Make sure to
-# put test-only gems in this group so their generators
-# and rake tasks are available in development mode:
-# group :development, :test do
-#   gem 'webrat'
-# end
-gem "hobo", "= 1.3.0.RC2"
-gem "rspec-rails", ">= 2.5.0", :group => [:test, :development]
-gem "acts_as_list"
