@@ -241,7 +241,7 @@ Feature: Sequences Activities
     Then I should get correct json
 
   @javascript
-  Scenario: Create an activity with a multiple choice sequence with custom feedback
+  Scenario: Create an activity with a type 'A' slope tool
     Given I am on the Activities page
     When I create a new activity:
       """
@@ -289,6 +289,178 @@ Feature: Sequences Activities
           :case_type: "A: Ask A Slope Question."
           :point_constraints: "Any Point Within The Range."
           :first_question: "What is the average velocity between 2 and 9 seconds (in m / s)?"
+          :slope_variable_name: velocity
+          :x_min: 2.0
+          :x_max: 9.0
+          :y_min: 1.0
+          :y_max: 8.0    
+          :tolerance: 0.1
+      """
+    Then I should get correct json
+
+
+  @javascript
+  Scenario: Create an activity with a type 'b' slope tool
+    Given I am on the Activities page
+    When I create a new activity:
+      """
+      --- 
+      :name: Sequences Slope Tool Sequence B
+      :units:
+        - :name: Seconds
+          :abbreviation: s
+        - :name: Meters
+          :abbreviation: m
+      :pages:
+      - :name: Slope Tool Sequence Case B
+        :text: Slope Tool Sequence Case B
+        :panes:
+        - :type: PredefinedGraphPane
+          :title: Velocity
+          :y:
+            :label: Distance
+            :unit: Meters
+            :min: 0.0
+            :max: 10.0
+            :ticks: 10
+          :x:
+            :label: Time
+            :unit: Seconds
+            :min: 0.0
+            :max: 10.0
+            :ticks: 10
+          :data: |-
+            0.0,0.0
+            1.0,0.0
+            2.0,1.0
+            3.0,2.0
+            4.0,3.0
+            5.0,4.0
+            6.0,5.0
+            7.0,6.0
+            8.0,7.0
+            9.0,8.0
+            10.0,7.0
+        - :type: TablePane
+          :title: data table
+        :sequence:
+          :type: "SlopeToolSequence"
+          :case_type: "B: Ask Student To Pick A Point."
+          :point_constraints: "Any Point Within The Range."
+          :slope_variable_name: velocity
+          :x_min: 2.0
+          :x_max: 9.0
+          :y_min: 1.0
+          :y_max: 8.0    
+          :tolerance: 0.1
+      """
+    Then I should get correct json
+
+  @javascript
+  Scenario: Create an activity with a slope tool which requires endpoint selection
+    Given I am on the Activities page
+    When I create a new activity:
+      """
+      --- 
+      :name: Sequences Slope Tool Sequence Average
+      :units:
+        - :name: Seconds
+          :abbreviation: s
+        - :name: Meters
+          :abbreviation: m
+      :pages:
+      - :name: Sequences Slope Tool Sequence Average
+        :text: Sequences Slope Tool Sequence Average
+        :panes:
+        - :type: PredefinedGraphPane
+          :title: Velocity
+          :y:
+            :label: Distance
+            :unit: Meters
+            :min: 0.0
+            :max: 10.0
+            :ticks: 10
+          :x:
+            :label: Time
+            :unit: Seconds
+            :min: 0.0
+            :max: 10.0
+            :ticks: 10
+          :data: |-
+            0.0,0.0
+            1.0,0.0
+            2.0,1.0
+            3.0,2.0
+            4.0,3.0
+            5.0,4.0
+            6.0,5.0
+            7.0,6.0
+            8.0,7.0
+            9.0,8.0
+            10.0,7.0
+        - :type: TablePane
+          :title: data table
+        :sequence:
+          :type: "SlopeToolSequence"
+          :case_type: "B: Ask Student To Pick A Point."
+          :point_constraints: "Endpoints Of The Range."
+          :slope_variable_name: velocity
+          :x_min: 2.0
+          :x_max: 9.0
+          :y_min: 1.0
+          :y_max: 8.0    
+          :tolerance: 0.1
+      """
+    Then I should get correct json
+
+ @javascript
+  Scenario: Create an activity with a slope tool which requires adjacent selection
+    Given I am on the Activities page
+    When I create a new activity:
+      """
+      --- 
+      :name: Sequences Slope Tool Sequence Adjacent
+      :units:
+        - :name: Seconds
+          :abbreviation: s
+        - :name: Meters
+          :abbreviation: m
+      :pages:
+      - :name: Sequences Slope Tool Sequence Adjacent
+        :text: Sequences Slope Tool Sequence Adjacent
+        :panes:
+        - :type: PredefinedGraphPane
+          :title: Velocity
+          :y:
+            :label: Distance
+            :unit: Meters
+            :min: 0.0
+            :max: 10.0
+            :ticks: 10
+          :x:
+            :label: Time
+            :unit: Seconds
+            :min: 0.0
+            :max: 10.0
+            :ticks: 10
+          :data: |-
+            0.0,0.0
+            1.0,0.0
+            2.0,1.0
+            3.0,2.0
+            4.0,3.0
+            5.0,4.0
+            6.0,5.0
+            7.0,6.0
+            8.0,7.0
+            9.0,8.0
+            10.0,7.0
+        - :type: TablePane
+          :title: data table
+        :sequence:
+          :type: "SlopeToolSequence"
+          :case_type: "B: Ask Student To Pick A Point."
+          :point_constraints: "Adjacent Points Within The Range."
           :slope_variable_name: velocity
           :x_min: 2.0
           :x_max: 9.0

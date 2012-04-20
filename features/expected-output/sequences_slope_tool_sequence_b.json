@@ -1,0 +1,52 @@
+{
+  "type": "Activity",
+  "name": "Sequences Slope Tool Sequence B",
+  "authorName": "",
+  "pages": 
+   [{"type": "Page",
+     "name": "Slope Tool Sequence Case B",
+     "text": "Slope Tool Sequence Case B",
+     "panes": 
+      [{"type": "PredefinedGraphPane",
+        "title": "Velocity",
+        "yLabel": "Distance",
+        "yUnits": "Meters",
+        "yMin": 0.0,
+        "yMax": 10.0,
+        "xLabel": "Time",
+        "xUnits": "Seconds",
+        "xMin": 0.0,
+        "xMax": 10.0,
+        "yTicks": 10.0,
+        "xTicks": 10.0,
+        "data": 
+         [[0.0, 0.0],
+          [1.0, 0.0],
+          [2.0, 1.0],
+          [3.0, 2.0],
+          [4.0, 3.0],
+          [5.0, 4.0],
+          [6.0, 5.0],
+          [7.0, 6.0],
+          [8.0, 7.0],
+          [9.0, 8.0],
+          [10.0, 7.0]]},
+       {"type": "TablePane", "title": "data table"}],
+     "sequence": 
+      {"type": "SlopeToolSequence",
+       "firstQuestionIsSlopeQuestion": false,
+       "firstQuestion": "",
+       "studentSelectsPoints": true,
+       "studentMustSelectEndpointsOfRange": false,
+       "slopeVariableName": "velocity",
+       "xMin": 2.0,
+       "xMax": 9.0,
+       "yMin": 1.0,
+       "yMax": 8.0,
+       "selectedPointsMustBeAdjacent": false,
+       "tolerance": 0.1}}
+    ],
+  "units": 
+   [{"type": "Unit", "name": "Seconds", "abbreviation": "s"},
+    {"type": "Unit", "name": "Meters", "abbreviation": "m"}]
+  }
