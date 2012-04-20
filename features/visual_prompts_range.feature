@@ -120,6 +120,7 @@ Feature: Range Visual Prompts Activities
             :maxX: 5
             :color: red
           :correctAnswer: 200
+          :tolerance: 0.123
           :giveUp: That's not right.
           :giveUpPrompts:
           - :type: RangeVisualPrompt

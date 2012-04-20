@@ -120,6 +120,7 @@ Feature: Point Circle Prompts Activities
             :pointY: 100
             :color: red
           :correctAnswer: 200
+          :tolerance: 0.123
           :giveUp: That's not right.
           :giveUpPrompts:
           - :type: PointCircleVisualPrompt

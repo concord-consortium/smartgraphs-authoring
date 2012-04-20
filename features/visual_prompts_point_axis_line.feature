@@ -125,6 +125,7 @@ Feature: Point Axis Line Prompts Activities
             :color: red
             :axis: X Axis
           :correctAnswer: 200
+          :tolerance: 0.123
           :giveUp: That's not right.
           :giveUpPrompts:
           - :type: PointAxisLineVisualPrompt

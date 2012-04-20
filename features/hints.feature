@@ -92,6 +92,7 @@ Feature: Hints Activities
           :title: Enter a number
           :initialPrompt: What is the value at x=2?
           :correctAnswer: 200
+          :tolerance: 0.123
           :giveUp: That's not right.
           :confirmCorrect: Yes, that's right!
           :hints:
