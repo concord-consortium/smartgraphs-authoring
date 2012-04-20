@@ -193,6 +193,8 @@ def create_sequence(sequence_def)
     click_button 'Create Constructed response sequence'
   when "MultipleChoiceSequence"
     extract_multiple_choice_sequence!(sequence_def)
+  when "SlopeToolSequence"
+    create_slope_tool_sequence!(sequence_def)
   end
 
   sequence_url = current_url
@@ -301,3 +303,20 @@ def extract_multiple_choice_sequence!(mc_seq_def)
     # multiple choice handles hints differently, so delete them from the hash
     mc_seq_def.delete(:hints)
   end
+
+
+def create_slope_tool_sequence!(opts)
+ click_link 'New Slope tool sequence'
+  select opts[:case_type], :from => 'slope_tool_sequence[case_type]'
+  select opts[:point_constraints], :from => 'slope_tool_sequence[point_constraints]'
+  fill_in 'slope_tool_sequence_first_question', :with => opts[:first_question]
+  fill_in 'slope_tool_sequence_slope_variable_name', :with => opts[:slope_variable_name]
+  fill_in 'slope_tool_sequence_x_min', :with => opts[:x_min]
+  fill_in 'slope_tool_sequence_y_min', :with => opts[:y_min]
+  fill_in 'slope_tool_sequence_x_max', :with => opts[:x_max]
+  fill_in 'slope_tool_sequence_y_max', :with => opts[:y_max]
+  fill_in 'slope_tool_sequence_tolerance', :with => opts[:tolerance]
+  click_button 'Create Slope tool sequence'
+end
+
+
