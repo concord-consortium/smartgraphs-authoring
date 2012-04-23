@@ -105,45 +105,49 @@
 </def>
 
 <def tag="add-panes-toolbar">
-  <a action="new" to="&this.image_panes">
-    <ht key="image_pane.actions.new" >New Image Pane element</ht>
-  </a><br/>
-  <a action="new" to="&this.predefined_graph_panes">
-    <ht key="predefined_graph_pane.actions.new" >New Predefined Graph Pane element</ht>
-  </a><br/>
-  <a action="new" to="&this.sensor_graph_panes">
-    <ht key="sensor_graph_pane.actions.new" >New Sensor Graph Pane element</ht>
-  </a><br/>
-  <a action="new" to="&this.prediction_graph_panes">
-    <ht key="prediction_graph_pane.actions.new" >New Prediction Graph Pane element</ht>
-  </a><br/>
-  <a action="new" to="&this.table_panes">
-    <ht key="table_pane.actions.new" >New Table Pane element</ht>
-  </a>
+  <if test="&can_edit?">
+    <a action="new" to="&this.image_panes">
+      <ht key="image_pane.actions.new" >New Image Pane element</ht>
+    </a><br/>
+    <a action="new" to="&this.predefined_graph_panes">
+      <ht key="predefined_graph_pane.actions.new" >New Predefined Graph Pane element</ht>
+    </a><br/>
+    <a action="new" to="&this.sensor_graph_panes">
+      <ht key="sensor_graph_pane.actions.new" >New Sensor Graph Pane element</ht>
+    </a><br/>
+    <a action="new" to="&this.prediction_graph_panes">
+      <ht key="prediction_graph_pane.actions.new" >New Prediction Graph Pane element</ht>
+    </a><br/>
+    <a action="new" to="&this.table_panes">
+      <ht key="table_pane.actions.new" >New Table Pane element</ht>
+    </a>
+  </if>
 </def>
 
 <def tag="add-sequences-toolbar">
   <!-- Limit Page Sequence to 1 member of the collection -->
-  <unless test="&this.page_sequences">
-    <a action="new" to="&this.instruction_sequences">
-      <ht key="instruction_sequence.actions.new" >New Instruction Sequence element</ht>
-    </a><br/>
-    <a action="new" to="&this.pick_a_point_sequences">
-      <ht key="pick_a_point_sequence.actions.new" >New Pick-A-Point Sequence element</ht>
-    </a><br/>
-    <a action="new" to="&this.numeric_sequences">
-      <ht key="numeric_sequence.actions.new" >New Numeric Sequence element</ht>
-    </a><br/>
-    <a action="new" to="&this.constructed_response_sequences">
-      <ht key="constructed_response_sequence.actions.new" >New Constructed Response Sequence element</ht>
-    </a><br/>
-    <a action="new" to="&this.multiple_choice_sequences">
-      <ht key="multiple_choice_sequence.actions.new" >New Multiple Choice Sequence element</ht>
-    </a><br/>
-    <a action="new" to="&this.slope_tool_sequences">
-      <ht key="slope_tool_sequence.actions.new" >New Multiple Choice Sequence element</ht>
-    </a><br/>
-  </unless>
+  <if test="&can_edit?">
+    <unless test="&this.page_sequences">
+      <a action="new" to="&this.instruction_sequences">
+        <ht key="instruction_sequence.actions.new" >New Instruction Sequence element</ht>
+      </a><br/>
+      <a action="new" to="&this.pick_a_point_sequences">
+        <ht key="pick_a_point_sequence.actions.new" >New Pick-A-Point Sequence element</ht>
+      </a><br/>
+      <a action="new" to="&this.numeric_sequences">
+        <ht key="numeric_sequence.actions.new" >New Numeric Sequence element</ht>
+      </a><br/>
+      <a action="new" to="&this.constructed_response_sequences">
+        <ht key="constructed_response_sequence.actions.new" >New Constructed Response Sequence element</ht>
+      </a><br/>
+      <a action="new" to="&this.multiple_choice_sequences">
+        <ht key="multiple_choice_sequence.actions.new" >New Multiple Choice Sequence element</ht>
+      </a><br/>
+      <a action="new" to="&this.slope_tool_sequences">
+        <ht key="slope_tool_sequence.actions.new" >New Multiple Choice Sequence element</ht>
+      </a><br/>
+    </unless>
+  </if>
 </def>
 
 <def tag="add-hints-toolbar">
@@ -359,6 +363,18 @@
       <custom-poly-select-many:included_graphs prompt="Include graph data from:" options="&PredictionGraphPane.get_all_prediction_graph_panes_before(this)"/>
     </after-field-list:>
   </old-form>
+</extend>
+
+<extend tag="show-page" for="Activity">
+  <old-show-page merge>
+    <new-link: replace>
+      <a:pages action="new" if="&can_edit?">
+        <ht key="page.actions.new" count="1">
+          New Page
+        </ht>
+      </a:pages>
+    </new-link:>
+  </old-show-page>
 </extend>
 
 <extend tag="show-page" for="SensorGraphPane">
