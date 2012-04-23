@@ -25,4 +25,9 @@ class Activity < ActiveRecord::Base
     }
   end
 
+  def after_user_new
+    self.owner = acting_user
+    self.author_name = acting_user.name
+  end
+
 end

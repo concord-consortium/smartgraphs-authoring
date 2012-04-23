@@ -29,4 +29,11 @@ module StandardPermissions
   def view_permitted?(field)
     true
   end
+
+  def edit_permitted?(attribute)
+    return true if acting_user.administrator?
+    return false if attribute == :owner
+    return owner_is?(acting_user)
+  end
+
 end

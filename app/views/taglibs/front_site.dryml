@@ -25,6 +25,9 @@
 
 <extend tag="card" for="Activity">
   <old-card merge>
+    <append-header:>
+      Author: <view:owner/>
+    </append-header:>
     <append-body:>
        <a action='author_preview'>View as author</a> or <a action='student_preview'>view as student</a> in SmartGraphs
     </append-body:>
