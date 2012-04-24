@@ -17,9 +17,6 @@ class MultipleChoiceHint < ActiveRecord::Base
 
   # --- Permissions --- #
 
-  def create_permitted?
-    acting_user.administrator?
-  end
 
   def to_hash
     { 
