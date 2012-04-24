@@ -5,7 +5,8 @@ Feature: Included Graphs Activities
 
   @javascript
   Scenario: Create an activity with a predefined graph pane with included prediction graph data
-    Given I am on the Activities page
+    Given I am logged in as an admin named 'admin'
+    And   I am on the Activities page
     When I create a new activity:
       """
       --- 
@@ -63,7 +64,8 @@ Feature: Included Graphs Activities
 
   @javascript
   Scenario: Create an activity with a sensor graph pane with included prediction graph data
-    Given I am on the Activities page
+    Given I am logged in as an admin named 'admin'
+    And   I am on the Activities page
     When I create a new activity:
       """
       --- 
@@ -135,7 +137,8 @@ Feature: Included Graphs Activities
 
   @javascript
   Scenario: Create an activity with a prediction graph pane with included prediction graph data
-    Given I am on the Activities page
+    Given I am logged in as an admin named 'admin'
+    And   I am on the Activities page
     When I create a new activity:
       """
       --- 

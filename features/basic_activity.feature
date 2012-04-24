@@ -4,8 +4,9 @@ Feature: Basic Activities
   Should create basic activities
 
   Scenario: Create an activity
-    Given I am on the Activities page
-    When I create a new activity:
+    Given I am logged in as an admin named 'admin'
+    And   I am on the Activities page
+    When  I create a new activity:
       """
       --- 
       :name: Simple Activity

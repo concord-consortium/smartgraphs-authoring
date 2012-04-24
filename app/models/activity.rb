@@ -27,7 +27,7 @@ class Activity < ActiveRecord::Base
 
   def after_user_new
     self.owner = acting_user
-    self.author_name = acting_user.name
+    self.author_name ||= acting_user.name
   end
 
 end

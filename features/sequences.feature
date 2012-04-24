@@ -4,7 +4,8 @@ Feature: Sequences Activities
   Should create activities with sequences
 
   Scenario: Create an activity with an instruction sequence
-    Given I am on the Activities page
+    Given I am logged in as an admin named 'admin'
+    And   I am on the Activities page
     When I create a new activity:
       """
       --- 
@@ -19,7 +20,8 @@ Feature: Sequences Activities
     Then I should get correct json
 
   Scenario: Create an activity with a pick a point sequence
-    Given I am on the Activities page
+    Given I am logged in as an admin named 'admin'
+    And   I am on the Activities page
     When I create a new activity:
       """
       --- 
@@ -64,7 +66,8 @@ Feature: Sequences Activities
     Then I should get correct json
 
   Scenario: Create an activity with a pick a point within a range sequence
-    Given I am on the Activities page
+    Given I am logged in as an admin named 'admin'
+    And   I am on the Activities page
     When I create a new activity:
       """
       --- 
@@ -111,7 +114,8 @@ Feature: Sequences Activities
     Then I should get correct json
 
   Scenario: Create an activity with a numeric sequence
-    Given I am on the Activities page
+    Given I am logged in as an admin named 'admin'
+    And   I am on the Activities page
     When I create a new activity:
       """
       --- 
@@ -156,7 +160,8 @@ Feature: Sequences Activities
     Then I should get correct json
 
   Scenario: Create an activity with a constructed response sequence
-    Given I am on the Activities page
+    Given I am logged in as an admin named 'admin'
+    And   I am on the Activities page
     When I create a new activity:
       """
       --- 
@@ -174,7 +179,8 @@ Feature: Sequences Activities
 
   @javascript
   Scenario: Create an activity with a multiple choice sequence with sequential feedback
-    Given I am on the Activities page
+    Given I am logged in as an admin named 'admin'
+    And   I am on the Activities page
     When I create a new activity:
       """
       --- 
@@ -208,7 +214,8 @@ Feature: Sequences Activities
 
   @javascript
   Scenario: Create an activity with a multiple choice sequence with custom feedback
-    Given I am on the Activities page
+    Given I am logged in as an admin named 'admin'
+    And   I am on the Activities page
     When I create a new activity:
       """
       --- 
@@ -242,7 +249,8 @@ Feature: Sequences Activities
 
   @javascript
   Scenario: Create an activity with a type 'A' slope tool
-    Given I am on the Activities page
+    Given I am logged in as an admin named 'admin'
+    And   I am on the Activities page
     When I create a new activity:
       """
       --- 
@@ -301,7 +309,8 @@ Feature: Sequences Activities
 
   @javascript
   Scenario: Create an activity with a type 'b' slope tool
-    Given I am on the Activities page
+    Given I am logged in as an admin named 'admin'
+    And   I am on the Activities page
     When I create a new activity:
       """
       --- 
@@ -358,7 +367,8 @@ Feature: Sequences Activities
 
  @javascript
   Scenario: Create an activity with a type 'c' slope tool
-    Given I am on the Activities page
+    Given I am logged in as an admin named 'admin'
+    And   I am on the Activities page
     When I create a new activity:
       """
       --- 
@@ -416,7 +426,8 @@ Feature: Sequences Activities
 
   @javascript
   Scenario: Create an activity with a slope tool which requires endpoint selection
-    Given I am on the Activities page
+    Given I am logged in as an admin named 'admin'
+    And   I am on the Activities page
     When I create a new activity:
       """
       --- 
@@ -473,7 +484,8 @@ Feature: Sequences Activities
 
  @javascript
   Scenario: Create an activity with a slope tool which requires adjacent selection
-    Given I am on the Activities page
+    Given I am logged in as an admin named 'admin'
+    And   I am on the Activities page
     When I create a new activity:
       """
       --- 

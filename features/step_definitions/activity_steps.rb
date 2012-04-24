@@ -10,6 +10,11 @@ module BetterHashDiff
 end
 
 Given /^I am on the [A|a]ctivities page$/ do
+Given(/^I am logged in as (?:a|an) (admin|user) named '(\w+)'$/) do |admin_text,name|
+  admin = admin_text == 'admin' ? true : false
+  do_login(name,admin)
+end
+
   visit '/activities'
 end
 

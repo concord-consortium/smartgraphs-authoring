@@ -4,7 +4,8 @@ Feature: Point Circle Prompts Activities
   Should create activities with point circle visual prompts
 
   Scenario: Create an activity with a pick a point sequence with point circle visual prompts
-    Given I am on the Activities page
+    Given I am logged in as an admin named 'admin'
+    And   I am on the Activities page
     When I create a new activity:
       """
       --- 
@@ -76,7 +77,8 @@ Feature: Point Circle Prompts Activities
     Then I should get correct json
 
   Scenario: Create an activity with a numeric sequence with point circle visual prompts
-    Given I am on the Activities page
+    Given I am logged in as an admin named 'admin'
+    And   I am on the Activities page
     When I create a new activity:
       """
       --- 
