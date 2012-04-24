@@ -9,22 +9,21 @@ module BetterHashDiff
   end
 end
 
-Given /^I am on the [A|a]ctivities page$/ do
 Given(/^I am logged in as (?:a|an) (admin|user) named '(\w+)'$/) do |admin_text,name|
   admin = admin_text == 'admin' ? true : false
   do_login(name,admin)
 end
 
+Given(/^I am on the [A|a]ctivities page$/) do
   visit '/activities'
 end
 
-When /^I create (?:a new|an) activity:$/ do |text|
+When(/^I create (?:a new|an) activity:$/)do |text|
   activity_def = YAML.load(text)
 
   @activity = create_activity(activity_def)
 end
 
-Then /^I should get correct json$/ do
 Then(/^I should see "([^"]*)" in the listing$/) do |name|
   visit '/activities'
   within "ul.activities" do |scope|
@@ -45,6 +44,7 @@ Then(/^I should not be able to edit "([^"]*)"$/) do |name|
   edit_url = edit_activity_path(a)
   (!page.has_selector?("a[href=\"#{edit_url}\"]"))
 end
+Then(/^I should get correct json$/)do
   # load the json file for this activity, by name
   filename = @activity.name.gsub(/\s+/,'').underscore + '.json'
   expected_json = JSON.parse(File.read(File.join(File.dirname(__FILE__), "..", "expected-output", filename)))
