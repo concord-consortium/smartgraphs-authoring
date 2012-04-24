@@ -25,6 +25,26 @@ When /^I create (?:a new|an) activity:$/ do |text|
 end
 
 Then /^I should get correct json$/ do
+Then(/^I should see "([^"]*)" in the listing$/) do |name|
+  visit '/activities'
+  within "ul.activities" do |scope|
+    scope.should have_content name
+  end
+end
+
+Then(/^I should be able to edit "([^"]*)"$/) do |name|
+  a = Activity.find_by_name(name)
+  visit "activities/#{a.id}"
+  edit_url = edit_activity_path(a)
+  page.has_selector?("a[href=\"#{edit_url}\"]")
+end
+
+Then(/^I should not be able to edit "([^"]*)"$/) do |name|
+  a = Activity.find_by_name(name)
+  visit "activities/#{a.id}"
+  edit_url = edit_activity_path(a)
+  (!page.has_selector?("a[href=\"#{edit_url}\"]"))
+end
   # load the json file for this activity, by name
   filename = @activity.name.gsub(/\s+/,'').underscore + '.json'
   expected_json = JSON.parse(File.read(File.join(File.dirname(__FILE__), "..", "expected-output", filename)))
