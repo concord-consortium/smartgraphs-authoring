@@ -296,38 +296,38 @@ end
 # side-effect: Will remove :hints from mc_seq_def hash
 # TODO: something safer?
 def extract_multiple_choice_sequence!(mc_seq_def)
-    click_link 'New Multiple choice sequence'
-    fill_in 'multiple_choice_sequence_initial_prompt', :with => mc_seq_def[:initialPrompt]
-    fill_in 'multiple_choice_sequence_give_up', :with => mc_seq_def[:giveUp]
-    fill_in 'multiple_choice_sequence_confirm_correct', :with => mc_seq_def[:confirmCorrect]
-    if mc_seq_def[:useSequentialFeedback] == true
-      check 'multiple_choice_sequence_use_sequential_feedback'
-    else
-      uncheck 'multiple_choice_sequence_use_sequential_feedback' 
+  click_link 'New Multiple choice sequence'
+  fill_in 'multiple_choice_sequence_initial_prompt', :with => mc_seq_def[:initialPrompt]
+  fill_in 'multiple_choice_sequence_give_up', :with => mc_seq_def[:giveUp]
+  fill_in 'multiple_choice_sequence_confirm_correct', :with => mc_seq_def[:confirmCorrect]
+  if mc_seq_def[:useSequentialFeedback] == true
+    check 'multiple_choice_sequence_use_sequential_feedback'
+  else
+    uncheck 'multiple_choice_sequence_use_sequential_feedback' 
+  end
+  click_button 'Create Multiple choice sequence'
+  mc_seq_def[:choices].each do |choice_def|
+    within('form.new.multiple-choice-choice') do
+      fill_in 'multiple_choice_choice_name', :with => choice_def[:name]
+      check('multiple_choice_choice_correct') if (choice_def[:correct] == true)
+      unless (mc_seq_def[:useSequentialFeedback] == true)
+        fill_in 'multiple_choice_choice_feedback', :with => choice_def[:feedback]
+      end
+      click_button 'Add'
     end
-    click_button 'Create Multiple choice sequence'
-    mc_seq_def[:choices].each do |choice_def|
-      within('form.new.multiple-choice-choice') do
-        fill_in 'multiple_choice_choice_name', :with => choice_def[:name]
-        check('multiple_choice_choice_correct') if (choice_def[:correct] == true)
-        unless (mc_seq_def[:useSequentialFeedback] == true)
-          fill_in 'multiple_choice_choice_feedback', :with => choice_def[:feedback]
-        end
+  end
+  if (mc_seq_def[:useSequentialFeedback] == true)
+    within('form.new.multiple-choice-hint') do
+      mc_seq_def[:hints].each do |hint_def|
+        fill_in 'multiple_choice_hint_name', :with => hint_def[:name]
+        fill_in 'multiple_choice_hint_hint_text', :with => hint_def[:feedback]
         click_button 'Add'
       end
     end
-    if (mc_seq_def[:useSequentialFeedback] == true)
-      within('form.new.multiple-choice-hint') do
-        mc_seq_def[:hints].each do |hint_def|
-          fill_in 'multiple_choice_hint_name', :with => hint_def[:name]
-          fill_in 'multiple_choice_hint_hint_text', :with => hint_def[:feedback]
-          click_button 'Add'
-        end
-      end
-    end
-    # multiple choice handles hints differently, so delete them from the hash
-    mc_seq_def.delete(:hints)
   end
+  # multiple choice handles hints differently, so delete them from the hash
+  mc_seq_def.delete(:hints)
+end 
 
 
 def create_slope_tool_sequence!(opts)
