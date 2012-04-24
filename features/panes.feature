@@ -4,7 +4,8 @@ Feature: Pane Activities
   Should create activities with panes
 
   Scenario: Create an activity with an image pane
-    Given I am on the Activities page
+    Given I am logged in as an admin named 'admin'
+    And   I am on the Activities page
     When I create a new activity:
       """
       --- 
@@ -22,7 +23,8 @@ Feature: Pane Activities
     Then I should get correct json
 
   Scenario: Create an activity with a predefined graph pane
-    Given I am on the Activities page
+    Given I am logged in as an admin named 'admin'
+    And   I am on the Activities page
     When I create a new activity:
       """
       --- 
@@ -59,7 +61,8 @@ Feature: Pane Activities
     Then I should get correct json
 
   Scenario: Create an activity with a sensor graph pane
-    Given I am on the Activities page
+    Given I am logged in as an admin named 'admin'
+    And   I am on the Activities page
     When I create a new activity:
       """
       --- 
@@ -91,7 +94,8 @@ Feature: Pane Activities
     Then I should get correct json
 
   Scenario: Create an activity with a table pane
-    Given I am on the Activities page
+    Given I am logged in as an admin named 'admin'
+    And   I am on the Activities page
     When I create a new activity:
       """
       --- 
@@ -106,7 +110,8 @@ Feature: Pane Activities
     Then I should get correct json
 
   Scenario: Create an activity with a prediction graph pane
-    Given I am on the Activities page
+    Given I am logged in as an admin named 'admin'
+    And   I am on the Activities page
     When I create a new activity:
       """
       --- 

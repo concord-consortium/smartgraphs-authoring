@@ -1,6 +1,10 @@
 class SensorGraphPane < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
+  
+  # standard owner and admin permissions
+  # defined in models/standard_permissions.rb
+  include StandardPermissions
 
   fields do
     title   :string, :required
@@ -49,24 +53,6 @@ class SensorGraphPane < ActiveRecord::Base
       hash['includeAnnotationsFrom'] = included_graphs.map{|graph| graph.get_indexed_path }
     end
     return hash
-  end
-
-  # --- Permissions --- #
-
-  def create_permitted?
-    acting_user.administrator?
-  end
-
-  def update_permitted?
-    acting_user.administrator?
-  end
-
-  def destroy_permitted?
-    acting_user.administrator?
-  end
-
-  def view_permitted?(field)
-    true
   end
 
 end

@@ -2,6 +2,10 @@ class MultipleChoiceHint < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
 
+  # standard owner and admin permissions
+  # defined in models/standard_permissions.rb
+  include StandardPermissions
+
   fields do
     name      :string
     hint_text :text
@@ -22,18 +26,6 @@ class MultipleChoiceHint < ActiveRecord::Base
       'name' => name,
       'text' => hint_text
     }
-  end
-
-  def update_permitted?
-    acting_user.administrator?
-  end
-
-  def destroy_permitted?
-    acting_user.administrator?
-  end
-
-  def view_permitted?(field)
-    true
   end
 
 end

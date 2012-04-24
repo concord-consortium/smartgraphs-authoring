@@ -1,15 +1,18 @@
 class Activity < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
-
+  
+  # standard owner and admin permissions
+  # defined in models/standard_permissions.rb
+  include StandardPermissions
+  
   fields do
     name        :string
     author_name :string
     timestamps
-  end
+  end 
 
   has_many :pages, :order => :position
-
   children :pages
 
   def to_hash
@@ -22,22 +25,9 @@ class Activity < ActiveRecord::Base
     }
   end
 
-  # --- Permissions --- #
-
-  def create_permitted?
-    acting_user.administrator?
-  end
-
-  def update_permitted?
-    acting_user.administrator?
-  end
-
-  def destroy_permitted?
-    acting_user.administrator?
-  end
-
-  def view_permitted?(field)
-    true
+  def after_user_new
+    self.owner = acting_user
+    self.author_name ||= acting_user.name
   end
 
 end

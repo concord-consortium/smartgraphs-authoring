@@ -1,6 +1,10 @@
 class NumericSequence < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
+  
+  # standard owner and admin permissions
+  # defined in models/standard_permissions.rb
+  include StandardPermissions
 
   fields do
     title           :string
@@ -8,7 +12,7 @@ class NumericSequence < ActiveRecord::Base
     give_up         :text
     confirm_correct :text
     correct_answer  :float
-    tolerance       :float
+    tolerance       :float,  :default => 0.01
     timestamps
   end
 
@@ -78,23 +82,4 @@ class NumericSequence < ActiveRecord::Base
     end
     hash
   end
-
-  # --- Permissions --- #
-
-  def create_permitted?
-    acting_user.administrator?
-  end
-
-  def update_permitted?
-    acting_user.administrator?
-  end
-
-  def destroy_permitted?
-    acting_user.administrator?
-  end
-
-  def view_permitted?(field)
-    true
-  end
-
 end

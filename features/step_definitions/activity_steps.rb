@@ -9,17 +9,53 @@ module BetterHashDiff
   end
 end
 
-Given /^I am on the [A|a]ctivities page$/ do
+Given(/^I am logged in as (?:a|an) (admin|user) named '(\w+)'$/) do |admin_text,name|
+  admin = admin_text == 'admin' ? true : false
+  do_login(name,admin)
+end
+
+Given(/^I am on the [A|a]ctivities page$/) do
   visit '/activities'
 end
 
-When /^I create (?:a new|an) activity:$/ do |text|
+When(/^I create (?:a new|an) activity:$/)do |text|
   activity_def = YAML.load(text)
 
   @activity = create_activity(activity_def)
 end
 
-Then /^I should get correct json$/ do
+Then(/^I should see "([^"]*)" in the listing$/) do |name|
+  visit '/activities'
+  within "ul.activities" do |scope|
+    scope.should have_content name
+  end
+end
+
+Then(/^I should be able to edit "([^"]*)"$/) do |name|
+  a = Activity.find_by_name(name)
+  visit activity_path(a)
+  edit_url = edit_activity_path(a)
+  has_link_to?(page,edit_url)
+end
+
+Then(/^I should not be able to edit "([^"]*)"$/) do |name|
+  a = Activity.find_by_name(name)
+  visit activity_path(a)
+  edit_url = edit_activity_path(a)
+  (!has_link_to?(page,edit_url))
+end
+
+Then(/^I should be able to change the name of "([^"]*)"$/) do |name|
+  a = Activity.find_by_name(name)
+  visit edit_activity_path(a)
+  new_name = "new_#{name}}"
+  fill_in 'activity_name', :with => new_name
+  click_button 'Save Activity'
+  visit activity_path(a)
+  page.should have_content(new_name)
+end
+
+Then(/^I should get correct json$/)do
   # load the json file for this activity, by name
   filename = @activity.name.gsub(/\s+/,'').underscore + '.json'
   expected_json = JSON.parse(File.read(File.join(File.dirname(__FILE__), "..", "expected-output", filename)))
@@ -33,6 +69,10 @@ Then /^I should get correct json$/ do
   #expected_json.extend BetterHashDiff
   #pp actual_json.diff(expected_json)
   actual_json.should == expected_json
+end
+
+def has_link_to?(context,url)
+  return context.has_selector?("a[href=\"#{url}\"]")
 end
 
 def create_activity(activity_def)
@@ -181,6 +221,7 @@ def create_sequence(sequence_def)
     fill_in 'numeric_sequence_title', :with => sequence_def[:title]
     fill_in 'numeric_sequence_initial_prompt', :with => sequence_def[:initialPrompt]
     fill_in 'numeric_sequence_correct_answer', :with => sequence_def[:correctAnswer]
+    fill_in 'numeric_sequence_tolerance', :with => sequence_def[:tolerance]
     fill_in 'numeric_sequence_give_up', :with => sequence_def[:giveUp]
     fill_in 'numeric_sequence_confirm_correct', :with => sequence_def[:confirmCorrect]
     click_button 'Create Numeric sequence'
@@ -191,7 +232,9 @@ def create_sequence(sequence_def)
     fill_in 'constructed_response_sequence_initial_content', :with => sequence_def[:initialContent]
     click_button 'Create Constructed response sequence'
   when "MultipleChoiceSequence"
-    exrtact_multiple_choice_sequence!(sequence_def)
+    extract_multiple_choice_sequence!(sequence_def)
+  when "SlopeToolSequence"
+    create_slope_tool_sequence!(sequence_def)
   end
 
   sequence_url = current_url
@@ -267,36 +310,53 @@ end
 
 # side-effect: Will remove :hints from mc_seq_def hash
 # TODO: something safer?
-def exrtact_multiple_choice_sequence!(mc_seq_def)
-    click_link 'New Multiple choice sequence'
-    fill_in 'multiple_choice_sequence_initial_prompt', :with => mc_seq_def[:initialPrompt]
-    fill_in 'multiple_choice_sequence_give_up', :with => mc_seq_def[:giveUp]
-    fill_in 'multiple_choice_sequence_confirm_correct', :with => mc_seq_def[:confirmCorrect]
-    if mc_seq_def[:useSequentialFeedback] == true
-      check 'multiple_choice_sequence_use_sequential_feedback'
-    else
-      uncheck 'multiple_choice_sequence_use_sequential_feedback' 
+def extract_multiple_choice_sequence!(mc_seq_def)
+  click_link 'New Multiple choice sequence'
+  fill_in 'multiple_choice_sequence_initial_prompt', :with => mc_seq_def[:initialPrompt]
+  fill_in 'multiple_choice_sequence_give_up', :with => mc_seq_def[:giveUp]
+  fill_in 'multiple_choice_sequence_confirm_correct', :with => mc_seq_def[:confirmCorrect]
+  if mc_seq_def[:useSequentialFeedback] == true
+    check 'multiple_choice_sequence_use_sequential_feedback'
+  else
+    uncheck 'multiple_choice_sequence_use_sequential_feedback' 
+  end
+  click_button 'Create Multiple choice sequence'
+  mc_seq_def[:choices].each do |choice_def|
+    within('form.new.multiple-choice-choice') do
+      fill_in 'multiple_choice_choice_name', :with => choice_def[:name]
+      check('multiple_choice_choice_correct') if (choice_def[:correct] == true)
+      unless (mc_seq_def[:useSequentialFeedback] == true)
+        fill_in 'multiple_choice_choice_feedback', :with => choice_def[:feedback]
+      end
+      click_button 'Add'
     end
-    click_button 'Create Multiple choice sequence'
-    mc_seq_def[:choices].each do |choice_def|
-      within('form.new.multiple-choice-choice') do
-        fill_in 'multiple_choice_choice_name', :with => choice_def[:name]
-        check('multiple_choice_choice_correct') if (choice_def[:correct] == true)
-        unless (mc_seq_def[:useSequentialFeedback] == true)
-          fill_in 'multiple_choice_choice_feedback', :with => choice_def[:feedback]
-        end
+  end
+  if (mc_seq_def[:useSequentialFeedback] == true)
+    within('form.new.multiple-choice-hint') do
+      mc_seq_def[:hints].each do |hint_def|
+        fill_in 'multiple_choice_hint_name', :with => hint_def[:name]
+        fill_in 'multiple_choice_hint_hint_text', :with => hint_def[:feedback]
         click_button 'Add'
       end
     end
-    if (mc_seq_def[:useSequentialFeedback] == true)
-      within('form.new.multiple-choice-hint') do
-        mc_seq_def[:hints].each do |hint_def|
-          fill_in 'multiple_choice_hint_name', :with => hint_def[:name]
-          fill_in 'multiple_choice_hint_hint_text', :with => hint_def[:feedback]
-          click_button 'Add'
-        end
-      end
-    end
-    # multiple choice handles hints differently, so delete them from the hash
-    mc_seq_def.delete(:hints)
   end
+  # multiple choice handles hints differently, so delete them from the hash
+  mc_seq_def.delete(:hints)
+end 
+
+
+def create_slope_tool_sequence!(opts)
+ click_link 'New Slope tool sequence'
+  select opts[:case_type], :from => 'slope_tool_sequence[case_type]'
+  select opts[:point_constraints], :from => 'slope_tool_sequence[point_constraints]'
+  fill_in 'slope_tool_sequence_first_question', :with => opts[:first_question]
+  fill_in 'slope_tool_sequence_slope_variable_name', :with => opts[:slope_variable_name]
+  fill_in 'slope_tool_sequence_x_min', :with => opts[:x_min]
+  fill_in 'slope_tool_sequence_y_min', :with => opts[:y_min]
+  fill_in 'slope_tool_sequence_x_max', :with => opts[:x_max]
+  fill_in 'slope_tool_sequence_y_max', :with => opts[:y_max]
+  fill_in 'slope_tool_sequence_tolerance', :with => opts[:tolerance]
+  click_button 'Create Slope tool sequence'
+end
+
+

@@ -4,7 +4,8 @@ Feature: Hints Activities
   Should create activities with hints
 
   Scenario: Create an activity with a pick a point sequence with hints
-    Given I am on the Activities page
+    Given I am logged in as an admin named 'admin'
+    And   I am on the Activities page
     When I create a new activity:
       """
       --- 
@@ -54,7 +55,8 @@ Feature: Hints Activities
     Then I should get correct json
 
   Scenario: Create an activity with a numeric sequence with hints
-    Given I am on the Activities page
+    Given I am logged in as an admin named 'admin'
+    And   I am on the Activities page
     When I create a new activity:
       """
       --- 
@@ -92,6 +94,7 @@ Feature: Hints Activities
           :title: Enter a number
           :initialPrompt: What is the value at x=2?
           :correctAnswer: 200
+          :tolerance: 0.123
           :giveUp: That's not right.
           :confirmCorrect: Yes, that's right!
           :hints:

@@ -1,6 +1,10 @@
 class PredictionGraphPane < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
+  
+  # standard owner and admin permissions
+  # defined in models/standard_permissions.rb
+  include StandardPermissions
 
   fields do
     title   :string
@@ -101,22 +105,4 @@ class PredictionGraphPane < ActiveRecord::Base
   def self.is_graph_pane?(pane)
     return pane.kind_of?(SensorGraphPane) || pane.kind_of?(PredictionGraphPane) || pane.kind_of?(PredefinedGraphPane)
   end
-  # --- Permissions --- #
-
-  def create_permitted?
-    acting_user.administrator?
-  end
-
-  def update_permitted?
-    acting_user.administrator?
-  end
-
-  def destroy_permitted?
-    acting_user.administrator?
-  end
-
-  def view_permitted?(field)
-    true
-  end
-
 end

@@ -1,6 +1,10 @@
 class PageSequence < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
+  
+  # standard owner and admin permissions
+  # defined in models/standard_permissions.rb
+  include StandardPermissions
 
   fields do
     timestamps
@@ -8,23 +12,5 @@ class PageSequence < ActiveRecord::Base
 
   belongs_to :page
   belongs_to :sequence, :polymorphic => true, :index => 'index_sequences'
-
-  # --- Permissions --- #
-
-  def create_permitted?
-    acting_user.administrator?
-  end
-
-  def update_permitted?
-    acting_user.administrator?
-  end
-
-  def destroy_permitted?
-    acting_user.administrator?
-  end
-
-  def view_permitted?(field)
-    true
-  end
 
 end

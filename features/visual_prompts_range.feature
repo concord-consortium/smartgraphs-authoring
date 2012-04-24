@@ -4,7 +4,8 @@ Feature: Range Visual Prompts Activities
   Should create activities with range visual prompts
 
   Scenario: Create an activity with a pick a point sequence with range visual prompts
-    Given I am on the Activities page
+    Given I am logged in as an admin named 'admin'
+    And   I am on the Activities page
     When I create a new activity:
       """
       --- 
@@ -76,7 +77,8 @@ Feature: Range Visual Prompts Activities
     Then I should get correct json
 
   Scenario: Create an activity with a numeric sequence with range visual prompts
-    Given I am on the Activities page
+    Given I am logged in as an admin named 'admin'
+    And   I am on the Activities page
     When I create a new activity:
       """
       --- 
@@ -120,6 +122,7 @@ Feature: Range Visual Prompts Activities
             :maxX: 5
             :color: red
           :correctAnswer: 200
+          :tolerance: 0.123
           :giveUp: That's not right.
           :giveUpPrompts:
           - :type: RangeVisualPrompt

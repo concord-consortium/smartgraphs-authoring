@@ -40,7 +40,8 @@
         "giveUp": {
           "text": "That's not right."
         },
-        "correctAnswer": 200.0
+        "correctAnswer": 200.0,
+        "tolerance": 0.123
       }
     }
   ],
