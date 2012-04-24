@@ -33,17 +33,28 @@ end
 
 Then(/^I should be able to edit "([^"]*)"$/) do |name|
   a = Activity.find_by_name(name)
-  visit "activities/#{a.id}"
+  visit activity_path(a)
   edit_url = edit_activity_path(a)
-  page.has_selector?("a[href=\"#{edit_url}\"]")
+  has_link_to?(page,edit_url)
 end
 
 Then(/^I should not be able to edit "([^"]*)"$/) do |name|
   a = Activity.find_by_name(name)
-  visit "activities/#{a.id}"
+  visit activity_path(a)
   edit_url = edit_activity_path(a)
-  (!page.has_selector?("a[href=\"#{edit_url}\"]"))
+  (!has_link_to?(page,edit_url))
 end
+
+Then(/^I should be able to change the name of "([^"]*)"$/) do |name|
+  a = Activity.find_by_name(name)
+  visit edit_activity_path(a)
+  new_name = "new_#{name}}"
+  fill_in 'activity_name', :with => new_name
+  click_button 'Save Activity'
+  visit activity_path(a)
+  page.should have_content(new_name)
+end
+
 Then(/^I should get correct json$/)do
   # load the json file for this activity, by name
   filename = @activity.name.gsub(/\s+/,'').underscore + '.json'
@@ -58,6 +69,10 @@ Then(/^I should get correct json$/)do
   #expected_json.extend BetterHashDiff
   #pp actual_json.diff(expected_json)
   actual_json.should == expected_json
+end
+
+def has_link_to?(context,url)
+  return context.has_selector?("a[href=\"#{url}\"]")
 end
 
 def create_activity(activity_def)
