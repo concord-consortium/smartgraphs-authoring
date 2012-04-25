@@ -2,7 +2,15 @@ module StandardPermissions
   
   def self.included(base)
     base.class_eval {
-      belongs_to :owner, :class_name => "User"     
+      belongs_to :owner, :class_name => "User"
+      
+      # parent :activity
+      def self.parent(symbol)
+        define_method "parent" do
+          return self.send symbol
+        end
+      end
+
     }
   end
 
@@ -34,6 +42,24 @@ module StandardPermissions
     return true if acting_user.administrator?
     return false if attribute == :owner
     return owner_is?(acting_user)
+  end
+
+  def children
+    child_many = self.class.reflect_on_all_associations(:has_many)
+    child_many.map! { |x| x.name }
+
+    kids = child_many.flatten
+    kids.map! do |key| 
+      results = self.send(key)
+      results.map! do |k|
+        if k.respond_to? :children
+          [k, k.children]
+        else
+          k
+        end
+      end
+    end
+    kids.flatten.uniq
   end
 
 end
