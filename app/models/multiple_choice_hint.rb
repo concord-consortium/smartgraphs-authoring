@@ -5,7 +5,8 @@ class MultipleChoiceHint < ActiveRecord::Base
   # standard owner and admin permissions
   # defined in models/standard_permissions.rb
   include StandardPermissions
-
+  parent :multiple_choice_sequence
+  
   fields do
     name      :string
     hint_text :text

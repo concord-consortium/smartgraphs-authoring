@@ -5,6 +5,7 @@ class PointCircleVisualPrompt < ActiveRecord::Base
   # standard owner and admin permissions
   # defined in models/standard_permissions.rb
   include StandardPermissions
+  parent :any_prompt
 
   fields do
     name    :string, :required

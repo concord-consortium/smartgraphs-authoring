@@ -5,7 +5,8 @@ class SensorGraphPane < ActiveRecord::Base
   # standard owner and admin permissions
   # defined in models/standard_permissions.rb
   include StandardPermissions
-
+  parent :page
+  
   fields do
     title   :string, :required
     y_label :string, :required

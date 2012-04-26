@@ -4,10 +4,25 @@ module StandardPermissions
     base.class_eval {
       belongs_to :owner, :class_name => "User"
       
+      # tell the AR model what the 'parent' is eg:
       # parent :activity
+      # or 
+      # parent :any_sequence
       def self.parent(symbol)
-        define_method "parent" do
-          return self.send symbol
+        # HACK alert:
+        # magic souce to handle pseudo sequence polymorphism...
+        if symbol == :any_sequence
+          define_method "parent" do
+            numeric_sequence || pick_a_point_sequence
+          end
+        elsif symbol == :any_prompt
+          define_method "parent" do
+            text_hint_prompt || initial_prompt_prompt || confirm_correct_prompt || give_up_prompt 
+          end
+        else
+          define_method "parent" do
+            return self.send symbol
+          end
         end
       end
 
