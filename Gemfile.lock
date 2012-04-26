@@ -34,6 +34,7 @@ GEM
       activerecord (>= 3.0)
     arel (2.0.10)
     awesome_print (1.0.2)
+    binding_of_caller (0.6.7)
     builder (2.1.2)
     capistrano (2.8.0)
       highline
@@ -125,6 +126,11 @@ GEM
     pry-doc (0.4.1)
       pry (>= 0.9.0)
       yard (~> 0.7.4)
+    pry-nav (0.2.1)
+      pry (~> 0.9.9)
+    pry-stack_explorer (0.4.2)
+      binding_of_caller (~> 0.6.2)
+      pry (~> 0.9.9)
     rack (1.2.5)
     rack-mount (0.6.14)
       rack (>= 1.0.0)
@@ -200,6 +206,8 @@ DEPENDENCIES
   mysql
   pry
   pry-doc
+  pry-nav
+  pry-stack_explorer
   railroady
   rails (= 3.0.10)
   rspec-rails (>= 2.5.0)

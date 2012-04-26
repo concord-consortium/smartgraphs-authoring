@@ -16,6 +16,8 @@ group :development do
   # see: http://pry.github.com/screencasts.html
   gem 'pry'
   gem 'pry-doc'
+  gem 'pry-stack_explorer'
+  gem 'pry-nav'
   gem 'awesome_print'
   gem 'railroady' 
 end
