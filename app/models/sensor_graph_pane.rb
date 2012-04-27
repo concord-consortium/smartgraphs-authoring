@@ -4,8 +4,9 @@ class SensorGraphPane < ActiveRecord::Base
   
   # standard owner and admin permissions
   # defined in models/standard_permissions.rb
-  include StandardPermissions
-  parent :page
+  include SgPermissions
+  include SgMarshal
+  sg_parent :page
   
   fields do
     title   :string, :required

@@ -4,8 +4,9 @@ class Page < ActiveRecord::Base
   
   # standard owner and admin permissions
   # defined in models/standard_permissions.rb
-  include StandardPermissions
-  parent :activity
+  include SgPermissions
+  include SgMarshal
+  sg_parent :activity
 
   fields do
     name :string

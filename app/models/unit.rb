@@ -1,7 +1,8 @@
 class Unit < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
-
+  include SgMarshal
+  
   fields do
     name         :string, :required, :unique
     abbreviation :string

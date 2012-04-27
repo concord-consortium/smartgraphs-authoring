@@ -3,8 +3,9 @@ class SlopeToolSequence < ActiveRecord::Base
   
   # standard owner and admin permissions
   # defined in models/standard_permissions.rb
-  include StandardPermissions
-  parent :page
+  include SgPermissions
+  include SgMarshal
+  sg_parent :page
 
   CaseType        = HoboFields::Types::EnumString.for(:case_a, :case_b,    :case_c)
   PointConstraint = HoboFields::Types::EnumString.for(:any,    :endpoints, :adjacent)
