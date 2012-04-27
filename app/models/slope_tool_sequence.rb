@@ -29,10 +29,6 @@ class SlopeToolSequence < ActiveRecord::Base
   has_one :page, :through => :page_sequence
   reverse_association_of :page, 'Page#slope_tool_sequences'
 
-  def parent
-    page
-  end
-
   def to_hash
     {
       'type'                              => type,
