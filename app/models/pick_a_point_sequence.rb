@@ -93,20 +93,7 @@ class PickAPointSequence < ActiveRecord::Base
         'yMax' => (correct_answer_y_max || 'null')
       }
     end
-    unless sequence_hints.empty?
-      hash['hints'] = sequence_hints.map do |sequence_hint|
-        sequence_hint.hint.to_hash
-      end
-    end
-    unless initial_prompt_prompts.empty?
-      hash['initialPrompt']['visualPrompts'] = initial_prompt_prompts.map {|p| p.prompt.to_hash }
-    end
-    unless give_up_prompts.empty?
-      hash['giveUp']['visualPrompts'] = give_up_prompts.map {|p| p.prompt.to_hash }
-    end
-    unless confirm_correct_prompts.empty?
-      hash['confirmCorrect']['visualPrompts'] = confirm_correct_prompts.map {|p| p.prompt.to_hash }
-    end
+    update_sequence_prompts(hash)
     hash
   end
 
