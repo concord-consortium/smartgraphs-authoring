@@ -39,7 +39,7 @@ module SgMarshal
       if definition.kind_of? Array
         definition.each do |d|
           if d.kind_of?(Hash) && d['type']
-            #TODO: move this logic elsewhere:
+            #TODO: move this logic elsewhere: I smell factory pattern.
             klass_name = d['type']
             if klass_name == 'MultipleChoiceWithSequentialHintsSequence'
               klass_name = 'MultipleChoiceSequence'
