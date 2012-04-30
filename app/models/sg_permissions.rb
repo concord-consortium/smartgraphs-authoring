@@ -22,7 +22,6 @@ module SgPermissions
   end
 
   def self.included(base)
-    puts "including #{self} in #{base}"
     base.class_eval do
       belongs_to :owner, :class_name => "User"
     end
