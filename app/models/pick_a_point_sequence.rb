@@ -4,8 +4,12 @@ class PickAPointSequence < ActiveRecord::Base
 
   # standard owner and admin permissions
   # defined in models/standard_permissions.rb
-  include StandardPermissions
+  include SgPermissions
+  include SgMarshal
+  include SgSequencePrompts
 
+  sg_parent :page
+  
   fields do
     title            :string
     initial_prompt   :text
@@ -89,20 +93,20 @@ class PickAPointSequence < ActiveRecord::Base
         'yMax' => (correct_answer_y_max || 'null')
       }
     end
-    unless sequence_hints.empty?
-      hash['hints'] = sequence_hints.map do |sequence_hint|
-        sequence_hint.hint.to_hash
-      end
-    end
-    unless initial_prompt_prompts.empty?
-      hash['initialPrompt']['visualPrompts'] = initial_prompt_prompts.map {|p| p.prompt.to_hash }
-    end
-    unless give_up_prompts.empty?
-      hash['giveUp']['visualPrompts'] = give_up_prompts.map {|p| p.prompt.to_hash }
-    end
-    unless confirm_correct_prompts.empty?
-      hash['confirmCorrect']['visualPrompts'] = confirm_correct_prompts.map {|p| p.prompt.to_hash }
-    end
+    update_sequence_prompts(hash)
     hash
   end
+
+  def correct_answer_point_from_hash(definition)
+    self.correct_answer_x = definition[0]
+    self.correct_answer_y = definition[1]
+  end
+
+  def correct_answer_range_from_hash(definition)
+    self.correct_answer_y_min = definition['yMin']
+    self.correct_answer_x_min = definition['xMin']
+    self.correct_answer_y_max = definition['yMax']
+    self.correct_answer_x_max = definition['xMax']
+  end
+
 end

@@ -3,6 +3,7 @@ source 'http://rubygems.org'
 gem 'rails', '3.0.10'
 gem "hobo", "= 1.3.0.RC2"
 gem "acts_as_list"
+gem "amoeba"
 
 group :development do
   gem 'ffi', '1.0.9'
@@ -15,7 +16,10 @@ group :development do
   # see: http://pry.github.com/screencasts.html
   gem 'pry'
   gem 'pry-doc'
+  gem 'pry-stack_explorer'
+  gem 'pry-nav'
   gem 'awesome_print'
+  gem 'railroady' 
 end
 
 group :test do

@@ -4,8 +4,10 @@ class MultipleChoiceHint < ActiveRecord::Base
 
   # standard owner and admin permissions
   # defined in models/standard_permissions.rb
-  include StandardPermissions
-
+  include SgPermissions
+  include SgMarshal
+  sg_parent :multiple_choice_sequence
+  
   fields do
     name      :string
     hint_text :text
@@ -23,6 +25,10 @@ class MultipleChoiceHint < ActiveRecord::Base
       'name' => name,
       'text' => hint_text
     }
+  end
+
+  def text_from_hash(definition)
+    self.hint_text = definition
   end
 
 end

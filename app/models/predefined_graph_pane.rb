@@ -4,8 +4,10 @@ class PredefinedGraphPane < ActiveRecord::Base
   
   # standard owner and admin permissions
   # defined in models/standard_permissions.rb
-  include StandardPermissions
-
+  include SgPermissions
+  include SgMarshal
+  sg_parent :page
+  
   fields do
     title :string, :required
     y_label :string, :required
@@ -71,4 +73,16 @@ class PredefinedGraphPane < ActiveRecord::Base
     self.data = points.map! { |point| point.join(',')}.join("\n")
   end
 
+  def data_from_hash(points)
+    tmp_data  = points.map{ |point| point.join(",") }
+    self.data = tmp_data.join("\n")
+  end
+
+  def x_units_from_hash(definition)
+    self.x_unit = Unit.find_or_create_by_name(definition)
+  end
+
+  def y_units_from_hash(definition)
+    self.y_unit = Unit.find_or_create_by_name(definition)
+  end
 end

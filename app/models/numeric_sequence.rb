@@ -4,8 +4,11 @@ class NumericSequence < ActiveRecord::Base
   
   # standard owner and admin permissions
   # defined in models/standard_permissions.rb
-  include StandardPermissions
-
+  include SgPermissions
+  include SgMarshal
+  include SgSequencePrompts
+  sg_parent :page
+  
   fields do
     title           :string
     initial_prompt  :text
@@ -66,20 +69,7 @@ class NumericSequence < ActiveRecord::Base
       'giveUp' => {'text' => give_up.to_s },
       'confirmCorrect' => {'text' => confirm_correct.to_s }
     }
-    unless sequence_hints.empty?
-      hash['hints'] = sequence_hints.map do |sequence_hint|
-        sequence_hint.hint.to_hash
-      end
-    end
-    unless initial_prompt_prompts.empty?
-      hash['initialPrompt']['visualPrompts'] = initial_prompt_prompts.map {|p| p.prompt.to_hash }
-    end
-    unless give_up_prompts.empty?
-      hash['giveUp']['visualPrompts'] = give_up_prompts.map {|p| p.prompt.to_hash }
-    end
-    unless confirm_correct_prompts.empty?
-      hash['confirmCorrect']['visualPrompts'] = confirm_correct_prompts.map {|p| p.prompt.to_hash }
-    end
+    update_sequence_prompts(hash)
     hash
   end
 end

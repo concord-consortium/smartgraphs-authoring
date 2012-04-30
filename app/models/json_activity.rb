@@ -4,8 +4,8 @@ class JsonActivity < ActiveRecord::Base
   
   # standard owner and admin permissions
   # defined in models/standard_permissions.rb
-  include StandardPermissions
-
+  include SgPermissions
+  
   fields do
     name :string
     json :text

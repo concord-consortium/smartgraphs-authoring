@@ -3,7 +3,9 @@ class SlopeToolSequence < ActiveRecord::Base
   
   # standard owner and admin permissions
   # defined in models/standard_permissions.rb
-  include StandardPermissions
+  include SgPermissions
+  include SgMarshal
+  sg_parent :page
 
   CaseType        = HoboFields::Types::EnumString.for(:case_a, :case_b,    :case_c)
   PointConstraint = HoboFields::Types::EnumString.for(:any,    :endpoints, :adjacent)
@@ -26,10 +28,6 @@ class SlopeToolSequence < ActiveRecord::Base
   has_one :page_sequence, :as => :sequence, :dependent => :destroy
   has_one :page, :through => :page_sequence
   reverse_association_of :page, 'Page#slope_tool_sequences'
-
-  def parent
-    page
-  end
 
   def to_hash
     {
@@ -64,7 +62,7 @@ class SlopeToolSequence < ActiveRecord::Base
 
   #student_selects_points                 :boolean,  :default => true
   def student_selects_points
-    return case case_type
+    return case self.case_type
       when "case_a" then true
       when "case_b" then true
       else false
@@ -73,12 +71,12 @@ class SlopeToolSequence < ActiveRecord::Base
 
   # student_must_select_endpoints_of_range :boolean,  :default => false
   def student_must_select_endpoints_of_range
-    point_constraints == "endpoints"
+    self.point_constraints == "endpoints"
   end
 
   # selected_points_must_be_adjacent       :boolean,  :default => false
   def selected_points_must_be_adjacent
-    point_constraints == "adjacent"
+    self.point_constraints == "adjacent"
   end
 
   def validate_point_constraints
@@ -88,5 +86,49 @@ class SlopeToolSequence < ActiveRecord::Base
   def validate_case_type(c_type)
     return true if CaseTypes.include? c_type
   end
+
+  def selected_points_must_be_adjacent_from_hash(definition)
+    if definition == true
+      self.point_constraints = "adjacent"
+    else
+      if self.point_constraints == "adjacent"
+        self.point_constraints = "any"
+      end
+    end
+  end
+
+  def student_must_select_endpoints_of_range_from_hash(definition)
+    if definition == true
+      self.point_constraints = "endpoints"
+    else
+      if self.point_constraints = "endpoints"
+        self.point_constraints = "any"
+      end
+    end
+  end
+
+  def student_selects_points_from_hash(definition)
+    if definition == true
+      if self.first_question_is_slope_question
+        self.case_type = "case_a"
+      else
+        self.case_type = "case_b"
+      end
+    else
+      self.case_type = "case_c"
+    end
+  end
+
+  def first_question_is_slope_question_from_hash(definition)
+    if definition == true
+      if student_selects_points
+        self.case_type = "case_a" 
+      else
+        self.case_type = "case_c"
+      end
+    else
+      self.case_type="case_b"
+    end
+  end  
 
 end

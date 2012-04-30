@@ -4,8 +4,10 @@ class AnnotationInclusion < ActiveRecord::Base
 
   # standard owner and admin permissions
   # defined in models/standard_permissions.rb
-  include StandardPermissions
-
+  include SgPermissions
+  include SgMarshal
+  sg_parent :including_graph
+  
   fields do
     timestamps
   end

@@ -4,7 +4,9 @@ class PointCircleVisualPrompt < ActiveRecord::Base
   
   # standard owner and admin permissions
   # defined in models/standard_permissions.rb
-  include StandardPermissions
+  include SgPermissions
+  include SgMarshal
+  sg_parent :any_prompt
 
   fields do
     name    :string, :required
@@ -49,4 +51,8 @@ class PointCircleVisualPrompt < ActiveRecord::Base
     }
   end
 
+  def point_from_hash(defs)
+    # TODO defs had better be an array...
+    self.point_x, self.point_y = defs
+  end
 end

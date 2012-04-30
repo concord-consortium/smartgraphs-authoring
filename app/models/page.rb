@@ -4,7 +4,9 @@ class Page < ActiveRecord::Base
   
   # standard owner and admin permissions
   # defined in models/standard_permissions.rb
-  include StandardPermissions
+  include SgPermissions
+  include SgMarshal
+  sg_parent :activity
 
   fields do
     name :string
@@ -72,4 +74,14 @@ class Page < ActiveRecord::Base
     hash
   end
 
+  # see SgMarshal
+  def panes_from_hash(defs)
+    defs.each do |definition|
+      klass_name = definition['type']
+      klass = klass_name.constantize
+      method_name = klass_name.underscore.pluralize
+      obj = klass.from_hash(definition)
+      self.send(method_name) << obj
+    end
+  end
 end
