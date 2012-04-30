@@ -18,6 +18,7 @@ Feature: Sequences Activities
           :text: Click ok...
       """
     Then I should get correct json
+    And I should be able to copy the activity
 
   Scenario: Create an activity with a pick a point sequence
     Given I am logged in as an admin named 'admin'
@@ -64,6 +65,7 @@ Feature: Sequences Activities
           :confirmCorrect: Yes, that's right!
       """
     Then I should get correct json
+    And I should be able to copy the activity
 
   Scenario: Create an activity with a pick a point within a range sequence
     Given I am logged in as an admin named 'admin'
@@ -112,6 +114,7 @@ Feature: Sequences Activities
           :confirmCorrect: Yes, that's right!
       """
     Then I should get correct json
+    And I should be able to copy the activity
 
   Scenario: Create an activity with a numeric sequence
     Given I am logged in as an admin named 'admin'
@@ -158,6 +161,7 @@ Feature: Sequences Activities
           :confirmCorrect: Yes, that's right!
       """
     Then I should get correct json
+    And I should be able to copy the activity
 
   Scenario: Create an activity with a constructed response sequence
     Given I am logged in as an admin named 'admin'
@@ -176,6 +180,7 @@ Feature: Sequences Activities
           :initialContent: When I was...
       """
     Then I should get correct json
+    And I should be able to copy the activity
 
   @javascript
   Scenario: Create an activity with a multiple choice sequence with sequential feedback
@@ -211,6 +216,7 @@ Feature: Sequences Activities
             :feedback: try choice B instead.
       """
     Then I should get correct json
+    And I should be able to copy the activity
 
   @javascript
   Scenario: Create an activity with a multiple choice sequence with custom feedback
@@ -246,6 +252,7 @@ Feature: Sequences Activities
             :feedback: try choice B instead.
       """
     Then I should get correct json
+    And I should be able to copy the activity
 
   @javascript
   Scenario: Create an activity with a type 'A' slope tool
@@ -305,6 +312,7 @@ Feature: Sequences Activities
           :tolerance: 0.1
       """
     Then I should get correct json
+    And I should be able to copy the activity
 
 
   @javascript
@@ -364,6 +372,7 @@ Feature: Sequences Activities
           :tolerance: 0.1
       """
     Then I should get correct json
+    And I should be able to copy the activity
 
  @javascript
   Scenario: Create an activity with a type 'c' slope tool
@@ -422,6 +431,7 @@ Feature: Sequences Activities
           :tolerance: 0.1
       """
     Then I should get correct json
+    And I should be able to copy the activity
 
 
   @javascript
@@ -481,6 +491,7 @@ Feature: Sequences Activities
           :tolerance: 0.1
       """
     Then I should get correct json
+    And I should be able to copy the activity
 
  @javascript
   Scenario: Create an activity with a slope tool which requires adjacent selection
@@ -539,3 +550,4 @@ Feature: Sequences Activities
           :tolerance: 0.1
       """
     Then I should get correct json
+    And I should be able to copy the activity

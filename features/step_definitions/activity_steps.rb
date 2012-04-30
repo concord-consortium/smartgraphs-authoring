@@ -24,6 +24,11 @@ When(/^I create (?:a new|an) activity:$/)do |text|
   @activity = create_activity(activity_def)
 end
 
+Then(/^I should be able to copy the activity/) do
+  the_copy = @activity.copy_activity
+  the_copy.to_hash.to_s.should == @activity.to_hash.to_s
+end
+
 Then(/^I should see "([^"]*)" in the listing$/) do |name|
   visit '/activities'
   within "ul.activities" do |scope|
