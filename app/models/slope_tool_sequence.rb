@@ -62,7 +62,7 @@ class SlopeToolSequence < ActiveRecord::Base
 
   #student_selects_points                 :boolean,  :default => true
   def student_selects_points
-    return case case_type
+    return case self.case_type
       when "case_a" then true
       when "case_b" then true
       else false
@@ -71,12 +71,12 @@ class SlopeToolSequence < ActiveRecord::Base
 
   # student_must_select_endpoints_of_range :boolean,  :default => false
   def student_must_select_endpoints_of_range
-    point_constraints == "endpoints"
+    self.point_constraints == "endpoints"
   end
 
   # selected_points_must_be_adjacent       :boolean,  :default => false
   def selected_points_must_be_adjacent
-    point_constraints == "adjacent"
+    self.point_constraints == "adjacent"
   end
 
   def validate_point_constraints
