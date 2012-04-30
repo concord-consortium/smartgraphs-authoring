@@ -72,4 +72,49 @@ class MultipleChoiceSequence < ActiveRecord::Base
     return !correct_answer.nil?
   end
 
+  def choices_from_hash(definition)
+    definition.each do |d|
+      self.multiple_choice_choices << MultipleChoiceChoice.from_hash({'name' => d})
+      # later we are going to have to add references to these choices
+      # for correct item number &etc.
+    end
+    if @pending_callbacks
+      @pending_callbacks.each do |callback|
+        callback.call(self)
+      end
+    end
+  end
+
+  def hints_from_hash(definition)
+    if use_sequential_feedback
+      definition.each do |d|
+        self.multiple_choice_hints << MultipleChoiceHint.from_hash(d)
+      end
+    else
+      @pending_callbacks ||= []
+      callback = Proc.new do |self_ref|
+        definition.each_with_index do |d,i|
+          self_ref.multiple_choice_choices[i].feedback = d['text'];
+        end
+      end
+      if self.multiple_choice_choices && self.multiple_choice_choices.size > 0
+        callback.call(self)
+      else
+        @pending_callbacks << callback
+      end
+    end
+  end
+
+  def correct_answer_index_from_hash(index)
+    @pending_callbacks ||= []
+    callback = Proc.new do |self_ref|
+      self_ref.multiple_choice_choices.each { |c| c.correct = false}
+      self_ref.multiple_choice_choices[index].correct = true;
+    end
+    if self.multiple_choice_choices && self.multiple_choice_choices.size > index
+      callback.call(self)
+    else
+      @pending_callbacks << callback
+    end
+  end
 end

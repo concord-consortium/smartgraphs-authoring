@@ -87,4 +87,48 @@ class SlopeToolSequence < ActiveRecord::Base
     return true if CaseTypes.include? c_type
   end
 
+  def selected_points_must_be_adjacent_from_hash(definition)
+    if definition == true
+      self.point_constraints = "adjacent"
+    else
+      if self.point_constraints == "adjacent"
+        self.point_constraints = "any"
+      end
+    end
+  end
+
+  def student_must_select_endpoints_of_range_from_hash(definition)
+    if definition == true
+      self.point_constraints = "endpoints"
+    else
+      if self.point_constraints = "endpoints"
+        self.point_constraints = "any"
+      end
+    end
+  end
+
+  def student_selects_points_from_hash(definition)
+    if definition == true
+      if self.first_question_is_slope_question
+        self.case_type = "case_a"
+      else
+        self.case_type = "case_b"
+      end
+    else
+      self.case_type = "case_c"
+    end
+  end
+
+  def first_question_is_slope_question_from_hash(definition)
+    if definition == true
+      if student_selects_points
+        self.case_type = "case_a" 
+      else
+        self.case_type = "case_c"
+      end
+    else
+      self.case_type="case_b"
+    end
+  end  
+
 end

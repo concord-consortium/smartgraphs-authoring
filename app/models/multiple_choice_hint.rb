@@ -27,4 +27,8 @@ class MultipleChoiceHint < ActiveRecord::Base
     }
   end
 
+  def text_from_hash(definition)
+    self.hint_text = definition
+  end
+
 end

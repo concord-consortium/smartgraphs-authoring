@@ -74,4 +74,14 @@ class Page < ActiveRecord::Base
     hash
   end
 
+  # see SgMarshal
+  def panes_from_hash(defs)
+    defs.each do |definition|
+      klass_name = definition['type']
+      klass = klass_name.constantize
+      method_name = klass_name.underscore.pluralize
+      obj = klass.from_hash(definition)
+      self.send(method_name) << obj
+    end
+  end
 end

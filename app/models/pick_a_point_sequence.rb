@@ -109,4 +109,17 @@ class PickAPointSequence < ActiveRecord::Base
     end
     hash
   end
+
+  def correct_answer_point_from_hash(definition)
+    self.correct_answer_x = definition[0]
+    self.correct_answer_y = definition[1]
+  end
+
+  def correct_answer_range_from_hash(definition)
+    self.correct_answer_y_min = definition['yMin']
+    self.correct_answer_x_min = definition['xMin']
+    self.correct_answer_y_max = definition['yMax']
+    self.correct_answer_x_max = definition['xMax']
+  end
+
 end
