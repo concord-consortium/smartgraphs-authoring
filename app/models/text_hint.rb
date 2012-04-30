@@ -6,6 +6,7 @@ class TextHint < ActiveRecord::Base
   # defined in models/standard_permissions.rb
   include SgPermissions
   include SgMarshal
+  include SgSequencePrompts
   sg_parent :any_sequence
   
   fields do

@@ -6,6 +6,8 @@ class PickAPointSequence < ActiveRecord::Base
   # defined in models/standard_permissions.rb
   include SgPermissions
   include SgMarshal
+  include SgSequencePrompts
+
   sg_parent :page
   
   fields do
