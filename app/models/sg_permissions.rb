@@ -21,30 +21,47 @@ module SgPermissions
     end
   end
 
-  def self.included(base)
-    base.class_eval do
-      belongs_to :owner, :class_name => "User"
+  def sg_activity
+    current_top = self
+    while (current_top.respond_to? :sg_parent)
+      current_top = current_top.send(:sg_parent)
+      throw "cant find activity" if current_top.nil?
+      return current_top if current_top.kind_of? Activity
     end
-    base.extend(ClassMethods)
   end
 
-  def after_user_new 
-    self.owner = acting_user
+  def self.included(base)
+    base.extend(ClassMethods)
+  end
+  
+  def is_owner?(user)
+    activity = self.sg_activity
+    if activity.nil?
+      message = "cant find owner for #{self}"
+      Rails.log message
+      puts message
+      return true
+    end
+    return activity.is_owner?(user)
   end
 
   def create_permitted?
-    acting_user.signed_up?
+    if acting_user.signed_up?
+      return true
+      # self.is_owner?(acting_user)
+    end
+    return false
   end
 
   def update_permitted?
    return true if acting_user.administrator?
-   return true if owner_is?(acting_user)
+   return true if self.is_owner?(acting_user)
    return false
   end
 
   def destroy_permitted?
    return true if acting_user.administrator?
-   return true if owner_is?(acting_user)
+   return true if self.is_owner?(acting_user)
    return false
   end
 
@@ -54,26 +71,7 @@ module SgPermissions
 
   def edit_permitted?(attribute)
     return true if acting_user.administrator?
-    return false if attribute == :owner
-    return owner_is?(acting_user)
-  end
-
-  def children
-    child_many = self.class.reflect_on_all_associations(:has_many)
-    child_many.map! { |x| x.name }
-
-    kids = child_many.flatten
-    kids.map! do |key| 
-      results = self.send(key)
-      results.map! do |k|
-        if k.respond_to? :children
-          [k, k.children]
-        else
-          k
-        end
-      end
-    end
-    kids.flatten.uniq
+    return self.is_owner?(acting_user)
   end
 
 end
