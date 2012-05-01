@@ -31,7 +31,7 @@
     <append-body:>
        <a action='author_preview'>View as author</a> 
        or <a action='student_preview'>view as student</a> in SmartGraphs
-       or <a action='copy'>Copy this</a>
+       <a action='copy' if="&can_create?">Copy this</a>
     </append-body:>
   </old-card>
 </extend>
