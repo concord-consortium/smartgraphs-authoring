@@ -478,7 +478,7 @@
               </h3>
 
               <sortable-collection:multiple_choice_choices param="collection"/>
-              <section param="add-to-collection" if="&can_create?(@multiple_choice_sequence.multiple_choice_choices)">
+              <section param="add-to-collection" if="&can_edit?">
                 <h3 param="add-form-heading">
                   <ht key="multiple_choice_choice.collection.add_form_heading" count="1">
                     Add a Multiple Choice choice
@@ -498,7 +498,7 @@
                   </ht>
                 </h3>
                 <sortable-collection:multiple_choice_hints param="collection"/>
-                <section param="add-to-collection" if="&can_create?(@multiple_choice_sequence.multiple_choice_hints)">
+                <section param="add-to-collection" if="&can_edit?">
                   <h3 param="add-form-heading">
                     <ht key="multiple_choice_hint.collection.add_form_heading" count="1">
                       Add a Multiple Choice choice
