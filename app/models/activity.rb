@@ -31,9 +31,11 @@ class Activity < ActiveRecord::Base
     self.author_name ||= acting_user.name
   end
 
-  def copy_activity
+  def copy_activity(user = self.owner)
     hash_rep = self.to_hash
     the_copy = Activity.from_hash(hash_rep)
+    the_copy.owner = user
+    the_copy.save
     return the_copy
   end
   
