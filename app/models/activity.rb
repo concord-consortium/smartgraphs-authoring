@@ -4,7 +4,6 @@ class Activity < ActiveRecord::Base
   
   # standard owner and admin permissions
   # defined in models/standard_permissions.rb
-  include SgPermissions
   include SgMarshal
   
   fields do
@@ -13,8 +12,9 @@ class Activity < ActiveRecord::Base
     timestamps
   end 
 
-  has_many :pages, :order => :position
-  children :pages
+  has_many   :pages, :order => :position
+  belongs_to :owner, :class_name => "User"
+  children   :pages
 
   def to_hash
     {
@@ -39,4 +39,34 @@ class Activity < ActiveRecord::Base
     return the_copy
   end
   
+  def is_owner?(user=acting_user)
+    return self.owner_is? user
+  end
+
+  def create_permitted?
+    acting_user.signed_up?
+  end
+
+  def update_permitted?
+   return true if acting_user.administrator?
+   return true if self.is_owner?
+   return false
+  end
+
+  def destroy_permitted?
+   return true if acting_user.administrator?
+   return true if self.is_owner?
+   return false
+  end
+
+  def view_permitted?(field)
+    true
+  end
+
+  def edit_permitted?(attribute)
+    return true if acting_user.administrator?
+    return false if attribute == :owner
+    return self.is_owner?
+  end
+
 end
