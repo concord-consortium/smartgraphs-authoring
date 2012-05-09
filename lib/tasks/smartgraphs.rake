@@ -21,4 +21,26 @@ namespace :sg do
     %x[cd #{Rails.root}]
     %x[rvm use #{current_rvm}]
   end
+
+  desc 'serialize [activity_id] to tmp file'
+  task :serialize, [:activity_id] => [:environment]  do |t,args|
+    id  = args[:activity_id]
+    act = Activity.find(id)
+    File.open("activity_#{id}.json", "w") do |io| 
+      io.write act.to_hash.to_json 
+    end
+  end
+
+  desc 'marshal serialized [activity_id] from tmp file'
+  task :marshal, [:activity_id] => [:environment]  do |t,args|
+    id       = args[:activity_id]
+    json_str = ""
+    File.open("activity_#{id}.json", "r") do |io| 
+      json_str = io.read
+    end
+    ha = JSON.parse(json_str)
+    a = Activity.from_hash(ha)
+    a.save
+    puts a.id
+  end
 end
