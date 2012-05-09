@@ -6,6 +6,7 @@ class SensorGraphPane < ActiveRecord::Base
   # defined in models/standard_permissions.rb
   include SgPermissions
   include SgMarshal
+  include SgGraphPane
   sg_parent :page
   
   fields do

@@ -74,7 +74,7 @@ class MultipleChoiceSequence < ActiveRecord::Base
 
   def choices_from_hash(definition)
     definition.each do |d|
-      self.multiple_choice_choices << MultipleChoiceChoice.from_hash({'name' => d})
+      self.multiple_choice_choices << MultipleChoiceChoice.from_hash({'name' => d},self.marshal_context)
       # later we are going to have to add references to these choices
       # for correct item number &etc.
     end
@@ -88,7 +88,7 @@ class MultipleChoiceSequence < ActiveRecord::Base
   def hints_from_hash(definition)
     if use_sequential_feedback
       definition.each do |d|
-        self.multiple_choice_hints << MultipleChoiceHint.from_hash(d)
+        self.multiple_choice_hints << MultipleChoiceHint.from_hash(d,self.marshal_context)
       end
     else
       @pending_callbacks ||= []

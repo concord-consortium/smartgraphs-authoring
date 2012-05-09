@@ -1,14 +1,17 @@
 module SgMarshal
   module ClassMethods
-    def from_hash(defs)
+
+    def from_hash(defs, context=nil)
       defs               = Hash[defs.map {|k,v| [k.underscore, v]}]
       object             = self.new(filter_attributes(defs))
+      object.marshal_context = context || object
       object.create_hash = defs
       object.create_collections
       object.create_associations
       object.process_nested_lists
       object.custom_from_hashes
       object.save
+      object.invoke_mashall_callbacks if object.marshal_context == object
       object
     end
 
@@ -26,6 +29,15 @@ module SgMarshal
 
   def self.included(base)
     base.extend(ClassMethods)
+  end
+
+  def marshal_context=(context)
+    @marshal_context = context
+  end
+  
+  def marshal_context
+    @marshal_context ||= self
+    return @marshal_context
   end
 
   def process_nested_lists
@@ -52,7 +64,7 @@ module SgMarshal
             assoc_name = klass_name.underscore.pluralize
             if self.respond_to? assoc_name
               begin
-                obj = klass.from_hash(d)
+                obj = klass.from_hash(d,self.marshal_context)
                 self.send(assoc_name.to_sym) << obj
               rescue => detail
                 puts "unable to convert #{klass} from hash\n\n #{d.inspect}\n\n(#{assoc_name})"
@@ -114,7 +126,7 @@ module SgMarshal
   def create_associated(symbol,definition)
     class_name = symbol.singularize.camelcase
     klass = class_name.constantize
-    klass.from_hash(definition)
+    klass.from_hash(definition,self.marshal_context)
   end
 
   def add_collection(symbol)
@@ -133,6 +145,22 @@ module SgMarshal
     defs = self.create_hash[sym_string]
     self.send "#{symbol}=".to_sym, create_associated(sym_string,defs)
   end
+
+  def marshall_callbacks
+    @marshall_callbacks ||= []
+    @marshall_callbacks
+  end
+
+  def add_marshall_callback(callback)
+    self.marshal_context.marshall_callbacks << callback
+  end
+
+  def invoke_mashall_callbacks
+    self.marshall_callbacks.each do |callback|
+      callback.call()
+    end
+  end
+
 end
 
 

@@ -6,6 +6,8 @@ class PointAxisLineVisualPrompt < ActiveRecord::Base
   # defined in models/standard_permissions.rb
   include SgPermissions
   include SgMarshal
+  include SgVisualPrompt
+
   sg_parent :any_prompt
 
   fields do

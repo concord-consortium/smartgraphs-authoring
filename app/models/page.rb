@@ -80,7 +80,7 @@ class Page < ActiveRecord::Base
       klass_name = definition['type']
       klass = klass_name.constantize
       method_name = klass_name.underscore.pluralize
-      obj = klass.from_hash(definition)
+      obj = klass.from_hash(definition,self.marshal_context)
       self.send(method_name) << obj
     end
   end

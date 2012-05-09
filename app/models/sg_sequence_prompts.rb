@@ -1,12 +1,16 @@
 module SgSequencePrompts
 
   def add_visual_prompt(definition,p_name=nil)
+    # Hack! for confirm_correct:
+    # asscns are confirm_visual_prompt_types not confirm_correct_vis..
+    _p_name = p_name.gsub(/_correct/,"") unless p_name.nil?
+
     klass_name  = definition['type']
     klass       = klass_name.constantize
     klass_name.underscore.pluralize
-    prompt      = klass.from_hash(definition)
+    prompt      = klass.from_hash(definition,self.marshal_context)
     method_name = klass_name.underscore.pluralize
-    method_name = "#{p_name}_#{method_name}" unless p_name.nil?
+    method_name = "#{_p_name}_#{method_name}" unless _p_name.nil?
     self.send(method_name) <<  prompt
   end
 
@@ -35,7 +39,7 @@ module SgSequencePrompts
 
   def hints_from_hash(defs)
     defs.each do |definition|
-      self.text_hints << TextHint.from_hash(definition)
+      self.text_hints << TextHint.from_hash(definition,self.marshal_context)
     end
   end
 

@@ -6,6 +6,8 @@ class PointCircleVisualPrompt < ActiveRecord::Base
   # defined in models/standard_permissions.rb
   include SgPermissions
   include SgMarshal
+  include SgVisualPrompt
+  
   sg_parent :any_prompt
 
   fields do
@@ -42,17 +44,5 @@ class PointCircleVisualPrompt < ActiveRecord::Base
   has_one :confirm_correct_numeric_sequence, :through => :confirm_correct_prompt, :source => :numeric_sequence
   reverse_association_of :confirm_correct_numeric_sequence, 'NumericSequence#confirm_point_circle_visual_prompts'
 
-  def to_hash
-    {
-      'type' => 'PointCircleVisualPrompt',
-      'name' => name,
-      'point' => [point_x, point_y],
-      'color' => color
-    }
-  end
 
-  def point_from_hash(defs)
-    # TODO defs had better be an array...
-    self.point_x, self.point_y = defs
-  end
 end
