@@ -1,3 +1,103 @@
+a:link, a.new-link {
+	color: #479492;
+	}
+a:hover, a:focus {
+	color: #da5936;
+	}
+body {
+	background: #fee9aa;
+	}
+button, input[type=button], input.button, .button {
+	background: #f3951d;
+	border: 0 solid #f3951d;
+	color: #fff;
+	font: 12px/1 arial, helvetica, sans-serif;
+	padding: 4px 14px;
+	background: -webkit-gradient(linear, left top, left bottom, from(#f3951d), to(#ec6e0d));
+	background: -moz-linear-gradient(top,  #f3951d,  #ec6e0d);
+	-moz-border-radius: 12px;
+	-webkit-border-radius: 12px;
+	border-radius: 12px;
+	}
+	button:hover, input[type=button]:hover, .button:hover {
+		background: #F3951d;
+		background: -webkit-gradient(linear, left top, left bottom, from(#f3951d), to(#dd6e0d));
+		background: -moz-linear-gradient(top,  #f3951d,  #dd6e0d);
+		}
 .correct {
-  color: green;
-}
+  color: #75a643;
+	}
+.flash.notice {
+	background: #3a878b;
+	}
+.page-header .navigation li {
+	color: #3f3f3f;
+	}
+.page-header .navigation a:link, .page-header .navigation a:visited {
+	color: #3a878b;
+	}
+.header {
+	background: #f4b626;
+	-webkit-border-top-left-radius: 13px;
+	-webkit-border-top-right-radius: 13px;
+	-moz-border-radius-topleft: 13px;
+	-moz-border-radius-topright: 13px;
+	border-top-left-radius: 13px;
+	border-top-right-radius: 13px;
+	}
+	h1.app-name {
+		background: url(../images/smartgraphs-logo.png) no-repeat 30px 10px;
+		font: normal 36px arial, helvetica, sans-serif;
+		height: 55px;
+		padding: 65px 0 0 90px;
+		}
+.page-header .navigation.main-nav a {
+	background: #c5e2e1;
+	color: #68aeac;
+	text-transform:capitalize;
+	-webkit-border-top-left-radius: 8px;
+	-webkit-border-top-right-radius: 8px;
+	-moz-border-radius-topleft: 8px;
+	-moz-border-radius-topright: 8px;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+	}
+.page-header .navigation.main-nav a:hover {
+	background: #69afad;
+	border: none;
+	color: #fff;
+	}
+.page-header .navigation.main-nav li.current a {
+	background: #69afad;
+	border: none;
+	color: #fff;
+	}
+.section, .front-page .welcome-message {
+	background: #fff !important;
+	border: none !important;
+	padding-bottom: 20px;
+	-webkit-border-bottom-left-radius: 13px;
+	-webkit-border-bottom-right-radius: 13px;
+	-moz-border-radius-bottomleft: 13px;
+	-moz-border-radius-bottomright: 13px;
+	border-bottom-left-radius: 13px;
+	border-bottom-right-radius: 13px;
+	}
+	.content-header {
+		background: #fff;
+		border: none !important;
+		padding: 5px 0 0;
+		-webkit-border-bottom-left-radius: 13px;
+		-webkit-border-bottom-right-radius: 13px;
+		-moz-border-radius-bottomleft: 13px;
+		-moz-border-radius-bottomright: 13px;
+		border-bottom-left-radius: 13px;
+		border-bottom-right-radius: 13px;
+		}
+		.section .card .header {
+			background: transparent;
+			}
+		.content-header h1 , .content-header h2.heading {
+			color: #3a878b;
+			text-transform: capitalize;
+			}
