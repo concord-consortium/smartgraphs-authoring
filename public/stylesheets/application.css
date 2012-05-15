@@ -101,3 +101,24 @@ button, input[type=button], input.button, .button {
 			color: #3a878b;
 			text-transform: capitalize;
 			}
+#copyright {
+	clear: left;
+	color: #3f3f3f;
+	float: left;
+	font-size: 11px;
+	text-align: left;
+	width: 40%;
+	}
+#nsf {
+	background: url(../images/nsf-logo.png) no-repeat right 3px;
+	clear: right;
+	color: #3f3f3f;
+	float: right;
+	font-size: 11px;
+	padding-right: 50px;
+	text-align: left;
+	width: 40%;
+	}
+#admin-links {
+	clear: both;
+	}
