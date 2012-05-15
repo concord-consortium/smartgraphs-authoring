@@ -16,9 +16,17 @@
 <extend tag="page">
   <old-page merge>
     <footer:>
-      <a href="&admin_users_url" if="&current_user.administrator?">
-        <t key="hobo.admin.subsite_name">Admin</t>
-      </a>
+      <p id="copyright">
+        &copy; Copyright 2012 the Concord Consortium. All rights reserved.
+      </p>
+      <p id="nsf">
+        This material is based upon work supported by the National Science Foundation under Grant No. DRL-0918522. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.
+      </p>
+      <div id="admin-links">
+        <a href="&admin_users_url" if="&current_user.administrator?">
+          <t key="hobo.admin.subsite_name">Admin</t>
+        </a>
+      </div>
     </footer:>
   </old-page>
 </extend>
