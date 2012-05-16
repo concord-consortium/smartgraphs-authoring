@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120501155044) do
+ActiveRecord::Schema.define(:version => 20120516141336) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -299,7 +299,7 @@ ActiveRecord::Schema.define(:version => 20120501155044) do
 
   create_table "slope_tool_sequences", :force => true do |t|
     t.text     "first_question"
-    t.string   "slope_variable_name"
+    t.string   "slope_variable_name", :default => "slope"
     t.float    "x_min",               :default => 0.0
     t.float    "y_min",               :default => 0.0
     t.float    "x_max",               :default => 10.0
