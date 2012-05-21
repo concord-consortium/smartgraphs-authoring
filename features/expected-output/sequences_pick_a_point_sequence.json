@@ -40,7 +40,8 @@
         "giveUp": {
           "text": "That's not right."
         },
-        "correctAnswerPoint": [2.0, 200.0]
+        "correctAnswerPoint": [2.0, 200.0],
+        "hints": []
       }
     }
   ],
