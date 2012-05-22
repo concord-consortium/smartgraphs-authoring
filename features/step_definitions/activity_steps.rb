@@ -18,6 +18,21 @@ Given(/^I am on the [A|a]ctivities page$/) do
   visit '/activities'
 end
 
+Given(/^I am on [M|m]y [A|a]ctivities page$/) do
+  visit '/activities/my_activities'
+end
+
+Given(/^I am on the [I|i]ndex page$/) do
+  visit '/'
+end
+
+Then(/^I should see a link to "([^"]*)" in the navigation$/) do |url|
+  within "ul.navigation" do |scope|
+    has_link_to?(scope,url)
+  end
+end
+
+
 When(/^I create (?:a new|an) activity:$/)do |text|
   activity_def = YAML.load(text)
 
