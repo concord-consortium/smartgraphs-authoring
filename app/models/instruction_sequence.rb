@@ -13,6 +13,8 @@ class InstructionSequence < ActiveRecord::Base
     timestamps
   end
 
+  validates :text, :presence => true
+  
   has_one :page_sequence, :as => :sequence, :dependent => :destroy
 
   has_one :page, :through => :page_sequence
