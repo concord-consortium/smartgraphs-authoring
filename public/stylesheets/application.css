@@ -27,6 +27,8 @@ button, input[type=button], input.button, .button {
 .correct {
   color: #75a643;
 	}
+.error-messages { color: #900024; }
+.error-messages h2 { color: #900024; }
 .flash.notice {
 	background: #3a878b;
 	}

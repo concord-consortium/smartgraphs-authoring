@@ -30,6 +30,9 @@ class PickAPointSequence < ActiveRecord::Base
   end
 
   validates :title, :presence => true
+  validates :initial_prompt, :presence => true
+  validates :give_up, :presence => true
+  validates :confirm_correct, :presence => true
 
   def field_order
     "title, initial_prompt, give_up, confirm_correct, correct_answer_x, correct_answer_y, correct_answer_x_min, correct_answer_y_min, correct_answer_x_max, correct_answer_y_max"
