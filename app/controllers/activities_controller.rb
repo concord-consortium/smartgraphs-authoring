@@ -74,6 +74,5 @@ class ActivitiesController < ApplicationController
 
   index_action :my_activities do
     @activities = Activity.where(["owner_id = ?", current_user.id]).paginate(:page => params[:page])
-    render :index
   end
 end
