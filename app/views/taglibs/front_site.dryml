@@ -164,7 +164,10 @@
         <ht key="multiple_choice_sequence.actions.new" >New Multiple Choice Sequence element</ht>
       </a><br/>
       <a action="new" to="&this.slope_tool_sequences">
-        <ht key="slope_tool_sequence.actions.new" >New Multiple Choice Sequence element</ht>
+        <ht key="slope_tool_sequence.actions.new" >New Slope Tool Sequence element</ht>
+      </a><br/>
+      <a action="new" to="&this.line_construction_sequences">
+        <ht key="line_construction_sequence.actions.new" >New Line Construction Sequence</ht>
       </a><br/>
     </unless>
   </if>

@@ -17,21 +17,22 @@ describe LineConstructionSequence do
     end
 
     it "should produce the correct hash" do
-      @expected = {
+      expected_hash = {
         "type"                => "LineConstructionSequence",
-        "slope"               => 1,
+        "slope"               => 1.0,
         "slopeTolerance"      => 0.1,
-        "yIntercept"          => 0,
+        "yIntercept"          => 0.0,
         "yInterceptTolerance" => 0.1,
-        "intialPrompt"        => LineConstructionSequence.defaults['initial_prompt'],
-        "confirmCorrect"      => LineConstructionSequence.defaults['confirm_correect'],
-        "slopeIncorrect"      => LineConstructionSequence.defaults['slope_incorrect'],
-        "yInterceptIncorrect" => LineConstructionSequence.defaults['y_intercept_incorrect'],
-        "allIncorrect"        => LineConstructionSequence.defaults['all_incorect'],
+        "initialPrompt"       => "Construct a line with y-interept 0.0, with slope 1.0.",
+        "confirmCorrect"      => "That is Correct.",
+        "slopeIncorrect"      => "Incorrect, your slope is wrong.",
+        "yInterceptIncorrect" => "Incorrect, your y-intercept is wrong.",
+        "allIncorrect"        => "Incorrect. Try again.",
         "showCrossHairs"      => true,
         "showToolTipCoords"   => false,
         "showGraphGrid"       => true
       }
+      @instance.to_hash.should == expected_hash
     end
   end
   

@@ -4,8 +4,8 @@ class LineConstructionSequence < ActiveRecord::Base
   # TODO: We could have these be i18nized constants....
   def self.defaults
     @defaults ||= {
-      'initial_prompt'         => "Construct a line with y-interept %s, with slope %s",
-      'confirm_correct'       => "Thats Correct",
+      'initial_prompt'        => "Construct a line with y-interept %s, with slope %s.",
+      'confirm_correct'       => "That is Correct.",
       'slope_incorrect'       => "Incorrect, your slope is wrong.",
       'y_intercept_incorrect' => "Incorrect, your y-intercept is wrong.",
       'all_incorrect'         => "Incorrect. Try again." 
@@ -37,12 +37,12 @@ class LineConstructionSequence < ActiveRecord::Base
 
   has_one :page_sequence, :as => :sequence, :dependent => :destroy
   has_one :page, :through => :page_sequence
-  reverse_association_of :page, 'Page#slope_tool_sequences'
+  reverse_association_of :page, 'Page#line_construction_sequences'
   
   before_validation :default_text_values
   
   validates :title,                 :presence => true
-  validates :initial_prompt,         :presence => true
+  validates :initial_prompt,        :presence => true
   validates :confirm_correct,       :presence => true
   validates :slope_incorrect,       :presence => true
   validates :y_intercept_incorrect, :presence => true
@@ -60,7 +60,7 @@ class LineConstructionSequence < ActiveRecord::Base
         "slopeTolerance"      => slope_tolerance,
         "yIntercept"          => y_intercept,
         "yInterceptTolerance" => y_intercept_tolerance,
-        "initialPrompt"       => initial_prompt,
+        "initialPrompt"       => sprintf(initial_prompt,y_intercept, slope),
         "confirmCorrect"      => confirm_correct,
         "slopeIncorrect"      => slope_incorrect,
         "yInterceptIncorrect" => y_intercept_incorrect,
