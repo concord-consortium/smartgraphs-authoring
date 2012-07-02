@@ -4,6 +4,8 @@ class ActivitiesController < ApplicationController
 
   auto_actions :all
 
+  index_action :my_activities
+
   def show
     hobo_show do |format|
       format.json {
@@ -70,4 +72,7 @@ class ActivitiesController < ApplicationController
     redirect_to activity_url(copy)
   end
 
+  index_action :my_activities do
+    @activities = Activity.where(["owner_id = ?", current_user.id]).paginate(:page => params[:page])
+  end
 end

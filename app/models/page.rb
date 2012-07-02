@@ -52,7 +52,10 @@ class Page < ActiveRecord::Base
 
   has_many :slope_tool_sequences, :through => :page_sequences, :source => :sequence, :source_type => 'SlopeToolSequence'
   reverse_association_of :slope_tool_sequences, 'SlopeToolSequence#page'
-
+  
+  has_many :line_construction_sequences, :through => :page_sequences, :source => :sequence, :source_type => 'LineConstructionSequence'
+  reverse_association_of :line_construction_sequences, 'LineConstructionSequence#page'
+  
   children :page_sequences, :page_panes
 
   acts_as_list

@@ -13,6 +13,16 @@
   <old-field-list merge skip="position"/>
 </extend>
 
+<def tag="main-nav">
+  <navigation class="main-nav" merge-attrs param="default">
+    <nav-item href="#{base_url}/">Home</nav-item>
+    <nav-item with="&Activity"><ht key="activity.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
+    <nav-item href="/activities/my_activities" name="My Activities" if="&current_user.signed_up?">My Activities</nav-item>
+    <nav-item with="&JsonActivity"><ht key="json_activity.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
+    <nav-item with="&Unit"><ht key="unit.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
+  </navigation>
+</def>
+
 <extend tag="page">
   <old-page merge>
     <footer:>
@@ -154,7 +164,10 @@
         <ht key="multiple_choice_sequence.actions.new" >New Multiple Choice Sequence element</ht>
       </a><br/>
       <a action="new" to="&this.slope_tool_sequences">
-        <ht key="slope_tool_sequence.actions.new" >New Multiple Choice Sequence element</ht>
+        <ht key="slope_tool_sequence.actions.new" >New Slope Tool Sequence element</ht>
+      </a><br/>
+      <a action="new" to="&this.line_construction_sequences">
+        <ht key="line_construction_sequence.actions.new" >New Line Construction Sequence</ht>
       </a><br/>
     </unless>
   </if>

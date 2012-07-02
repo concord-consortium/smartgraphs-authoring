@@ -19,6 +19,12 @@ class NumericSequence < ActiveRecord::Base
     timestamps
   end
 
+  validates :title, :presence => true
+  validates :initial_prompt, :presence => true
+  validates :give_up, :presence => true
+  validates :confirm_correct, :presence => true
+  validates :correct_answer, :presence => true
+  
   has_one :page_sequence, :as => :sequence, :dependent => :destroy
 
   has_one :page, :through => :page_sequence

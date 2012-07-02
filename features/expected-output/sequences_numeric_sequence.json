@@ -41,7 +41,8 @@
           "text": "That's not right."
         },
         "correctAnswer": 200.0,
-        "tolerance": 0.123
+        "tolerance": 0.123,
+        "hints": []
       }
     }
   ],

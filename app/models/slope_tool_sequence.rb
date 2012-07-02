@@ -15,7 +15,7 @@ class SlopeToolSequence < ActiveRecord::Base
     point_constraints                      SlopeToolSequence::PointConstraint,  :default => "any"
 
     first_question                         :text
-    slope_variable_name                    :string
+    slope_variable_name                    :string,   :default => "slope"
     x_min                                  :float,    :default => 0
     y_min                                  :float,    :default => 0
     x_max                                  :float,    :default => 10

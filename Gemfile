@@ -3,7 +3,6 @@ source 'http://rubygems.org'
 gem 'rails', '3.0.10'
 gem "hobo", "= 1.3.0.RC2"
 gem "acts_as_list"
-gem "amoeba"
 
 group :development do
   gem 'ffi', '1.0.9'
@@ -31,5 +30,6 @@ group :test do
 end
 
 group :production do
-  gem 'mysql'
+  # gem 'mysql'
+  gem 'mysql2', '~> 0.2.7'
 end

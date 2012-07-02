@@ -14,6 +14,8 @@ class ConstructedResponseSequence < ActiveRecord::Base
     initial_content :text
     timestamps
   end
+  
+  validates :title, :presence => true
 
   has_one :page_sequence, :as => :sequence, :dependent => :destroy
 
