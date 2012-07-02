@@ -6,7 +6,7 @@
     <header class="content-header">
       <h1>Welcome to the SmartGraphs Authoring Tool</h1>
       <section class="welcome-message">
-
+        <p>SmartGraphs allows users to customize existing activities or create new ones. View the <a href="https://docs.google.com/document/d/1-T8AOLteF6gwo-7grUY8vsCu3txH74-QHC-RBg-kwcY/edit " title="SmartGraphs Authoring Manual">Authoring Manual</a> for more information.</p>
 
         <% if User.count == 0 -%>
           <h3 style="margin-top: 20px;">There are no user accounts - please provide the details of the site administrator</h3>
