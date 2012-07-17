@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120516141336) do
+ActiveRecord::Schema.define(:version => 20120626184328) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -100,6 +100,24 @@ ActiveRecord::Schema.define(:version => 20120516141336) do
   create_table "json_activities", :force => true do |t|
     t.string   "name"
     t.text     "json"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "line_construction_sequences", :force => true do |t|
+    t.string   "title",                 :default => "new line construction"
+    t.float    "slope",                 :default => 1.0
+    t.float    "slope_tolerance",       :default => 0.1
+    t.float    "y_intercept",           :default => 0.0
+    t.float    "y_intercept_tolerance", :default => 0.1
+    t.boolean  "show_cross_hairs",      :default => true
+    t.boolean  "show_tool_tip_coords",  :default => false
+    t.boolean  "show_graph_grid",       :default => true
+    t.text     "initial_prompt"
+    t.text     "confirm_correct"
+    t.text     "slope_incorrect"
+    t.text     "y_intercept_incorrect"
+    t.text     "all_incorrect"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

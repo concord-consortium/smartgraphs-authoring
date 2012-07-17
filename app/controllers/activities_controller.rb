@@ -6,6 +6,13 @@ class ActivitiesController < ApplicationController
 
   index_action :my_activities
 
+  def index
+      hobo_index do |expects|
+        expects.json { render :json => @activities.to_json }
+        expects.html { hobo_index }
+      end
+  end
+
   def show
     hobo_show do |format|
       format.json {
