@@ -16,7 +16,7 @@ describe LineConstructionSequence do
       end
     end
 
-    it "should produce the correct hash" do
+    it "should produce the correct hash with default values" do
       expected_hash = {
         "type"                => "LineConstructionSequence",
         "slope"               => 1.0,
@@ -30,7 +30,9 @@ describe LineConstructionSequence do
         "allIncorrect"        => "Incorrect. Try again.",
         "showCrossHairs"      => true,
         "showToolTipCoords"   => false,
-        "showGraphGrid"       => true
+        "showGraphGrid"       => true,
+        "xPrecision"          => 0.1,
+        "yPrecision"          => 0.1
       }
       @instance.to_hash.should == expected_hash
     end
