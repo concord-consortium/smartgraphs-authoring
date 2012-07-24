@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120724135738) do
+ActiveRecord::Schema.define(:version => 20120626184328) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -120,8 +120,6 @@ ActiveRecord::Schema.define(:version => 20120724135738) do
     t.text     "all_incorrect"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.float    "x_precision",           :default => 0.1
-    t.float    "y_precision",           :default => 0.1
   end
 
   create_table "multiple_choice_choices", :force => true do |t|

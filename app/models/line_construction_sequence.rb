@@ -8,7 +8,7 @@ class LineConstructionSequence < ActiveRecord::Base
       'confirm_correct'       => "That is Correct.",
       'slope_incorrect'       => "Incorrect, your slope is wrong.",
       'y_intercept_incorrect' => "Incorrect, your y-intercept is wrong.",
-      'all_incorrect'         => "Incorrect. Try again."
+      'all_incorrect'         => "Incorrect. Try again." 
     }
   end
 
@@ -27,22 +27,20 @@ class LineConstructionSequence < ActiveRecord::Base
     show_cross_hairs      :boolean,:default => true
     show_tool_tip_coords  :boolean,:default => false
     show_graph_grid       :boolean,:default => true
-    initial_prompt        :text
-    confirm_correct       :text
-    slope_incorrect       :text
-    y_intercept_incorrect :text
-    all_incorrect         :text
-    x_precision           :float,  :default => 0.1
-    y_precision           :float,  :default => 0.1
+    initial_prompt        :text  
+    confirm_correct       :text  
+    slope_incorrect       :text  
+    y_intercept_incorrect :text  
+    all_incorrect         :text  
     timestamps
   end
 
   has_one :page_sequence, :as => :sequence, :dependent => :destroy
   has_one :page, :through => :page_sequence
   reverse_association_of :page, 'Page#line_construction_sequences'
-
+  
   before_validation :default_text_values
-
+  
   validates :title,                 :presence => true
   validates :initial_prompt,        :presence => true
   validates :confirm_correct,       :presence => true
@@ -54,8 +52,6 @@ class LineConstructionSequence < ActiveRecord::Base
   validates :slope_tolerance,       :numericality => true
   validates :y_intercept,           :numericality => true
   validates :y_intercept_tolerance, :numericality => true
-  validates :x_precision,           :numericality => true
-  validates :y_precision,           :numericality => true
 
   def to_hash
     {
@@ -71,9 +67,7 @@ class LineConstructionSequence < ActiveRecord::Base
         "allIncorrect"        => all_incorrect,
         "showCrossHairs"      => show_cross_hairs,
         "showToolTipCoords"   => show_tool_tip_coords,
-        "showGraphGrid"       => show_graph_grid,
-        "xPrecision"          => x_precision,
-        "yPrecision"          => y_precision
+        "showGraphGrid"       => show_graph_grid
     }
   end
 
@@ -87,6 +81,6 @@ class LineConstructionSequence < ActiveRecord::Base
       # self.attributes[key] ||= value
       self.send("#{key}=", value) if self.send(key).nil? || self.send(key).empty?
     end
-  end
+  end  
 
 end
