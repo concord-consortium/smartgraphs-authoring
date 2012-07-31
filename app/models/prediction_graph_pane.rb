@@ -15,10 +15,12 @@ class PredictionGraphPane < ActiveRecord::Base
     y_min   :float
     y_max   :float
     y_ticks :float
+    y_precision :float, :default => 0.1
     x_label :string
     x_min   :float
     x_max   :float
     x_ticks :float
+    x_precision :float, :default => 0.1
     prediction_type  enum_string(:connecting_points, :continuous_curves)
     timestamps
   end
@@ -38,7 +40,7 @@ class PredictionGraphPane < ActiveRecord::Base
   has_many :included_graphs, :through => :annotation_inclusions
 
   def field_order
-    "title, y_label, y_unit, y_min, y_max, y_ticks, x_label, x_unit, x_min, x_max, x_ticks, prediction_type"
+    "title, y_label, y_unit, y_min, y_max, y_ticks, y_precision, x_label, x_unit, x_min, x_max, x_ticks, x_precision, prediction_type"
   end
 
   def to_hash
@@ -54,7 +56,9 @@ class PredictionGraphPane < ActiveRecord::Base
       'xMin' => x_min,
       'xMax' => x_max,
       'yTicks' => y_ticks,
+      'yPrecision' => y_precision,
       'xTicks' => x_ticks,
+      'xPrecision' => x_precision,
       'predictionType' => prediction_type
     }
     if included_graphs.size > 0

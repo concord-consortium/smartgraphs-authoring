@@ -11,17 +11,19 @@ class PredefinedGraphPane < ActiveRecord::Base
   
   fields do
     title :string, :required
+    
     y_label :string, :required
-    # need to add y units
     y_min :float, :required
     y_max :float, :required
     y_ticks :float, :required
+    y_precision :float, :default => 0.1
+
     x_label :string, :required
-    # need to add x units
     x_min :float, :required
     x_max :float, :required
     x_ticks :float, :required
-
+    x_precision :float, :default => 0.1
+    
     data :text
     timestamps
   end
@@ -38,7 +40,7 @@ class PredefinedGraphPane < ActiveRecord::Base
   has_many :included_graphs, :through => :annotation_inclusions
 
   def field_order
-    "title, y_label, y_unit, y_min, y_max, y_ticks, x_label, x_unit, x_min, x_max, x_ticks, data"
+    "title, y_label, y_unit, y_min, y_max, y_ticks, y_precision, x_label, x_unit, x_min, x_max, x_ticks, x_precision, data"
   end
 
   def to_hash
@@ -54,7 +56,9 @@ class PredefinedGraphPane < ActiveRecord::Base
       'xMin' => x_min,
       'xMax' => x_max,
       'yTicks' => y_ticks,
+      'yPrecision' => y_precision,
       'xTicks' => x_ticks,
+      'xPrecision' => x_precision,
       'data' => data.split("\n").map {|point| point.split(',').map{|value| value.to_f}}
     }
     if included_graphs.size > 0
