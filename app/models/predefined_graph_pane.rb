@@ -39,27 +39,31 @@ class PredefinedGraphPane < ActiveRecord::Base
   has_many :annotation_inclusions, :as => :including_graph, :dependent => :destroy
   has_many :included_graphs, :through => :annotation_inclusions
 
+  before_validation do
+    normalize_data
+  end
+
   def field_order
     "title, y_label, y_unit, y_min, y_max, y_ticks, y_precision, x_label, x_unit, x_min, x_max, x_ticks, x_precision, data"
   end
 
   def to_hash
     hash = {
-      'type' => 'PredefinedGraphPane',
-      'title' => title,
-      'yLabel' => y_label,
-      'yUnits' => y_unit ? y_unit.name : nil,
-      'yMin' => y_min,
-      'yMax' => y_max,
-      'xLabel' => x_label,
-      'xUnits' => x_unit ? x_unit.name : nil,
-      'xMin' => x_min,
-      'xMax' => x_max,
-      'yTicks' => y_ticks,
+      'type'       => 'PredefinedGraphPane',
+      'title'      => title,
+      'yLabel'     => y_label,
+      'yUnits'     => y_unit ? y_unit.name : nil,
+      'yMin'       => y_min,
+      'yMax'       => y_max,
+      'xLabel'     => x_label,
+      'xUnits'     => x_unit ? x_unit.name : nil,
+      'xMin'       => x_min,
+      'xMax'       => x_max,
+      'yTicks'     => y_ticks,
       'yPrecision' => y_precision,
-      'xTicks' => x_ticks,
+      'xTicks'     => x_ticks,
       'xPrecision' => x_precision,
-      'data' => data.split("\n").map {|point| point.split(',').map{|value| value.to_f}}
+      'data'       => data_to_hash
     }
     if included_graphs.size > 0
       hash['includeAnnotationsFrom'] = included_graphs.map{|graph| graph.get_indexed_path }
@@ -67,12 +71,13 @@ class PredefinedGraphPane < ActiveRecord::Base
     return hash
   end
 
-  before_validation do
+  def data_to_hash
     normalize_data
+    data.split("\n").map {|point| point.split(',').map{|value| value.to_f}}
   end
 
   def normalize_data
-    return unless self.data
+    self.data ||= ""
     points = self.data.strip.split("\n").map {|point| point.strip }
     points.map! {|point| point.split(/\s*[,\t]\s*/)}
     self.data = points.map! { |point| point.join(',')}.join("\n")
