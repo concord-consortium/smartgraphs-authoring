@@ -7,6 +7,7 @@ class PredefinedGraphPane < ActiveRecord::Base
   include SgPermissions
   include SgMarshal
   include SgGraphPane
+
   sg_parent :page
   
   fields do
@@ -47,27 +48,16 @@ class PredefinedGraphPane < ActiveRecord::Base
     "title, y_label, y_unit, y_min, y_max, y_ticks, y_precision, x_label, x_unit, x_min, x_max, x_ticks, x_precision, data"
   end
 
+  def graph_type
+    'PredefinedGraphPane'
+  end
+
   def to_hash
-    hash = {
-      'type'       => 'PredefinedGraphPane',
-      'title'      => title,
-      'yLabel'     => y_label,
-      'yUnits'     => y_unit ? y_unit.name : nil,
-      'yMin'       => y_min,
-      'yMax'       => y_max,
-      'xLabel'     => x_label,
-      'xUnits'     => x_unit ? x_unit.name : nil,
-      'xMin'       => x_min,
-      'xMax'       => x_max,
-      'yTicks'     => y_ticks,
-      'yPrecision' => y_precision,
-      'xTicks'     => x_ticks,
-      'xPrecision' => x_precision,
-      'data'       => data_to_hash
-    }
-    if included_graphs.size > 0
-      hash['includeAnnotationsFrom'] = included_graphs.map{|graph| graph.get_indexed_path }
-    end
+    hash = super()
+    hash['xPrecision'] = x_precision
+    hash['yPrecision'] = y_precision
+    hash['xPrecision'] = x_precision
+    hash['data']       = data_to_hash
     return hash
   end
 
