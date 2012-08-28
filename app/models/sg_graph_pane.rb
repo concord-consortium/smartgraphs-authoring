@@ -1,5 +1,8 @@
 module SgGraphPane
 
+  LineType  = HoboFields::Types::EnumString.for(:connected, :none)
+  PointType = HoboFields::Types::EnumString.for(:none, :disc)
+  
   def data_from_hash(points)
     tmp_data  = points.map{ |point| point.join(",") }
     self.data = tmp_data.join("\n")

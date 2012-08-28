@@ -18,13 +18,20 @@ class PredefinedGraphPane < ActiveRecord::Base
     y_max :float, :required
     y_ticks :float, :required
     y_precision :float, :default => 0.1
-
+    
     x_label :string, :required
     x_min :float, :required
     x_max :float, :required
     x_ticks :float, :required
     x_precision :float, :default => 0.1
     
+    expression :string, :default =>"" #y = 0.5 * x + 5",         
+    line_snap_distance :float, :default => 0.1
+    line_type SgGraphPane::LineType,   :default => "none"    
+    point_type SgGraphPane::LineType,   :default => "disc"          
+    show_cross_hairs :boolean, :default => false
+    show_graph_grid  :boolean, :default => false
+    show_tool_tip_coords :boolean, :default => false
     data :text
     timestamps
   end
@@ -45,7 +52,13 @@ class PredefinedGraphPane < ActiveRecord::Base
   end
 
   def field_order
-    "title, y_label, y_unit, y_min, y_max, y_ticks, y_precision, x_label, x_unit, x_min, x_max, x_ticks, x_precision, data"
+    fo  = %w[title y_label y_unit y_min y_max y_ticks y_precision]
+    fo << %w[x_label x_unit x_min x_max x_ticks x_precision]
+    fo << %w[show_graph_grid show_cross_hairs show_tool_tip_coords]
+    fo << %w[expression line_snap_distance line_type point_type]
+    fo << %w[data]   
+    fo.flatten.compact.join(", ") # silly hobo
+
   end
 
   def graph_type
@@ -58,6 +71,13 @@ class PredefinedGraphPane < ActiveRecord::Base
     hash['yPrecision'] = y_precision
     hash['xPrecision'] = x_precision
     hash['data']       = data_to_hash
+    hash["expression"] = expression
+    hash["lineSnapDistance"] = line_snap_distance
+    hash["lineType"] = line_type
+    hash["pointType"] = point_type
+    hash["showCrossHairs"] = show_cross_hairs
+    hash["showToolTipCoords"] = show_tool_tip_coords
+    hash["showGraphGrid"] = show_graph_grid
     return hash
   end
 

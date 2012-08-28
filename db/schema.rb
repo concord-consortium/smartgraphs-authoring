@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120724144315) do
+ActiveRecord::Schema.define(:version => 20120827220700) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -120,8 +120,6 @@ ActiveRecord::Schema.define(:version => 20120724144315) do
     t.text     "all_incorrect"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.float    "x_precision",           :default => 0.1
-    t.float    "y_precision",           :default => 0.1
   end
 
   create_table "multiple_choice_choices", :force => true do |t|
@@ -250,8 +248,15 @@ ActiveRecord::Schema.define(:version => 20120724144315) do
     t.integer  "y_unit_id"
     t.integer  "x_unit_id"
     t.text     "data"
-    t.float    "y_precision", :default => 0.1
-    t.float    "x_precision", :default => 0.1
+    t.float    "y_precision",          :default => 0.1
+    t.float    "x_precision",          :default => 0.1
+    t.string   "expression",           :default => ""
+    t.float    "line_snap_distance",   :default => 0.1
+    t.string   "line_type",            :default => "none"
+    t.string   "point_type",           :default => "disc"
+    t.boolean  "show_cross_hairs",     :default => false
+    t.boolean  "show_graph_grid",      :default => false
+    t.boolean  "show_tool_tip_coords", :default => false
   end
 
   add_index "predefined_graph_panes", ["x_unit_id"], :name => "index_predefined_graph_panes_on_x_unit_id"
