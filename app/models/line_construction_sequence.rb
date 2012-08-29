@@ -24,9 +24,6 @@ class LineConstructionSequence < ActiveRecord::Base
     slope_tolerance       :float,  :default => 0.1
     y_intercept           :float,  :default => 0
     y_intercept_tolerance :float,  :default => 0.1
-    show_cross_hairs      :boolean,:default => true
-    show_tool_tip_coords  :boolean,:default => false
-    show_graph_grid       :boolean,:default => true
     initial_prompt        :text  
     confirm_correct       :text  
     slope_incorrect       :text  
@@ -65,9 +62,6 @@ class LineConstructionSequence < ActiveRecord::Base
         "slopeIncorrect"      => slope_incorrect,
         "yInterceptIncorrect" => y_intercept_incorrect,
         "allIncorrect"        => all_incorrect,
-        "showCrossHairs"      => show_cross_hairs,
-        "showToolTipCoords"   => show_tool_tip_coords,
-        "showGraphGrid"       => show_graph_grid
     }
   end
 
