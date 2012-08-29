@@ -117,6 +117,8 @@ ActiveRecord::Schema.define(:version => 20120829143745) do
     t.text     "all_incorrect"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "x_precision",           :default => 0.1
+    t.float    "y_precision",           :default => 0.1
   end
 
   create_table "multiple_choice_choices", :force => true do |t|
