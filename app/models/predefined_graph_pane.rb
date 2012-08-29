@@ -1,7 +1,7 @@
 class PredefinedGraphPane < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
-  
+
   # standard owner and admin permissions
   # defined in models/standard_permissions.rb
   include SgPermissions
@@ -9,23 +9,23 @@ class PredefinedGraphPane < ActiveRecord::Base
   include SgGraphPane
 
   sg_parent :page
-  
+
   fields do
     title :string, :required
-    
+
     y_label :string, :required
     y_min :float, :required
     y_max :float, :required
     y_ticks :float, :required
     y_precision :float, :default => 0.1
-    
+
     x_label :string, :required
     x_min :float, :required
     x_max :float, :required
     x_ticks :float, :required
     x_precision :float, :default => 0.1
-    
-    expression :string, :default =>"" #y = 0.5 * x + 5",         
+
+    expression :string, :default =>"" #y = 0.5 * x + 5",
     line_snap_distance :float, :default => 0.1
     line_type SgGraphPane::LineType,   :default => "none"    
     point_type SgGraphPane::LineType,   :default => "disc"          
@@ -56,7 +56,7 @@ class PredefinedGraphPane < ActiveRecord::Base
     fo << %w[x_label x_unit x_min x_max x_ticks x_precision]
     fo << %w[show_graph_grid show_cross_hairs show_tool_tip_coords]
     fo << %w[expression line_snap_distance line_type point_type]
-    fo << %w[data]   
+    fo << %w[data]
     fo.flatten.compact.join(", ") # silly hobo
 
   end
