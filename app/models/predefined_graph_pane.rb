@@ -27,8 +27,8 @@ class PredefinedGraphPane < ActiveRecord::Base
 
     expression :string, :default =>"" #y = 0.5 * x + 5",
     line_snap_distance :float, :default => 0.1
-    line_type SgGraphPane::LineType,   :default => "none"    
-    point_type SgGraphPane::LineType,   :default => "disc"          
+    line_type  SgGraphPane::LineType,   :default => "none"
+    point_type SgGraphPane::PointType,  :default => "dot"
     show_cross_hairs :boolean, :default => false
     show_graph_grid  :boolean, :default => false
     show_tool_tip_coords :boolean, :default => false
