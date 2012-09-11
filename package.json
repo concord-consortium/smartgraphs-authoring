@@ -2,6 +2,6 @@
   "description" : "package file which installs authoring dependency: smartgraphs-generator",
   "version" : "0.0.1",
   "dependencies" : {
-    "smartgraphs-generator" : "git://github.com/zeuslearning/smartgraphs-generator.git#function-graphing-staging"
+    "smartgraphs-generator" : "git://github.com/zeuslearning/smartgraphs-generator.git#expression-graphing-staging"
   }
 }
