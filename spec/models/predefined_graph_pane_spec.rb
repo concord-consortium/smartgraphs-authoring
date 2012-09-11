@@ -140,6 +140,22 @@ describe PredefinedGraphPane do
           test.should be_valid
         end
       end
+      describe "more complicated expression" do
+        it "passes pow(x,10) * (4 * atan( log(x) + 3))" do
+            test = PredefinedGraphPane.new(
+            :title     => "title",
+            :y_label   => "y",
+            :y_min     =>  0 ,
+            :y_max     =>  10,
+            :y_ticks    => 10,
+            :x_label     => "x",
+            :x_min       => 0,
+            :x_max       => 10,
+            :x_ticks     => 10,
+            :expression => "pow(x,10) * (4 * atan( log(x) + 3))")
+          test.should be_valid
+        end
+      end
       describe "failing expressions" do
         it "fails z = y + x + 3" do
           test = PredefinedGraphPane.new(
@@ -153,6 +169,20 @@ describe PredefinedGraphPane do
             :x_max       => 10,
             :x_ticks     => 10,
             :expression => "z = y + x + 3")
+          test.should_not be_valid
+        end
+        it "console.log('foo');" do
+          test = PredefinedGraphPane.new(
+            :title     => "title",
+            :y_label   => "y",
+            :y_min     =>  0 ,
+            :y_max     =>  10,
+            :y_ticks    => 10,
+            :x_label     => "x",
+            :x_min       => 0,
+            :x_max       => 10,
+            :x_ticks     => 10,
+            :expression => "console.log('foo');")
           test.should_not be_valid
         end
       end
