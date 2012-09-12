@@ -124,7 +124,7 @@ describe PredefinedGraphPane do
             :x_min       => 0,
             :x_max       => 10,
             :x_ticks     => 10,
-            :expression => "3 * x + 4")
+            :expression => "0.3 * x + 4")
           test.should be_valid
           test = PredefinedGraphPane.new(
             :title     => "title",
@@ -136,12 +136,12 @@ describe PredefinedGraphPane do
             :x_min       => 0,
             :x_max       => 10,
             :x_ticks     => 10,
-            :expression => "y = 3 * x + 4")
+            :expression => "y = x + 5")
           test.should be_valid
         end
       end
       describe "more complicated expression" do
-        it "passes pow(x,10) * (4 * atan( log(x) + 3))" do
+        it "passes pow(x,10) * (4.0 * atan( log(x) + 3))" do
             test = PredefinedGraphPane.new(
             :title     => "title",
             :y_label   => "y",
@@ -152,7 +152,7 @@ describe PredefinedGraphPane do
             :x_min       => 0,
             :x_max       => 10,
             :x_ticks     => 10,
-            :expression => "pow(x,10) * (4 * atan( log(x) + 3))")
+            :expression => "pow(x,10) * (4.0 * atan( log(x) + 3))")
           test.should be_valid
         end
       end

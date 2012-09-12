@@ -110,7 +110,7 @@ class PredefinedGraphPane < ActiveRecord::Base
   # Validation must now support compound expressions..
   def validate_expression
     slope_regex = /^(\-?\d+\s*\*\s*)?x\s*([+|-]\s*\d+)?$/
-    compound_regex = /^(sin|cos|tan|asin|acos|atan|pow|log|sqrt|x|,|\+|\-|\*|\/|\(|\)|\s|[0-9])+$/
+    compound_regex = /^(sin|cos|tan|asin|acos|atan|pow|log|sqrt|X|x|\,|\.|\+|\-|\*|\/|\(|\)|\s|[0-9])+$/
     return if self.expression.empty?
     return if self.expression.match(slope_regex)
     return if self.expression.match(compound_regex)
