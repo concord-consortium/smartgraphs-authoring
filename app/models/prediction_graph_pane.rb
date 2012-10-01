@@ -43,27 +43,15 @@ class PredictionGraphPane < ActiveRecord::Base
     "title, y_label, y_unit, y_min, y_max, y_ticks, y_precision, x_label, x_unit, x_min, x_max, x_ticks, x_precision, prediction_type"
   end
 
+  def graph_type
+    'PredictionGraphPane'
+  end
+
   def to_hash
-    hash = {
-      'type' => 'PredictionGraphPane',
-      'title' => title,
-      'yLabel' => y_label,
-      'yUnits' => y_unit ? y_unit.name : nil,
-      'yMin' => y_min,
-      'yMax' => y_max,
-      'xLabel' => x_label,
-      'xUnits' => x_unit ? x_unit.name : nil,
-      'xMin' => x_min,
-      'xMax' => x_max,
-      'yTicks' => y_ticks,
-      'yPrecision' => y_precision,
-      'xTicks' => x_ticks,
-      'xPrecision' => x_precision,
-      'predictionType' => prediction_type
-    }
-    if included_graphs.size > 0
-      hash['includeAnnotationsFrom'] = included_graphs.map{|graph| graph.get_indexed_path }
-    end
+    hash = super(); # from SgGraphPane
+    hash['xPrecision'] = x_precision
+    hash['yPrecision'] = y_precision
+    hash['predictionType'] = prediction_type
     return hash
   end
 

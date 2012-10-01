@@ -32,6 +32,8 @@ en:
         text_hint_prompts: Prompts
       pick_a_point_sequence:
         sequence_hints: Hints
+      predefined_graph_pane:
+        expression: Expression  (y=) 
     attribute_help:
       table_pane:
         title: this is not displayed in the runtime
@@ -40,6 +42,7 @@ en:
       predefined_graph_pane:
         x_ticks: number of ticks on the x axis
         y_ticks: number of ticks on the y axis
+        expression: Right hand side of the equation e.g. "3 * x + 3" or "pow(x,10) * (4 * atan( log(x) + 3))".
       slope_tool_sequence:
         case_type: |
           Choose one of the following forms for this tool:

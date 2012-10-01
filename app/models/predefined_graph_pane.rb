@@ -1,17 +1,18 @@
 class PredefinedGraphPane < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
-  
+
   # standard owner and admin permissions
   # defined in models/standard_permissions.rb
   include SgPermissions
   include SgMarshal
   include SgGraphPane
+
   sg_parent :page
-  
+
   fields do
     title :string, :required
-    
+
     y_label :string, :required
     y_min :float, :required
     y_max :float, :required
@@ -23,7 +24,14 @@ class PredefinedGraphPane < ActiveRecord::Base
     x_max :float, :required
     x_ticks :float, :required
     x_precision :float, :default => 0.1
-    
+
+    expression :string, :default =>"" #y = 0.5 * x + 5",
+    line_snap_distance :float, :default => 0.1
+    line_type  SgGraphPane::LineType,   :default => "none"
+    point_type SgGraphPane::PointType,  :default => "dot"
+    show_cross_hairs :boolean, :default => false
+    show_graph_grid  :boolean, :default => false
+    show_tool_tip_coords :boolean, :default => false
     data :text
     timestamps
   end
@@ -39,44 +47,74 @@ class PredefinedGraphPane < ActiveRecord::Base
   has_many :annotation_inclusions, :as => :including_graph, :dependent => :destroy
   has_many :included_graphs, :through => :annotation_inclusions
 
+  before_validation do
+    normalize_data
+    normalize_expression
+  end
+
+  validate :validate_expression
+
   def field_order
-    "title, y_label, y_unit, y_min, y_max, y_ticks, y_precision, x_label, x_unit, x_min, x_max, x_ticks, x_precision, data"
+    fo  = %w[title y_label y_unit y_min y_max y_ticks y_precision]
+    fo << %w[x_label x_unit x_min x_max x_ticks x_precision]
+    fo << %w[show_graph_grid show_cross_hairs show_tool_tip_coords]
+    fo << %w[expression line_snap_distance line_type point_type]
+    fo << %w[data]
+    fo.flatten.compact.join(", ") # silly hobo
+
+  end
+
+  def graph_type
+    'PredefinedGraphPane'
   end
 
   def to_hash
-    hash = {
-      'type' => 'PredefinedGraphPane',
-      'title' => title,
-      'yLabel' => y_label,
-      'yUnits' => y_unit ? y_unit.name : nil,
-      'yMin' => y_min,
-      'yMax' => y_max,
-      'xLabel' => x_label,
-      'xUnits' => x_unit ? x_unit.name : nil,
-      'xMin' => x_min,
-      'xMax' => x_max,
-      'yTicks' => y_ticks,
-      'yPrecision' => y_precision,
-      'xTicks' => x_ticks,
-      'xPrecision' => x_precision,
-      'data' => data.split("\n").map {|point| point.split(',').map{|value| value.to_f}}
-    }
-    if included_graphs.size > 0
-      hash['includeAnnotationsFrom'] = included_graphs.map{|graph| graph.get_indexed_path }
-    end
+    hash = super()
+    hash['xPrecision'] = x_precision
+    hash['yPrecision'] = y_precision
+    hash['xPrecision'] = x_precision
+    hash['data']       = data_to_hash
+    hash["expression"] = expression_to_hash
+    hash["lineSnapDistance"] = line_snap_distance
+    hash["lineType"] = line_type
+    hash["pointType"] = point_type
+    hash["showCrossHairs"] = show_cross_hairs
+    hash["showToolTipCoords"] = show_tool_tip_coords
+    hash["showGraphGrid"] = show_graph_grid
     return hash
   end
 
-  before_validation do
+  def expression_to_hash
+    if expression.empty?
+      return ""
+    else
+      return "y  = #{expression}"
+    end
+  end
+  def data_to_hash
     normalize_data
+    data.split("\n").map {|point| point.split(',').map{|value| value.to_f}}
   end
 
   def normalize_data
-    return unless self.data
+    self.data ||= ""
     points = self.data.strip.split("\n").map {|point| point.strip }
     points.map! {|point| point.split(/\s*[,\t]\s*/)}
     self.data = points.map! { |point| point.join(',')}.join("\n")
   end
 
+  def normalize_expression
+    self.expression.gsub!(/^\s*y\s*=\s*/,"")
+  end
+
+  # Validation must now support compound expressions..
+  def validate_expression
+    slope_regex = /^(\-?\d+\s*\*\s*)?x\s*([+|-]\s*\d+)?$/
+    compound_regex = /^(sin|cos|tan|asin|acos|atan|pow|log|sqrt|X|x|\,|\.|\+|\-|\*|\/|\(|\)|\s|[0-9])+$/
+    return if self.expression.empty?
+    return if self.expression.match(slope_regex)
+    return if self.expression.match(compound_regex)
+    errors.add(:expression, "unkown expression format. Please use '[m] * x + [b]' for slope-form. You may also use sin cos, tan, asin, acos, atan, pow, log, sqrt")
+  end
 
 end

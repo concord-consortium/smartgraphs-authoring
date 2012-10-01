@@ -1,5 +1,8 @@
 module SgGraphPane
 
+  LineType  = HoboFields::Types::EnumString.for(:connected, :none)
+  PointType = HoboFields::Types::EnumString.for(:none, :dot)
+  
   def data_from_hash(points)
     tmp_data  = points.map{ |point| point.join(",") }
     self.data = tmp_data.join("\n")
@@ -25,5 +28,26 @@ module SgGraphPane
       end
     end
     self.add_marshall_callback(callback)
+  end
+
+  def to_hash
+    hash = {
+      'type' => self.graph_type,
+      'title' => title,
+      'yLabel' => y_label,
+      'yUnits' => y_unit ? y_unit.name : nil,
+      'yMin' => y_min,
+      'yMax' => y_max,
+      'xLabel' => x_label,
+      'xUnits' => x_unit ? x_unit.name : nil,
+      'xMin' => x_min,
+      'xMax' => x_max,
+      'yTicks' => y_ticks,
+      'xTicks' => x_ticks
+    }
+    if included_graphs.size > 0
+      hash['includeAnnotationsFrom'] = included_graphs.map{|graph| graph.get_indexed_path }
+    end
+    hash
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120724144315) do
+ActiveRecord::Schema.define(:version => 20120829143745) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -110,9 +110,6 @@ ActiveRecord::Schema.define(:version => 20120724144315) do
     t.float    "slope_tolerance",       :default => 0.1
     t.float    "y_intercept",           :default => 0.0
     t.float    "y_intercept_tolerance", :default => 0.1
-    t.boolean  "show_cross_hairs",      :default => true
-    t.boolean  "show_tool_tip_coords",  :default => false
-    t.boolean  "show_graph_grid",       :default => true
     t.text     "initial_prompt"
     t.text     "confirm_correct"
     t.text     "slope_incorrect"
@@ -250,8 +247,15 @@ ActiveRecord::Schema.define(:version => 20120724144315) do
     t.integer  "y_unit_id"
     t.integer  "x_unit_id"
     t.text     "data"
-    t.float    "y_precision", :default => 0.1
-    t.float    "x_precision", :default => 0.1
+    t.float    "y_precision",          :default => 0.1
+    t.float    "x_precision",          :default => 0.1
+    t.string   "expression",           :default => ""
+    t.float    "line_snap_distance",   :default => 0.1
+    t.string   "line_type",            :default => "none"
+    t.string   "point_type",           :default => "dot"
+    t.boolean  "show_cross_hairs",     :default => false
+    t.boolean  "show_graph_grid",      :default => false
+    t.boolean  "show_tool_tip_coords", :default => false
   end
 
   add_index "predefined_graph_panes", ["x_unit_id"], :name => "index_predefined_graph_panes_on_x_unit_id"

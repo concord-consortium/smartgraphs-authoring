@@ -90,10 +90,10 @@ class PickAPointSequence < ActiveRecord::Base
       hash['correctAnswerPoint'] = [correct_answer_x, correct_answer_y]
     elsif correct_answer_x_min || correct_answer_y_min || correct_answer_x_max || correct_answer_y_max
       hash['correctAnswerRange'] = {
-        'xMin' => (correct_answer_x_min || 'null'),
-        'yMin' => (correct_answer_y_min || 'null'),
-        'xMax' => (correct_answer_x_max || 'null'),
-        'yMax' => (correct_answer_y_max || 'null')
+        'xMin' => correct_answer_x_min,
+        'yMin' => correct_answer_y_min,
+        'xMax' => correct_answer_x_max,
+        'yMax' => correct_answer_y_max
       }
     end
     update_sequence_prompts(hash)
