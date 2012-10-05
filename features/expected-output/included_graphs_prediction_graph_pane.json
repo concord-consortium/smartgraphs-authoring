@@ -21,6 +21,8 @@
           "xMin": 0.0,
           "xMax": 10.0,
           "xTicks": 1.0,
+          "xPrecision": 0.1,
+          "yPrecision": 0.1,
           "predictionType": "continuous_curves"
         },
         {
@@ -36,6 +38,8 @@
           "xMin": 0.0,
           "xMax": 10.0,
           "xTicks": 1.0,
+          "xPrecision": 0.1,
+          "yPrecision": 0.1,
           "predictionType": "continuous_curves"
         }
       ]
@@ -58,6 +62,8 @@
           "xMin": 0.0,
           "xMax": 10.0,
           "xTicks": 1.0,
+          "xPrecision": 0.1,
+          "yPrecision": 0.1,
           "predictionType": "connecting_points",
           "includeAnnotationsFrom": ["page/1/pane/1"]
         }
@@ -81,6 +87,8 @@
           "xMin": 0.0,
           "xMax": 10.0,
           "xTicks": 1.0,
+          "xPrecision": 0.1,
+          "yPrecision": 0.1,
           "predictionType": "continuous_curves",
           "includeAnnotationsFrom": ["page/1/pane/2"]
         }

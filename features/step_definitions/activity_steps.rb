@@ -82,7 +82,7 @@ Then(/^I should get correct json$/)do
   activity_url = activity_path(:id => @activity.id, :format => 'json')
   visit activity_url
   body = page.driver.respond_to?('response') ? page.driver.response.body : page.driver.body
-  actual_json = JSON.parse(body.gsub(/.*<pre>/,'').gsub(/<\/pre>.*/,''))
+  actual_json = JSON.parse(body.gsub(/.*<pre[^>]*>/,'').gsub(/<\/pre>.*/,''))
   # Uncomment if you want slightly better 
   # display of hash differences:
   #actual_json.extend BetterHashDiff
@@ -140,8 +140,7 @@ def create_pane(pane_def)
   when "PredefinedGraphPane"
     click_link 'New Predefined graph pane'
     fill_in 'predefined_graph_pane_title', :with => pane_def[:title]
-    fill_in 'predefined_graph_pane_data', :with => pane_def[:data]
-
+    
     fill_in 'predefined_graph_pane_y_label', :with => pane_def[:y][:label]
     fill_in 'predefined_graph_pane_y_min', :with => pane_def[:y][:min]
     fill_in 'predefined_graph_pane_y_max', :with => pane_def[:y][:max]
@@ -154,9 +153,16 @@ def create_pane(pane_def)
     fill_in 'predefined_graph_pane_x_ticks', :with => pane_def[:x][:ticks]
     select pane_def[:x][:unit], :from => 'predefined_graph_pane[x_unit_id]'
 
+    # oddly, when the submit button is beneith the fold we can't click
+    # on it, at least using chrome webdriver. One solution is to scroll the 
+    # page like this:
+    # page.execute_script "window.scrollBy(0,10000)"
+    # another would be to fill out something else in the page just before
+    # the button. Go figure.
+    fill_in 'predefined_graph_pane_data', :with => pane_def[:data]
     select_included_graphs(pane_def[:included_graphs])
-
     click_button 'Create Predefined graph pane'
+    
   when "SensorGraphPane"
     click_link 'New Sensor graph pane'
     fill_in 'sensor_graph_pane_title', :with => pane_def[:title]
