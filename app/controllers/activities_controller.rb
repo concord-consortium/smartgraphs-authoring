@@ -75,7 +75,7 @@ class ActivitiesController < ApplicationController
     original = Activity.find(activity_id)
     copy = original.copy_activity(current_user)
     copy.name = "copy of #{copy.name}"
-    copy.save
+    copy.save!
     redirect_to activity_url(copy)
   end
 
