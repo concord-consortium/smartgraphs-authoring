@@ -27,10 +27,11 @@ describe LineConstructionSequence do
         "confirmCorrect"      => "That is Correct.",
         "slopeIncorrect"      => "Incorrect, your slope is wrong.",
         "yInterceptIncorrect" => "Incorrect, your y-intercept is wrong.",
-        "allIncorrect"        => "Incorrect. Try again.",
-        "showCrossHairs"      => true,
-        "showToolTipCoords"   => false,
-        "showGraphGrid"       => true
+        "allIncorrect"        => "Incorrect. Try again."
+        # these moved to GraphPane....
+        # "showCrossHairs"      => true,
+        # "showToolTipCoords"   => false,
+        # "showGraphGrid"       => true
       }
       @instance.to_hash.should == expected_hash
     end
