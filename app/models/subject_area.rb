@@ -3,7 +3,7 @@ class SubjectArea < ActiveRecord::Base
   hobo_model # Don't put anything above this
   
   include SgMarshal         # serialization.
-  # include SgAdminOnlyModel  # admin only permissions.
+  include SgAdminOnlyModel  # admin only permissions.
   
   fields do
     name         :string, :required, :unique
@@ -21,20 +21,4 @@ class SubjectArea < ActiveRecord::Base
   has_many :activities, :through => :activity_subject_areas
 
 
-  # --- Permissions --- #
-  def create_permitted?
-    acting_user.administrator?
-  end
-
-  def update_permitted?
-    acting_user.administrator?
-  end
-
-  def destroy_permitted?
-    acting_user.administrator?
-  end
-
-  def view_permitted?(field)
-    true
-  end
 end

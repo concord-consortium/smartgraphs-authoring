@@ -3,7 +3,7 @@ class GradeLevel < ActiveRecord::Base
   hobo_model # Don't put anything above this
 
   include SgMarshal         # serialization.
-  # include SgAdminOnlyModel  # admin only permissions.
+  include SgAdminOnlyModel  # admin only permissions.
   
   fields do
     name         :string, :required, :unique
@@ -19,23 +19,5 @@ class GradeLevel < ActiveRecord::Base
 
   has_many :activity_grade_levels
   has_many :activities, :through => :activity_grade_levels
-
-
-  # --- Permissions --- #
-  def create_permitted?
-    acting_user.administrator?
-  end
-
-  def update_permitted?
-    acting_user.administrator?
-  end
-
-  def destroy_permitted?
-    acting_user.administrator?
-  end
-
-  def view_permitted?(field)
-    true
-  end
   
 end
