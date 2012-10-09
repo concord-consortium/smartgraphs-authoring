@@ -26,6 +26,15 @@ Given(/^I am on the [I|i]ndex page$/) do
   visit '/'
 end
 
+Given(/^There is a subject area called\s+'(.*)'$/) do |name|
+  @subject = SubjectArea.create(:name => name)
+end
+
+Given(/^There is a grade level called\s+'(.*)'$/) do |name|
+  @subject = GradeLevel.create(:name => name)
+end
+
+
 Then(/^I should see a link to "([^"]*)" in the navigation$/) do |url|
   within "ul.navigation" do |scope|
     has_link_to?(scope,url)
@@ -35,7 +44,6 @@ end
 
 When(/^I create (?:a new|an) activity:$/)do |text|
   activity_def = YAML.load(text)
-
   @activity = create_activity(activity_def)
 end
 
@@ -46,6 +54,14 @@ end
 
 Then(/^The activity should be (public||private)$/) do |p|
   @activity.publication_status.should == p.downcase
+end
+
+Then(/^The activity should be in the '(.*)' subject area/) do |subj|
+  @activity.subject_areas.map(&:name).should include(subj)
+end
+
+Then(/^The activity should be in the '(.*)' grade level/) do |level|
+  @activity.grade_levels.map(&:name).should include(level)
 end
 
 Then(/^I should see "([^"]*)" in the listing$/) do |name|
@@ -107,6 +123,19 @@ def create_activity(activity_def)
   if activity_def[:publication_status]
     select activity_def[:publication_status].capitalize, :from => 'activity[publication_status]'
   end
+  
+  if activity_def[:grade_levels]
+    activity_def[:grade_levels].each do |grade_level|
+      select grade_level.capitalize
+    end
+  end
+
+  if activity_def[:subject_areas]
+    activity_def[:subject_areas].each do |subject_area|
+      select subject_area.capitalize
+    end
+  end
+
   click_button 'Create Activity'
 
   activity_url = current_url

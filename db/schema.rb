@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121009160031) do
+ActiveRecord::Schema.define(:version => 20121009191901) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -23,6 +23,26 @@ ActiveRecord::Schema.define(:version => 20121009160031) do
   end
 
   add_index "activities", ["owner_id"], :name => "index_activities_on_owner_id"
+
+  create_table "activity_grade_levels", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "activity_id"
+    t.integer  "grade_level_id"
+  end
+
+  add_index "activity_grade_levels", ["activity_id"], :name => "index_activity_grade_levels_on_activity_id"
+  add_index "activity_grade_levels", ["grade_level_id"], :name => "index_activity_grade_levels_on_grade_level_id"
+
+  create_table "activity_subject_areas", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "activity_id"
+    t.integer  "subject_area_id"
+  end
+
+  add_index "activity_subject_areas", ["activity_id"], :name => "index_activity_subject_areas_on_activity_id"
+  add_index "activity_subject_areas", ["subject_area_id"], :name => "index_activity_subject_areas_on_subject_area_id"
 
   create_table "annotation_inclusions", :force => true do |t|
     t.datetime "created_at"
@@ -69,6 +89,12 @@ ActiveRecord::Schema.define(:version => 20121009160031) do
   add_index "give_up_prompts", ["numeric_sequence_id"], :name => "index_give_up_prompts_on_numeric_sequence_id"
   add_index "give_up_prompts", ["pick_a_point_sequence_id"], :name => "index_give_up_prompts_on_pick_a_point_sequence_id"
   add_index "give_up_prompts", ["prompt_type", "prompt_id"], :name => "index_give_up_prompts"
+
+  create_table "grade_levels", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "image_panes", :force => true do |t|
     t.string   "name"
@@ -336,6 +362,12 @@ ActiveRecord::Schema.define(:version => 20121009160031) do
     t.datetime "updated_at"
     t.string   "case_type",           :default => "case_a"
     t.string   "point_constraints",   :default => "any"
+  end
+
+  create_table "subject_areas", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "table_panes", :force => true do |t|

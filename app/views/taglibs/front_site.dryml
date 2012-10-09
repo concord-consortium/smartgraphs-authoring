@@ -20,6 +20,7 @@
     <nav-item href="/activities/my_activities" name="My Activities" if="&current_user.signed_up?">My Activities</nav-item>
     <nav-item with="&JsonActivity"><ht key="json_activity.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
     <nav-item with="&Unit"><ht key="unit.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
+    <nav-item with="&GradeLevel"><ht key="grade_level.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
   </navigation>
 </def>
 
