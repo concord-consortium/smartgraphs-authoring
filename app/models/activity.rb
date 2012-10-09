@@ -11,7 +11,7 @@ class Activity < ActiveRecord::Base
   fields do
     name        :string
     author_name :string
-    publication_status Activity::PublicationStatus, :default => :private
+    publication_status Activity::PublicationStatus, :default => 'private'
     timestamps
   end 
 
