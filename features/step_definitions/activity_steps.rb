@@ -44,6 +44,10 @@ Then(/^I should be able to copy the activity/) do
   the_copy.to_hash.to_s.should == @activity.to_hash.to_s
 end
 
+Then(/^The activity should be (public||private)$/) do |p|
+  @activity.publication_status.should == p.downcase
+end
+
 Then(/^I should see "([^"]*)" in the listing$/) do |name|
   visit '/activities'
   within "ul.activities" do |scope|
@@ -100,6 +104,9 @@ def create_activity(activity_def)
   click_link 'New Activity'
   fill_in 'activity_name', :with => activity_def[:name]
   fill_in 'activity_author_name', :with => activity_def[:author_name]
+  if activity_def[:publication_status]
+    select activity_def[:publication_status].capitalize, :from => 'activity[publication_status]'
+  end
   click_button 'Create Activity'
 
   activity_url = current_url

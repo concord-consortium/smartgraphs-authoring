@@ -2,6 +2,8 @@ class Activity < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
   
+  PublicationStatus  = HoboFields::Types::EnumString.for(:public, :private)
+
   # standard owner and admin permissions
   # defined in models/standard_permissions.rb
   include SgMarshal
@@ -9,6 +11,7 @@ class Activity < ActiveRecord::Base
   fields do
     name        :string
     author_name :string
+    publication_status Activity::PublicationStatus, :default => :private
     timestamps
   end 
 

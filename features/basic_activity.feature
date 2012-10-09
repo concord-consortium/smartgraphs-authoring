@@ -19,6 +19,40 @@ Feature: Basic Activities
       """
     Then I should get correct json
 
+  Scenario: Create a public activity
+    Given I am logged in as an admin named 'admin'
+    And   I am on the Activities page
+    When  I create a new activity:
+      """
+      --- 
+      :name: Simple Activity
+      :author_name: Mr. Author
+      :publication_status: public
+      :pages:
+      - :name: Simple Page 1
+        :text: In this page...
+      - :name: Simple Page 2
+        :text: Now, in this other page...
+      """
+    Then The activity should be public
+
+  Scenario: Create a public activity
+    Given I am logged in as an admin named 'admin'
+    And   I am on the Activities page
+    When  I create a new activity:
+      """
+      --- 
+      :name: Simple Activity
+      :author_name: Mr. Author
+      :publication_status: private
+      :pages:
+      - :name: Simple Page 1
+        :text: In this page...
+      - :name: Simple Page 2
+        :text: Now, in this other page...
+      """
+    Then The activity should be private
+
   Scenario: Listing activities
     Given I am logged in as an admin named 'admin'
     And   I am on the index page
