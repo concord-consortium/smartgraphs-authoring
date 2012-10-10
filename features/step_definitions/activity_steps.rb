@@ -64,6 +64,20 @@ Then(/^The activity should be in the '(.*)' grade level/) do |level|
   @activity.grade_levels.map(&:name).should include(level)
 end
 
+Then(/^I should see an activity listed for the grade level "([^"]*)"$/) do |level|
+  visit '/activities'
+  within "div.grade_levels" do |scope|
+    scope.should have_content level
+  end
+end
+
+Then(/^I should see an activity listed for the subject area "([^"]*)"$/) do |subject|
+  visit '/activities'
+  within "div.subject_areas" do |scope|
+    scope.should have_content subject
+  end
+end
+
 Then(/^I should see "([^"]*)" in the listing$/) do |name|
   visit '/activities'
   within "ul.activities" do |scope|

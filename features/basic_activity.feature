@@ -68,19 +68,48 @@ Feature: Basic Activities
       - Maths
       :grade_levels:
       - 10-12
-      :pages:
-      - :name: Simple Page 1
-        :text: In this page...
-      - :name: Simple Page 2
-        :text: Now, in this other page...
       """
     Then The activity should be in the 'Maths' subject area
     And  The activity should be in the '10-12' grade level
 
+
+  
   Scenario: Listing activities
     Given I am logged in as an admin named 'admin'
     And   I am on the index page
     Then I should see a link to "activities" in the navigation
+
+  @javascript
+  Scenario: Seeing grade levels in the listing
+    Given I am logged in as an admin named 'admin'
+    Given There is a grade level called  '10-12'
+    And   I am on the Activities page
+    When  I create a new activity:
+      """
+      --- 
+      :name: Simple Activity
+      :author_name: Mr. Author
+      :grade_levels:
+      - 10-12
+      """
+    When I am on the Activities page
+    Then I should see an activity listed for the grade level "10-12"
+
+  @javascript
+  Scenario: Seeing subject areas in the listing
+    Given I am logged in as an admin named 'admin'
+    Given There is a subject area called 'Maths'
+    And   I am on the Activities page
+    When  I create a new activity:
+      """
+      --- 
+      :name: Simple Activity
+      :author_name: Mr. Author
+      :subject_areas:
+      - Maths
+      """
+    When I am on the Activities page
+    Then I should see an activity listed for the subject area "Maths"
 
   Scenario: Listing my activities
     Given I am logged in as an admin named 'admin'
