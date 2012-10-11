@@ -19,9 +19,9 @@ class ActivityFilter
   end
 
   def is_filtering
-    return true unless self.search.empty?
-    return true unless self.grade_levels.empty?
-    return true unless self.subject_areas.empty?
+    return true unless (self.search.nil? or self.search.empty?)
+    return true unless (self.grade_levels.nil? or self.grade_levels.empty?)
+    return true unless (self.subject_areas.nil? or self.subject_areas.empty?)
     return false
   end
 
