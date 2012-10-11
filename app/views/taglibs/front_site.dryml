@@ -436,6 +436,40 @@
   </old-show-page>
 </extend>
 
+<def tag='search-filter'>
+  <form method='get' param='search-form' action='' merge-attrs with='&nil'>
+    <hidden-fields param for-query-string skip='page, search'/>
+    <span param='label'><t key='hobo.table_plus.search'>Search</t></span>
+    <input name='search' class='search' param type='search' value='&params[:search]'/>
+    <submit label='&t(&apos;hobo.table_plus.submit_label&apos;, :default=>&apos;Go&apos;)' class='search-button' param='search-submit'/>
+  </form>
+  <if test='&params[:search]'>
+    <form method='get' param='clear-form' action='' merge-attrs>
+      <hidden-fields for-query-string skip='page, search'/>
+      <input name='search' type='hidden' value=''/>
+      <submit label='Clear' class='search-button' param='clear-submit'/>
+    </form>
+  </if>
+</def>
+
+<def tag="activitySearchFilter">
+  <search-filter>
+    <search-form-append:>
+      hi
+    </search-form-append:>
+  </search-filter>
+</def>
+
+<extend tag="index-page" for="Activity">
+  <old-index-page merge>
+    <before-collection:>
+      <activitySearchFilter/>
+    </before-collection:>
+
+  </old-index-page>
+</extend>
+
+
 <extend tag="show-page" for="SensorGraphPane">
   <old-show-page merge>
     <field-list: fields="&this.field_order" />
@@ -574,16 +608,6 @@
   </old-show-page>
 </extend>
 
-<!--<extend tag="form" for="SlopeToolSequence">-->
-  <!--<old-form merge>-->
-    <!--<error-messages param/>-->
-    <!--<field-list fields="case_type, first_question, student_must_select_endpoints_of_range, slope_variable_name, x_min, y_min, x_max, y_max, selected_points_must_be_adjacent, tolerance" param/>-->
-    <!--<select-menu:case_type selected="&this.case_type" options="&SlopeToolSequence::CaseTypes"/>-->
-    <!--<div param="actions">-->
-      <!--<submit label="#{ht 'slope_tool_sequence.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>-->
-    <!--</div>-->
-  <!--</old-form>-->
-<!--</extend>-->
 
 <extend tag="show-page">
   <old-show-page merge>
