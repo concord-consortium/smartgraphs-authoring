@@ -5,7 +5,6 @@ Feature: Basic Activities
 
   Scenario: Create an activity
     Given I am logged in as an admin named 'admin'
-    And   I am on the Activities page
     When  I create a new activity:
       """
       --- 
@@ -21,7 +20,6 @@ Feature: Basic Activities
 
   Scenario: Create a public activity
     Given I am logged in as an admin named 'admin'
-    And   I am on the Activities page
     When  I create a new activity:
       """
       --- 
@@ -38,7 +36,6 @@ Feature: Basic Activities
 
   Scenario: Create a public activity
     Given I am logged in as an admin named 'admin'
-    And   I am on the Activities page
     When  I create a new activity:
       """
       --- 
@@ -58,7 +55,6 @@ Feature: Basic Activities
     Given I am logged in as an admin named 'admin'
     Given There is a grade level called  '10-12'
     Given There is a subject area called 'Maths'
-    And   I am on the Activities page
     When  I create a new activity:
       """
       --- 
@@ -73,7 +69,7 @@ Feature: Basic Activities
     And  The activity should be in the '10-12' grade level
 
 
-  
+
   Scenario: Listing activities
     Given I am logged in as an admin named 'admin'
     And   I am on the index page
@@ -83,7 +79,6 @@ Feature: Basic Activities
   Scenario: Seeing grade levels in the listing
     Given I am logged in as an admin named 'admin'
     Given There is a grade level called  '10-12'
-    And   I am on the Activities page
     When  I create a new activity:
       """
       --- 
@@ -91,6 +86,7 @@ Feature: Basic Activities
       :author_name: Mr. Author
       :grade_levels:
       - 10-12
+      :publication_status: public
       """
     When I am on the Activities page
     Then I should see an activity listed for the grade level "10-12"
@@ -99,7 +95,6 @@ Feature: Basic Activities
   Scenario: Seeing subject areas in the listing
     Given I am logged in as an admin named 'admin'
     Given There is a subject area called 'Maths'
-    And   I am on the Activities page
     When  I create a new activity:
       """
       --- 
@@ -107,25 +102,29 @@ Feature: Basic Activities
       :author_name: Mr. Author
       :subject_areas:
       - Maths
+      :publication_status: public
       """
     When I am on the Activities page
     Then I should see an activity listed for the subject area "Maths"
 
-  Scenario: Listing my activities
+  Scenario: Listing my private activities
     Given I am logged in as an admin named 'admin'
-    And I am on the Activities page
     When  I create a new activity:
       """
       --- 
       :name: Simple Activity
       :author_name: Mr. Author
-      :pages:
-      - :name: Simple Page 1
-        :text: In this page...
-      - :name: Simple Page 2
-        :text: Now, in this other page...
+      :publication_status: private
       """
-    And I am on the index page
-    Then I should see a link to "activities/my_activities" in the navigation
-    When I am on My Activities page
-    Then I should see "Simple Activity" in the listing
+    Then I should see "Simple Activity" in my activities list
+
+  Scenario: Private activities don't show up in index
+    Given I am logged in as an admin named 'admin'
+    When  I create a new activity:
+      """
+      --- 
+      :name: My Private Activity
+      :author_name: Mr. Author
+      :publication_status: private
+      """
+    Then I should not see "My Private Activity" in the listing

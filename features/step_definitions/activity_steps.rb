@@ -85,6 +85,18 @@ Then(/^I should see "([^"]*)" in the listing$/) do |name|
   end
 end
 
+Then(/^I should see "([^"]*)" in my activities list/) do |name|
+  visit '/activities/my_activities'
+  within "ul.activities" do |scope|
+    scope.should have_content name
+  end
+end
+
+Then(/^I should not see "([^"]*)" in the listing$/) do |name|
+  visit '/activities'
+  page.should_not have_content(name)
+end
+
 Then(/^I should be able to edit "([^"]*)"$/) do |name|
   a = Activity.find_by_name(name)
   visit activity_path(a)
