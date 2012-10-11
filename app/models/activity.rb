@@ -9,7 +9,7 @@ class Activity < ActiveRecord::Base
   include SgMarshal
   
   fields do
-    name        :string
+    name        :string, :required
     author_name :string
     publication_status Activity::PublicationStatus, :default => 'private'
     timestamps

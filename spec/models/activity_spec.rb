@@ -1,7 +1,20 @@
 require 'spec_helper'
 
 describe Activity do
+  describe "name" do
+    it "must have a name" do
+      subject.name = ""
+      subject.should_not be_valid
+      subject.name = 'bob'
+      subject.should be_valid
+    end
+  end
+
   describe "publication_status" do
+    before (:each) do
+      subject.name = "a valid name"
+    end
+    
     it "should have a publication status" do
       should.respond_to? :publication_status
     end
