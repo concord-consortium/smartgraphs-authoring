@@ -7,10 +7,8 @@ class ActivitiesController < ApplicationController
   index_action :my_activities
 
   def index
-      @activities = Activity.publication_status_is('public')
-      @activities = @activities.apply_scopes(:search => [params[:search], :name])
-      @grade_levels = []
-      @grade_level_options = GradeLevel.all
+      @activity_filter = ActivityFilter.new(params)
+      @activities = @activity_filter.activities
       hobo_index @activities do |expects|
         expects.json { render :json => @activities.to_json }
         expects.html { hobo_index @activities }
