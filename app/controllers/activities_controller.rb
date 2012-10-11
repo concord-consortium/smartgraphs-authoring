@@ -7,9 +7,10 @@ class ActivitiesController < ApplicationController
   index_action :my_activities
 
   def index
-      hobo_index do |expects|
+      @activities = Activity.publication_status_is('public')
+      hobo_index @activities do |expects|
         expects.json { render :json => @activities.to_json }
-        expects.html { hobo_index }
+        expects.html { hobo_index @activities }
       end
   end
 
