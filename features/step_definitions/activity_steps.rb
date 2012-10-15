@@ -26,11 +26,11 @@ Given(/^I am on the [I|i]ndex page$/) do
   visit '/'
 end
 
-Given(/^There is a subject area called\s+'(.*)'$/) do |name|
+Given(/^There is a subject area called\s+"(.*)"$/) do |name|
   @subject = SubjectArea.create(:name => name)
 end
 
-Given(/^There is a grade level called\s+'(.*)'$/) do |name|
+Given(/^There is a grade level called\s+"(.*)"$/) do |name|
   @subject = GradeLevel.create(:name => name)
 end
 
@@ -56,11 +56,11 @@ Then(/^The activity should be (public||private)$/) do |p|
   @activity.publication_status.should == p.downcase
 end
 
-Then(/^The activity should be in the '(.*)' subject area/) do |subj|
+Then(/^The activity should be in the "([^"]*)" subject area/) do |subj|
   @activity.subject_areas.map(&:name).should include(subj)
 end
 
-Then(/^The activity should be in the '(.*)' grade level/) do |level|
+Then(/^The activity should be in the "([^"]*)" grade level/) do |level|
   @activity.grade_levels.map(&:name).should include(level)
 end
 

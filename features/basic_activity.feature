@@ -53,8 +53,8 @@ Feature: Basic Activities
   @javascript
   Scenario: Create an activity with a grade level and subject area
     Given I am logged in as an admin named 'admin'
-    Given There is a grade level called  '10-12'
-    Given There is a subject area called 'Maths'
+    Given There is a grade level called  "10-12"
+    Given There is a subject area called "Maths"
     When  I create a new activity:
       """
       --- 
@@ -65,8 +65,8 @@ Feature: Basic Activities
       :grade_levels:
       - 10-12
       """
-    Then The activity should be in the 'Maths' subject area
-    And  The activity should be in the '10-12' grade level
+    Then The activity should be in the "Maths" subject area
+    And  The activity should be in the "10-12" grade level
 
 
 
@@ -78,7 +78,7 @@ Feature: Basic Activities
   @javascript
   Scenario: Seeing grade levels in the listing
     Given I am logged in as an admin named 'admin'
-    Given There is a grade level called  '10-12'
+    Given There is a grade level called  "10-12"
     When  I create a new activity:
       """
       --- 
@@ -94,7 +94,7 @@ Feature: Basic Activities
   @javascript
   Scenario: Seeing subject areas in the listing
     Given I am logged in as an admin named 'admin'
-    Given There is a subject area called 'Maths'
+    Given There is a subject area called "Maths"
     When  I create a new activity:
       """
       --- 
