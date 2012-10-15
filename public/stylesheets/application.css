@@ -130,6 +130,11 @@ a.button {
 	clear: both;
 	}
 
+.category_tag {
+	font-weight: bold;
+	margin-left: 1.5em;
+	/*margin-right: 1.5em;*/
+}
 .searchBox {
 	/*background-color: whiteSmoke;*/
 	border: 2px solid whiteSmoke;

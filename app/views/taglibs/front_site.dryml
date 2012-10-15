@@ -46,7 +46,7 @@
 <extend tag="card" for="Activity">
   <old-card merge>
     <append-header:>
-      Author: <view:owner/>
+      <span class="category_tag"> Author: </span> <view:owner/>
       <activityGrades/>
       <activitySubjects/>
     </append-header:>
@@ -394,23 +394,23 @@
 
 <def tag="activityGrades">
   <if:grade_levels>
-    <div class="grade_levels">
+    <span class="grade_levels">
       <span class="category_tag">Grade Levels:</span>
       <span class="category_values">
         <repeat: join=", "><name/></repeat>
       </span>
-    </div>
+    </span>
   </if>
 </def>
 
 <def tag="activitySubjects">
   <if:subject_areas>
-    <div class="subject_areas">
+    <span class="subject_areas">
       <span class="category_tag">Subject Areas:</span>
       <span class="category_values">
         <repeat: join=", "><name/></repeat>
       </span>
-    </div>
+    </span>
   </if>
 </def>
 
@@ -424,6 +424,7 @@
 <extend tag="show-page" for="Activity">
   <old-show-page merge>
     <append-content-header:>
+      <br/><br/>
       <activityCategories/>
     </append-content-header:>
     <new-link: replace>
