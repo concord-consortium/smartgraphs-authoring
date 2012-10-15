@@ -19,10 +19,10 @@ class Activity < ActiveRecord::Base
   belongs_to :owner, :class_name => "User"
   children   :pages
 
-  has_many   :activity_grade_levels
+  has_many   :activity_grade_levels, :dependent => :destroy
   has_many   :grade_levels, :through => :activity_grade_levels, :accessible => true
 
-  has_many   :activity_subject_areas
+  has_many   :activity_subject_areas, :dependent => :destroy
   has_many   :subject_areas, :through => :activity_subject_areas, :accessible => true
 
   def to_hash

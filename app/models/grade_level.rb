@@ -17,7 +17,7 @@ class GradeLevel < ActiveRecord::Base
     }
   end
 
-  has_many :activity_grade_levels
+  has_many :activity_grade_levels, :dependent => :destroy
   has_many :activities, :through => :activity_grade_levels
   
 end

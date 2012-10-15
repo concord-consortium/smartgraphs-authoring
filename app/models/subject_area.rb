@@ -17,7 +17,7 @@ class SubjectArea < ActiveRecord::Base
     }
   end
   
-  has_many :activity_subject_areas
+  has_many :activity_subject_areas, :dependent => :destroy
   has_many :activities, :through => :activity_subject_areas
 
 
