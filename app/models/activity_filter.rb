@@ -3,8 +3,10 @@ class ActivityFilter
   attr_accessor :subject_areas
   attr_accessor :grade_levels
   attr_accessor :search
+  attr_accessor :activities
 
-  def initialize(params)
+  def initialize(activities,params)
+    self.activities = activities
     self.grade_levels  = [params['grade_levels' ]].flatten.compact.uniq.reject{ |g| g.empty? }.map { |g| GradeLevel.find(g) }
     self.subject_areas = [params['subject_areas']].flatten.compact.uniq.reject{ |s| s.empty? }.map { |s| SubjectArea.find(s)}
     self.search = params['search']
@@ -26,7 +28,6 @@ class ActivityFilter
   end
 
   def activities
-    @activities = Activity.publication_status_is('public')
     if self.search
       @activities = @activities.apply_scopes(:search => [self.search, :name])
     end
