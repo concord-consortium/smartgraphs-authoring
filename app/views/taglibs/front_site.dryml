@@ -52,6 +52,9 @@
       <span class="category_tag"> Owner: </span> <view:owner/>
       <activityGrades/>
       <activitySubjects/>
+      <if test="&current_user.administrator?">
+        <span class="category_tag">(<view:publication_status/>)</span> 
+      </if>
     </append-header:>
     <append-body:>
        <a action='author_preview'>View as author</a> 
