@@ -87,7 +87,7 @@ class ActivitiesController < ApplicationController
   end
 
   index_action :all_activities do
-    load_activities(@activities)
+    load_activities(Activity)
     hobo_index @activities
   end
 
