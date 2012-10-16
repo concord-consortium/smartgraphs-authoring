@@ -25,6 +25,8 @@ class Activity < ActiveRecord::Base
   has_many   :activity_subject_areas, :dependent => :destroy
   has_many   :subject_areas, :through => :activity_subject_areas, :accessible => true
 
+  has_many   :data_sets
+  
   def to_hash
     {
       'type' => 'Activity',

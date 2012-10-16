@@ -47,6 +47,9 @@ class PredefinedGraphPane < ActiveRecord::Base
   has_many :annotation_inclusions, :as => :including_graph, :dependent => :destroy
   has_many :included_graphs, :through => :annotation_inclusions
 
+  has_many :data_set_graphs, :dependent => :destroy
+  has_many :data_sets, :through => :data_set_graphs
+
   before_validation do
     normalize_data
     normalize_expression
@@ -61,7 +64,6 @@ class PredefinedGraphPane < ActiveRecord::Base
     fo << %w[expression line_snap_distance line_type point_type]
     fo << %w[data]
     fo.flatten.compact.join(", ") # silly hobo
-
   end
 
   def graph_type
