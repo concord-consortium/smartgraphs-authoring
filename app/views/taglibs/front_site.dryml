@@ -49,7 +49,7 @@
 <extend tag="card" for="Activity">
   <old-card merge>
     <append-header:>
-      <span class="category_tag"> Author: </span> <view:owner/>
+      <span class="category_tag"> Owner: </span> <view:owner/>
       <activityGrades/>
       <activitySubjects/>
     </append-header:>
