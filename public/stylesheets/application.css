@@ -150,6 +150,7 @@ a.button {
 	margin-right: 1em;
 	margin-left: 1em;
 	padding: 0.5em;
+	vertical-align: top;
 	}
 	.searchBox h4 {
 		font-size: 12px;
