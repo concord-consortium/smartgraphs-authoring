@@ -140,7 +140,7 @@ class DataSet < ActiveRecord::Base
 
   ##
   ## create one or more datasets from
-  def self.fromPredefinedGraphPane(graph)
+  def self.from_predefined_graph_pane(graph)
     # cache = {}
     # key = "#{graph.class_name}_#{graph.id}"
     # other method will cache.
@@ -159,4 +159,11 @@ class DataSet < ActiveRecord::Base
     new_item.save!
     # TODO, other things.
   end
+
+  def self.convertAllGraphPanes()
+    PredefinedGraphPane.all.each do |gp|
+      self.from_predefined_graph_pane(gp)
+    end
+  end
+
 end

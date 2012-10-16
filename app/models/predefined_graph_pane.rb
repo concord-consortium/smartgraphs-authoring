@@ -9,6 +9,8 @@ class PredefinedGraphPane < ActiveRecord::Base
   include SgGraphPane
 
   sg_parent :page
+  
+  children  :data_set_graphs, :data_sets
 
   fields do
     title :string, :required
@@ -58,11 +60,9 @@ class PredefinedGraphPane < ActiveRecord::Base
   validate :validate_expression
 
   def field_order
-    fo  = %w[title y_label y_unit y_min y_max y_ticks y_precision]
-    fo << %w[x_label x_unit x_min x_max x_ticks x_precision]
+    fo  = %w[title y_label y_min y_max y_ticks ]
+    fo << %w[x_label x_min x_max x_ticks ]
     fo << %w[show_graph_grid show_cross_hairs show_tool_tip_coords]
-    fo << %w[expression line_snap_distance line_type point_type]
-    fo << %w[data]
     fo.flatten.compact.join(", ") # silly hobo
   end
 
