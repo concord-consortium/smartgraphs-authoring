@@ -7,7 +7,7 @@ a:hover, a:focus {
 body {
 	background: #fee9aa;
 	}
-button, input[type=button], input.button, .button {
+button, input[type=button], input.button, .button, a.button {
 	background: #f3951d;
 	border: 0 solid #f3951d;
 	color: #fff;
@@ -19,11 +19,16 @@ button, input[type=button], input.button, .button {
 	-webkit-border-radius: 12px;
 	border-radius: 12px;
 	}
-	button:hover, input[type=button]:hover, .button:hover {
+	button:hover, input[type=button]:hover, .button:hover, a.button:hover {
 		background: #F3951d;
 		background: -webkit-gradient(linear, left top, left bottom, from(#f3951d), to(#dd6e0d));
 		background: -moz-linear-gradient(top,  #f3951d,  #dd6e0d);
 		}
+a.button {
+	display: inline-block;
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
 .correct {
   color: #75a643;
 	}
@@ -124,3 +129,55 @@ button, input[type=button], input.button, .button {
 #admin-links {
 	clear: both;
 	}
+
+.category_tag {
+	font-weight: bold;
+	margin-left: 1.5em;
+	/*margin-right: 1.5em;*/
+}
+.searchBox {
+	/*background-color: whiteSmoke;*/
+	border: 2px solid whiteSmoke;
+	padding: 1em;
+	padding-top: 0;
+}
+.smallwhite a {
+	color: white;
+}
+.checklistArea {
+	clear: none;
+	display: inline-block;
+	margin-right: 1em;
+	margin-left: 1em;
+	padding: 0.5em;
+	vertical-align: top;
+	}
+	.searchBox h4 {
+		font-size: 12px;
+		text-decoration: underline;
+		font-weight: bold;
+	}
+	.searchBox .nameSearch {
+		margin-right: 2em;
+		font-weight: bold;
+	}
+	.searchBox .searchHeading {
+		text-decoration: underline;
+	}
+	.searchBox form {
+		clear: none;
+		display: inline-block;
+	}
+	.searchBox .nameSearch {
+		clear: none;
+		display: inline-block;
+	}
+	
+	.searchBox .checkList {
+		clear: none;
+		display: inline-block;
+		list-style: none;
+		}
+		.checkList .checkItem {
+			margin: 0;
+		}

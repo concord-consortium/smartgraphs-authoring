@@ -18,13 +18,30 @@
     <nav-item href="#{base_url}/">Home</nav-item>
     <nav-item with="&Activity"><ht key="activity.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
     <nav-item href="/activities/my_activities" name="My Activities" if="&current_user.signed_up?">My Activities</nav-item>
-    <nav-item with="&JsonActivity"><ht key="json_activity.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
-    <nav-item with="&Unit"><ht key="unit.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
+    <!-- nav-item with="&JsonActivity"><ht key="json_activity.nav_item" count="100"><model-name-human count="100"/></ht></nav-item -->
+    <if test="&current_user.administrator?">
+      <nav-item href="/activities/all_activities" name="All Activities">All Activities</nav-item>
+      <nav-item with="&Unit"><ht key="unit.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
+      <nav-item with="&GradeLevel"><ht key="grade_level.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
+      <nav-item with="&SubjectArea"><ht key="subject_area.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
+    </if>
   </navigation>
 </def>
 
 <extend tag="page">
   <old-page merge>
+    <custom-scripts:>
+      <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-6899787-29']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+      </script>
+    </custom-scripts:>
     <footer:>
       <p id="copyright">
         &copy; Copyright 2012 the Concord Consortium. All rights reserved.
@@ -44,7 +61,12 @@
 <extend tag="card" for="Activity">
   <old-card merge>
     <append-header:>
-      Author: <view:owner/>
+      <span class="category_tag"> Owner: </span> <view:owner/>
+      <activityGrades/>
+      <activitySubjects/>
+      <if test="&current_user.administrator?">
+        <span class="category_tag">(<view:publication_status/>)</span> 
+      </if>
     </append-header:>
     <append-body:>
        <a action='author_preview'>View as author</a> 
@@ -388,8 +410,41 @@
   </old-form>
 </extend>
 
+<def tag="activityGrades">
+  <if:grade_levels>
+    <span class="grade_levels">
+      <span class="category_tag">Grade Levels:</span>
+      <span class="category_values">
+        <repeat: join=", "><name/></repeat>
+      </span>
+    </span>
+  </if>
+</def>
+
+<def tag="activitySubjects">
+  <if:subject_areas>
+    <span class="subject_areas">
+      <span class="category_tag">Subject Areas:</span>
+      <span class="category_values">
+        <repeat: join=", "><name/></repeat>
+      </span>
+    </span>
+  </if>
+</def>
+
+<def tag="activityCategories">
+  <div class='category_tags'>
+    <activityGrades/>
+    <activitySubjects/>
+  </div>
+</def>
+
 <extend tag="show-page" for="Activity">
   <old-show-page merge>
+    <append-content-header:>
+      <br/><br/>
+      <activityCategories/>
+    </append-content-header:>
     <new-link: replace>
       <a:pages action="new" if="&can_edit?">
         <ht key="page.actions.new" count="1">
@@ -399,6 +454,67 @@
     </new-link:>
   </old-show-page>
 </extend>
+
+<def tag='checkboxSelect' attrs='all,selected,name'>
+  <div class="checklistArea">
+    <h4 class='checklistHeading'>#{name.humanize.capitalize}</h4>
+    <ul class='checkList #{name}' merge-attrs>
+      <li class='checkItem' param repeat='&all'>
+        <input 
+            name='#{name}[]' 
+            checked='&this.in?(selected)' 
+            id='#{dom_id(this, :check_many)}' 
+            type='checkbox' 
+            value='#{this.id}' />
+        <label for='#{dom_id(this, :check_many)}'><name param/></label>
+      </li>
+    </ul>
+  </div>
+</def>
+<def tag='activitySearchFilter'>
+  <div class="searchBox">
+    <form method='get' action=''>  
+      <checkboxSelect all='&this.all_grade_levels'  selected='&this.grade_levels'  name='grade_levels' />
+      <checkboxSelect all='&this.all_subject_areas' selected='&this.subject_areas' name='subject_areas'/>
+      <div class="nameSearch">
+        <span class="searchHeading">Title</span>
+        <input name='search' class='search' type='search' value='&this.search'/>
+      </div>
+      <submit label='search →' class='search-button' param='search-submit'/>
+    </form>
+    <if test='&this.is_filtering'>
+      <form method='get' param='clear-form' action='' merge-attrs>
+        <input name='search' type='hidden' value=''/>
+        <input name='grade_levels' type='hidden' value=''/>
+        <input name='subject_areas' type='hidden' value=''/>
+        <submit label='✖' class='search-button' param='clear-submit'/>
+      </form>
+    </if>
+  </div>
+</def>
+
+<extend tag="index-page" for="Activity">
+  <old-index-page merge>
+   <content:>
+
+      <section param="content-body">
+        <activitySearchFilter with="&@activity_filter"/>
+      
+        <p>
+          <a action="new" class="button" to="&model" param="new-link">
+            <ht key="activity.actions.new">new activity</ht>
+          </a>
+
+          <page-nav param="top-page-nav"/>
+        </p>
+        <collection param/>
+        <page-nav param="bottom-page-nav"/>
+
+      </section>
+    </content:>
+  </old-index-page>
+</extend>
+
 
 <extend tag="show-page" for="SensorGraphPane">
   <old-show-page merge>
@@ -538,16 +654,6 @@
   </old-show-page>
 </extend>
 
-<!--<extend tag="form" for="SlopeToolSequence">-->
-  <!--<old-form merge>-->
-    <!--<error-messages param/>-->
-    <!--<field-list fields="case_type, first_question, student_must_select_endpoints_of_range, slope_variable_name, x_min, y_min, x_max, y_max, selected_points_must_be_adjacent, tolerance" param/>-->
-    <!--<select-menu:case_type selected="&this.case_type" options="&SlopeToolSequence::CaseTypes"/>-->
-    <!--<div param="actions">-->
-      <!--<submit label="#{ht 'slope_tool_sequence.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>-->
-    <!--</div>-->
-  <!--</old-form>-->
-<!--</extend>-->
 
 <extend tag="show-page">
   <old-show-page merge>

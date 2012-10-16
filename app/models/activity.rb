@@ -2,19 +2,28 @@ class Activity < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
   
+  PublicationStatus  = HoboFields::Types::EnumString.for(:public, :private)
+
   # standard owner and admin permissions
   # defined in models/standard_permissions.rb
   include SgMarshal
   
   fields do
-    name        :string
+    name        :string, :required
     author_name :string
+    publication_status Activity::PublicationStatus, :default => 'private'
     timestamps
   end 
 
   has_many   :pages, :order => :position
   belongs_to :owner, :class_name => "User"
   children   :pages
+
+  has_many   :activity_grade_levels, :dependent => :destroy
+  has_many   :grade_levels, :through => :activity_grade_levels, :accessible => true
+
+  has_many   :activity_subject_areas, :dependent => :destroy
+  has_many   :subject_areas, :through => :activity_subject_areas, :accessible => true
 
   def to_hash
     {

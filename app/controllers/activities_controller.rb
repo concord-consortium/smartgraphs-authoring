@@ -5,11 +5,13 @@ class ActivitiesController < ApplicationController
   auto_actions :all
 
   index_action :my_activities
+  index_action :all_activities
 
   def index
-      hobo_index do |expects|
+      load_activities(Activity.publication_status_is('public'))
+      hobo_index @activities do |expects|
         expects.json { render :json => @activities.to_json }
-        expects.html { hobo_index }
+        expects.html { hobo_index @activities }
       end
   end
 
@@ -80,6 +82,23 @@ class ActivitiesController < ApplicationController
   end
 
   index_action :my_activities do
-    @activities = Activity.where(["owner_id = ?", current_user.id]).paginate(:page => params[:page])
+    load_activities(Activity.owner_is(current_user))
+    hobo_index @activities
   end
+
+  index_action :all_activities do
+    load_activities(Activity)
+    hobo_index @activities
+  end
+
+
+  #####################################################
+  private
+  #####################################################
+
+  def load_activities(activities)
+    @activity_filter = ActivityFilter.new(activities,params)
+    @activities = @activity_filter.activities
+  end
+
 end
