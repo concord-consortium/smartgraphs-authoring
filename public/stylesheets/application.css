@@ -159,8 +159,10 @@ a.button {
 	}
 	.searchBox .nameSearch {
 		margin-right: 2em;
-		text-decoration: underline;
 		font-weight: bold;
+	}
+	.searchBox .searchHeading {
+		text-decoration: underline;
 	}
 	.searchBox form {
 		clear: none;
