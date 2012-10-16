@@ -19,9 +19,12 @@
     <nav-item with="&Activity"><ht key="activity.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
     <nav-item href="/activities/my_activities" name="My Activities" if="&current_user.signed_up?">My Activities</nav-item>
     <!-- nav-item with="&JsonActivity"><ht key="json_activity.nav_item" count="100"><model-name-human count="100"/></ht></nav-item -->
-    <nav-item with="&Unit"><ht key="unit.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
-    <nav-item with="&GradeLevel"><ht key="grade_level.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
-    <nav-item with="&SubjectArea"><ht key="subject_area.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
+    <if test="&current_user.administrator?">
+      <nav-item href="/activities/all_activities" name="All Activities">All Activities</nav-item>
+      <nav-item with="&Unit"><ht key="unit.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
+      <nav-item with="&GradeLevel"><ht key="grade_level.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
+      <nav-item with="&SubjectArea"><ht key="subject_area.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
+    </if>
   </navigation>
 </def>
 

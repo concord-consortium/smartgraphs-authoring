@@ -5,6 +5,7 @@ class ActivitiesController < ApplicationController
   auto_actions :all
 
   index_action :my_activities
+  index_action :all_activities
 
   def index
       load_activities(Activity.publication_status_is('public'))
@@ -82,6 +83,11 @@ class ActivitiesController < ApplicationController
 
   index_action :my_activities do
     load_activities(Activity.owner_is(current_user))
+    hobo_index @activities
+  end
+
+  index_action :all_activities do
+    load_activities(@activities)
     hobo_index @activities
   end
 

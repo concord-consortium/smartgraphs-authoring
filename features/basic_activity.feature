@@ -107,24 +107,16 @@ Feature: Basic Activities
     When I am on the Activities page
     Then I should see an activity listed for the subject area "Maths"
 
-  Scenario: Listing my private activities
+  Scenario: Listing private activities
     Given I am logged in as an admin named 'admin'
     When  I create a new activity:
       """
       --- 
-      :name: Simple Activity
+      :name: Private Activity
       :author_name: Mr. Author
       :publication_status: private
       """
-    Then I should see "Simple Activity" in my activities list
+    Then I should see "Private Activity" in my activities list
+    And I should see "Private Activity" in the all activities list
+    And I should not see "Private Activity" in the listing
 
-  Scenario: Private activities don't show up in index
-    Given I am logged in as an admin named 'admin'
-    When  I create a new activity:
-      """
-      --- 
-      :name: My Private Activity
-      :author_name: Mr. Author
-      :publication_status: private
-      """
-    Then I should not see "My Private Activity" in the listing

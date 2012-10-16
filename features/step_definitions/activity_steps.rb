@@ -66,14 +66,14 @@ end
 
 Then(/^I should see an activity listed for the grade level "([^"]*)"$/) do |level|
   visit '/activities'
-  within "div.grade_levels" do |scope|
+  within ".grade_levels" do |scope|
     scope.should have_content level
   end
 end
 
 Then(/^I should see an activity listed for the subject area "([^"]*)"$/) do |subject|
   visit '/activities'
-  within "div.subject_areas" do |scope|
+  within ".subject_areas" do |scope|
     scope.should have_content subject
   end
 end
@@ -87,6 +87,13 @@ end
 
 Then(/^I should see "([^"]*)" in my activities list/) do |name|
   visit '/activities/my_activities'
+  within "ul.activities" do |scope|
+    scope.should have_content name
+  end
+end
+
+Then(/^I should see "([^"]*)" in\s*(?:[tT]he)\s*all activities list/) do |name|
+  visit '/activities/all_activities'
   within "ul.activities" do |scope|
     scope.should have_content name
   end
