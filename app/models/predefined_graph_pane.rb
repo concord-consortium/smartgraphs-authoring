@@ -72,18 +72,15 @@ class PredefinedGraphPane < ActiveRecord::Base
 
   def to_hash
     hash = super()
-    hash['xPrecision'] = x_precision
-    hash['yPrecision'] = y_precision
-    hash['xPrecision'] = x_precision
-    hash['data']       = data_to_hash
-    hash["expression"] = expression_to_hash
-    hash["lineSnapDistance"] = line_snap_distance
-    hash["lineType"] = line_type
-    hash["pointType"] = point_type
     hash["showCrossHairs"] = show_cross_hairs
     hash["showToolTipCoords"] = show_tool_tip_coords
     hash["showGraphGrid"] = show_graph_grid
+    hash["includedDataSets"] = included_datasets
     return hash
+  end
+
+  def included_datasets
+    return data_sets.map {|d| {"name" => d.name, "inLegend" => true} }
   end
 
   def expression_to_hash
@@ -93,6 +90,7 @@ class PredefinedGraphPane < ActiveRecord::Base
       return "y  = #{expression}"
     end
   end
+
   def data_to_hash
     normalize_data
     data.split("\n").map {|point| point.split(',').map{|value| value.to_f}}

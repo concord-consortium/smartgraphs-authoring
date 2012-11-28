@@ -32,16 +32,14 @@ module SgGraphPane
 
   def to_hash
     hash = {
-      'type' => self.graph_type,
-      'title' => title,
+      'type'   => self.graph_type,
+      'title'  => title,
       'yLabel' => y_label,
-      'yUnits' => y_unit ? y_unit.name : nil,
-      'yMin' => y_min,
-      'yMax' => y_max,
+      'yMin'   => y_min,
+      'yMax'   => y_max,
       'xLabel' => x_label,
-      'xUnits' => x_unit ? x_unit.name : nil,
-      'xMin' => x_min,
-      'xMax' => x_max,
+      'xMin'   => x_min,
+      'xMax'   => x_max,
       'yTicks' => y_ticks,
       'xTicks' => x_ticks
     }

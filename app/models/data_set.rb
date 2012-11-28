@@ -6,7 +6,6 @@ class DataSet < ActiveRecord::Base
   # defined in models/standard_permissions.rb
   include SgPermissions
   include SgMarshal
-  include SgGraphPane
 
   sg_parent :activity
 
@@ -21,7 +20,6 @@ class DataSet < ActiveRecord::Base
 
     expression :string, :default =>"" #y = 0.5 * x + 5",
     
-    # not sure if this belongs on graphPane or ?
     line_type  DataSet::LineType,   :default => "none"
     point_type DataSet::PointType,  :default => "dot"
 
@@ -66,19 +64,16 @@ class DataSet < ActiveRecord::Base
 
   def to_hash
     hash = {
-      'type' => self.type,
-      'name' => name,
-      'yLabel' => y_label,
-      'yUnits' => y_unit ? y_unit.name : nil,
-      'xUnits' => x_unit ? x_unit.name : nil,
-      'xMin' => x_min,
-      'xMax' => x_max,
-      'yTicks' => y_ticks,
-      'xTicks' => x_ticks
+      'type'             => self.type,
+      'name'             => self.name,
+      'yUnits'           => y_unit ? y_unit.name : nil,
+      'xUnits'           => x_unit ? x_unit.name : nil,
+      'xPrecision'       => x_precision,
+      'yPrecision'       => y_precision,
+      'lineSnapDistance' => line_snap_distance,
+      'data'             => data_to_hash,
+      'expression'       => expression_to_hash
     }
-    if included_graphs.size > 0
-      hash['includeAnnotationsFrom'] = included_graphs.map{|graph| graph.get_indexed_path }
-    end
     hash
   end
     
@@ -130,7 +125,7 @@ class DataSet < ActiveRecord::Base
   end
 
   def is_data_ref?
-    return (!(self.expression.nil && self.expression.blank?))
+    return (!(self.expression.nil? && self.expression.blank?))
   end
 
   def type
