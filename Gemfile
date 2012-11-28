@@ -21,6 +21,7 @@ group :development do
   gem 'railroady' 
   gem 'guard'
   gem 'guard-rspec'
+  gem 'rb-fsevent'
 end
 
 group :test do
