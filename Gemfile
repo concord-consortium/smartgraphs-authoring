@@ -19,6 +19,8 @@ group :development do
   gem 'pry-nav'
   gem 'awesome_print'
   gem 'railroady' 
+  gem 'guard'
+  gem 'guard-rspec'
 end
 
 group :test do
