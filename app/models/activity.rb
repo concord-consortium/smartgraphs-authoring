@@ -17,14 +17,16 @@ class Activity < ActiveRecord::Base
 
   has_many   :pages, :order => :position
   belongs_to :owner, :class_name => "User"
-  children   :pages
-
+  children   :pages, :data_sets
+  
   has_many   :activity_grade_levels, :dependent => :destroy
   has_many   :grade_levels, :through => :activity_grade_levels, :accessible => true
 
   has_many   :activity_subject_areas, :dependent => :destroy
   has_many   :subject_areas, :through => :activity_subject_areas, :accessible => true
 
+  has_many   :data_sets
+  
   def to_hash
     {
       'type' => 'Activity',

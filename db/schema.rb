@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121009191901) do
+ActiveRecord::Schema.define(:version => 20121015205230) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -76,6 +76,36 @@ ActiveRecord::Schema.define(:version => 20121009191901) do
     t.datetime "updated_at"
     t.text     "initial_content"
   end
+
+  create_table "data_set_graphs", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "data_set_id"
+    t.integer  "predefined_graph_pane_id"
+  end
+
+  add_index "data_set_graphs", ["data_set_id"], :name => "index_data_set_graphs_on_data_set_id"
+  add_index "data_set_graphs", ["predefined_graph_pane_id"], :name => "index_data_set_graphs_on_predefined_graph_pane_id"
+
+  create_table "data_sets", :force => true do |t|
+    t.string   "name"
+    t.float    "y_precision",        :default => 0.1
+    t.float    "x_precision",        :default => 0.1
+    t.float    "line_snap_distance", :default => 0.1
+    t.string   "expression",         :default => ""
+    t.string   "line_type",          :default => "none"
+    t.string   "point_type",         :default => "dot"
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "y_unit_id"
+    t.integer  "x_unit_id"
+    t.integer  "activity_id"
+  end
+
+  add_index "data_sets", ["activity_id"], :name => "index_data_sets_on_activity_id"
+  add_index "data_sets", ["x_unit_id"], :name => "index_data_sets_on_x_unit_id"
+  add_index "data_sets", ["y_unit_id"], :name => "index_data_sets_on_y_unit_id"
 
   create_table "give_up_prompts", :force => true do |t|
     t.datetime "created_at"

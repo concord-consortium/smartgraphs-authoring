@@ -379,7 +379,8 @@
     </field-list:>
     <after-field-list:>
       <h3>Included prediction graphs</h3>
-      <custom-poly-select-many:included_graphs prompt="Include graph data from:" options="&PredictionGraphPane.get_all_prediction_graph_panes_before(this)"/>
+      <!-- custom-poly-select-many:included_graphs prompt="Include graph data from:" options="&PredictionGraphPane.get_all_prediction_graph_panes_before(this)"/ -->
+      <input-many:data_set_graphs />
     </after-field-list:>
   </old-form>
 </extend>
@@ -452,6 +453,12 @@
         </ht>
       </a:pages>
     </new-link:>
+    <after-data_sets-collection-section:>
+      <hr/>
+      <a:data_sets action="new" if="&can_create?(@activity.data_sets)">
+          New Data set
+      </a:data_sets>
+    </after-data_sets-collection-section:>
   </old-show-page>
 </extend>
 
@@ -531,10 +538,10 @@
     <field-list: fields="&this.field_order">
       <data-tag: with="&this.gsub('&#10;', '<br>').html_safe"/>
     </field-list:>
-    <after-field-list:>
+    <!-- after-field-list:>
       <h3>Included Prediction Graphs</h3>
       <collection:included_graphs />
-    </after-field-list:>
+    </after-field-list: -->
   </old-show-page>
 </extend>
 
