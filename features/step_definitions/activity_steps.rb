@@ -197,8 +197,36 @@ def create_page(page_def)
   create_multiple_choice_sequencese(page_def[:multiple_choice_sequence]) if page_def[:multiple_choice_sequence]
 end
 
+# TODO: make add_data_set which excerises the UI
+def legacy_add_data_set(definition)
+  x_unit    = definition['x']['unit'] if definition['x']
+  y_unit    = definition['y']['unit'] if definition['y']
+  data       = definition['data'] || ""
+  expression = definition['expression'] || ""
+  name       = definition['data_set_name'] || 'default_data_set'
+  x_unit = Unit.find_by_name(x_unit) if x_unit
+  y_unit = Unit.find_by_name(y_unit) if y_unit
+  atts = {
+    :name       => name,
+    :x_unit     => x_unit,
+    :y_unit     => y_unit,
+    :data       => data,
+    :expression => expression
+  }
+  return DataSet.create!(atts)
+end
+
+def select_included_data_sets(included_defs = [])
+  binding.pry
+  included_defs.each do |data_set_name|
+    select_node = find(:css, '.select-many select')
+    select_node.find(:xpath, XPath::HTML.option(data_set_name), :message => "cannot select option with text '#{data_set_name}'").select_option
+  end
+end
+
 def create_pane(pane_def)
   case pane_def[:type]
+  
   when "ImagePane"
     click_link 'New Image pane'
     fill_in 'image_pane_name', :with => pane_def[:name]
@@ -206,7 +234,13 @@ def create_pane(pane_def)
     fill_in 'image_pane_license', :with => pane_def[:license]
     fill_in 'image_pane_attribution', :with => pane_def[:attribution]
     click_button 'Create Image pane'
+
   when "PredefinedGraphPane"
+    if(pane_def[:y] || pane_def[:x] || pane_def[:data])
+      data_set = legacy_add_data_set(pane_def)
+      pane_def[:data_sets] ||= []
+      pane_def[:data_sets] << data_set.name
+    end
     click_link 'New Predefined graph pane'
     fill_in 'predefined_graph_pane_title', :with => pane_def[:title]
     
@@ -214,22 +248,14 @@ def create_pane(pane_def)
     fill_in 'predefined_graph_pane_y_min', :with => pane_def[:y][:min]
     fill_in 'predefined_graph_pane_y_max', :with => pane_def[:y][:max]
     fill_in 'predefined_graph_pane_y_ticks', :with => pane_def[:y][:ticks]
-    select pane_def[:y][:unit], :from => 'predefined_graph_pane[y_unit_id]'
-
+    
     fill_in 'predefined_graph_pane_x_label', :with => pane_def[:x][:label]
     fill_in 'predefined_graph_pane_x_min', :with => pane_def[:x][:min]
     fill_in 'predefined_graph_pane_x_max', :with => pane_def[:x][:max]
     fill_in 'predefined_graph_pane_x_ticks', :with => pane_def[:x][:ticks]
-    select pane_def[:x][:unit], :from => 'predefined_graph_pane[x_unit_id]'
-
-    # oddly, when the submit button is beneith the fold we can't click
-    # on it, at least using chrome webdriver. One solution is to scroll the 
-    # page like this:
-    # page.execute_script "window.scrollBy(0,10000)"
-    # another would be to fill out something else in the page just before
-    # the button. Go figure.
-    fill_in 'predefined_graph_pane_data', :with => pane_def[:data]
+    
     select_included_graphs(pane_def[:included_graphs])
+    select_included_data_sets(pane_def[:data_sets])
     click_button 'Create Predefined graph pane'
     
   when "SensorGraphPane"
