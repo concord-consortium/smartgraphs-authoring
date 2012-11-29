@@ -378,9 +378,9 @@
       <x_unit-tag: include-none blank-message="No units"/>
     </field-list:>
     <after-field-list:>
-      <h3>Included prediction graphs</h3>
+      <h3>Included data sets</h3>
       <!-- custom-poly-select-many:included_graphs prompt="Include graph data from:" options="&PredictionGraphPane.get_all_prediction_graph_panes_before(this)"/ -->
-      <input-many:data_set_graphs />
+      <select-many:data_sets />
     </after-field-list:>
   </old-form>
 </extend>

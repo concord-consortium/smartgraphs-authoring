@@ -10,7 +10,8 @@ class PredefinedGraphPane < ActiveRecord::Base
 
   sg_parent :page
   
-  children  :data_set_graphs, :data_sets
+  children :data_sets
+  # children  :data_set_graphs, :data_sets
 
   fields do
     title :string, :required
@@ -56,8 +57,9 @@ class PredefinedGraphPane < ActiveRecord::Base
   has_many :annotation_inclusions, :as => :including_graph, :dependent => :destroy
   has_many :included_graphs, :through => :annotation_inclusions
 
+  has_many :data_sets, :through => :data_set_graphs, :accessible => true
   has_many :data_set_graphs, :dependent => :destroy
-  has_many :data_sets, :through => :data_set_graphs
+  
 
   def field_order
     fo  = %w[title y_label y_min y_max y_ticks ]
