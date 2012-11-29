@@ -27,6 +27,9 @@ class PredefinedGraphPane < ActiveRecord::Base
     x_ticks :float, :required
     x_precision :float, :default => 0.1
 
+    # Keep these fields around to migrate older data, 
+    # even though data_set.rb now provides this kind of
+    # data.  See DataSet#from_predefined_graph_pane
     expression :string, :default =>"" #y = 0.5 * x + 5",
     line_snap_distance :float, :default => 0.1
     line_type  SgGraphPane::LineType,   :default => "none"
@@ -35,11 +38,15 @@ class PredefinedGraphPane < ActiveRecord::Base
     show_graph_grid  :boolean, :default => false
     show_tool_tip_coords :boolean, :default => false
     data :text
+    # end of LegacyFields
+    
     timestamps
   end
 
+  # legacy associations
   belongs_to :y_unit, :class_name => 'Unit'
   belongs_to :x_unit, :class_name => 'Unit'
+  # end 
 
   has_one :page_pane, :as => :pane, :dependent => :destroy
   has_one :page, :through => :page_pane
@@ -73,6 +80,8 @@ class PredefinedGraphPane < ActiveRecord::Base
   end
 
   def included_datasets
+    # TODO: Eventually we want to be able to specify if datasets are
+    # in the legend.
     return data_sets.map {|d| {"name" => d.name, "inLegend" => true} }
   end
 
