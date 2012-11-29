@@ -2,6 +2,7 @@
 # More info at https://github.com/guard/guard#readme
 
 guard 'rspec', :version => 2 do
+  watch('spec/spec_helper.rb')                        { "spec" }
   # Rails example
   watch(%r{^app/(.+)\.rb$})                           { |m| "spec/#{m[1]}_spec.rb" }
   watch(%r{^app/(.*)(\.erb|\.haml)$})                 { |m| "spec/#{m[1]}#{m[2]}_spec.rb" }
