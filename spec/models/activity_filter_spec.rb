@@ -3,33 +3,33 @@ require 'spec_helper'
 describe ActivityFilter do
 
   before(:each) do
-    @first_grade  = GradeLevel.create(:name => '1')
-    @second_grade = GradeLevel.create(:name => '2')
-    @math         = SubjectArea.create(:name => 'math')
-    @science      = SubjectArea.create(:name => 'science')
+    @first_grade  = GradeLevel.create!(:name => '1')
+    @second_grade = GradeLevel.create!(:name => '2')
+    @math         = SubjectArea.create!(:name => 'math')
+    @science      = SubjectArea.create!(:name => 'science')
+    
+    @private      = Activity.create!(:name => 'private')
+    @simple       = Activity.create!(:name => 'simple', :publication_status =>'public')
 
-    @private      = Activity.create(:name => 'private')
-    @simple       = Activity.create(:name => 'simple', :publication_status =>'public')
-
-    @first_grade_math  = Activity.create({
+    @first_grade_math  = Activity.create!({
       :name => 'first grade math math activitiy', 
       :subject_areas => [@math], 
       :grade_levels =>[@first_grade],
       :publication_status =>'public'
     })
-    @second_grade_math  = Activity.create(
+    @second_grade_math  = Activity.create!(
       :name => 'second grade math activitiy', 
       :subject_areas      => [@math], 
       :grade_levels       => [@second_grade],
       :publication_status =>'public'
     )
-    @first_grade_science  = Activity.create(
+    @first_grade_science  = Activity.create!(
       :name => 'first grade science activitiy', 
       :subject_areas => [@science], :grade_levels =>[@first_grade],
       :publication_status =>'public'
     )
 
-    @simple_science_and_math  = Activity.create(
+    @simple_science_and_math  = Activity.create!(
       :name => 'simple first grade science and math activitiy', 
       :subject_areas => [@science,@math], :grade_levels =>[@first_grade],
       :publication_status =>'public'
