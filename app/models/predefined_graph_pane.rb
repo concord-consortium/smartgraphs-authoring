@@ -52,13 +52,6 @@ class PredefinedGraphPane < ActiveRecord::Base
   has_many :data_set_graphs, :dependent => :destroy
   has_many :data_sets, :through => :data_set_graphs
 
-  before_validation do
-    normalize_data
-    normalize_expression
-  end
-
-  validate :validate_expression
-
   def field_order
     fo  = %w[title y_label y_min y_max y_ticks ]
     fo << %w[x_label x_min x_max x_ticks ]
@@ -81,40 +74,6 @@ class PredefinedGraphPane < ActiveRecord::Base
 
   def included_datasets
     return data_sets.map {|d| {"name" => d.name, "inLegend" => true} }
-  end
-
-  def expression_to_hash
-    if expression.empty?
-      return ""
-    else
-      return "y  = #{expression}"
-    end
-  end
-
-  def data_to_hash
-    normalize_data
-    data.split("\n").map {|point| point.split(',').map{|value| value.to_f}}
-  end
-
-  def normalize_data
-    self.data ||= ""
-    points = self.data.strip.split("\n").map {|point| point.strip }
-    points.map! {|point| point.split(/\s*[,\t]\s*/)}
-    self.data = points.map! { |point| point.join(',')}.join("\n")
-  end
-
-  def normalize_expression
-    self.expression.gsub!(/^\s*y\s*=\s*/,"")
-  end
-
-  # Validation must now support compound expressions..
-  def validate_expression
-    slope_regex = /^(\-?\d+\s*\*\s*)?x\s*([+|-]\s*\d+)?$/
-    compound_regex = /^(sin|cos|tan|asin|acos|atan|pow|log|sqrt|X|x|\,|\.|\+|\-|\*|\/|\(|\)|\s|[0-9])+$/
-    return if self.expression.empty?
-    return if self.expression.match(slope_regex)
-    return if self.expression.match(compound_regex)
-    errors.add(:expression, "unkown expression format. Please use '[m] * x + [b]' for slope-form. You may also use sin cos, tan, asin, acos, atan, pow, log, sqrt")
   end
 
 end
