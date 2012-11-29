@@ -36,8 +36,8 @@ class DataSet < ActiveRecord::Base
   has_many :predefined_graph_panes, :through => :data_set_graphs
 
   before_validation do
-    normalize_data
-    normalize_expression
+    reformat_data_text
+    reformat_expression
   end
 
   validate :validate_expression
@@ -99,18 +99,18 @@ class DataSet < ActiveRecord::Base
   end
 
   def data_to_hash
-    normalize_data
+    reformat_data_text
     data.split("\n").map {|point| point.split(',').map{|value| value.to_f}}
   end
 
-  def normalize_data
+  def reformat_data_text
     self.data ||= ""
     points = self.data.strip.split("\n").map {|point| point.strip }
     points.map! {|point| point.split(/\s*[,\t]\s*/)}
     self.data = points.map! { |point| point.join(',')}.join("\n")
   end
 
-  def normalize_expression
+  def reformat_expression
     self.expression.gsub!(/^\s*y\s*=\s*/,"")
   end
 

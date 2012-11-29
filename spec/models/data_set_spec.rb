@@ -1,48 +1,48 @@
 require 'spec_helper'
 
 describe DataSet do
-  describe "#normalize_data" do
+  describe "#reformat_data_text" do
     it "should run on empty DataSet" do
       empty_data = ""
-      subject.normalize_data
+      subject.reformat_data_text
       subject.data.should match empty_data
     end
     it "should return comma separated data" do
       subject.data = "1,2\n1,3"
-      subject.normalize_data
+      subject.reformat_data_text
       subject.data.should == "1,2\n1,3"
     end
     it "tabs should be replaced by comma separated data" do
       subject.data = "1\t2\n1\t3"
-      subject.normalize_data
+      subject.reformat_data_text
       subject.data.should == "1,2\n1,3"
     end
     it "extra lines should be stripped" do
       subject.data = "\n\n1,2\n1,3\n\n"
-      subject.normalize_data
+      subject.reformat_data_text
       subject.data.should == "1,2\n1,3"
     end
     it "extra space should be stripped" do
       subject.data = "1 , 2  \n 1 , 3"
-      subject.normalize_data
+      subject.reformat_data_text
       subject.data.should == "1,2\n1,3"
     end
   end
 
-  describe "#normalize_expression" do
+  describe "#reformat_expression" do
     it "should get rid of the left side of y =" do
       subject.expression="y = 23 * x + 4"
-      subject.normalize_expression
+      subject.reformat_expression
       subject.expression.should == "23 * x + 4"
     end
     it "should leave well enough alone" do
       subject.expression="22 * x + 6"
-      subject.normalize_expression
+      subject.reformat_expression
       subject.expression.should == "22 * x + 6"
     end
     it "should leave non-standard expressions alone, to fail validation later" do
       subject.expression="z + y = 22 * x + 6"
-      subject.normalize_expression
+      subject.reformat_expression
       subject.expression.should == "z + y = 22 * x + 6"
     end
   end
