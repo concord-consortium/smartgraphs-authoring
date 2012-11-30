@@ -173,6 +173,7 @@ def create_activity(activity_def)
 
   activity_url = current_url
   activity_def[:units].each{|unit_def| create_unit(unit_def); visit activity_url } if activity_def[:units]
+  activity_def[:data_sets].each{|data_set_def| create_data_set(data_set_def); visit activity_url } if activity_def[:data_sets]  
   activity_def[:pages].each{|page_def| create_page(page_def); visit activity_url } if activity_def[:pages]
   return Activity.last
 end
@@ -197,8 +198,22 @@ def create_page(page_def)
   create_multiple_choice_sequencese(page_def[:multiple_choice_sequence]) if page_def[:multiple_choice_sequence]
 end
 
-# TODO: make add_data_set which excerises the UI
-def add_data_set(definition)
+def create_data_set(definition)
+  click_link 'New Data set'
+  fill_in 'data_set_name', :with => definition[:name]
+  fill_in 'data_set_y_precision', :with => definition[:yPrecision]
+  fill_in 'data_set_x_precision', :with => definition[:xPrecision]
+  fill_in 'data_set_line_snap_distance', :with => definition[:lineSnapDistance]
+  fill_in 'data_set_expression', :with => definition[:expression]
+  select definition[:lineType].capitalize, :from => 'data_set[line_type]'
+  select definition[:pointType].capitalize, :from => 'data_set[point_type]'
+  fill_in 'data_set_data', :with => definition[:data]
+  select definition[:xUnits], :from => 'data_set[x_unit_id]'
+  select definition[:yUnits], :from => 'data_set[y_unit_id]'
+  click_button 'Create Data set'
+end
+
+def create_data_set_model(definition)
   x_unit    = definition['x']['unit'] if definition['x']
   y_unit    = definition['y']['unit'] if definition['y']
   data       = definition['data'] || ""
@@ -235,11 +250,6 @@ def create_pane(pane_def)
     click_button 'Create Image pane'
 
   when "PredefinedGraphPane"
-    if(pane_def[:y] || pane_def[:x] || pane_def[:data])
-      data_set = add_data_set(pane_def)
-      pane_def[:data_sets] ||= []
-      pane_def[:data_sets] << data_set.name
-    end
     click_link 'New Predefined graph pane'
     fill_in 'predefined_graph_pane_title', :with => pane_def[:title]
     

@@ -89,14 +89,14 @@ Feature: Range Visual Prompts Activities
         :abbreviation: s
       - :name: Distance
         :abbreviation: m
-      :datasets:
+      :data_sets:
       - :name: default_data_set
         :yPrecision: 0.1
         :xPrecision: 0.1
         :lineSnapDistance: 0.1
         :expression:
-        :lineType: none
-        :pointType: dot
+        :lineType: None
+        :pointType: Dot
         :data: |-
           1,100
           2,200
@@ -120,7 +120,7 @@ Feature: Range Visual Prompts Activities
             :min: 0
             :max: 10
             :ticks: 1
-          :datasets:
+          :data_sets:
            - default_data_set
         :sequence:
           :type: "NumericSequence"
