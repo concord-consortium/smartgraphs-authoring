@@ -33,6 +33,7 @@ class Activity < ActiveRecord::Base
       'name' => name,
       'authorName' => author_name,
       'pages' => pages.map(&:to_hash),
+      'datasets' => data_sets.map(&:to_hash),
       'units' => Unit.find(:all).map(&:to_hash)
     }
   end
