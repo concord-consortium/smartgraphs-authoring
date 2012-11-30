@@ -76,6 +76,7 @@ Feature: Range Visual Prompts Activities
       """
     Then I should get correct json
 
+  @javascript
   Scenario: Create an activity with a numeric sequence with range visual prompts
     Given I am logged in as an admin named 'admin'
     And   I am on the Activities page
