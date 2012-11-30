@@ -25,6 +25,10 @@ group :development do
 end
 
 group :test do
+  gem 'pry'
+  gem 'pry-doc'
+  gem 'pry-stack_explorer'
+  gem 'pry-nav'
   gem 'sqlite3'
   gem 'cucumber-rails'
   gem "rspec-rails", ">= 2.5.0"

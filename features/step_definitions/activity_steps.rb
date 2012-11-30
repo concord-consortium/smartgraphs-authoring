@@ -198,7 +198,7 @@ def create_page(page_def)
 end
 
 # TODO: make add_data_set which excerises the UI
-def legacy_add_data_set(definition)
+def add_data_set(definition)
   x_unit    = definition['x']['unit'] if definition['x']
   y_unit    = definition['y']['unit'] if definition['y']
   data       = definition['data'] || ""
@@ -237,7 +237,7 @@ def create_pane(pane_def)
 
   when "PredefinedGraphPane"
     if(pane_def[:y] || pane_def[:x] || pane_def[:data])
-      data_set = legacy_add_data_set(pane_def)
+      data_set = add_data_set(pane_def)
       pane_def[:data_sets] ||= []
       pane_def[:data_sets] << data_set.name
     end
@@ -256,6 +256,7 @@ def create_pane(pane_def)
     
     select_included_graphs(pane_def[:included_graphs])
     select_included_data_sets(pane_def[:data_sets])
+    binding.pry
     click_button 'Create Predefined graph pane'
     
   when "SensorGraphPane"
