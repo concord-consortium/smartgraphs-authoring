@@ -2,6 +2,26 @@
   "type": "Activity",
   "name": "Visual Prompt Range Numeric",
   "authorName": "",
+  "datasets": [
+    {
+      "name": "default_data_set",
+      "type": "dataRef",
+      "expression": "",
+      "xUnits": "Time",
+      "yUnits": "Distance",
+      "xPrecision": 0.1,
+      "yPrecision": 0.1,
+      "lineSnapDistance": 0.1,
+      "pointType": "dot",
+      "lineType": "none",
+      "data": [
+        [1.0, 100.0],
+        [2.0, 200.0],
+        [3.0, 300.0],
+        [4.0, 400.0]
+      ]                
+    }
+  ],
   "pages": [
     {
       "type": "Page",
