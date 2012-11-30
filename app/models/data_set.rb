@@ -71,6 +71,8 @@ class DataSet < ActiveRecord::Base
       'xPrecision'       => x_precision,
       'yPrecision'       => y_precision,
       'lineSnapDistance' => line_snap_distance,
+      'lineType'         => line_type,
+      'pointType'        => point_type,
       'data'             => data_to_hash,
       'expression'       => expression_to_hash
     }
