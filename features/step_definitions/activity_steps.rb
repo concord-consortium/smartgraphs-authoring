@@ -217,7 +217,6 @@ def add_data_set(definition)
 end
 
 def select_included_data_sets(included_defs = [])
-  binding.pry
   included_defs.each do |data_set_name|
     select_node = find(:css, '.select-many select')
     select_node.find(:xpath, XPath::HTML.option(data_set_name), :message => "cannot select option with text '#{data_set_name}'").select_option
@@ -256,7 +255,6 @@ def create_pane(pane_def)
     
     select_included_graphs(pane_def[:included_graphs])
     select_included_data_sets(pane_def[:data_sets])
-    binding.pry
     click_button 'Create Predefined graph pane'
     
   when "SensorGraphPane"
