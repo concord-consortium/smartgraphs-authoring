@@ -35,7 +35,7 @@ class PickAPointSequence < ActiveRecord::Base
   validates :confirm_correct, :presence => true
 
   def field_order
-    "title, initial_prompt, give_up, confirm_correct, correct_answer_x, correct_answer_y, correct_answer_x_min, correct_answer_y_min, correct_answer_x_max, correct_answer_y_max"
+    "title, data_set, initial_prompt, give_up, confirm_correct, correct_answer_x, correct_answer_y, correct_answer_x_min, correct_answer_y_min, correct_answer_x_max, correct_answer_y_max"
   end
 
   has_one :page_sequence, :as => :sequence, :dependent => :destroy
