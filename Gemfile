@@ -30,6 +30,7 @@ group :test do
   gem 'pry-stack_explorer'
   gem 'pry-nav'
   gem 'sqlite3'
+  gem 'selenium-webdriver', ">=2.26"
   gem 'cucumber-rails'
   gem "rspec-rails", ">= 2.5.0"
   gem 'database_cleaner'
