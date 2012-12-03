@@ -334,6 +334,7 @@ def create_sequence(sequence_def)
     fill_in 'pick_a_point_sequence_initial_prompt', :with => sequence_def[:initialPrompt]
     fill_in 'pick_a_point_sequence_give_up', :with => sequence_def[:giveUp]
     fill_in 'pick_a_point_sequence_confirm_correct', :with => sequence_def[:confirmCorrect]
+    select sequence_def[:dataSet], :from => 'pick_a_point_sequence[data_set_id]'
 
     if sequence_def[:correctAnswerX] || sequence_def[:correctAnswerY]
       fill_in 'pick_a_point_sequence_correct_answer_x', :with => sequence_def[:correctAnswerX]

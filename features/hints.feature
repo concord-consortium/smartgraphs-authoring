@@ -47,11 +47,12 @@ Feature: Hints Activities
             :min: 0
             :max: 10
             :ticks: 1
-          :data_sets:
+          :data_sets: 
           - default_data_set
         :sequence:
           :type: "PickAPointSequence"
           :title: Pick a point
+          :dataSet: default_data_set
           :initialPrompt: Pick the middle point.
           :correctAnswerX: 2
           :correctAnswerY: 200

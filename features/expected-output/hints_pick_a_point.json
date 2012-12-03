@@ -32,6 +32,7 @@
       ],
       "sequence": {
         "type": "PickAPointSequence",
+        "dataSetName": "default_data_set",
         "initialPrompt": {
           "text": "Pick the middle point."
         },
