@@ -79,12 +79,15 @@ class PickAPointSequence < ActiveRecord::Base
 
   children :sequence_hints, :initial_prompt_prompts, :confirm_correct_prompts, :give_up_prompts
 
+  belongs_to :data_set
+
   def to_hash
     hash = {
       'type' => 'PickAPointSequence',
       'initialPrompt' => {'text' => initial_prompt.to_s },
       'giveUp' => {'text' => give_up.to_s },
-      'confirmCorrect' => {'text' => confirm_correct.to_s }
+      'confirmCorrect' => {'text' => confirm_correct.to_s },
+      'dataSetName' => data_set.name
     }
     if correct_answer_x && correct_answer_y
       hash['correctAnswerPoint'] = [correct_answer_x, correct_answer_y]

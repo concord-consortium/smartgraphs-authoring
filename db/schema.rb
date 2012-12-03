@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121015205230) do
+ActiveRecord::Schema.define(:version => 20121203205008) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -266,7 +266,10 @@ ActiveRecord::Schema.define(:version => 20121015205230) do
     t.float    "correct_answer_y_min"
     t.float    "correct_answer_x_max"
     t.float    "correct_answer_y_max"
+    t.integer  "data_set_id"
   end
+
+  add_index "pick_a_point_sequences", ["data_set_id"], :name => "index_pick_a_point_sequences_on_data_set_id"
 
   create_table "point_axis_line_visual_prompts", :force => true do |t|
     t.string   "name"
