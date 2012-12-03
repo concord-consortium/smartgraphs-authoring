@@ -344,7 +344,7 @@ def create_sequence(sequence_def)
       fill_in 'pick_a_point_sequence_correct_answer_x_max', :with => sequence_def[:correctAnswerXMax]
       fill_in 'pick_a_point_sequence_correct_answer_y_max', :with => sequence_def[:correctAnswerYMax]
     end
-
+    binding.pry
     click_button 'Create Pick a point sequence'
   when "NumericSequence"
     click_link 'New Numeric sequence'
