@@ -22,7 +22,12 @@
           "showCrossHairs": false,
           "showToolTipCoords": false,
           "showGraphGrid": false,
-          "includedDataSets": ["default_data_set"]
+          "includedDataSets": [
+            {
+              "name": "default_data_set",
+              "inLegend": true
+            }
+          ]
         }
       ],
       "sequence": {
