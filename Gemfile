@@ -25,10 +25,10 @@ group :development do
 end
 
 group :test do
-  # gem 'pry'
-  # gem 'pry-doc'
-  # gem 'pry-stack_explorer'
-  # gem 'pry-nav'
+  gem 'pry'
+  gem 'pry-doc'
+  gem 'pry-stack_explorer'
+  gem 'pry-nav'
   gem 'sqlite3'
   gem 'selenium-webdriver', ">=2.26"
   gem 'cucumber-rails'
