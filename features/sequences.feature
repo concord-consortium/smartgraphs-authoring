@@ -8,7 +8,7 @@ Feature: Sequences Activities
     And   I am on the Activities page
     When I create a new activity:
       """
-      --- 
+      ---
       :name: Sequences Instruction Sequence
       :pages:
       - :name: Simple Page 1
@@ -25,7 +25,7 @@ Feature: Sequences Activities
     And   I am on the Activities page
     When I create a new activity:
       """
-      --- 
+      ---
       :name: Sequences Pick A Point Sequence
       :units:
       - :name: Time
@@ -72,7 +72,7 @@ Feature: Sequences Activities
     And   I am on the Activities page
     When I create a new activity:
       """
-      --- 
+      ---
       :name: Sequences Pick A Point Within A Range Sequence
       :units:
       - :name: Time
@@ -121,7 +121,7 @@ Feature: Sequences Activities
     And   I am on the Activities page
     When I create a new activity:
       """
-      --- 
+      ---
       :name: Sequences Numeric Sequence
       :units:
       - :name: Time
@@ -168,7 +168,7 @@ Feature: Sequences Activities
     And   I am on the Activities page
     When I create a new activity:
       """
-      --- 
+      ---
       :name: Sequences Constructed Response Sequence
       :pages:
       - :name: Simple Page 1
@@ -188,7 +188,7 @@ Feature: Sequences Activities
     And   I am on the Activities page
     When I create a new activity:
       """
-      --- 
+      ---
       :name: Sequences Multiple Choice Sequence Sequential
       :pages:
       - :name: Page 1
@@ -224,7 +224,7 @@ Feature: Sequences Activities
     And   I am on the Activities page
     When I create a new activity:
       """
-      --- 
+      ---
       :name: Sequences Multiple Choice Sequence Custom
       :pages:
       - :name: Page 1
@@ -260,7 +260,7 @@ Feature: Sequences Activities
     And   I am on the Activities page
     When I create a new activity:
       """
-      --- 
+      ---
       :name: Sequences Slope Tool Sequence A
       :units:
         - :name: Seconds
@@ -308,7 +308,7 @@ Feature: Sequences Activities
           :x_min: 2.0
           :x_max: 9.0
           :y_min: 1.0
-          :y_max: 8.0    
+          :y_max: 8.0
           :tolerance: 0.1
       """
     Then I should get correct json
@@ -321,7 +321,7 @@ Feature: Sequences Activities
     And   I am on the Activities page
     When I create a new activity:
       """
-      --- 
+      ---
       :name: Sequences Slope Tool Sequence B
       :units:
         - :name: Seconds
@@ -368,7 +368,7 @@ Feature: Sequences Activities
           :x_min: 2.0
           :x_max: 9.0
           :y_min: 1.0
-          :y_max: 8.0    
+          :y_max: 8.0
           :tolerance: 0.1
       """
     Then I should get correct json
@@ -380,7 +380,7 @@ Feature: Sequences Activities
     And   I am on the Activities page
     When I create a new activity:
       """
-      --- 
+      ---
       :name: Sequences Slope Tool Sequence C
       :units:
         - :name: Seconds
@@ -427,7 +427,7 @@ Feature: Sequences Activities
           :x_min: 2.0
           :x_max: 9.0
           :y_min: 1.0
-          :y_max: 8.0    
+          :y_max: 8.0
           :tolerance: 0.1
       """
     Then I should get correct json
@@ -440,7 +440,7 @@ Feature: Sequences Activities
     And   I am on the Activities page
     When I create a new activity:
       """
-      --- 
+      ---
       :name: Sequences Slope Tool Sequence Average
       :units:
         - :name: Seconds
@@ -487,7 +487,7 @@ Feature: Sequences Activities
           :x_min: 2.0
           :x_max: 9.0
           :y_min: 1.0
-          :y_max: 8.0    
+          :y_max: 8.0
           :tolerance: 0.1
       """
     Then I should get correct json
@@ -499,7 +499,7 @@ Feature: Sequences Activities
     And   I am on the Activities page
     When I create a new activity:
       """
-      --- 
+      ---
       :name: Sequences Slope Tool Sequence Adjacent
       :units:
         - :name: Seconds
@@ -546,7 +546,7 @@ Feature: Sequences Activities
           :x_min: 2.0
           :x_max: 9.0
           :y_min: 1.0
-          :y_max: 8.0    
+          :y_max: 8.0
           :tolerance: 0.1
       """
     Then I should get correct json
