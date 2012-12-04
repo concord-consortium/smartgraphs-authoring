@@ -104,7 +104,13 @@ class PickAPointSequence < ActiveRecord::Base
   end
 
   def data_set_name_from_hash(definition)
-    self.data_set = self.page.activity.data_sets.find{ |ds| ds.name = definition }
+    callback = Proc.new do
+      self.reload
+      found_data_set = self.page.activity.data_sets.find_by_name(definition)
+      self.data_set = found_data_set
+      self.save!
+    end
+    self.add_marshall_callback(callback)
   end
 
   def correct_answer_point_from_hash(definition)
