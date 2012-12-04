@@ -75,6 +75,10 @@ class Activity < ActiveRecord::Base
     true
   end
 
+  def datasets_from_hash(definitions)
+    self.data_sets = definitions.map {|d| DataSet.from_hash(d)}
+  end
+
   def edit_permitted?(attribute)
     return true if acting_user.administrator?
     return false if attribute == :owner
