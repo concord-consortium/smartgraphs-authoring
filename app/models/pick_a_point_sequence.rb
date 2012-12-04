@@ -103,6 +103,10 @@ class PickAPointSequence < ActiveRecord::Base
     hash
   end
 
+  def data_set_name_from_hash(definition)
+    self.data_set = self.page.activity.data_sets.find{ |ds| ds.name = definition }
+  end
+
   def correct_answer_point_from_hash(definition)
     self.correct_answer_x = definition[0]
     self.correct_answer_y = definition[1]
