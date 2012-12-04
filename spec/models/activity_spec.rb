@@ -70,4 +70,29 @@ describe Activity do
     end
   end
 
+  describe "copy" do
+    subject do
+      @data_set = DataSet.new(:name => "test")
+      @page = Page.new(:name => "test")
+      @sequence = PickAPointSequence.create({
+        :title            => "string",
+        :initial_prompt   => "text",
+        :give_up          => "text",
+        :confirm_correct  => "text",
+        :data_set         => @data_set
+      })
+      @page.pick_a_point_sequences << @sequence
+      @original = Activity.create({
+        :name => "testing",
+        :data_sets => [@data_set],
+        :pages => [@page]
+      })
+      @original.copy_activity
+    end
+
+    it "should match original" do
+      subject.to_hash.should == @original.to_hash
+    end
+  end
+
 end
