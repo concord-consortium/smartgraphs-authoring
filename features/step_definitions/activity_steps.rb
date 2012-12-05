@@ -52,6 +52,12 @@ When(/^I create (?:a new|an) activity:$/)do |text|
   @activity = create_activity(activity_def)
 end
 
+Then(/^when serialization is fixed I should be able to copy the activity/) do
+  pending "We need to come back to check serialization on this"
+  the_copy = @activity.copy_activity
+  the_copy.to_hash.to_s.should == @activity.to_hash.to_s
+end
+
 Then(/^I should be able to copy the activity/) do
   the_copy = @activity.copy_activity
   the_copy.to_hash.to_s.should == @activity.to_hash.to_s

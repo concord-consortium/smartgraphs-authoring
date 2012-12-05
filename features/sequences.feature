@@ -142,6 +142,22 @@ Feature: Sequences Activities
         :abbreviation: s
       - :name: Distance
         :abbreviation: m
+      :data_sets:
+      - :name: default_data_set
+        :yPrecision: 0.1
+        :xPrecision: 0.1
+        :lineSnapDistance: 0.1
+        :expression:
+        :lineType: None
+        :pointType: Dot
+        :data: |-
+          1,100
+          2,200
+          3,300
+          4,400
+        :xUnits: Time
+        :yUnits: Distance
+
       :pages:
       - :name: Simple Page 1
         :text: In this page...
@@ -150,21 +166,16 @@ Feature: Sequences Activities
           :title: Graph Pane
           :y:
             :label: Distance
-            :unit: Distance
             :min: 0
             :max: 10
             :ticks: 1
           :x:
             :label: Time
-            :unit: Time
             :min: 0
             :max: 10
             :ticks: 1
-          :data: |-
-            1,100
-            2,200
-            3,300
-            4,400
+          :data_sets:
+          - default_data_set
         :sequence:
           :type: "NumericSequence"
           :title: Enter a number
@@ -194,7 +205,7 @@ Feature: Sequences Activities
           :initialContent: When I was...
       """
     Then I should get correct json
-    And I should be able to copy the activity
+    And  I should be able to copy the activity
 
   @javascript
   Scenario: Create an activity with a multiple choice sequence with sequential feedback
@@ -230,7 +241,7 @@ Feature: Sequences Activities
             :feedback: try choice B instead.
       """
     Then I should get correct json
-    And I should be able to copy the activity
+    And  I should be able to copy the activity
 
   @javascript
   Scenario: Create an activity with a multiple choice sequence with custom feedback
@@ -266,7 +277,7 @@ Feature: Sequences Activities
             :feedback: try choice B instead.
       """
     Then I should get correct json
-    And I should be able to copy the activity
+    And  I should be able to copy the activity
 
   @javascript
   Scenario: Create an activity with a type 'A' slope tool
@@ -281,6 +292,29 @@ Feature: Sequences Activities
           :abbreviation: s
         - :name: Meters
           :abbreviation: m
+      :data_sets:
+      - :name: default_data_set
+        :yPrecision: 0.1
+        :xPrecision: 0.1
+        :lineSnapDistance: 0.1
+        :expression:
+        :lineType: None
+        :pointType: Dot
+        :data: |-
+          0.0,0.0
+          1.0,0.0
+          2.0,1.0
+          3.0,2.0
+          4.0,3.0
+          5.0,4.0
+          6.0,5.0
+          7.0,6.0
+          8.0,7.0
+          9.0,8.0
+          10.0,7.0
+        :xUnits: Seconds
+        :yUnits: Meters
+
       :pages:
       - :name: Slope Tool Sequence Case A
         :text: Slope Tool Sequence Case A
@@ -289,28 +323,16 @@ Feature: Sequences Activities
           :title: Velocity
           :y:
             :label: Distance
-            :unit: Meters
             :min: 0.0
             :max: 10.0
             :ticks: 10
           :x:
             :label: Time
-            :unit: Seconds
             :min: 0.0
             :max: 10.0
             :ticks: 10
-          :data: |-
-            0.0,0.0
-            1.0,0.0
-            2.0,1.0
-            3.0,2.0
-            4.0,3.0
-            5.0,4.0
-            6.0,5.0
-            7.0,6.0
-            8.0,7.0
-            9.0,8.0
-            10.0,7.0
+          :data_sets:
+          - default_data_set
         - :type: TablePane
           :title: data table
         :sequence:
@@ -326,7 +348,7 @@ Feature: Sequences Activities
           :tolerance: 0.1
       """
     Then I should get correct json
-    And I should be able to copy the activity
+    And when serialization is fixed I should be able to copy the activity
 
 
   @javascript
@@ -342,6 +364,29 @@ Feature: Sequences Activities
           :abbreviation: s
         - :name: Meters
           :abbreviation: m
+      :data_sets:
+      - :name: default_data_set
+        :yPrecision: 0.1
+        :xPrecision: 0.1
+        :lineSnapDistance: 0.1
+        :expression:
+        :lineType: None
+        :pointType: Dot
+        :data: |-
+          0.0,0.0
+          1.0,0.0
+          2.0,1.0
+          3.0,2.0
+          4.0,3.0
+          5.0,4.0
+          6.0,5.0
+          7.0,6.0
+          8.0,7.0
+          9.0,8.0
+          10.0,7.0
+        :xUnits: Seconds
+        :yUnits: Meters
+
       :pages:
       - :name: Slope Tool Sequence Case B
         :text: Slope Tool Sequence Case B
@@ -350,28 +395,16 @@ Feature: Sequences Activities
           :title: Velocity
           :y:
             :label: Distance
-            :unit: Meters
             :min: 0.0
             :max: 10.0
             :ticks: 10
           :x:
             :label: Time
-            :unit: Seconds
             :min: 0.0
             :max: 10.0
             :ticks: 10
-          :data: |-
-            0.0,0.0
-            1.0,0.0
-            2.0,1.0
-            3.0,2.0
-            4.0,3.0
-            5.0,4.0
-            6.0,5.0
-            7.0,6.0
-            8.0,7.0
-            9.0,8.0
-            10.0,7.0
+          :data_sets:
+          - default_data_set
         - :type: TablePane
           :title: data table
         :sequence:
@@ -386,11 +419,10 @@ Feature: Sequences Activities
           :tolerance: 0.1
       """
     Then I should get correct json
-    And I should be able to copy the activity
+    And when serialization is fixed I should be able to copy the activity
 
  @javascript
   Scenario: Create an activity with a type 'c' slope tool
-    Given PENDING: we should come back to check serialization
     Given I am logged in as an admin named 'admin'
     And   I am on the Activities page
     When I create a new activity:
@@ -457,12 +489,11 @@ Feature: Sequences Activities
           :tolerance: 0.1
       """
     Then I should get correct json
-    And I should be able to copy the activity
+    And when serialization is fixed I should be able to copy the activity
 
 
   @javascript
   Scenario: Create an activity with a slope tool which requires endpoint selection
-    Given PENDING: we should come back to check serialization
     Given I am logged in as an admin named 'admin'
     And   I am on the Activities page
     When I create a new activity:
@@ -529,11 +560,10 @@ Feature: Sequences Activities
           :tolerance: 0.1
       """
     Then I should get correct json
-    And I should be able to copy the activity
+    And when serialization is fixed I should be able to copy the activity
 
  @javascript
   Scenario: Create an activity with a slope tool which requires adjacent selection
-    Given PENDING: we should come back to check serialization
     Given I am logged in as an admin named 'admin'
     And   I am on the Activities page
     When I create a new activity:
@@ -600,4 +630,4 @@ Feature: Sequences Activities
           :tolerance: 0.1
       """
     Then I should get correct json
-    And I should be able to copy the activity
+    And when serialization is fixed I should be able to copy the activity

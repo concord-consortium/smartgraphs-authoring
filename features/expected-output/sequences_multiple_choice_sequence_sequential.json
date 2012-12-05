@@ -2,7 +2,6 @@
   "type": "Activity",
   "name": "Sequences Multiple Choice Sequence Sequential",
   "authorName": "",
-  "units" : [],
   "pages": [
     {
       "type": "Page",
@@ -11,23 +10,25 @@
       "sequence": {
         "type": "MultipleChoiceWithSequentialHintsSequence",
         "initialPrompt": "Whats the blah blah.",
-        "confirmCorrect": "Yes, that's right!",
+        "choices": [
+          "choice a",
+          "choice b",
+          "choice c"
+        ],
+        "correctAnswerIndex": 1,
         "giveUp": "That's not right.",
+        "confirmCorrect": "Yes, that's right!",
         "hints": [{
           "name": "feedback 1",
           "text": "this aint right"
         },{
           "name": "feedback 2",
           "text": "try choice B instead."
-        }],
-        "choices": [
-          "choice a",
-          "choice b",
-          "choice c"
-        ],
-        "correctAnswerIndex": 1
+        }]
       }
     }
-  ]
+  ],
+  "datasets": [],
+  "units" : []
 }
 

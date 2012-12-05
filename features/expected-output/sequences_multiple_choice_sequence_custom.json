@@ -2,7 +2,6 @@
   "type": "Activity",
   "name": "Sequences Multiple Choice Sequence Custom",
   "authorName": "",
-  "units" : [],
   "pages": [
     {
       "type": "Page",
@@ -11,8 +10,14 @@
       "sequence": {
         "type": "MultipleChoiceWithCustomHintsSequence",
         "initialPrompt": "Whats the blah blah.",
-        "confirmCorrect": "Yes, that's right!",
+        "choices": [
+          "choice a",
+          "choice b",
+          "choice c"
+        ],
+        "correctAnswerIndex": 1,
         "giveUp": "That's not right.",
+        "confirmCorrect": "Yes, that's right!",
         "hints": [{
           "name": "Choice choice a Hint",
           "choiceIndex":0,
@@ -25,15 +30,11 @@
           "name": "Choice choice c Hint",
           "choiceIndex":2,
           "text": "try choice B instead."
-        }],
-        "choices": [
-          "choice a",
-          "choice b",
-          "choice c"
-        ],
-        "correctAnswerIndex": 1
+        }]
       }
     }
-  ]
+  ],
+  "datasets": [],
+  "units": []
 }
 
