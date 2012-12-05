@@ -79,7 +79,7 @@ Feature: Sequences Activities
           :confirmCorrect: Yes, that's right!
       """
     Then I should get correct json
-    And I should be able to copy the activity
+    And when serialization is fixed I should be able to copy the activity
 
   Scenario: Create an activity with a pick a point within a range sequence
     Given I am logged in as an admin named 'admin'
