@@ -390,6 +390,7 @@ Feature: Sequences Activities
 
  @javascript
   Scenario: Create an activity with a type 'c' slope tool
+    Given PENDING: we should come back to check serialization
     Given I am logged in as an admin named 'admin'
     And   I am on the Activities page
     When I create a new activity:
@@ -401,6 +402,29 @@ Feature: Sequences Activities
           :abbreviation: s
         - :name: Meters
           :abbreviation: m
+      :data_sets:
+      - :name: default_data_set
+        :yPrecision: 0.1
+        :xPrecision: 0.1
+        :lineSnapDistance: 0.1
+        :expression:
+        :lineType: None
+        :pointType: Dot
+        :data: |-
+          0.0,0.0
+          1.0,0.0
+          2.0,1.0
+          3.0,2.0
+          4.0,3.0
+          5.0,4.0
+          6.0,5.0
+          7.0,6.0
+          8.0,7.0
+          9.0,8.0
+          10.0,7.0
+        :xUnits: Seconds
+        :yUnits: Meters
+
       :pages:
       - :name: Slope Tool Sequence Case C
         :text: Slope Tool Sequence Case C
@@ -409,28 +433,16 @@ Feature: Sequences Activities
           :title: Velocity
           :y:
             :label: Distance
-            :unit: Meters
             :min: 0.0
             :max: 10.0
             :ticks: 10
           :x:
             :label: Time
-            :unit: Seconds
             :min: 0.0
             :max: 10.0
             :ticks: 10
-          :data: |-
-            0.0,0.0
-            1.0,0.0
-            2.0,1.0
-            3.0,2.0
-            4.0,3.0
-            5.0,4.0
-            6.0,5.0
-            7.0,6.0
-            8.0,7.0
-            9.0,8.0
-            10.0,7.0
+          :data_sets:
+          - default_data_set
         - :type: TablePane
           :title: data table
         :sequence:
@@ -450,6 +462,7 @@ Feature: Sequences Activities
 
   @javascript
   Scenario: Create an activity with a slope tool which requires endpoint selection
+    Given PENDING: we should come back to check serialization
     Given I am logged in as an admin named 'admin'
     And   I am on the Activities page
     When I create a new activity:
@@ -461,6 +474,29 @@ Feature: Sequences Activities
           :abbreviation: s
         - :name: Meters
           :abbreviation: m
+      :data_sets:
+      - :name: default_data_set
+        :yPrecision: 0.1
+        :xPrecision: 0.1
+        :lineSnapDistance: 0.1
+        :expression:
+        :lineType: None
+        :pointType: Dot
+        :data: |-
+          0.0,0.0
+          1.0,0.0
+          2.0,1.0
+          3.0,2.0
+          4.0,3.0
+          5.0,4.0
+          6.0,5.0
+          7.0,6.0
+          8.0,7.0
+          9.0,8.0
+          10.0,7.0
+        :xUnits: Seconds
+        :yUnits: Meters
+
       :pages:
       - :name: Sequences Slope Tool Sequence Average
         :text: Sequences Slope Tool Sequence Average
@@ -469,28 +505,16 @@ Feature: Sequences Activities
           :title: Velocity
           :y:
             :label: Distance
-            :unit: Meters
             :min: 0.0
             :max: 10.0
             :ticks: 10
           :x:
             :label: Time
-            :unit: Seconds
             :min: 0.0
             :max: 10.0
             :ticks: 10
-          :data: |-
-            0.0,0.0
-            1.0,0.0
-            2.0,1.0
-            3.0,2.0
-            4.0,3.0
-            5.0,4.0
-            6.0,5.0
-            7.0,6.0
-            8.0,7.0
-            9.0,8.0
-            10.0,7.0
+          :data_sets:
+          - default_data_set
         - :type: TablePane
           :title: data table
         :sequence:
@@ -521,6 +545,29 @@ Feature: Sequences Activities
           :abbreviation: s
         - :name: Meters
           :abbreviation: m
+      :data_sets:
+      - :name: default_data_set
+        :yPrecision: 0.1
+        :xPrecision: 0.1
+        :lineSnapDistance: 0.1
+        :expression:
+        :lineType: None
+        :pointType: Dot
+        :data: |-
+          0.0,0.0
+          1.0,0.0
+          2.0,1.0
+          3.0,2.0
+          4.0,3.0
+          5.0,4.0
+          6.0,5.0
+          7.0,6.0
+          8.0,7.0
+          9.0,8.0
+          10.0,7.0
+        :xUnits: Seconds
+        :yUnits: Meters
+
       :pages:
       - :name: Sequences Slope Tool Sequence Adjacent
         :text: Sequences Slope Tool Sequence Adjacent
@@ -529,28 +576,16 @@ Feature: Sequences Activities
           :title: Velocity
           :y:
             :label: Distance
-            :unit: Meters
             :min: 0.0
             :max: 10.0
             :ticks: 10
           :x:
             :label: Time
-            :unit: Seconds
             :min: 0.0
             :max: 10.0
             :ticks: 10
-          :data: |-
-            0.0,0.0
-            1.0,0.0
-            2.0,1.0
-            3.0,2.0
-            4.0,3.0
-            5.0,4.0
-            6.0,5.0
-            7.0,6.0
-            8.0,7.0
-            9.0,8.0
-            10.0,7.0
+          :data_sets:
+          - default_data_set
         - :type: TablePane
           :title: data table
         :sequence:
