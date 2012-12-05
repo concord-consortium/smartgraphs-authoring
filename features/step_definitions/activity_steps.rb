@@ -9,6 +9,11 @@ module BetterHashDiff
   end
 end
 
+# Cucumber doesn't have a scenario-level pending keyword: http://stackoverflow.com/a/5983793/306084
+Given /^PENDING/ do
+  pending
+end
+
 Given(/^I am logged in as (?:a|an) (admin|user) named '(\w+)'$/) do |admin_text,name|
   admin = admin_text == 'admin' ? true : false
   do_login(name,admin)

@@ -509,6 +509,7 @@ Feature: Sequences Activities
 
  @javascript
   Scenario: Create an activity with a slope tool which requires adjacent selection
+    Given PENDING: we should come back to check serialization
     Given I am logged in as an admin named 'admin'
     And   I am on the Activities page
     When I create a new activity:
