@@ -78,6 +78,23 @@ Feature: Hints Activities
         :abbreviation: s
       - :name: Distance
         :abbreviation: m
+
+      :data_sets:
+      - :name: default_data_set
+        :yPrecision: 0.1
+        :xPrecision: 0.1
+        :lineSnapDistance: 0.1
+        :expression:
+        :lineType: None
+        :pointType: Dot
+        :data: |-
+          1,100
+          2,200
+          3,300
+          4,400
+        :xUnits: Time
+        :yUnits: Distance
+
       :pages:
       - :name: Simple Page 1
         :text: In this page...
@@ -86,23 +103,19 @@ Feature: Hints Activities
           :title: Graph Pane
           :y:
             :label: Distance
-            :unit: Distance
             :min: 0
             :max: 10
             :ticks: 1
           :x:
             :label: Time
-            :unit: Time
             :min: 0
             :max: 10
             :ticks: 1
-          :data: |-
-            1,100
-            2,200
-            3,300
-            4,400
+          :data_sets:
+          - default_data_set
         :sequence:
           :type: "NumericSequence"
+          :dataSet: default_data_set
           :title: Enter a number
           :initialPrompt: What is the value at x=2?
           :correctAnswer: 200
