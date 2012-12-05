@@ -37,6 +37,10 @@ group :test do
   gem 'launchy'
 end
 
+group :test, :development do
+  gem 'rubygems-bundler'
+end
+
 group :production do
   # gem 'mysql'
   gem 'mysql2', '~> 0.2.7'
