@@ -85,4 +85,8 @@ class Activity < ActiveRecord::Base
     return self.is_owner?
   end
 
+  def extract_graphs
+    graphs = self.pages.map { |p| [p.predefined_graph_panes,p.prediction_graph_panes,p.sensor_graph_panes]}
+    graphs.flatten!
+  end
 end
