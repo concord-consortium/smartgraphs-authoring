@@ -328,7 +328,7 @@ end
 def select_included_graphs(included_def = [])
   (included_def || []).each do |graph_name|
     # select the graph to be included
-    select_node = find(:css, '.select-many select')
+    select_node = find(:css, '.custom.select-many select')
     select_node.find(:xpath, XPath::HTML.option(graph_name), :message => "cannot select option with text '#{graph_name}'").select_option
   end
 end

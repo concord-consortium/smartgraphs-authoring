@@ -379,8 +379,9 @@
     </field-list:>
     <after-field-list:>
       <h3>Included data sets</h3>
-      <!-- custom-poly-select-many:included_graphs prompt="Include graph data from:" options="&PredictionGraphPane.get_all_prediction_graph_panes_before(this)"/ -->
       <select-many:data_sets />
+      <h3>Included graphs</h3>
+      <custom-poly-select-many:included_graphs prompt="Include graph data from:" options="&PredictionGraphPane.get_all_prediction_graph_panes_before(this)"/>
     </after-field-list:>
   </old-form>
 </extend>
@@ -563,7 +564,7 @@
   values = this
   remove_label ||= t("hobo.actions.remove", :default=>'Remove')
   -%>
-  <div class="input select-many" merge-attrs>
+  <div class="custom input select-many" merge-attrs>
     <div style="display:none" class="item-proto">
       <div class="item" param="proto-item">
         <span></span>
