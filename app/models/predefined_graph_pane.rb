@@ -72,6 +72,14 @@ class PredefinedGraphPane < ActiveRecord::Base
     'PredefinedGraphPane'
   end
 
+  def include_referenced_graphs(graph_reference_urls)
+    graphs = self.sg_activity.extract_graphs
+    graphs.select! { |g| (g.respond_to? :get_indexed_path) && (graph_reference_urls.include?(g.get_indexed_path))}
+    graphs.each do |graph|
+      self.included_graphs << graph
+    end
+  end
+
   def included_data_sets_from_hash(definitions)
     callback = Proc.new do
       self.reload
