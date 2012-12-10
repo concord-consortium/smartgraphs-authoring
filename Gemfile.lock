@@ -29,7 +29,7 @@ GEM
       activesupport (= 3.0.10)
     activesupport (3.0.10)
     acts_as_list (0.1.4)
-    addressable (2.2.8)
+    addressable (2.2.6)
     arel (2.0.10)
     awesome_print (1.0.2)
     binding_of_caller (0.6.8)
@@ -203,6 +203,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_list (~> 0.1.4)
+  addressable (= 2.2.6)
   awesome_print (~> 1.0.2)
   capistrano (>= 1.0.0)
   capistrano-ext (~> 1.2.1)

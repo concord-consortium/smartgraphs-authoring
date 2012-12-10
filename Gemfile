@@ -26,6 +26,8 @@ group :test do
   gem "rspec-rails", ">= 2.5.0"
   gem 'database_cleaner', '~> 0.7.0'
   gem 'launchy', '~> 2.0.5'
+  # Addressable is a launchy dependency
+  gem 'addressable', '= 2.2.6'
 end
 
 group :test, :development do
