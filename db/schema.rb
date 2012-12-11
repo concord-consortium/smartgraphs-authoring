@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121211160131) do
+ActiveRecord::Schema.define(:version => 20121211182324) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -404,7 +404,10 @@ ActiveRecord::Schema.define(:version => 20121211160131) do
     t.datetime "updated_at"
     t.string   "case_type",           :default => "case_a"
     t.string   "point_constraints",   :default => "any"
+    t.integer  "data_set_id"
   end
+
+  add_index "slope_tool_sequences", ["data_set_id"], :name => "index_slope_tool_sequences_on_data_set_id"
 
   create_table "subject_areas", :force => true do |t|
     t.string   "name"

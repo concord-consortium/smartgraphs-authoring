@@ -499,6 +499,7 @@ def create_slope_tool_sequence!(opts)
   fill_in 'slope_tool_sequence_x_max', :with => opts[:x_max]
   fill_in 'slope_tool_sequence_y_max', :with => opts[:y_max]
   fill_in 'slope_tool_sequence_tolerance', :with => opts[:tolerance]
+  select opts[:data_set_name], :from => 'slope_tool_sequence[data_set_id]'
   click_button 'Create Slope tool sequence'
 end
 

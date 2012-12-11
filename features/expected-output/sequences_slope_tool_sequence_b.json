@@ -34,7 +34,9 @@
        "yMin": 1.0,
        "yMax": 8.0,
        "selectedPointsMustBeAdjacent": false,
-       "tolerance": 0.1}}
+       "tolerance": 0.1,
+       "dataSetName":"default_data_set"
+       }}
     ],
   "datasets":
   [{"type":"dataRef",

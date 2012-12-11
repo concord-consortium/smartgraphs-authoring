@@ -394,6 +394,7 @@ Feature: Sequences Activities
           :title: data table
         :sequence:
           :type: "SlopeToolSequence"
+          :data_set_name: default_data_set
           :case_type: "A: Ask A Slope Question."
           :point_constraints: "Any Point Within The Range."
           :first_question: "What is the average velocity between 2 and 9 seconds (in m / s)?"
@@ -466,6 +467,7 @@ Feature: Sequences Activities
           :title: data table
         :sequence:
           :type: "SlopeToolSequence"
+          :data_set_name: default_data_set
           :case_type: "B: Ask Student To Pick A Point."
           :point_constraints: "Any Point Within The Range."
           :slope_variable_name: velocity
@@ -536,6 +538,7 @@ Feature: Sequences Activities
           :title: data table
         :sequence:
           :type: "SlopeToolSequence"
+          :data_set_name: default_data_set
           :case_type: "C: Ask For Average Slope For The Region."
           :point_constraints: "Any Point Within The Range."
           :slope_variable_name: velocity
@@ -607,6 +610,7 @@ Feature: Sequences Activities
           :title: data table
         :sequence:
           :type: "SlopeToolSequence"
+          :data_set_name: default_data_set
           :case_type: "B: Ask Student To Pick A Point."
           :point_constraints: "Endpoints Of The Range."
           :slope_variable_name: velocity
@@ -677,6 +681,7 @@ Feature: Sequences Activities
           :title: data table
         :sequence:
           :type: "SlopeToolSequence"
+          :data_set_name: default_data_set
           :case_type: "B: Ask Student To Pick A Point."
           :point_constraints: "Adjacent Points Within The Range."
           :slope_variable_name: velocity
