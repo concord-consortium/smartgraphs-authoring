@@ -37,6 +37,8 @@ class LineConstructionSequence < ActiveRecord::Base
   reverse_association_of :page, 'Page#line_construction_sequences'
   
   before_validation :default_text_values
+
+  belongs_to :data_set
   
   validates :title,                 :presence => true
   validates :initial_prompt,        :presence => true
@@ -62,6 +64,7 @@ class LineConstructionSequence < ActiveRecord::Base
         "slopeIncorrect"      => slope_incorrect,
         "yInterceptIncorrect" => y_intercept_incorrect,
         "allIncorrect"        => all_incorrect,
+        'dataSetName'         => data_set.name
     }
   end
 
