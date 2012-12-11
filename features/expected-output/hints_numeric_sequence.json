@@ -38,6 +38,7 @@
         "confirmCorrect": {
           "text": "Yes, that's right!"
         },
+        "dataSetName":"default_data_set",
         "hints": [
           {
             "name": "Hint 1",

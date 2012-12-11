@@ -365,6 +365,7 @@ def create_sequence(sequence_def)
     fill_in 'numeric_sequence_tolerance', :with => sequence_def[:tolerance]
     fill_in 'numeric_sequence_give_up', :with => sequence_def[:giveUp]
     fill_in 'numeric_sequence_confirm_correct', :with => sequence_def[:confirmCorrect]
+    select sequence_def[:dataSet], :from => 'numeric_sequence[data_set_id]'
     click_button 'Create Numeric sequence'
   when "ConstructedResponseSequence"
     click_link 'New Constructed response sequence'

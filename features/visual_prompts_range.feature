@@ -136,6 +136,7 @@ Feature: Range Visual Prompts Activities
            - default_data_set
         :sequence:
           :type: "NumericSequence"
+          :dataSet: default_data_set
           :title: Numeric
           :initialPrompt: Pick the middle point.
           :initialPromptPrompts:

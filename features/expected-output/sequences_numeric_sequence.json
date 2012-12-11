@@ -22,7 +22,7 @@
           "showCrossHairs": false,
           "showToolTipCoords": false,
           "showGraphGrid": false,
-          "includedDataSets":[]
+          "includedDataSets":[{"name":"default_data_set", "inLegend":true}]
         }
       ],
       "sequence": {
@@ -32,12 +32,13 @@
         },
         "correctAnswer": 200.0,
         "tolerance": 0.123,
-        "confirmCorrect": {
-          "text": "Yes, that's right!"
-        },
         "giveUp": {
           "text": "That's not right."
         },
+        "confirmCorrect": {
+          "text": "Yes, that's right!"
+        },
+        "dataSetName":"default_data_set",
         "hints": []
       }
     }

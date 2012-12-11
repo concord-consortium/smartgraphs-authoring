@@ -143,6 +143,7 @@ Feature: Sequences Activities
     Then I should get correct json
     And I should be able to copy the activity
 
+  @javascript
   Scenario: Create an activity with a numeric sequence
     Given I am logged in as an admin named 'admin'
     And   I am on the Activities page
@@ -191,6 +192,7 @@ Feature: Sequences Activities
           - default_data_set
         :sequence:
           :type: "NumericSequence"
+          :dataSet: default_data_set
           :title: Enter a number
           :initialPrompt: What is the value at x=2?
           :correctAnswer: 200

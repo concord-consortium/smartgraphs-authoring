@@ -90,6 +90,7 @@
         },
         "correctAnswer": 200.0,
         "tolerance": 0.123,
+        "dataSetName":"default_data_set",
         "hints": [
           {
             "name": "Hint 1",
