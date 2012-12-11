@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121203205008) do
+ActiveRecord::Schema.define(:version => 20121211135841) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -217,7 +217,10 @@ ActiveRecord::Schema.define(:version => 20121203205008) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.float    "tolerance",       :default => 0.01
+    t.integer  "data_set_id"
   end
+
+  add_index "numeric_sequences", ["data_set_id"], :name => "index_numeric_sequences_on_data_set_id"
 
   create_table "page_panes", :force => true do |t|
     t.datetime "created_at"

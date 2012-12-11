@@ -66,6 +66,8 @@ class NumericSequence < ActiveRecord::Base
 
   children :sequence_hints, :initial_prompt_prompts, :confirm_correct_prompts, :give_up_prompts
 
+  belongs_to :data_set
+
   def to_hash
     hash = {
       'type' => 'NumericSequence',
@@ -73,7 +75,8 @@ class NumericSequence < ActiveRecord::Base
       'correctAnswer' => correct_answer,
       'tolerance' => tolerance,
       'giveUp' => {'text' => give_up.to_s },
-      'confirmCorrect' => {'text' => confirm_correct.to_s }
+      'confirmCorrect' => {'text' => confirm_correct.to_s },
+      'dataSetName' => data_set.name
     }
     update_sequence_prompts(hash)
     hash
