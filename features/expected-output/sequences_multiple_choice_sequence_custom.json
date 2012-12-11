@@ -30,11 +30,25 @@
           "name": "Choice choice c Hint",
           "choiceIndex":2,
           "text": "try choice B instead."
-        }]
+        }],
+        "dataSetName":"default_data_set"
       }
     }
   ],
-  "datasets": [],
-  "units": []
+  "datasets":
+   [{"type":"dataRef",
+     "name":"default_data_set",
+     "yUnits":"Meters",
+     "xUnits":"Seconds",
+     "xPrecision":0.1,
+     "yPrecision":0.1,
+     "lineSnapDistance":0.1,
+     "lineType":"none",
+     "pointType":"dot",
+     "data":[[1.0, 100.0], [2.0, 200.0], [3.0, 300.0], [4.0, 400.0]],
+     "expression":""}],
+  "units":
+   [{"type":"Unit", "name":"Seconds", "abbreviation":"s"},
+    {"type":"Unit", "name":"Meters", "abbreviation":"m"}]
 }
 

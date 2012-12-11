@@ -230,11 +230,32 @@ Feature: Sequences Activities
       """
       ---
       :name: Sequences Multiple Choice Sequence Sequential
+      :units:
+        - :name: Seconds
+          :abbreviation: s
+        - :name: Meters
+          :abbreviation: m
+      :data_sets:
+      - :name: default_data_set
+        :yPrecision: 0.1
+        :xPrecision: 0.1
+        :lineSnapDistance: 0.1
+        :expression:
+        :lineType: None
+        :pointType: Dot
+        :data: |-
+          1,100
+          2,200
+          3,300
+          4,400
+        :xUnits: Seconds
+        :yUnits: Meters
       :pages:
       - :name: Page 1
         :text: In this page...
         :sequence:
           :type: "MultipleChoiceSequence"
+          :dataSetName: default_data_set
           :initialPrompt: Whats the blah blah.
           :giveUp: That's not right.
           :confirmCorrect: Yes, that's right!
@@ -266,11 +287,32 @@ Feature: Sequences Activities
       """
       ---
       :name: Sequences Multiple Choice Sequence Custom
+      :units:
+        - :name: Seconds
+          :abbreviation: s
+        - :name: Meters
+          :abbreviation: m
+      :data_sets:
+      - :name: default_data_set
+        :yPrecision: 0.1
+        :xPrecision: 0.1
+        :lineSnapDistance: 0.1
+        :expression:
+        :lineType: None
+        :pointType: Dot
+        :data: |-
+          1,100
+          2,200
+          3,300
+          4,400
+        :xUnits: Seconds
+        :yUnits: Meters
       :pages:
       - :name: Page 1
         :text: In this page...
         :sequence:
           :type: "MultipleChoiceSequence"
+          :dataSetName: default_data_set
           :initialPrompt: Whats the blah blah.
           :giveUp: That's not right.
           :confirmCorrect: Yes, that's right!

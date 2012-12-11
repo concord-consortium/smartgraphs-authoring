@@ -462,6 +462,7 @@ def extract_multiple_choice_sequence!(mc_seq_def)
   else
     uncheck 'multiple_choice_sequence_use_sequential_feedback' 
   end
+  select mc_seq_def[:dataSetName], :from => 'multiple_choice_sequence[data_set_id]'
   click_button 'Create Multiple choice sequence'
   mc_seq_def[:choices].each do |choice_def|
     within('form.new.multiple-choice-choice') do

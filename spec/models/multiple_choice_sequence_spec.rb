@@ -17,13 +17,17 @@ describe MultipleChoiceSequence do
       @hints = 1.upto(4).map { |i|
         MultipleChoiceHint.new(:name => "feedback #{i}")
       }
+      @data_set = mock_model(DataSet, {
+        :name => "dataSetA"
+      })
       @multi_choice = MultipleChoiceSequence.create(
         :initial_prompt => @initial_prompt,
         :give_up => @giveup,
         :confirm_correct => @confirm_correct,
         :use_sequential_feedback => true,
         :multiple_choice_choices => @choices,
-        :multiple_choice_hints => @hints
+        :multiple_choice_hints => @hints,
+        :data_set => @data_set
       )
     end
     it "should match the format specified by the generator project" do
@@ -34,6 +38,7 @@ describe MultipleChoiceSequence do
         assert_equal the_hash['giveUp'], @multi_choice.give_up
         assert_equal the_hash['confirmCorrect'], @multi_choice.confirm_correct
         assert_equal the_hash['choices'][1], @choices[1].name
+        assert_equal the_hash['dataSetName'], @data_set.name
     end
     describe "when using sequential hints" do
       it "should match the format specified by the generator project" do
