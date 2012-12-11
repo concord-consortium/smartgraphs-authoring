@@ -81,4 +81,14 @@ class NumericSequence < ActiveRecord::Base
     update_sequence_prompts(hash)
     hash
   end
+
+  def data_set_name_from_hash(definition)
+    callback = Proc.new do
+      self.reload
+      found_data_set = self.page.activity.data_sets.find_by_name(definition)
+      self.data_set = found_data_set
+      self.save!
+    end
+    self.add_marshall_callback(callback)
+  end
 end
