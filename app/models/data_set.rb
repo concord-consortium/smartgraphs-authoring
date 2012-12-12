@@ -35,6 +35,9 @@ class DataSet < ActiveRecord::Base
   has_many :data_set_predefined_graphs, :dependent => :destroy
   has_many :predefined_graph_panes, :through => :data_set_predefined_graphs
 
+  has_many :data_set_sensor_graphs, :dependent => :destroy
+  has_many :sensor_graph_panes, :through => :data_set_sensor_graphs
+
   before_validation do
     reformat_data_text
     reformat_expression

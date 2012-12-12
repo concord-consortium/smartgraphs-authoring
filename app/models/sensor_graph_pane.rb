@@ -33,6 +33,9 @@ class SensorGraphPane < ActiveRecord::Base
   has_many :annotation_inclusions, :as => :including_graph, :dependent => :destroy
   has_many :included_graphs, :through => :annotation_inclusions
 
+  has_many :data_sets, :through => :data_set_sensor_graphs, :accessible => true
+  has_many :data_set_sensor_graphs, :dependent => :destroy
+
   def field_order
     "title, y_label, y_unit, y_min, y_max, y_ticks, x_label, x_unit, x_min, x_max, x_ticks"
   end
