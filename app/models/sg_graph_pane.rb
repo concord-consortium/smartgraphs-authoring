@@ -30,6 +30,26 @@ module SgGraphPane
     self.add_marshall_callback(callback)
   end
 
+  def include_referenced_graphs(graph_reference_urls)
+    graphs = self.sg_activity.extract_graphs
+    graphs.select! { |g| (g.respond_to? :get_indexed_path) && (graph_reference_urls.include?(g.get_indexed_path))}
+    graphs.each do |graph|
+      self.included_graphs << graph
+    end
+  end
+
+  def included_data_sets_from_hash(definitions)
+    callback = Proc.new do
+      self.reload
+      definitions.each do |definition|
+        found_data_set = self.page.activity.data_sets.find_by_name(definition['name'])
+        self.data_sets << found_data_set
+      end
+      self.save!
+    end
+    self.add_marshall_callback(callback)
+  end
+
   def to_hash
     hash = {
       'type'   => self.graph_type,
@@ -47,5 +67,57 @@ module SgGraphPane
       hash['includeAnnotationsFrom'] = included_graphs.map{|graph| graph.get_indexed_path }
     end
     hash
+  end
+
+  def included_datasets
+    # TODO: Eventually we want to be able to specify if datasets are
+    # in the legend.
+    return data_sets.map {|d| {"name" => d.name, "inLegend" => true} }
+  end
+
+  # returns a 1-based indexed path string
+  # eg page/2/pane/1
+  def get_indexed_path
+    page.activity.pages.each_with_index do |pg,pg_i|
+      pg.page_panes.each_with_index do |pg_pn, pn_i|
+        pn = pg_pn.pane
+        if pn == self
+          return "page/#{pg_i+1}/pane/#{pn_i+1}"
+        end
+      end
+    end
+    return nil
+  end
+
+  def self.get_all_graph_panes_before(pane)
+    return [] unless is_graph_pane?(pane)
+
+    pane_collection = []
+
+    page = pane.page
+    activity = page.activity
+
+    # iterate through all the pages and panes until we encounter the passed in pane.
+    # Then return all the graph panes we've encountered up until that point.
+    activity.pages.each do |pg|
+      pg.page_panes.each do |pn|
+        if pn.pane == pane
+          return pane_collection
+        else
+          pane_collection << pn.pane if is_graph_pane?(pn.pane)
+        end
+      end
+      return pane_collection if pg == page
+    end
+    return pane_collection
+  end
+
+  def self.get_all_prediction_graph_panes_before(pane)
+    panes = get_all_graph_panes_before(pane)
+    return panes.select{|p| p.kind_of?(PredictionGraphPane) }
+  end
+
+  def self.is_graph_pane?(pane)
+    return pane.kind_of?(SensorGraphPane) || pane.kind_of?(PredictionGraphPane) || pane.kind_of?(PredefinedGraphPane)
   end
 end

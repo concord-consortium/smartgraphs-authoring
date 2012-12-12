@@ -72,26 +72,6 @@ class PredefinedGraphPane < ActiveRecord::Base
     'PredefinedGraphPane'
   end
 
-  def include_referenced_graphs(graph_reference_urls)
-    graphs = self.sg_activity.extract_graphs
-    graphs.select! { |g| (g.respond_to? :get_indexed_path) && (graph_reference_urls.include?(g.get_indexed_path))}
-    graphs.each do |graph|
-      self.included_graphs << graph
-    end
-  end
-
-  def included_data_sets_from_hash(definitions)
-    callback = Proc.new do
-      self.reload
-      definitions.each do |definition|
-        found_data_set = self.page.activity.data_sets.find_by_name(definition['name'])
-        self.data_sets << found_data_set
-      end
-      self.save!
-    end
-    self.add_marshall_callback(callback)
-  end
-
   def to_hash
     hash = super()
     hash["showCrossHairs"] = show_cross_hairs
@@ -100,11 +80,4 @@ class PredefinedGraphPane < ActiveRecord::Base
     hash["includedDataSets"] = included_datasets
     return hash
   end
-
-  def included_datasets
-    # TODO: Eventually we want to be able to specify if datasets are
-    # in the legend.
-    return data_sets.map {|d| {"name" => d.name, "inLegend" => true} }
-  end
-
 end
