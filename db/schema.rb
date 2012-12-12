@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121211184038) do
+ActiveRecord::Schema.define(:version => 20121211182324) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -373,10 +373,8 @@ ActiveRecord::Schema.define(:version => 20121211184038) do
     t.datetime "updated_at"
     t.integer  "y_unit_id"
     t.integer  "x_unit_id"
-    t.integer  "data_set_id"
   end
 
-  add_index "sensor_graph_panes", ["data_set_id"], :name => "index_sensor_graph_panes_on_data_set_id"
   add_index "sensor_graph_panes", ["x_unit_id"], :name => "index_sensor_graph_panes_on_x_unit_id"
   add_index "sensor_graph_panes", ["y_unit_id"], :name => "index_sensor_graph_panes_on_y_unit_id"
 
