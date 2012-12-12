@@ -1,4 +1,4 @@
-class DataSetPredefinedGraph < ActiveRecord::Base
+class DataSetPredictionGraph < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
 
@@ -10,6 +10,6 @@ class DataSetPredefinedGraph < ActiveRecord::Base
   end
 
   belongs_to :data_set
-  belongs_to :predefined_graph_pane
+  belongs_to :prediction_graph_pane
 
 end

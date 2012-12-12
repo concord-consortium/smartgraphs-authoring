@@ -39,6 +39,9 @@ class PredictionGraphPane < ActiveRecord::Base
   has_many :annotation_inclusions, :as => :including_graph, :dependent => :destroy
   has_many :included_graphs, :through => :annotation_inclusions
 
+  has_many :data_sets, :through => :data_set_prediction_graphs, :accessible => true
+  has_many :data_set_prediction_graphs, :dependent => :destroy
+
   def field_order
     "title, y_label, y_unit, y_min, y_max, y_ticks, y_precision, x_label, x_unit, x_min, x_max, x_ticks, x_precision, prediction_type"
   end
