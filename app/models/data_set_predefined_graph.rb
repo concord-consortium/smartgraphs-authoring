@@ -1,4 +1,4 @@
-class DataSetGraph < ActiveRecord::Base
+class DataSetPredefinedGraph < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
   

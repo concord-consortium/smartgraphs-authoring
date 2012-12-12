@@ -32,8 +32,8 @@ class DataSet < ActiveRecord::Base
 
   belongs_to :activity
 
-  has_many :data_set_graphs, :dependent => :destroy
-  has_many :predefined_graph_panes, :through => :data_set_graphs
+  has_many :data_set_predefined_graphs, :dependent => :destroy
+  has_many :predefined_graph_panes, :through => :data_set_predefined_graphs
 
   before_validation do
     reformat_data_text

@@ -1,4 +1,4 @@
-class DataSetGraphsController < ApplicationController
+class DataSetPredefinedGraphsController < ApplicationController
 
   hobo_model_controller
 
