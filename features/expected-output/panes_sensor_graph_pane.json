@@ -18,7 +18,8 @@
           "xMin": 0.0,
           "xMax": 10.0,
           "yTicks": 1.0,
-          "xTicks": 1.0
+          "xTicks": 1.0,
+          "includedDataSets": []
         }
       ]
     }

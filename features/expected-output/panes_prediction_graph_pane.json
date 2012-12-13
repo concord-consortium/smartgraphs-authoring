@@ -21,6 +21,7 @@
           "xTicks": 1.0,          
           "xPrecision": 0.1,
           "yPrecision": 0.1,
+          "includedDataSets": [],
           "predictionType": "connecting_points"
         }
       ]
@@ -43,6 +44,7 @@
           "xTicks": 1.0,
           "xPrecision": 0.1,
           "yPrecision": 0.1,
+          "includedDataSets": [],
           "predictionType": "continuous_curves"
         }
       ]
