@@ -73,6 +73,7 @@ Feature: Included Graphs Activities
           - Prediction 1
       """
     Then I should get correct json
+    And I should be able to copy the activity
 
   @javascript
   Scenario: Create an activity with a sensor graph pane with included prediction graph data
@@ -146,6 +147,7 @@ Feature: Included Graphs Activities
           - Prediction 2
       """
     Then I should get correct json
+    And I should be able to copy the activity
 
   @javascript
   Scenario: Create an activity with a prediction graph pane with included prediction graph data
@@ -236,4 +238,4 @@ Feature: Included Graphs Activities
           - Prediction 2
       """
     Then I should get correct json
-
+    And I should be able to copy the activity
