@@ -69,6 +69,7 @@ Feature: Pane Activities
           - default_data_set
       """
     Then I should get correct json
+    And I should be able to copy the activity
 
   Scenario: Create an activity with a sensor graph pane
     Given I am logged in as an admin named 'admin'
@@ -102,6 +103,7 @@ Feature: Pane Activities
             :ticks: 1
       """
     Then I should get correct json
+    And I should be able to copy the activity
 
   Scenario: Create an activity with a table pane
     Given I am logged in as an admin named 'admin'
@@ -170,4 +172,5 @@ Feature: Pane Activities
           :prediction_type: Continuous Curves
       """
     Then I should get correct json
+    And I should be able to copy the activity
 
