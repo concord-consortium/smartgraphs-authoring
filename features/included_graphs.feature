@@ -9,7 +9,7 @@ Feature: Included Graphs Activities
     And   I am on the Activities page
     When I create a new activity:
       """
-      --- 
+      ---
       :name: Included Graphs Predefined Graph Pane
       :units:
       - :name: Time
@@ -80,7 +80,7 @@ Feature: Included Graphs Activities
     And   I am on the Activities page
     When I create a new activity:
       """
-      --- 
+      ---
       :name: Included Graphs Sensor Graph Pane
       :units:
       - :name: Time
@@ -153,7 +153,7 @@ Feature: Included Graphs Activities
     And   I am on the Activities page
     When I create a new activity:
       """
-      --- 
+      ---
       :name: Included Graphs Prediction Graph Pane
       :units:
       - :name: Time
