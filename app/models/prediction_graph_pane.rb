@@ -57,4 +57,36 @@ class PredictionGraphPane < ActiveRecord::Base
     hash['predictionType'] = prediction_type
     return hash
   end
+
+  def self.get_all_graph_panes_before(pane)
+    return [] unless is_graph_pane?(pane)
+
+    pane_collection = []
+
+    page = pane.page
+    activity = page.activity
+
+    # iterate through all the pages and panes until we encounter the passed in pane.
+    # Then return all the graph panes we've encountered up until that point.
+    activity.pages.each do |pg|
+      pg.page_panes.each do |pn|
+        if pn.pane == pane
+          return pane_collection
+        else
+          pane_collection << pn.pane if is_graph_pane?(pn.pane)
+        end
+      end
+      return pane_collection if pg == page
+    end
+    return pane_collection
+  end
+
+  def self.get_all_prediction_graph_panes_before(pane)
+    panes = get_all_graph_panes_before(pane)
+    return panes.select{|p| p.kind_of?(PredictionGraphPane) }
+  end
+
+  def self.is_graph_pane?(pane)
+    return pane.kind_of?(SensorGraphPane) || pane.kind_of?(PredictionGraphPane) || pane.kind_of?(PredefinedGraphPane)
+  end
 end
