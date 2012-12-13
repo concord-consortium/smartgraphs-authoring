@@ -77,7 +77,6 @@ class PredefinedGraphPane < ActiveRecord::Base
     hash["showCrossHairs"] = show_cross_hairs
     hash["showToolTipCoords"] = show_tool_tip_coords
     hash["showGraphGrid"] = show_graph_grid
-    hash["includedDataSets"] = included_datasets
     return hash
   end
 end

@@ -11,7 +11,7 @@ describe PredictionGraphPane do
   describe "zero argument constructor defaults" do
     describe "#to_hash" do
       let(:expected_hash) { 
-       {"type"=>"PredictionGraphPane", "title"=>nil, "yLabel"=>nil, "yMin"=>nil, "yMax"=>nil, "xLabel"=>nil, "xMin"=>nil, "xMax"=>nil, "yTicks"=>nil, "xTicks"=>nil, "xPrecision"=>0.1, "yPrecision"=>0.1, "predictionType"=>nil}
+        { "type"=>"PredictionGraphPane", "title"=>nil, "yLabel"=>nil, "yMin"=>nil, "yMax"=>nil, "xLabel"=>nil, "xMin"=>nil, "xMax"=>nil, "yTicks"=>nil, "xTicks"=>nil, "xPrecision"=>0.1, "yPrecision"=>0.1, "predictionType"=>nil, "includedDataSets"=>[] }
       }
       it "should match our expected hash" do
         subject.to_hash.should == expected_hash
@@ -36,7 +36,7 @@ describe PredictionGraphPane do
     
     describe "#to_hash" do
       let(:expected_hash) { 
-       {"type"=>"PredictionGraphPane", "title"=>"x in terms of y", "yLabel"=>"y", "yMin"=>0.0, "yMax"=>1.0, "xLabel"=>"x", "xMin"=>0.0, "xMax"=>10.0, "yTicks"=>0.1, "xTicks"=>1.0, "xPrecision"=>0.1, "yPrecision"=>0.1, "predictionType"=>"connecting_points"} 
+       {"type"=>"PredictionGraphPane", "title"=>"x in terms of y", "yLabel"=>"y", "yMin"=>0.0, "yMax"=>1.0, "xLabel"=>"x", "xMin"=>0.0, "xMax"=>10.0, "yTicks"=>0.1, "xTicks"=>1.0, "xPrecision"=>0.1, "yPrecision"=>0.1, "predictionType"=>"connecting_points", "includedDataSets"=>[]} 
       }  
       it "should match our expected hash" do
         subject.to_hash.should == expected_hash

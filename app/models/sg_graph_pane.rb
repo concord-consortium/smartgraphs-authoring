@@ -61,7 +61,8 @@ module SgGraphPane
       'xMin'   => x_min,
       'xMax'   => x_max,
       'yTicks' => y_ticks,
-      'xTicks' => x_ticks
+      'xTicks' => x_ticks,
+      'includedDataSets' => included_datasets
     }
     if included_graphs.size > 0
       hash['includeAnnotationsFrom'] = included_graphs.map{|graph| graph.get_indexed_path }
