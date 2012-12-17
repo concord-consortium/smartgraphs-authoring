@@ -129,7 +129,8 @@ class DataSet < ActiveRecord::Base
 
   ##
   ## create one or more datasets from
-  def self.from_predefined_graph_pane(graph)
+  ## a PredefinedGraphPane or a PredictionGraphPane
+  def self.from_graph_pane(graph)
     # cache = {}
     # key = "#{graph.class_name}_#{graph.id}"
     # other method will cache.
@@ -143,7 +144,11 @@ class DataSet < ActiveRecord::Base
     attributes.select! { |k,v| column_names.include?(k)}
     new_item = self.new(attributes)
     new_item.activity = activity
-    new_item.predefined_graph_panes << graph
+    if graph.is_a?(PredefinedGraphPane)
+      new_item.predefined_graph_panes << graph
+    elsif graph.is_a?(PredictionGraphPane)
+      new_item.prediction_graph_panes << graph
+    end
     new_item.name = graph.title
     new_item.save!
     # TODO, other things.
@@ -151,7 +156,10 @@ class DataSet < ActiveRecord::Base
 
   def self.convertAllGraphPanes()
     PredefinedGraphPane.all.each do |gp|
-      self.from_predefined_graph_pane(gp)
+      self.from_graph_pane(gp)
+    end
+    PredictionGraphPane.all.each do |pp|
+      self.from_graph_pane(pp)
     end
   end
 
