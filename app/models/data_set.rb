@@ -123,8 +123,8 @@ class DataSet < ActiveRecord::Base
   end
 
   def type
-    return 'dataRef' if self.is_data_ref?
-    return "dataDef"
+    return 'dataref' if self.is_data_ref?
+    return 'datadef'
   end
 
   ##
