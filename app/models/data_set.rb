@@ -119,7 +119,7 @@ class DataSet < ActiveRecord::Base
   end
 
   def is_data_ref?
-    return (!(self.expression.nil? && self.expression.blank?))
+    return !self.expression.nil? && !self.expression.blank?
   end
 
   def type
