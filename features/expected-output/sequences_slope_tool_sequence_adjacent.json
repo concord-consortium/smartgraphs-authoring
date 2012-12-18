@@ -2,11 +2,11 @@
   "type": "Activity",
   "name": "Sequences Slope Tool Sequence Adjacent",
   "authorName": "",
-  "pages": 
+  "pages":
    [{"type": "Page",
      "name": "Sequences Slope Tool Sequence Adjacent",
      "text": "Sequences Slope Tool Sequence Adjacent",
-     "panes": 
+     "panes":
       [{"type": "PredefinedGraphPane",
         "title": "Velocity",
         "yLabel": "Distance",
@@ -22,7 +22,7 @@
         "showGraphGrid": false,
         "includedDataSets":[{"name":"default_data_set", "inLegend":true}]},
        {"type": "TablePane", "title": "data table"}],
-     "sequence": 
+     "sequence":
       {"type": "SlopeToolSequence",
        "firstQuestionIsSlopeQuestion": false,
        "firstQuestion": "",
@@ -38,7 +38,7 @@
        "dataSetName":"default_data_set"
        }}],
   "datasets":
-    [{"type":"dataRef",
+    [{"type":"datadef",
       "name":"default_data_set",
       "yUnits":"Meters",
       "xUnits":"Seconds",
@@ -60,7 +60,7 @@
         [9.0, 8.0],
         [10.0, 7.0]],
       "expression":""}],
-  "units": 
+  "units":
    [{"type": "Unit", "name": "Seconds", "abbreviation": "s"},
     {"type": "Unit", "name": "Meters", "abbreviation": "m"}]
 }

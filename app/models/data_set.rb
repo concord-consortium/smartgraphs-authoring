@@ -19,7 +19,7 @@ class DataSet < ActiveRecord::Base
     line_snap_distance :float, :default => 0.1
 
     expression :string, :default =>"" #y = 0.5 * x + 5",
-    
+
     line_type  DataSet::LineType,   :default => "none"
     point_type DataSet::PointType,  :default => "dot"
 
@@ -70,7 +70,7 @@ class DataSet < ActiveRecord::Base
     }
     hash
   end
-    
+
   def x_units_from_hash(definition)
     self.x_unit = Unit.find_or_create_by_name(definition)
   end
@@ -119,12 +119,12 @@ class DataSet < ActiveRecord::Base
   end
 
   def is_data_ref?
-    return (!(self.expression.nil? && self.expression.blank?))
+    return !self.expression.nil? && !self.expression.blank?
   end
 
   def type
-    return 'dataRef' if self.is_data_ref?
-    return "dataDef"
+    return 'dataref' if self.is_data_ref?
+    return 'datadef'
   end
 
   ##
