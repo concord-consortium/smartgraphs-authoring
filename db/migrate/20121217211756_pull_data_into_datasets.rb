@@ -4,11 +4,12 @@ class PullDataIntoDatasets < ActiveRecord::Migration
     DataSet.convertAllGraphPanes();
     # Link Sequences with datasets
     # - Build array of sequences
-    sequences = NumericSequence.all
+    sequences = []
+    sequences << NumericSequence.all
     sequences << LineConstructionSequence.all
     sequences << MultipleChoiceSequence.all
     sequences << SlopeToolSequence.all
-    sequences.each do |seq|
+    sequences.flatten.each do |seq|
       # Check for predefined graph panes, prediction graph panes, and senor graph panes in that order
       # Use their data set as the sequence data set if one is found.
       if seq.page.predefined_graph_panes.length > 0
