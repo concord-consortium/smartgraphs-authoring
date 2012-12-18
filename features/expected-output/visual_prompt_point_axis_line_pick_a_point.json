@@ -4,7 +4,7 @@
   "authorName": "",
   "datasets": [
   {
-    "type": "dataRef",
+    "type": "datadef",
     "name": "default_data_set",
     "yUnits": "Distance",
     "xUnits": "Time",
@@ -42,8 +42,8 @@
           "showToolTipCoords": false,
           "showGraphGrid": false,
           "includedDataSets": [
-            { 
-              "name": "default_data_set", 
+            {
+              "name": "default_data_set",
               "inLegend": true
             }
           ]

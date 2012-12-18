@@ -30,7 +30,7 @@
     }
   ],
   "datasets":
-   [{"type":"dataRef",
+   [{"type":"datadef",
      "name":"default_data_set",
      "yUnits":"Meters",
      "xUnits":"Seconds",
