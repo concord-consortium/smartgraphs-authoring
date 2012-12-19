@@ -70,5 +70,36 @@ namespace :sg do
     puts a.id
   end
 
-
+  desc 'compare serialized runtime json files'
+  task :diff_json, [:new_dir, :old_dir] => [:environment] do |t,args|
+    hl = HighLine.new()
+    new_dir = args[:new_dir] ? args[:new_dir] : hl.ask "What is the directory containing the newer JSON files? "
+    old_dir = args[:old_dir] ? args[:old_dir] : hl.ask "What is the directory containing the older JSON files? "
+    # Check for file differences between the two directories
+    old_files = Dir.entries(old_dir).reject!{|f| f.match(/^\./)}
+    new_files = Dir.entries(new_dir).reject!{|f| f.match(/^\./)}
+    oldnew = old_files - new_files
+    newold = new_files - old_files
+    if oldnew.length > 0
+      hl.say "File(s) in old but not new: #{oldnew.join(', ')}."
+    end
+    if newold.length > 0
+      hl.say "File(s) in new but not old: #{newold.join(', ')}."
+    end
+    # Iterate over the old files and diff them against the new versions of the same files
+    old_files = old_files - oldnew
+    old_files.each do |old|
+      # Get the filename
+      hl.say "Checking #{old}:"
+      old_hash = MultiJson.load(File.open(old_dir + old))
+      # new is the same filename in new_dir
+      new_hash = MultiJson.load(File.open(new_dir + old))
+      diff = HashDiff.diff(old_hash, new_hash)
+      if diff.blank?
+        hl.say "No significant changes."
+      else
+        hl.say "#{diff}"
+      end
+    end
+  end
 end
