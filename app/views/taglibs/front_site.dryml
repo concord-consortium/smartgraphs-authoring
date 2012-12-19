@@ -289,8 +289,7 @@
 <extend tag="form" for="PickAPointSequence">
   <old-form merge>
     <field-list: fields="&this.field_order">
-    <!-- @page or &this.page? -->
-      <data_set-tag: options="&DataSet.activity_is(activity_for(&this))" />
+      <data_set-tag: options="&DataSet.activity_is(activity_for(@this))" />
     </field-list>
     <after-field-list:>
       <h3>
@@ -331,7 +330,7 @@
 <extend tag="form" for="LineConstructionSequence">
   <old-form merge>
     <field-list: fields="&this.field_order">
-      <data_set-tag: options="&DataSet.activity_is(this.activity)" />
+      <data_set-tag: options="&DataSet.activity_is(activity_for(@this))" />
     </field-list>
   </old-form>
 </extend>
@@ -339,7 +338,7 @@
 <extend tag="form" for="MultipleChoiceSequence">
   <old-form merge>
     <field-list: fields="&this.field_order">
-      <data_set-tag: options="&DataSet.activity_is(this.activity)" />
+      <data_set-tag: options="&DataSet.activity_is(activity_for(@this))" />
     </field-list>
   </old-form>
 </extend>
@@ -347,7 +346,7 @@
 <extend tag="form" for="SlopeToolSequence">
   <old-form merge>
     <field-list: fields="&this.field_order">
-      <data_set-tag: options="&DataSet.activity_is(this.activity)" />
+      <data_set-tag: options="&DataSet.activity_is(activity_for(@this))" />
     </field-list>
   </old-form>
 </extend>
@@ -355,7 +354,7 @@
 <extend tag="form" for="NumericSequence">
   <old-form merge>
     <field-list: fields="&this.field_order">
-      <data_set-tag: options="&DataSet.activity_is(this.activity)" />
+      <data_set-tag: options="&DataSet.activity_is(activity_for(@this))" />
     </field-list>
     <after-field-list:>
       <h3>
@@ -409,7 +408,7 @@
     </field-list:>
     <after-field-list:>
       <h3>Included data sets</h3>
-      <select-many:data_sets options="&DataSet.activity_is(this.page.activity)" />
+      <select-many:data_sets options="&DataSet.activity_is(activity_for(@this))" />
       <h3>Included graphs</h3>
       <custom-poly-select-many:included_graphs prompt="Include graph data from:" options="&PredictionGraphPane.get_all_prediction_graph_panes_before(this)"/>
     </after-field-list:>
@@ -424,7 +423,7 @@
     </field-list:>
     <after-field-list:>
       <h3>Included data sets</h3>
-      <select-many:data_sets options="&DataSet.activity_is(this.page.activity)" />
+      <select-many:data_sets options="&DataSet.activity_is(activity_for(@this))" />
       <h3>Included prediction graphs</h3>
       <custom-poly-select-many:included_graphs prompt="Include graph data from:" options="&PredictionGraphPane.get_all_prediction_graph_panes_before(this)"/>
     </after-field-list:>
@@ -439,7 +438,7 @@
     </field-list:>
     <after-field-list:>
       <h3>Included data sets</h3>
-      <select-many:data_sets options="&DataSet.activity_is(this.page.activity)" />
+      <select-many:data_sets options="&DataSet.activity_is(activity_for(@this))" />
       <h3>Included prediction graphs</h3>
       <custom-poly-select-many:included_graphs prompt="Include graph data from:" options="&PredictionGraphPane.get_all_prediction_graph_panes_before(this)"/>
     </after-field-list:>
