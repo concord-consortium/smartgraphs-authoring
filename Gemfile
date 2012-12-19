@@ -16,6 +16,9 @@ group :development do
   # see: http://pry.github.com/screencasts.html
   gem 'awesome_print', '~> 1.0.2'
   gem 'railroady', '~> 1.0.7'
+  gem 'hashdiff'
+  gem 'highline'
+  gem 'multi_json'
 end
 
 group :test do
