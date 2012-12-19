@@ -79,51 +79,52 @@ set :deploy_via, :remote_cache
 #############################################################
 
 namespace :db do
-  desc 'Dumps the production database to db/production_data.sql on the remote server'
+  desc 'Dumps the production database to db/data.yml on the remote server'
   task :remote_db_dump, :roles => :db, :only => { :primary => true } do
     run "cd #{deploy_to}/#{current_dir} && " +
       "bundle exec rake RAILS_ENV=#{rails_env} db:dump --trace"
   end
 
-  desc 'Loads the production database in db/production_data.sql on the remote server'
+  desc 'Loads the production database in db/data.yml on the remote server'
   task :remote_db_load, :roles => :db, :only => { :primary => true } do
     run "cd #{deploy_to}/#{current_dir} && " +
       "bundle exec rake RAILS_ENV=#{rails_env} db:load --trace"
   end
 
-  desc '[NOTE: use "fetch_remote_db" instead!] Downloads db/production_data.sql from the remote production environment to your local machine'
+  desc 'Downloads db/data.yml from the remote production environment to your local machine'
   task :remote_db_download, :roles => :db, :only => { :primary => true } do
     remote_db_compress
     ssh_compression = ssh_options[:compression]
     ssh_options[:compression] = true
-    download("#{deploy_to}/#{current_dir}/db/production_data.sql.gz", "db/production_data.sql.gz", :via => :scp)
+    download("#{deploy_to}/#{current_dir}/db/data.yml.gz", "db/data.yml.gz", :via => :scp)
+    `gunzip -f db/data.yml.gz`
     ssh_options[:compression] = ssh_compression
   end
 
-  desc '[NOTE: use "push_remote_db" instead!] Uploads db/production_data.sql to the remote production environment from your local machine'
+  desc 'Uploads db/data.yml to the remote production environment from your local machine'
   task :remote_db_upload, :roles => :db, :only => { :primary => true } do
     ssh_compression = ssh_options[:compression]
     ssh_options[:compression] = true
-    `gzip -f db/production_data.sql` unless File.exists?("db/production_data.sql.gz")
-    upload("db/production_data.sql.gz", "#{deploy_to}/#{current_dir}/db/production_data.sql.gz", :via => :scp)
+    `gzip -f db/data.yml`
+    upload("db/data.yml.gz", "#{deploy_to}/#{current_dir}/db/data.yml.gz", :via => :scp)
     ssh_options[:compression] = ssh_compression
     remote_db_uncompress
   end
 
   task :remote_db_compress, :roles => :db, :only => { :primary => true } do
-    run "gzip -f #{deploy_to}/#{current_dir}/db/production_data.sql"
+    run "gzip -f #{deploy_to}/#{current_dir}/db/data.yml"
   end
 
   task :remote_db_uncompress, :roles => :db, :only => { :primary => true } do
-    run "gunzip -f #{deploy_to}/#{current_dir}/db/production_data.sql.gz"
+    run "gunzip -f #{deploy_to}/#{current_dir}/db/data.yml.gz"
   end
 
   desc 'Cleans up data dump file'
   task :remote_db_cleanup, :roles => :db, :only => { :primary => true } do
     execute_on_servers(options) do |servers|
       self.sessions[servers.first].sftp.connect do |tsftp|
-        tsftp.remove "#{deploy_to}/#{current_dir}/db/production_data.sql"
-        tsftp.remove "#{deploy_to}/#{current_dir}/db/production_data.sql.gz"
+        tsftp.remove "#{deploy_to}/#{current_dir}/db/data.yml"
+        tsftp.remove "#{deploy_to}/#{current_dir}/db/data.yml.gz"
       end
     end
   end
@@ -252,13 +253,13 @@ end
 #
 # generake (hehe) cap task to run rake tasks.
 # found here: http://stackoverflow.com/questions/312214/how-do-i-run-a-rake-task-from-capistrano
-namespace :rake_tasks do  
+namespace :rake_tasks do
   desc "Run a rake task: cap staging rake:invoke task=a_certain_task"
-  # run like: cap staging rake:invoke task=a_certain_task  
-  task :invoke do  
+  # run like: cap staging rake:invoke task=a_certain_task
+  task :invoke do
     run("cd #{deploy_to}/current; bundle exec rake #{ENV['task']} RAILS_ENV=#{rails_env}")
- rake #{ENV['task']} RAILS_ENV=#{rails_env}")  
-  end  
+ rake #{ENV['task']} RAILS_ENV=#{rails_env}")
+  end
 end
 
 namespace :hobo do
