@@ -73,8 +73,8 @@ namespace :sg do
   desc 'compare serialized runtime json files'
   task :diff_json, [:new_dir, :old_dir] => [:environment] do |t,args|
     hl = HighLine.new()
-    new_dir = args[:new_dir] ? args[:new_dir] : hl.ask "What is the directory containing the newer JSON files? "
-    old_dir = args[:old_dir] ? args[:old_dir] : hl.ask "What is the directory containing the older JSON files? "
+    new_dir = args[:new_dir] ? args[:new_dir] : hl.ask("What is the directory containing the newer JSON files? ")
+    old_dir = args[:old_dir] ? args[:old_dir] : hl.ask("What is the directory containing the older JSON files? ")
     # Check for file differences between the two directories
     old_files = Dir.entries(old_dir).reject!{|f| f.match(/^\./)}
     new_files = Dir.entries(new_dir).reject!{|f| f.match(/^\./)}
