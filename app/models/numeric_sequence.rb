@@ -19,6 +19,10 @@ class NumericSequence < ActiveRecord::Base
     timestamps
   end
 
+  def field_order
+    "title, data_set, initial_prompt, give_up, confirm_correct, correct_answer, tolerance"
+  end
+
   validates :title, :presence => true
   validates :initial_prompt, :presence => true
   validates :give_up, :presence => true

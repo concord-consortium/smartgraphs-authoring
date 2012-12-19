@@ -16,6 +16,10 @@ class MultipleChoiceSequence < ActiveRecord::Base
     timestamps
   end
 
+  def field_order
+    "data_set, initial_prompt, give_up, confirm_correct, use_sequential_feedback"
+  end
+
   has_one :page_sequence, :as => :sequence, :dependent => :destroy
 
   has_one :page, :through => :page_sequence

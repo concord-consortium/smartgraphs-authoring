@@ -25,6 +25,10 @@ class SlopeToolSequence < ActiveRecord::Base
     timestamps
   end
 
+  def field_order
+    "data_set, case_type, point_constraints, first_question, slope_variable_name, x_min, y_min, x_max, y_max, tolerance"
+  end
+
   has_one :page_sequence, :as => :sequence, :dependent => :destroy
   has_one :page, :through => :page_sequence
   reverse_association_of :page, 'Page#slope_tool_sequences'
