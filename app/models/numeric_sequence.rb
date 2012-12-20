@@ -80,7 +80,7 @@ class NumericSequence < ActiveRecord::Base
       'tolerance' => tolerance,
       'giveUp' => {'text' => give_up.to_s },
       'confirmCorrect' => {'text' => confirm_correct.to_s },
-      'dataSetName' => data_set.name
+      'dataSetName' => data_set ? data_set.name : ''
     }
     update_sequence_prompts(hash)
     hash

@@ -44,7 +44,7 @@ class MultipleChoiceSequence < ActiveRecord::Base
       'giveUp' => give_up,
       'confirmCorrect' => confirm_correct,
       'hints' => hints,
-      'dataSetName'         => data_set.name
+      'dataSetName'         => data_set ? data_set.name : ''
     }
   end
 
