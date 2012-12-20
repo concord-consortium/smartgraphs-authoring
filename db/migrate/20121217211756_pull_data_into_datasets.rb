@@ -3,6 +3,7 @@ class PullDataIntoDatasets < ActiveRecord::Migration
     # Pull data from PredefinedGraphPanes and PredictionGraphPanes into DataSets
     DataSet.convertAllGraphPanes();
     # Link Sequences with datasets
+    [NumericSequence, LineConstructionSequence, MultipleChoiceSequence, PickAPointSequence, SlopeToolSequence].each { |m| m.reset_column_information }
     # - Build array of sequences
     sequences = []
     sequences << NumericSequence.all
@@ -22,13 +23,14 @@ class PullDataIntoDatasets < ActiveRecord::Migration
           elsif seq.page.sensor_graph_panes.length > 0
             seq.data_set = seq.page.sensor_graph_panes.first.data_sets.first
           end
-          # puts "#{seq.class.to_s} #{seq.id} is getting data_set #{seq.data_set ? seq.data_set.name : 'nil'}"
+          say "#{seq.class.to_s} #{seq.id} is getting data_set #{seq.data_set ? seq.data_set.name : 'nil'}"
+          say "(from Activity #{seq.data_set.activity.id})" unless seq.data_set.nil?
           seq.save
-        # else
-        #   puts "#{seq.class.to_s} #{seq.id} belongs to a page with no activity."
+        else
+          say "#{seq.class.to_s} #{seq.id} belongs to a page with no activity."
         end
-      # else
-      #   puts "#{seq.class.to_s} #{seq.id} has no associated page."
+      else
+        say "#{seq.class.to_s} #{seq.id} has no associated page."
       end
     end
   end
