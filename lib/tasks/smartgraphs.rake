@@ -52,6 +52,7 @@ namespace :sg do
         if json.length > 0
           f = File.open("json/activity_#{activity.id}.runtime.json", "w")
           f.write(json)
+          f.close
         else
           errors.write("#{activity.id}\n")
         end
@@ -59,6 +60,7 @@ namespace :sg do
         errors.write("#{e} in Activity #{activity.id}\n")
       end
     end
+    errors.close
   end
 
   desc 'marshal serialized [activity_id] from tmp file'
