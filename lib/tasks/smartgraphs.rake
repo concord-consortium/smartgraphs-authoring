@@ -47,12 +47,16 @@ namespace :sg do
     c = Converter.new()
     errors = File.open("json/errors.txt", "w")
     Activity.all.each do |activity|
-      json = c.convert(activity.to_hash.to_json)
-      if json.length > 0
-        f = File.open("json/activity_#{activity.id}.runtime.json", "w")
-        f.write(json)
-      else
-        errors.write("#{activity.id}\n")
+      begin
+        json = c.convert(activity.to_hash.to_json)
+        if json.length > 0
+          f = File.open("json/activity_#{activity.id}.runtime.json", "w")
+          f.write(json)
+        else
+          errors.write("#{activity.id}\n")
+        end
+      rescue Exception => e
+        errors.write("#{e} in Activity #{activity.id}\n")
       end
     end
   end
