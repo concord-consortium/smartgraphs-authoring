@@ -20,6 +20,7 @@ class PullDataIntoDatasets < ActiveRecord::Migration
         elsif seq.page.sensor_graph_panes.length > 0
           seq.data_set = seq.page.sensor_graph_panes.first.data_sets.first
         end
+        puts "#{seq.class.to_s} #{seq.id} is getting data_set #{seq.data_set ? seq.data_set.name : 'nil'}"
         seq.save
       else
         puts "#{seq.class.to_s} #{seq.id} has no associated page."
