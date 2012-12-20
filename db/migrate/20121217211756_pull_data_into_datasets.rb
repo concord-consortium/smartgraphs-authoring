@@ -8,6 +8,7 @@ class PullDataIntoDatasets < ActiveRecord::Migration
     sequences << NumericSequence.all
     sequences << LineConstructionSequence.all
     sequences << MultipleChoiceSequence.all
+    sequences << PickAPointSequence.all
     sequences << SlopeToolSequence.all
     sequences.flatten.each do |seq|
       # Check for predefined graph panes, prediction graph panes, and senor graph panes in that order
