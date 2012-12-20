@@ -80,8 +80,8 @@ namespace :sg do
     new_dir = args[:new_dir] ? args[:new_dir] : hl.ask("What is the directory containing the newer JSON files? ")
     old_dir = args[:old_dir] ? args[:old_dir] : hl.ask("What is the directory containing the older JSON files? ")
     # Check for file differences between the two directories
-    old_files = Dir.entries(old_dir).reject!{|f| f.match(/^\./)}
-    new_files = Dir.entries(new_dir).reject!{|f| f.match(/^\./)}
+    old_files = Dir.entries(old_dir).select!{|f| f.match(/\.json/)}
+    new_files = Dir.entries(new_dir).select!{|f| f.match(/\.json/)}
     oldnew = old_files - new_files
     newold = new_files - old_files
     if oldnew.length > 0
