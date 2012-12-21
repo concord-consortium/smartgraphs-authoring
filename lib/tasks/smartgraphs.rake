@@ -104,7 +104,7 @@ namespace :sg do
       if diff.blank?
         hl.say "No significant changes."
       else
-        hl.say "#{diff}"
+        hl.say (ap diff)
       end
     end
   end
