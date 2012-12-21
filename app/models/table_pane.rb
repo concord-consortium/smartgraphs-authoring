@@ -10,6 +10,8 @@ class TablePane < ActiveRecord::Base
   
   fields do
     title :string
+    x_label :string
+    y_label :string
     timestamps
   end
 
@@ -21,6 +23,8 @@ class TablePane < ActiveRecord::Base
   def to_hash
     {
       'type' => 'TablePane',
+      'xLabel' => x_label,
+      'yLabel' => y_label,
       'title' => title
     }
   end
