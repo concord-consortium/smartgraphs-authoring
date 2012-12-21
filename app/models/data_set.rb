@@ -149,7 +149,7 @@ class DataSet < ActiveRecord::Base
     elsif graph.is_a?(PredictionGraphPane)
       new_item.prediction_graph_panes << graph
     end
-    new_item.name = graph.title
+    new_item.name = "#{graph.title.parameterize}-#{activity.data_sets.length+1}"
     new_item.save!
     # TODO, other things.
   end
