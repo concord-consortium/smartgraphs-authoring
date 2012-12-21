@@ -104,7 +104,10 @@ namespace :sg do
       if diff.blank?
         hl.say "No significant changes."
       else
-        hl.say (ap diff)
+        # N.B. we might want to pass options to `ap` - it uses ANSI
+        # coloring, so there are a lot of messy escapes if the output of this task
+        # is redirected to a file. (It breaks Highline's `say` completely.)
+        puts (ap diff)
       end
     end
   end
