@@ -25,7 +25,9 @@
           "includedDataSets":[{"name":"default_data_set", "inLegend":true}]},
         {
           "type": "TablePane",
-          "title": "data table"
+          "title": "data table",
+          "xLabel": "Time",
+          "yLabel": "Distance"
         }
       ],
       "sequence": {
