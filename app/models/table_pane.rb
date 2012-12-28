@@ -23,8 +23,8 @@ class TablePane < ActiveRecord::Base
   def to_hash
     {
       'type' => 'TablePane',
-      'xLabel' => x_label,
-      'yLabel' => y_label,
+      'xLabel' => x_label.blank? ? '' : x_label,
+      'yLabel' => y_label.blank? ? '' : y_label,
       'title' => title
     }
   end
