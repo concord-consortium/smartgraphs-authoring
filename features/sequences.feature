@@ -392,6 +392,8 @@ Feature: Sequences Activities
           - default_data_set
         - :type: TablePane
           :title: data table
+          :x_label: Time
+          :y_label: Distance
         :sequence:
           :type: "SlopeToolSequence"
           :data_set_name: default_data_set
@@ -465,6 +467,8 @@ Feature: Sequences Activities
           - default_data_set
         - :type: TablePane
           :title: data table
+          :x_label: Time
+          :y_label: Distance
         :sequence:
           :type: "SlopeToolSequence"
           :data_set_name: default_data_set
@@ -536,6 +540,8 @@ Feature: Sequences Activities
           - default_data_set
         - :type: TablePane
           :title: data table
+          :x_label: Time
+          :y_label: Distance
         :sequence:
           :type: "SlopeToolSequence"
           :data_set_name: default_data_set
@@ -608,6 +614,8 @@ Feature: Sequences Activities
           - default_data_set
         - :type: TablePane
           :title: data table
+          :x_label: Time
+          :y_label: Distance
         :sequence:
           :type: "SlopeToolSequence"
           :data_set_name: default_data_set
@@ -679,6 +687,8 @@ Feature: Sequences Activities
           - default_data_set
         - :type: TablePane
           :title: data table
+          :x_label: Time
+          :y_label: Distance
         :sequence:
           :type: "SlopeToolSequence"
           :data_set_name: default_data_set

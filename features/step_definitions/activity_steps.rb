@@ -321,6 +321,8 @@ def create_pane(pane_def)
   when "TablePane"
     click_link 'New Table pane'
     fill_in 'table_pane_title', :with => pane_def[:title]
+    fill_in 'table_pane_x_label', :with => pane_def[:x_label] if pane_def[:x_label]
+    fill_in 'table_pane_y_label', :with => pane_def[:y_label] if pane_def[:y_label]
     click_button 'Create Table pane'
   end
 end
