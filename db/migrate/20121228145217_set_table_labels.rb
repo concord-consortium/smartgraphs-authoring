@@ -1,5 +1,6 @@
 class SetTableLabels < ActiveRecord::Migration
   def self.up
+    TablePane.reset_column_information
     TablePane.get_all_labels_from_graph_panes
   end
 
