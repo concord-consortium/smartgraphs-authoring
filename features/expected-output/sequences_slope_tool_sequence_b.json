@@ -21,7 +21,7 @@
         "showToolTipCoords": false,
         "showGraphGrid": false,
         "includedDataSets":[{"name":"default_data_set", "inLegend":true}]},
-       {"type": "TablePane", "title": "data table"}],
+       {"type": "TablePane", "xLabel": "Time", "yLabel": "Distance", "title": "data table"}],
      "sequence":
       {"type": "SlopeToolSequence",
        "firstQuestionIsSlopeQuestion": false,
