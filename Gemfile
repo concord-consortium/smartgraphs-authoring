@@ -22,6 +22,10 @@ group :development do
 end
 
 group :test do
+  # ffi, which is a dependency of childprocess, which is a dependency of selenium-webdriver,
+  # throws this error on every rake or startup:
+  # ($GEM_HOME)/ffi-1.0.9/lib/ffi/platform.rb:27: Use RbConfig instead of obsolete and deprecated Config.
+  # childprocess is the problem, pinned to ffi ~> 1.0, so it won't update past 1.0.9.
   gem 'selenium-webdriver', ">=2.26"
   gem 'cucumber-rails', '~> 1.3.0', :require => false
   gem "rspec-rails", ">= 2.5.0"
