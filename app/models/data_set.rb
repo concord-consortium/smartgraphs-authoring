@@ -148,6 +148,8 @@ class DataSet < ActiveRecord::Base
       new_item.predefined_graph_panes << graph
     elsif graph.is_a?(PredictionGraphPane)
       new_item.prediction_graph_panes << graph
+    elsif graph.is_a?(SensorGraphPane)
+      new_item.sensor_graph_panes << graph
     end
     new_item.name = "#{graph.title.parameterize}-#{activity.data_sets.length+1}"
     new_item.save!
@@ -160,6 +162,9 @@ class DataSet < ActiveRecord::Base
     end
     PredictionGraphPane.all.each do |pp|
       self.from_graph_pane(pp)
+    end
+    SensorGraphPane.all.each do |sp|
+      self.from_graph_pane(sp)
     end
   end
 
