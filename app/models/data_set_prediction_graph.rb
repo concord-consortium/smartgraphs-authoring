@@ -6,6 +6,7 @@ class DataSetPredictionGraph < ActiveRecord::Base
   sg_parent :predefined_graph_pane
 
   fields do
+    in_legend :boolean, :default => false
     timestamps
   end
 

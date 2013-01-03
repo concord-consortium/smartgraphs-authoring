@@ -6,6 +6,7 @@ class DataSetSensorGraph < ActiveRecord::Base
   sg_parent :sensor_graph_pane
 
   fields do
+    in_legend :boolean, :default => false
     timestamps
   end
 
