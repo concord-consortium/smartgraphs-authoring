@@ -54,6 +54,13 @@ describe PredefinedGraphPane do
       it "should match our expected hash" do
         subject.to_hash.should == expected_hash
       end
+
+      it "should allow datasets to appear in legend" do
+        subject.data_set_predefined_graphs.first.in_legend = true
+        subject.save
+
+        subject.to_hash.should include("includedDataSets" => [{"name"=>"dataset_a", "inLegend"=>true}, {"name"=>"dataset_b", "inLegend"=>false}])
+      end
     end
   end
 
