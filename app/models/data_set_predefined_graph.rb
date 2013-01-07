@@ -10,6 +10,8 @@ class DataSetPredefinedGraph < ActiveRecord::Base
     timestamps
   end
 
+  attr_accessible :in_legend, :data_set, :data_set_id
+
   belongs_to :data_set
   belongs_to :predefined_graph_pane
 

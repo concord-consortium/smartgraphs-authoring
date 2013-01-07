@@ -57,8 +57,8 @@ class PredefinedGraphPane < ActiveRecord::Base
   has_many :annotation_inclusions, :as => :including_graph, :dependent => :destroy
   has_many :included_graphs, :through => :annotation_inclusions
 
-  has_many :data_sets, :through => :data_set_predefined_graphs, :accessible => true
-  has_many :data_set_predefined_graphs, :dependent => :destroy
+  has_many :data_sets, :through => :data_set_predefined_graphs
+  has_many :data_set_predefined_graphs, :accessible => true, :dependent => :destroy
   
 
   def field_order
