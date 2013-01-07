@@ -10,7 +10,7 @@ class PredefinedGraphPane < ActiveRecord::Base
 
   sg_parent :page
   
-  children :data_sets
+  children :data_set_predefined_graphs
   # children  :data_set_graphs, :data_sets
 
   fields do
