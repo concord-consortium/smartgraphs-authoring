@@ -441,9 +441,10 @@
     </field-list:>
     <after-field-list:>
       <h3>Included data sets</h3>
+      <!-- TODO: We need to replace this select-many with something that acts like it, but adds a checkbox for existing associations to correspond to the in_legend boolean -->
       <select-many:data_sets options="&DataSet.activity_is(activity_for(@this))" />
-      <h3>Included graphs</h3>
-      <custom-poly-select-many:included_graphs prompt="Include graph data from:" options="&PredictionGraphPane.get_all_prediction_graph_panes_before(this)"/>
+      <!-- <h3>Included graphs</h3>
+      <custom-poly-select-many:included_graphs prompt="Include graph data from:" options="&PredictionGraphPane.get_all_prediction_graph_panes_before(this)"/> -->
     </after-field-list:>
   </old-form>
 </extend>
@@ -457,8 +458,8 @@
     <after-field-list:>
       <h3>Included data sets</h3>
       <select-many:data_sets options="&DataSet.activity_is(activity_for(@this))" />
-      <h3>Included prediction graphs</h3>
-      <custom-poly-select-many:included_graphs prompt="Include graph data from:" options="&PredictionGraphPane.get_all_prediction_graph_panes_before(this)"/>
+      <!-- <h3>Included prediction graphs</h3>
+            <custom-poly-select-many:included_graphs prompt="Include graph data from:" options="&PredictionGraphPane.get_all_prediction_graph_panes_before(this)"/> -->
     </after-field-list:>
   </old-form>
 </extend>
@@ -472,8 +473,8 @@
     <after-field-list:>
       <h3>Included data sets</h3>
       <select-many:data_sets options="&DataSet.activity_is(activity_for(@this))" />
-      <h3>Included prediction graphs</h3>
-      <custom-poly-select-many:included_graphs prompt="Include graph data from:" options="&PredictionGraphPane.get_all_prediction_graph_panes_before(this)"/>
+      <!-- <h3>Included prediction graphs</h3>
+            <custom-poly-select-many:included_graphs prompt="Include graph data from:" options="&PredictionGraphPane.get_all_prediction_graph_panes_before(this)"/> -->
     </after-field-list:>
   </old-form>
 </extend>
