@@ -9,7 +9,7 @@ class PredictionGraphPane < ActiveRecord::Base
   include SgGraphPane
   sg_parent :page
   
-  children :data_sets
+  children :data_set_prediction_graphs
 
   fields do
     title   :string

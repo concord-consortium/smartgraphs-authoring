@@ -9,7 +9,7 @@ class SensorGraphPane < ActiveRecord::Base
   include SgGraphPane
   sg_parent :page
   
-  children :data_sets
+  children :data_set_sensor_graphs
 
   fields do
     title   :string, :required
