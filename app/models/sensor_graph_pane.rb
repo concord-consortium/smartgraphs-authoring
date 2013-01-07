@@ -48,4 +48,7 @@ class SensorGraphPane < ActiveRecord::Base
     super() # left here as documentation, from SgGraphPane
   end
 
+  def included_datasets
+    return data_set_sensor_graphs.map {|j| {"name" => j.data_set.name, "inLegend" => j.in_legend} }
+  end
 end

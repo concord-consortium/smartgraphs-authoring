@@ -58,6 +58,10 @@ class PredictionGraphPane < ActiveRecord::Base
     return hash
   end
 
+  def included_datasets
+    return data_set_prediction_graphs.map {|j| {"name" => j.data_set.name, "inLegend" => j.in_legend} }
+  end
+
   def self.get_all_graph_panes_before(pane)
     return [] unless is_graph_pane?(pane)
 

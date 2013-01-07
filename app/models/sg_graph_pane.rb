@@ -70,12 +70,6 @@ module SgGraphPane
     hash
   end
 
-  def included_datasets
-    # TODO: Eventually we want to be able to specify if datasets are
-    # in the legend.
-    return data_sets.map {|d| {"name" => d.name, "inLegend" => true} }
-  end
-
   # returns a 1-based indexed path string
   # eg page/2/pane/1
   def get_indexed_path
