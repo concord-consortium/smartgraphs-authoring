@@ -457,9 +457,10 @@
     </field-list:>
     <after-field-list:>
       <h3>Included data sets</h3>
-      <select-many:data_sets options="&DataSet.activity_is(activity_for(@this))" />
-      <!-- <h3>Included prediction graphs</h3>
-            <custom-poly-select-many:included_graphs prompt="Include graph data from:" options="&PredictionGraphPane.get_all_prediction_graph_panes_before(this)"/> -->
+      <input-many:data_set_prediction_graphs>
+        <select-one:data_set options="&DataSet.activity_is(activity_for(@this))" />
+        <field-list fields="in_legend" />
+      </input-many>
     </after-field-list:>
   </old-form>
 </extend>
@@ -472,9 +473,10 @@
     </field-list:>
     <after-field-list:>
       <h3>Included data sets</h3>
-      <select-many:data_sets options="&DataSet.activity_is(activity_for(@this))" />
-      <!-- <h3>Included prediction graphs</h3>
-            <custom-poly-select-many:included_graphs prompt="Include graph data from:" options="&PredictionGraphPane.get_all_prediction_graph_panes_before(this)"/> -->
+      <input-many:data_set_sensor_graphs>
+        <select-one:data_set options="&DataSet.activity_is(activity_for(@this))" />
+        <field-list fields="in_legend" />
+      </input-many>
     </after-field-list:>
   </old-form>
 </extend>
