@@ -146,6 +146,39 @@
   </card:prompt>
 </def>
 
+<def tag="card" for="DataSetPredefinedGraph">
+  <card class="data-set-predefined-graph" param="default" merge>
+    <header: param>
+      <h4 param="heading"><a><%= h this.data_set.name %></a></h4>
+    </header:>
+    <body: param>
+    <%= '(in legend)' if this.in_legend %>
+    </body:>
+  </card>
+</def>
+
+<def tag="card" for="DataSetPredictionGraph">
+  <card class="data-set-prediction-graph" param="default" merge>
+    <header: param>
+      <h4 param="heading"><a><%= h this.data_set.name %></a></h4>
+    </header:>
+    <body: param>
+    <%= '(in legend)' if this.in_legend %>
+    </body:>
+  </card>
+</def>
+
+<def tag="card" for="DataSetSensorGraph">
+  <card class="data-set-sensor-graph" param="default" merge>
+    <header: param>
+      <h4 param="heading"><a><%= h this.data_set.name %></a></h4>
+    </header:>
+    <body: param>
+    <%= '(in legend)' if this.in_legend %>
+    </body:>
+  </card>
+</def>
+
 <def tag="add-panes-toolbar">
   <if test="&can_edit?">
     <a action="new" to="&this.image_panes">
