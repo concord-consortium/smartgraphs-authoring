@@ -64,8 +64,6 @@ describe PredefinedGraphPane do
     end
   end
 
- 
-
   describe "included graphs" do
     # TODO: This might be going away sometime:
     before(:each) do
