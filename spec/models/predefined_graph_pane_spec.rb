@@ -11,13 +11,14 @@ describe PredefinedGraphPane do
   end
   
   describe "included_datasets" do
-    before(:each) do
-      dataset_a = mock_model(DataSet, :name => "dataset_a")
-      dataset_b = mock_model(DataSet, :name => "dataset_b")
-      subject.data_sets << dataset_a
-      subject.data_sets << dataset_b
-    end
-    its(:included_datasets) { should =~ [{"name"=>"dataset_a", "inLegend"=>true}, {"name"=>"dataset_b", "inLegend"=>true}] }
+    # Rewrite to end use of "subject" - http://blog.davidchelimsky.net/2012/05/13/spec-smell-explicit-use-of-subject/
+    dataset_a = DataSet.create!(:name => "dataset_a", :id => 101)
+    dataset_b = DataSet.create!(:name => "dataset_b", :id => 102)
+    graph_pane = PredefinedGraphPane.create!(:title => 'Graph pane with data sets', :x_label => 'x', :y_label => 'y', :x_min => 0.0, :x_max => 1.0, :y_min => 0.0, :y_max => 10.0, :x_ticks => 0.1, :y_ticks => 1.0)
+    graph_pane.data_sets << dataset_a
+    graph_pane.data_sets << dataset_b
+    graph_pane.save
+    graph_pane.included_datasets.should =~ [{"name"=>"dataset_a", "inLegend"=>false}, {"name"=>"dataset_b", "inLegend"=>false}]
   end
 
   describe "#to_hash" do
@@ -30,9 +31,9 @@ describe PredefinedGraphPane do
 
     describe "with some interesting attributes" do
       subject do
-        dataset_a = mock_model(DataSet, :name => "dataset_a")
-        dataset_b = mock_model(DataSet, :name => "dataset_b")
-        PredefinedGraphPane.new({
+        dataset_a = DataSet.create!(:name => "dataset_a", :id => 103)
+        dataset_b = DataSet.create!(:name => "dataset_b", :id => 104)
+        PredefinedGraphPane.create!({
           :title   => "x in terms of y",
           :y_label => "y",
           :y_min   => 0.0, 
@@ -47,7 +48,7 @@ describe PredefinedGraphPane do
       end
 
       let(:expected_hash) { 
-        {"type"=>"PredefinedGraphPane", "title"=>"x in terms of y", "yLabel"=>"y", "yMin"=>0.0, "yMax"=>1.0, "xLabel"=>"x", "xMin"=>0.0, "xMax"=>10.0, "yTicks"=>0.1, "xTicks"=>1.0, "showCrossHairs"=>false, "showToolTipCoords"=>false, "showGraphGrid"=>false, "includedDataSets"=>[{"name"=>"dataset_a", "inLegend"=>true}, {"name"=>"dataset_b", "inLegend"=>true}]}
+        {"type"=>"PredefinedGraphPane", "title"=>"x in terms of y", "yLabel"=>"y", "yMin"=>0.0, "yMax"=>1.0, "xLabel"=>"x", "xMin"=>0.0, "xMax"=>10.0, "yTicks"=>0.1, "xTicks"=>1.0, "showCrossHairs"=>false, "showToolTipCoords"=>false, "showGraphGrid"=>false, "includedDataSets"=>[{"name"=>"dataset_a", "inLegend"=>false}, {"name"=>"dataset_b", "inLegend"=>false}]}
       }
 
       it "should match our expected hash" do
