@@ -596,18 +596,32 @@
 <extend tag="show-page" for="SensorGraphPane">
   <old-show-page merge>
     <field-list: fields="&this.field_order" />
+    <after-field-list:>
+      <h3>Included Prediction Graphs</h3>
+      <collection:included_graphs />
+    </after-field-list:>
   </old-show-page>
 </extend>
 
 <extend tag="show-page" for="PredefinedGraphPane">
   <old-show-page merge>
-    <field-list: fields="&this.field_order" />
+    <field-list: fields="&this.field_order">
+      <data-tag: with="&this.gsub('&#10;', '<br>').html_safe"/>
+    </field-list:>
+    <!-- after-field-list:>
+      <h3>Included Prediction Graphs</h3>
+      <collection:included_graphs />
+    </after-field-list: -->
   </old-show-page>
 </extend>
 
 <extend tag="show-page" for="PredictionGraphPane">
   <old-show-page merge>
     <field-list: fields="&this.field_order" />
+    <after-field-list:>
+      <h3>Included Prediction Graphs</h3>
+      <collection:included_graphs />
+    </after-field-list:>
   </old-show-page>
 </extend>
 
