@@ -45,7 +45,7 @@
           "includedDataSets": [
             {
               "name": "default_data_set",
-              "inLegend": true
+              "inLegend": false
             }
           ]
         }
