@@ -5,3 +5,25 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
+
+# little speed up for testing
+$user_cache = { }
+
+# create 10 users named, "user_1" ... "user_9"
+1..10.times do |i|
+  u = User.find_or_create_by_name("user_#{i+1}") do |u|
+    u.email_address = "#{u.name}@example.com"
+    u.password = u.password_confirmation = "#{u.name}pAsS"
+    u.state = 'active'
+    u.administrator = false
+  end
+  $user_cache["user_#{i}:false"] = u
+end
+
+# create an admin
+$user_cache["admin:true"] = User.find_or_create_by_name("admin") do |u|
+  u.email_address = "#{u.name}@concord.org"
+  u.password = u.password_confirmation = "#{u.name}pAsS"
+  u.state = 'active'
+  u.administrator = true
+end

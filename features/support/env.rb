@@ -34,7 +34,7 @@ ActionController::Base.allow_rescue = false
 # For some databases (like MongoDB and CouchDB) you may need to use :truncation instead.
 begin
   # DatabaseCleaner.strategy = :transaction
-  DatabaseCleaner.strategy = :truncation
+   DatabaseCleaner.strategy = :truncation, { :except => %w[users] }
 rescue NameError
   raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
 end
@@ -54,5 +54,9 @@ end
 # Possible values are :truncation and :transaction
 # The :transaction strategy is faster, but might give you threading problems.
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
-Cucumber::Rails::Database.javascript_strategy = :truncation
 
+# get the seed data, set of known users
+require "#{Rails.root}/db/seeds"
+
+# all of these truncate the whole DB, except the users table !!!
+Cucumber::Rails::Database.javascript_strategy = :truncation, { :except => ['users'] }
