@@ -244,7 +244,15 @@ end
 
 def select_included_data_sets(included_defs = [])
   included_defs.each do |data_set_name|
-    select_node = find(:css, '.select-many select')
+    select_node = find(:css, '.select-many select') # There may be more than one of these?
+    select_node.find(:xpath, XPath::HTML.option(data_set_name), :message => "cannot select option with text '#{data_set_name}'").select_option
+  end
+end
+
+def select_included_data_sets_for_panes(included_defs = [])
+  included_defs.each do |data_set_name|
+    click_button "+"
+    select_node = find(:css, '.input-many-item select') # There may be more than one of these?
     select_node.find(:xpath, XPath::HTML.option(data_set_name), :message => "cannot select option with text '#{data_set_name}'").select_option
   end
 end
@@ -275,7 +283,7 @@ def create_pane(pane_def)
     fill_in 'predefined_graph_pane_x_ticks', :with => pane_def[:x][:ticks]
     
     select_included_graphs(pane_def[:included_graphs])
-    select_included_data_sets(pane_def[:data_sets])
+    select_included_data_sets_for_panes(pane_def[:data_sets])
     click_button 'Create Predefined graph pane'
     
   when "SensorGraphPane"
