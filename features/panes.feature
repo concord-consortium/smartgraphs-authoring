@@ -22,6 +22,7 @@ Feature: Pane Activities
       """
     Then I should get correct json
 
+  @javascript
   Scenario: Create an activity with a predefined graph pane
     Given I am logged in as an admin named 'admin'
     And   I am on the Activities page

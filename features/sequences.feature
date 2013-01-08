@@ -81,6 +81,7 @@ Feature: Sequences Activities
     Then I should get correct json
     And I should be able to copy the activity
 
+  @javascript
   Scenario: Create an activity with a pick a point within a range sequence
     Given I am logged in as an admin named 'admin'
     And   I am on the Activities page
