@@ -22,7 +22,7 @@
           "showCrossHairs": false,
           "showToolTipCoords": false,
           "showGraphGrid": false,
-          "includedDataSets":[]}]}],
+          "includedDataSets":[{"name":"default_data_set", "inLegend":false}]}]}],
   "datasets":
    [{"type":"datadef",
      "name":"default_data_set",

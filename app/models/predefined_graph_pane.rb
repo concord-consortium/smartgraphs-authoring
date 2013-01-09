@@ -10,7 +10,7 @@ class PredefinedGraphPane < ActiveRecord::Base
 
   sg_parent :page
   
-  children :data_sets
+  children :data_set_predefined_graphs
   # children  :data_set_graphs, :data_sets
 
   fields do
@@ -57,8 +57,8 @@ class PredefinedGraphPane < ActiveRecord::Base
   has_many :annotation_inclusions, :as => :including_graph, :dependent => :destroy
   has_many :included_graphs, :through => :annotation_inclusions
 
-  has_many :data_sets, :through => :data_set_predefined_graphs, :accessible => true
-  has_many :data_set_predefined_graphs, :dependent => :destroy
+  has_many :data_sets, :through => :data_set_predefined_graphs
+  has_many :data_set_predefined_graphs, :accessible => true, :dependent => :destroy
   
 
   def field_order
@@ -78,5 +78,9 @@ class PredefinedGraphPane < ActiveRecord::Base
     hash["showToolTipCoords"] = show_tool_tip_coords
     hash["showGraphGrid"] = show_graph_grid
     return hash
+  end
+
+  def included_datasets
+    return data_set_predefined_graphs.map {|j| {"name" => j.data_set.name, "inLegend" => j.in_legend} }
   end
 end

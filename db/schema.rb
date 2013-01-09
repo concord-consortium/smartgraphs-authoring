@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121228145217) do
+ActiveRecord::Schema.define(:version => 20130103202835) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(:version => 20121228145217) do
     t.datetime "updated_at"
     t.integer  "data_set_id"
     t.integer  "predefined_graph_pane_id"
+    t.boolean  "in_legend",                :default => false
   end
 
   add_index "data_set_predefined_graphs", ["data_set_id"], :name => "index_data_set_predefined_graphs_on_data_set_id"
@@ -92,6 +93,7 @@ ActiveRecord::Schema.define(:version => 20121228145217) do
     t.datetime "updated_at"
     t.integer  "data_set_id"
     t.integer  "prediction_graph_pane_id"
+    t.boolean  "in_legend",                :default => false
   end
 
   add_index "data_set_prediction_graphs", ["data_set_id"], :name => "index_data_set_prediction_graphs_on_data_set_id"
@@ -102,6 +104,7 @@ ActiveRecord::Schema.define(:version => 20121228145217) do
     t.datetime "updated_at"
     t.integer  "data_set_id"
     t.integer  "sensor_graph_pane_id"
+    t.boolean  "in_legend",            :default => false
   end
 
   add_index "data_set_sensor_graphs", ["data_set_id"], :name => "index_data_set_sensor_graphs_on_data_set_id"

@@ -47,7 +47,7 @@
           "showToolTipCoords": false,
           "showGraphGrid": false,
           "includedDataSets":
-          [{"name":"default_data_set", "inLegend":true}]
+          [{"name":"default_data_set", "inLegend":false}]
         }
       ]
     }

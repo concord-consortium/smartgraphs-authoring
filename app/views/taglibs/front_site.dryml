@@ -146,6 +146,39 @@
   </card:prompt>
 </def>
 
+<def tag="card" for="DataSetPredefinedGraph">
+  <card class="data-set-predefined-graph" param="default" merge>
+    <header: param>
+      <h4 param="heading"><a><%= h this.data_set.name %></a></h4>
+    </header:>
+    <body: param>
+    <%= '(in legend)' if this.in_legend %>
+    </body:>
+  </card>
+</def>
+
+<def tag="card" for="DataSetPredictionGraph">
+  <card class="data-set-prediction-graph" param="default" merge>
+    <header: param>
+      <h4 param="heading"><a><%= h this.data_set.name %></a></h4>
+    </header:>
+    <body: param>
+    <%= '(in legend)' if this.in_legend %>
+    </body:>
+  </card>
+</def>
+
+<def tag="card" for="DataSetSensorGraph">
+  <card class="data-set-sensor-graph" param="default" merge>
+    <header: param>
+      <h4 param="heading"><a><%= h this.data_set.name %></a></h4>
+    </header:>
+    <body: param>
+    <%= '(in legend)' if this.in_legend %>
+    </body:>
+  </card>
+</def>
+
 <def tag="add-panes-toolbar">
   <if test="&can_edit?">
     <a action="new" to="&this.image_panes">
@@ -408,7 +441,10 @@
     </field-list:>
     <after-field-list:>
       <h3>Included data sets</h3>
-      <select-many:data_sets options="&DataSet.activity_is(activity_for(@this))" />
+      <input-many:data_set_predefined_graphs>
+        <select-one:data_set options="&DataSet.activity_is(activity_for(@this))" />
+        <field-list fields="in_legend" />
+      </input-many>
       <h3>Included graphs</h3>
       <custom-poly-select-many:included_graphs prompt="Include graph data from:" options="&PredictionGraphPane.get_all_prediction_graph_panes_before(this)"/>
     </after-field-list:>
@@ -423,7 +459,10 @@
     </field-list:>
     <after-field-list:>
       <h3>Included data sets</h3>
-      <select-many:data_sets options="&DataSet.activity_is(activity_for(@this))" />
+      <input-many:data_set_prediction_graphs>
+        <select-one:data_set options="&DataSet.activity_is(activity_for(@this))" />
+        <field-list fields="in_legend" />
+      </input-many>
       <h3>Included prediction graphs</h3>
       <custom-poly-select-many:included_graphs prompt="Include graph data from:" options="&PredictionGraphPane.get_all_prediction_graph_panes_before(this)"/>
     </after-field-list:>
@@ -438,7 +477,10 @@
     </field-list:>
     <after-field-list:>
       <h3>Included data sets</h3>
-      <select-many:data_sets options="&DataSet.activity_is(activity_for(@this))" />
+      <input-many:data_set_sensor_graphs>
+        <select-one:data_set options="&DataSet.activity_is(activity_for(@this))" />
+        <field-list fields="in_legend" />
+      </input-many>
       <h3>Included prediction graphs</h3>
       <custom-poly-select-many:included_graphs prompt="Include graph data from:" options="&PredictionGraphPane.get_all_prediction_graph_panes_before(this)"/>
     </after-field-list:>

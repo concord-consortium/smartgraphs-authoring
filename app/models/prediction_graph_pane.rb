@@ -9,7 +9,7 @@ class PredictionGraphPane < ActiveRecord::Base
   include SgGraphPane
   sg_parent :page
   
-  children :data_sets
+  children :data_set_prediction_graphs
 
   fields do
     title   :string
@@ -41,8 +41,8 @@ class PredictionGraphPane < ActiveRecord::Base
   has_many :annotation_inclusions, :as => :including_graph, :dependent => :destroy
   has_many :included_graphs, :through => :annotation_inclusions
 
-  has_many :data_sets, :through => :data_set_prediction_graphs, :accessible => true
-  has_many :data_set_prediction_graphs, :dependent => :destroy
+  has_many :data_sets, :through => :data_set_prediction_graphs
+  has_many :data_set_prediction_graphs, :accessible => true, :dependent => :destroy
 
   def field_order
     "title, y_label, y_unit, y_min, y_max, y_ticks, y_precision, x_label, x_unit, x_min, x_max, x_ticks, x_precision, prediction_type"
@@ -58,6 +58,10 @@ class PredictionGraphPane < ActiveRecord::Base
     hash['yPrecision'] = y_precision
     hash['predictionType'] = prediction_type
     return hash
+  end
+
+  def included_datasets
+    return data_set_prediction_graphs.map {|j| {"name" => j.data_set.name, "inLegend" => j.in_legend} }
   end
 
   def self.get_all_graph_panes_before(pane)

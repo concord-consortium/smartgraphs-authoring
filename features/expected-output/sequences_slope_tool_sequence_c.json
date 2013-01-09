@@ -20,7 +20,7 @@
         "showCrossHairs": false,
         "showToolTipCoords": false,
         "showGraphGrid": false,
-        "includedDataSets":[{"name":"default_data_set", "inLegend":true}]},
+        "includedDataSets":[{"name":"default_data_set", "inLegend":false}]},
        {"type": "TablePane", "title": "data table", "xLabel": "Time", "yLabel": "Distance"}],
      "sequence":
       {"type": "SlopeToolSequence",
