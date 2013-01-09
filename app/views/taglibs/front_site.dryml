@@ -224,6 +224,9 @@
       <a action="new" to="&this.line_construction_sequences">
         <ht key="line_construction_sequence.actions.new" >New Line Construction Sequence</ht>
       </a><br/>
+      <a action="new" to="&this.best_fit_sequences">
+        <ht key="best_fit_sequence.actions.new" >New Line of Best Fit Sequence</ht>
+      </a><br/>
     </unless>
   </if>
 </def>
@@ -421,6 +424,15 @@
       <collection:confirm_correct_prompts/>
       <add-confirm-correct-prompts-toolbar/>
     </after-field-list:>
+  </old-form>
+</extend>
+
+<extend tag="form" for="BestFitSequence">
+  <old-form merge>
+    <field-list: fields="&this.field_order">
+      <data_set-tag: options="&DataSet.activity_is(activity_for(@this))" />
+      <learner_data_set-tag: options="&DataSet.activity_is(activity_for(@this))" />
+    </field-list>
   </old-form>
 </extend>
 
