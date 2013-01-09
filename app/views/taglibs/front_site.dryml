@@ -741,8 +741,8 @@
 <extend tag="show-page">
   <old-show-page merge>
     <append-content-header:>
-      <if test="&this.respond_to? :parent"> 
-        <%= link_to "back to #{@this.parent}", @this.parent %>
+      <if test="&this.respond_to? :sg_parent">
+        <%= link_to "back to #{@this.sg_parent}", @this.sg_parent %>
       </if>
     </append-content-header:>
   </old-show-page>
