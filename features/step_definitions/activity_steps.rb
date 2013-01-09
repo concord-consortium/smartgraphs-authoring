@@ -244,7 +244,7 @@ end
 
 def select_included_data_sets(included_defs = [])
   included_defs.each do |data_set_name|
-    select_node = find(:css, '.select-many select') # There may be more than one of these?
+    select_node = find(:css, '.select-many select')
     select_node.find(:xpath, XPath::HTML.option(data_set_name), :message => "cannot select option with text '#{data_set_name}'").select_option
   end
 end
@@ -252,6 +252,7 @@ end
 def select_included_data_sets_for_panes(included_defs = [])
   included_defs.each do |data_set_name|
     click_button "+"
+    binding.pry
     select_node = find(:css, '.input-many-item select') # There may be more than one of these?
     select_node.find(:xpath, XPath::HTML.option(data_set_name), :message => "cannot select option with text '#{data_set_name}'").select_option
   end
