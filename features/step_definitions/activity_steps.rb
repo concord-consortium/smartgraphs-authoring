@@ -252,8 +252,8 @@ end
 def select_included_data_sets_for_panes(included_defs = [])
   included_defs.each do |data_set_name|
     click_button "+"
+    select_node = all(:css, '.input-many-item select').last # There may be more than one of these
     binding.pry
-    select_node = find(:css, '.input-many-item select') # There may be more than one of these?
     select_node.find(:xpath, XPath::HTML.option(data_set_name), :message => "cannot select option with text '#{data_set_name}'").select_option
   end
 end
@@ -388,6 +388,8 @@ def create_sequence(sequence_def)
     extract_multiple_choice_sequence!(sequence_def)
   when "SlopeToolSequence"
     create_slope_tool_sequence!(sequence_def)
+  when "BestFitSequence"
+    create_best_fit_sequence!(sequence_def)
   end
 
   sequence_url = current_url
@@ -514,4 +516,16 @@ def create_slope_tool_sequence!(opts)
   click_button 'Create Slope tool sequence'
 end
 
-
+def create_best_fit_sequence!(opts)
+  click_link 'New Best fit sequence'
+  fill_in 'best_fit_sequence_correct_tolerance', :with => opts[:correct_tolerance]
+  fill_in 'best_fit_sequence_close_tolerance', :with => opts[:close_tolerance]
+  fill_in 'best_fit_sequence_initial_prompt', :with => opts[:initial_prompt]
+  fill_in 'best_fit_sequence_confirm_correct', :with => opts[:confirm_correct]
+  fill_in 'best_fit_sequence_incorrect_prompt', :with => opts[:incorrect_prompt]
+  fill_in 'best_fit_sequence_close_prompt', :with => opts[:close_prompt]
+  fill_in 'best_fit_sequence_max_attempts', :with => opts[:max_attempts]
+  select opts[:data_set_name], :from => 'best_fit_sequence[data_set_id]'
+  select opts[:learner_data_set_name], :from => 'best_fit_sequence[learner_data_set_id]'
+  click_button 'Create Best fit sequence'
+end

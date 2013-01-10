@@ -745,35 +745,39 @@ Feature: Sequences Activities
         :xUnits: Time
         :yUnits: Distance
       :pages:
-      - :name: Simple Page 1
-        :text: In this page...
+      - :name: Best Fit Sequence Page 1
+        :text: On this page, students will be asked to find the line of best fit for a series of points.
         :panes:
         - :type: PredefinedGraphPane
-          :title: Graph Pane
+          :title: Line Construction Graph Pane
           :y:
-            :label: Distance
-            :min: 0
+            :label: y
+            :min: 0.0
             :max: 10
-            :ticks: 1
+            :ticks: 10
           :x:
-            :label: Time
+            :label: x
             :min: 0
             :max: 10
-            :ticks: 1
+            :ticks: 10
           :data_sets:
           - default_data_set
           - learner_data_set
+        - :type: TablePane
+          :title: Best Fit table
+          :x_label: x
+          :y_label: y
         :sequence:
           :type: "BestFitSequence"
-          :dataSet: default_data_set
-          :learnerDataSet: learner_data_set
-          :correctTolerance: 0.1
-          :closeTolerance: 0.2
-          :maxAttempts: 4
-          :initialPrompt: Draw the line of best fit on the graph.
-          :incorrectPrompt: That won't work.
-          :closePrompt: Close, but not quite.
-          :confirmCorrect: There we go.
+          :data_set_name: default_data_set
+          :learner_data_set_name: learner_data_set
+          :correct_tolerance: 0.1
+          :close_tolerance: 0.2
+          :max_attempts: 2
+          :initial_prompt: Find the line of best fit for this scatter plot.
+          :incorrect_prompt: Your estimate can be better; try again.
+          :close_prompt: Your estimate is close; try again.
+          :confirm_correct: You made an excellent estimate.
       """
     Then I should get correct json
     And I should be able to copy the activity
