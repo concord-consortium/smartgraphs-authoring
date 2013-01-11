@@ -732,6 +732,8 @@ Feature: Sequences Activities
           2,200
           3,300
           4,400
+          5,500
+          6,600
         :xUnits: Time
         :yUnits: Distance
       - :name: learner_data_set

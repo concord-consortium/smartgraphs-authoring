@@ -2,6 +2,9 @@ class BestFitSequence < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
 
+  # Note: BestFitSequences use a PredefinedGraphPane, not a PredictionGraphPane
+  # Note: the data_set needs more than 5 points
+
   # TODO: We could have these be i18nized constants....
   def self.defaults
     @defaults ||= {
