@@ -13,7 +13,7 @@ end
 # setup in the seeds.rb.
 def user_create(name='admin', is_admin=true)
   key = "#{name}:#{is_admin}"
-  $user_cache[key] ||= User.find_or_create_by_name(name) do |u|
+  UserCache.instance[key] ||= User.find_or_create_by_name(name) do |u|
     u.email_address = "#{u.name}@concord.org"
     u.password = u.password_confirmation = "#{u.name}pAsS"
     u.state = 'active'
