@@ -14,6 +14,7 @@ module SgAuthoring
     config.generators do |g|
       g.test_framework :rspec, :fixtures => true
       g.fallbacks[:rspec] = :test_unit
+      g.fixture_replacement :factory_girl
     end
 
     # Settings in config/environments/* take precedence over those specified here.
