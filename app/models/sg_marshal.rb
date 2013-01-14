@@ -11,7 +11,7 @@ module SgMarshal
       object.process_nested_lists
       object.custom_from_hashes
       object.save
-      object.invoke_mashall_callbacks if object.marshal_context == object
+      object.invoke_marshal_callbacks if object.marshal_context == object
       object
     end
 
@@ -155,7 +155,7 @@ module SgMarshal
     self.marshal_context.marshal_callbacks << callback
   end
 
-  def invoke_mashall_callbacks
+  def invoke_marshal_callbacks
     self.marshal_callbacks.each do |callback|
       callback.call()
     end
