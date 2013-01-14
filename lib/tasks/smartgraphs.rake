@@ -76,6 +76,31 @@ namespace :sg do
     puts a.id
   end
 
+  # Load semantic json in a directory into a DB
+  # To load semantic json in the features/expected-output dir to the test DB
+  # export RAILS_ENV='test';rake sg:load_semantic_data
+  # To load semantic json in the foo/bar dir to the test DB
+  # export RAILS_ENV='test';rake sg:load_semantic_data['foo/bar']
+  desc 'Load semantic json in a directory into a DB'
+  task :load_semantic_data, [:out_dir]  => 'db:reset' do |t,args|
+    args.with_defaults :out_dir => "features/expected-output"
+    out_dir ||= "#{Rails.root}/#{args.out_dir}"
+
+    Dir.new(out_dir).each do |f|
+      filename = "#{out_dir}/#{f}"
+
+      next if File.directory?(filename)      
+      json_str = ''
+      File.open(filename, "r") do |io|
+         json_str = io.read
+      end
+
+      ha = JSON.parse(json_str)
+      a = Activity.from_hash(ha)
+      a.save!
+    end
+  end
+
   desc 'compare serialized runtime json files'
   task :diff_json, [:new_dir, :old_dir] => [:environment] do |t,args|
     hl = HighLine.new()
