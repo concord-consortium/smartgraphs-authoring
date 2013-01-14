@@ -258,9 +258,9 @@ end
 def select_included_data_sets_for_panes(included_defs = [])
   included_defs.each do |data_set_name|
     click_button "+"
-    select_node = all(:css, '.input-many-item select').last # There may be more than one of these
-    sleep 1 # Ugh, but it fails without this
-    select_node.find(:xpath, XPath::HTML.option(data_set_name), :message => "cannot select option with text '#{data_set_name}'").select_option
+    within(:xpath, "(//div[@class='input-many-item'])[last()]/select") do
+      find(:xpath, XPath::HTML.option(data_set_name), :message => "cannot select option with text '#{data_set_name}'").select_option
+    end
   end
 end
 
