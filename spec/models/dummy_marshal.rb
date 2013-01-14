@@ -1,4 +1,4 @@
-# Class that SgMarshall can be mixed in to
+# Class that SgMarshal can be mixed in to
 class DummyMarshal
   attr_accessor :attr1_key, :attr2_key, :Attr3Key, :attr4_key, :attr5_key, :attr6_key
 
@@ -44,7 +44,7 @@ class DummyMarshal
   end
 end
 
-# Class that SgMarshall can be mixed in to
+# Class that SgMarshal can be mixed in to
 class DummyChild
   attr_accessor :attr1, :attr2
   include SgMarshal

@@ -93,6 +93,6 @@ class NumericSequence < ActiveRecord::Base
       self.data_set = found_data_set
       self.save!
     end
-    self.add_marshall_callback(callback)
+    self.add_marshal_callback(callback)
   end
 end

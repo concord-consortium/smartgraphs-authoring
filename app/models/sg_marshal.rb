@@ -146,17 +146,17 @@ module SgMarshal
     self.send "#{symbol}=".to_sym, create_associated(sym_string,defs)
   end
 
-  def marshall_callbacks
-    @marshall_callbacks ||= []
-    @marshall_callbacks
+  def marshal_callbacks
+    @marshal_callbacks ||= []
+    @marshal_callbacks
   end
 
-  def add_marshall_callback(callback)
-    self.marshal_context.marshall_callbacks << callback
+  def add_marshal_callback(callback)
+    self.marshal_context.marshal_callbacks << callback
   end
 
   def invoke_mashall_callbacks
-    self.marshall_callbacks.each do |callback|
+    self.marshal_callbacks.each do |callback|
       callback.call()
     end
   end
