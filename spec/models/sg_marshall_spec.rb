@@ -83,4 +83,15 @@ describe SgMarshal do
     end
     
   end
+
+  describe "#from_hash" do
+    let(:input_hash_with_belongs) { { 'type' => 'ASequence', 'attr1_key' => 'attr1_value', 'bDataSet' => { 'type' => 'BDataSet', 'name' => 'First Data' }, 'otherData' => { 'type' => 'BDataSet', 'name' => 'Second Data' } } }
+
+    it 'should create objects for both associations' do
+      a_seq = ASequence.from_hash(input_hash_with_belongs)
+      a_seq.b_data_set.should be_instance_of(BDataSet)
+      a_seq.other_data.should be_instance_of(BDataSet)
+      a_seq.other_data.name.should == 'Second Data'
+    end
+  end
 end
