@@ -11,8 +11,12 @@ require 'capybara/poltergeist'
 # order to ease the transition to Capybara we set the default here. If you'd
 # prefer to use XPath just remove this line and adjust any selectors in your
 # steps to use the XPath syntax.
-Capybara.default_selector = :css
-# Capybara.javascript_driver = :selenium
+# Capybara.default_selector = :css
+Capybara.register_driver :poltergeist do |app|
+  # options = {:js_errors => false, :logger => nil, :phantomjs_logger => nil}
+  options = {:js_errors => false}
+  Capybara::Poltergeist::Driver.new(app, options)
+end
 Capybara.javascript_driver = :poltergeist
 
 # By default, any exception happening in your Rails application will bubble up
