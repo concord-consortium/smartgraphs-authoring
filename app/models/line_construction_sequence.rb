@@ -32,6 +32,10 @@ class LineConstructionSequence < ActiveRecord::Base
     timestamps
   end
 
+  def field_order
+    "title, slope, slope_tolerance, y_intercept, y_intercept_tolerance, initial_prompt, slope_incorrect, y_intercept_incorrect, all_incorrect, confirm_correct"
+  end
+
   has_one :page_sequence, :as => :sequence, :dependent => :destroy
   has_one :page, :through => :page_sequence
   reverse_association_of :page, 'Page#line_construction_sequences'
