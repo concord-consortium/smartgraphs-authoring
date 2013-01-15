@@ -27,7 +27,7 @@ module SgGraphPane
         self_ref.included_graphs << graph
       end
     end
-    self.add_marshall_callback(callback)
+    self.add_marshal_callback(callback)
   end
 
   def include_referenced_graphs(graph_reference_urls)
@@ -47,7 +47,7 @@ module SgGraphPane
       end
       self.save!
     end
-    self.add_marshall_callback(callback)
+    self.add_marshal_callback(callback)
   end
 
   def to_hash
