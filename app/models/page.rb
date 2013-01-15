@@ -55,6 +55,9 @@ class Page < ActiveRecord::Base
   
   has_many :line_construction_sequences, :through => :page_sequences, :source => :sequence, :source_type => 'LineConstructionSequence'
   reverse_association_of :line_construction_sequences, 'LineConstructionSequence#page'
+
+  has_many :best_fit_sequences, :through => :page_sequences, :source => :sequence, :source_type => 'BestFitSequence'
+  reverse_association_of :best_fit_sequences, 'BestFitSequence#page'
   
   children :page_sequences, :page_panes
 

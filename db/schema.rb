@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130103202835) do
+ActiveRecord::Schema.define(:version => 20130109162629) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -55,6 +55,23 @@ ActiveRecord::Schema.define(:version => 20130103202835) do
 
   add_index "annotation_inclusions", ["included_graph_id"], :name => "included_graph_idx"
   add_index "annotation_inclusions", ["including_graph_type", "including_graph_id"], :name => "including_graph_idx"
+
+  create_table "best_fit_sequences", :force => true do |t|
+    t.float    "correct_tolerance",   :default => 0.1
+    t.float    "close_tolerance",     :default => 0.2
+    t.integer  "max_attempts",        :default => 4
+    t.text     "initial_prompt"
+    t.text     "incorrect_prompt"
+    t.text     "close_prompt"
+    t.text     "confirm_correct"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "data_set_id"
+    t.integer  "learner_data_set_id"
+  end
+
+  add_index "best_fit_sequences", ["data_set_id"], :name => "index_best_fit_sequences_on_data_set_id"
+  add_index "best_fit_sequences", ["learner_data_set_id"], :name => "index_best_fit_sequences_on_learner_data_set_id"
 
   create_table "confirm_correct_prompts", :force => true do |t|
     t.datetime "created_at"

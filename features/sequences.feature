@@ -632,7 +632,7 @@ Feature: Sequences Activities
     Then I should get correct json
     And I should be able to copy the activity
 
- @javascript
+  @javascript
   Scenario: Create an activity with a slope tool which requires adjacent selection
     Given I am logged in as an admin named 'admin'
     And   I am on the Activities page
@@ -701,6 +701,85 @@ Feature: Sequences Activities
           :y_min: 1.0
           :y_max: 8.0
           :tolerance: 0.1
+      """
+    Then I should get correct json
+    And I should be able to copy the activity
+
+  @javascript
+  Scenario: Create an activity with a line of best fit sequence
+    # Note that this also tests adding more than one dataset to a GraphPane
+    Given I am logged in as an admin named 'admin'
+    And   I am on the Activities page
+    When I create a new activity:
+      """
+      ---
+      :name: Sequences Best Fit Sequence
+      :units:
+      - :name: Time
+        :abbreviation: s
+      - :name: Distance
+        :abbreviation: m
+      :data_sets:
+      - :name: default_data_set
+        :yPrecision: 0.1
+        :xPrecision: 0.1
+        :lineSnapDistance: 0.1
+        :expression:
+        :lineType: None
+        :pointType: Dot
+        :data: |-
+          1,100
+          2,200
+          3,300
+          4,400
+          5,500
+          6,600
+        :xUnits: Time
+        :yUnits: Distance
+      - :name: learner_data_set
+        :yPrecision: 0.1
+        :xPrecision: 0.1
+        :lineSnapDistance: 0.1
+        :expression:
+        :lineType: Connected
+        :pointType: None
+        :data:
+        :xUnits: Time
+        :yUnits: Distance
+      :pages:
+      - :name: Best Fit Sequence Page 1
+        :text: On this page, students will be asked to find the line of best fit for a series of points.
+        :panes:
+        - :type: PredefinedGraphPane
+          :title: Line Construction Graph Pane
+          :y:
+            :label: y
+            :min: 0.0
+            :max: 10
+            :ticks: 10
+          :x:
+            :label: x
+            :min: 0
+            :max: 10
+            :ticks: 10
+          :data_sets:
+          - default_data_set
+          - learner_data_set
+        - :type: TablePane
+          :title: Best Fit table
+          :x_label: x
+          :y_label: y
+        :sequence:
+          :type: "BestFitSequence"
+          :data_set_name: default_data_set
+          :learner_data_set_name: learner_data_set
+          :correct_tolerance: 0.1
+          :close_tolerance: 0.2
+          :max_attempts: 2
+          :initial_prompt: Find the line of best fit for this scatter plot.
+          :incorrect_prompt: Your estimate can be better; try again.
+          :close_prompt: Your estimate is close; try again.
+          :confirm_correct: You made an excellent estimate.
       """
     Then I should get correct json
     And I should be able to copy the activity
