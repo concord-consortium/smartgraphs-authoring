@@ -85,7 +85,7 @@ describe SgMarshal do
   end
 
   describe "#from_hash" do
-    let(:input_hash_with_belongs) { { 'type' => 'ASequence', 'attr1_key' => 'attr1_value', 'bDataSet' => { 'type' => 'BDataSet', 'name' => 'First Data' }, 'otherData' => { 'type' => 'BDataSet', 'name' => 'Second Data' } } }
+    let(:input_hash_with_belongs) { { 'attr1_key' => 'attr1_value', 'bDataSet' => { 'name' => 'First Data' }, 'otherData' => { 'name' => 'Second Data' } } }
 
     it 'should create objects for both associations' do
       a_seq = ASequence.from_hash(input_hash_with_belongs)

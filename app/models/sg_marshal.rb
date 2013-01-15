@@ -94,15 +94,15 @@ module SgMarshal
 
   # create  collections from hashes
   def create_collections
-    self.collections.each do |collection_name|
-      self.add_collection(collection_name)
+    self.collections.each do |c|
+      self.add_collection(c)
     end
   end
 
   # create  1 <-> 1 assns from hashes
   def create_associations
-    self.associates.each do |associates_name|
-      self.add_associated(associates_name)
+    self.associates.each do |associate|
+      self.add_associated(associate)
     end
   end
       
@@ -115,35 +115,33 @@ module SgMarshal
   end
 
   def collections
-    self.class.reflect_on_all_associations(:has_many).map { |c| c.name }
+    self.class.reflect_on_all_associations(:has_many)
   end
   
   def associates
-    associates  = self.class.reflect_on_all_associations(:has_one).map    { |c| c.name }
-    associates  + self.class.reflect_on_all_associations(:belongs_to).map { |c| c.name }
+    associates  = self.class.reflect_on_all_associations(:has_one)
+    associates  + self.class.reflect_on_all_associations(:belongs_to)
   end
 
-  def create_associated(symbol,definition)
-    class_name = symbol.singularize.camelcase
-    klass = class_name.constantize
-    klass.from_hash(definition,self.marshal_context)
+  def create_associated(klass,definition)
+    klass.constantize.from_hash(definition,self.marshal_context)
   end
 
-  def add_collection(symbol)
-    sym_string = symbol.to_s
+  def add_collection(reflection)
+    sym_string = reflection.name.to_s
     return unless self.create_hash.has_key?(sym_string)
     defs = self.create_hash[sym_string]
     defs.each do |definition|
-      object = self.create_associated(sym_string,definition)
-      self.send(symbol) << object
+      object = self.create_associated(reflection.class_name,definition)
+      self.send(sym_string) << object
     end
   end
 
-  def add_associated(symbol)
-    sym_string = symbol.to_s
+  def add_associated(reflection)
+    sym_string = reflection.name
     return unless self.create_hash.has_key?(sym_string)
     defs = self.create_hash[sym_string]
-    self.send "#{symbol}=".to_sym, create_associated(sym_string,defs)
+    self.send "#{sym_string}=", create_associated(reflection.class_name,defs)
   end
 
   def marshal_callbacks

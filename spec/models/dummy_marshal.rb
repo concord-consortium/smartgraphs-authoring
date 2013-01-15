@@ -25,11 +25,15 @@ class DummyMarshal
     @dummy_children 
   end
   
-  # stub AR method
+  # stub AR methods
+  def self.create_reflection(macro, name, options, active_record)
+    ActiveRecord::Reflection::AssociationReflection.new(macro, name, options, active_record)
+  end
+
   def self.reflect_on_all_associations(association_symbol)
     case association_symbol
     when :has_many  # stub for has_many :dummy_children
-      [OpenStruct.new(:name => :dummy_children)]
+      [create_reflection(:has_many, 'dummy_children', {}, self)]
     when :has_one
       []
     when :belongs_to
@@ -88,11 +92,11 @@ class ASequence
   end
 
   def b_data_set=(new_data_set)
-    b_data_set = new_data_set
+    @b_data_set = new_data_set
   end
 
   def other_data=(new_data_set)
-    other_data = new_data_set
+    @other_data = new_data_set
   end
 
   def other_data
@@ -108,20 +112,24 @@ class ASequence
     ActiveRecord::Reflection::AssociationReflection.new(:belongs_to, name, options, active_record)
   end
 
+  def associates
+    return ASequence.reflect_on_all_associations
+  end
+
   # AR would get the reflection from its cached array of them, but we'll just create them on the fly
   def self.reflect_on_association(association)
     case association
     when :b_data_set
-      return create_reflection(:belongs_to, 'b_data_set', {}, BDataSet)
+      return create_reflection(:belongs_to, 'b_data_set', {}, self)
     when :other_data
-      return create_reflection(:belongs_to, 'other_data', {}, BDataSet)
+      return create_reflection(:belongs_to, 'other_data', {:class_name => 'BDataSet'}, self)
     else
       return nil
     end
   end
 
   # Get a list of all ActiveRecord AssociationReflections (optionally scoped to an association type, e.g. :belongs_to)
-  def self.reflect_on_all_associations(association_symbol)
+  def self.reflect_on_all_associations(association_symbol=nil)
     if association_symbol.blank? || association_symbol == :belongs_to
       return [
         self.reflect_on_association(:b_data_set),
