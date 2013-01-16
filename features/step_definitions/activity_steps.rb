@@ -48,9 +48,8 @@ end
 
 When /^I create a "([^"]*)" from semantic json$/ do |arg1|
   filename = arg1.gsub(/\s+/,'').underscore + '.json'
-  json_filename = "#{Rails.root}/features/expected-output/#{filename}"
-  expected_json = JSON.parse(File.read(json_filename))
-  @activity = Activity.from_hash(expected_json)
+  activity_hash = SemanticJSONImport.new(filename).load.to_hash
+  @activity = create_activity(activity_hash)
 end
 
 When(/^I create (?:a new|an) activity:$/)do |text|
