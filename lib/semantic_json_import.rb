@@ -15,26 +15,25 @@ class SemanticJSONImport
     end
   end
   
-  def self.load_dir(dir_name)
+  def self.load_dir(dir_name, save = false)
     Dir.new(json_directory).each do |fname|
-      activity = new(fname).load
+      activity = save ? new(fname).load : new(fname).load_and_save
     end
   end
 
-  # def load_mem(filename)
-  #   json_str = load_json(filename)
-  #   ha = JSON.parse(json_str)
-  #   Activity.from_hash_mem(ha)
-  # end
-
-  def load
+  def load_and_save
     ha = JSON.parse(json)
     @activity = Activity.from_hash(ha)
     self
   end
 
+  def load
+    ha = JSON.parse(json)
+    @activity = Activity.from_hash_to_mem(ha)
+    self
+  end
+
   def to_hash
-    # HashWithIndifferentAccess.new(load_mem(filename).create_hash)
     hash = @activity.create_hash
     HashWithIndifferentAccess.new(hash)
   end
