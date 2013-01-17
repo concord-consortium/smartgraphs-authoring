@@ -259,7 +259,7 @@ def select_included_data_sets_for_panes(included_defs = [])
     click_button "+"
     # That button triggers a prototype transition which causes the next step to fail on second, third, etc.
     # datasets if we don't wait. 0.15s is not enough wait; 0.2 seems to be the least we can get away with.
-    sleep 0.2
+    sleep 0.5
     within(:xpath, "(//div[@class='input-many-item'])[last()]/select") do
       find(:xpath, XPath::HTML.option(data_set_name), :message => "cannot select option with text '#{data_set_name}'").select_option
     end
