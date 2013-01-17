@@ -2,6 +2,8 @@ class PredefinedGraphPane < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
 
+  view_hints.parent :page
+  
   # standard owner and admin permissions
   # defined in models/standard_permissions.rb
   include SgPermissions
