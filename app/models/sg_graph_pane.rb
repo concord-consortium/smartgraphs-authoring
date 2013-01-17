@@ -62,7 +62,10 @@ module SgGraphPane
       'xMax'   => x_max,
       'yTicks' => y_ticks,
       'xTicks' => x_ticks,
-      'includedDataSets' => included_datasets
+      'includedDataSets' => included_datasets,
+      'showCrossHairs'   => show_cross_hairs,
+      'showToolTipCoords' => show_tool_tip_coords,
+      'showGraphGrid' => show_graph_grid
     }
     if included_graphs.size > 0
       hash['includeAnnotationsFrom'] = included_graphs.map{|graph| graph.get_indexed_path }
