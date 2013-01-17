@@ -21,6 +21,9 @@ class SensorGraphPane < ActiveRecord::Base
     x_min   :float, :required
     x_max   :float, :required
     x_ticks :float, :required
+    show_cross_hairs :boolean, :default => false
+    show_graph_grid  :boolean, :default => false
+    show_tool_tip_coords :boolean, :default => false
     timestamps
   end
 

@@ -24,6 +24,9 @@ class PredictionGraphPane < ActiveRecord::Base
     x_ticks :float
     x_precision :float, :default => 0.1
     prediction_type  enum_string(:connecting_points, :continuous_curves)
+    show_cross_hairs :boolean, :default => false
+    show_graph_grid  :boolean, :default => false
+    show_tool_tip_coords :boolean, :default => false
     timestamps
   end
 
