@@ -68,7 +68,7 @@ class LineConstructionSequence < ActiveRecord::Base
         "slopeIncorrect"      => slope_incorrect,
         "yInterceptIncorrect" => y_intercept_incorrect,
         "allIncorrect"        => all_incorrect,
-        'dataSetName'         => data_set ? data_set.name : ''
+        'dataSetName'         => data_set ? data_set.name : nil
     }
   end
 
