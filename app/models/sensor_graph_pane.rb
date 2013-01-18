@@ -21,6 +21,9 @@ class SensorGraphPane < ActiveRecord::Base
     x_min   :float, :required
     x_max   :float, :required
     x_ticks :float, :required
+    show_cross_hairs :boolean, :default => false
+    show_graph_grid  :boolean, :default => false
+    show_tool_tip_coords :boolean, :default => false
     timestamps
   end
 
@@ -39,7 +42,7 @@ class SensorGraphPane < ActiveRecord::Base
   has_many :data_set_sensor_graphs, :accessible => true, :dependent => :destroy
 
   def field_order
-    "title, y_label, y_unit, y_min, y_max, y_ticks, x_label, x_unit, x_min, x_max, x_ticks"
+    "title, y_label, y_unit, y_min, y_max, y_ticks, x_label, x_unit, x_min, x_max, x_ticks, show_graph_grid, show_cross_hairs, show_tool_tip_coords"
   end
 
   def graph_type

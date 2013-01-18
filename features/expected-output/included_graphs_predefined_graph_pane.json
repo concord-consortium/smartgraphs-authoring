@@ -20,6 +20,9 @@
           "yTicks": 1.0,
           "xTicks": 1.0,
           "includedDataSets": [],
+          "showCrossHairs":false,
+          "showToolTipCoords":false,
+          "showGraphGrid":false,
           "xPrecision": 0.1,
           "yPrecision": 0.1,
           "predictionType": "continuous_curves"

@@ -759,10 +759,10 @@
 
 <extend tag="show-page">
   <old-show-page merge>
-    <append-content-header:>
-      <if test="&this.respond_to? :sg_parent">
-        <%= link_to "back to #{@this.sg_parent}", @this.sg_parent %>
+    <prepend-content-header:>
+      <if test="&!this.class.view_hints.parent && this.respond_to?(:sg_parent)">
+        <%= link_to "&laquo; Back to Page #{@this.sg_parent}".html_safe, @this.sg_parent, :class => 'parent-link page-link'%>
       </if>
-    </append-content-header:>
+    </prepend-content-header:>
   </old-show-page>
 </extend>

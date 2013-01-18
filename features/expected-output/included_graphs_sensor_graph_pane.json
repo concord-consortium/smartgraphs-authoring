@@ -21,6 +21,9 @@
           "xTicks": 1.0,
           "xPrecision": 0.1,
           "yPrecision": 0.1,
+          "showCrossHairs":false,
+          "showToolTipCoords":false,
+          "showGraphGrid":false,
           "includedDataSets": [],
           "predictionType": "continuous_curves"
         }
@@ -44,6 +47,9 @@
           "xTicks": 1.0,
           "xPrecision": 0.1,
           "yPrecision": 0.1,
+          "showCrossHairs":false,
+          "showToolTipCoords":false,
+          "showGraphGrid":false,
           "includedDataSets": [],
           "predictionType": "continuous_curves"
         }
@@ -65,6 +71,9 @@
           "xMax": 10.0,
           "yTicks": 1.0,
           "xTicks": 1.0,
+          "showCrossHairs":false,
+          "showToolTipCoords":false,
+          "showGraphGrid":false,
           "includedDataSets": [],
           "includeAnnotationsFrom": ["page/1/pane/1", "page/2/pane/1"]
         }

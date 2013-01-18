@@ -1,6 +1,8 @@
 class Page < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
+
+  # view_hints.parent nil
   
   # standard owner and admin permissions
   # defined in models/standard_permissions.rb

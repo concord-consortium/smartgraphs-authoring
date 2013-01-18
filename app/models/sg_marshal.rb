@@ -15,6 +15,19 @@ module SgMarshal
       object
     end
 
+    def from_hash_to_mem(defs, context=nil)
+      defs               = Hash[defs.map {|k,v| [k.underscore, v]}]
+      object             = self.new(filter_attributes(defs))
+      object.marshal_context = context || object
+      object.create_hash = defs
+      object.create_collections
+      object.create_associations
+      object.process_nested_lists
+      object.custom_from_hashes
+      object.invoke_marshal_callbacks if object.marshal_context == object
+      object
+    end
+
     def filter_attributes(_in_hash)
       # handle edge cases where value is a hash with one text key...
       # custom munging too:

@@ -24,6 +24,9 @@ class PredictionGraphPane < ActiveRecord::Base
     x_ticks :float
     x_precision :float, :default => 0.1
     prediction_type  enum_string(:connecting_points, :continuous_curves)
+    show_cross_hairs :boolean, :default => false
+    show_graph_grid  :boolean, :default => false
+    show_tool_tip_coords :boolean, :default => false
     timestamps
   end
 
@@ -45,7 +48,7 @@ class PredictionGraphPane < ActiveRecord::Base
   has_many :data_set_prediction_graphs, :accessible => true, :dependent => :destroy
 
   def field_order
-    "title, y_label, y_unit, y_min, y_max, y_ticks, y_precision, x_label, x_unit, x_min, x_max, x_ticks, x_precision, prediction_type"
+    "title, y_label, y_unit, y_min, y_max, y_ticks, y_precision, x_label, x_unit, x_min, x_max, x_ticks, x_precision, prediction_type, show_graph_grid, show_cross_hairs, show_tool_tip_coords"
   end
 
   def graph_type
