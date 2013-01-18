@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130109162629) do
+ActiveRecord::Schema.define(:version => 20130117175102) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -383,8 +383,11 @@ ActiveRecord::Schema.define(:version => 20130109162629) do
     t.integer  "y_unit_id"
     t.integer  "x_unit_id"
     t.string   "prediction_type"
-    t.float    "y_precision",     :default => 0.1
-    t.float    "x_precision",     :default => 0.1
+    t.float    "y_precision",          :default => 0.1
+    t.float    "x_precision",          :default => 0.1
+    t.boolean  "show_cross_hairs",     :default => false
+    t.boolean  "show_graph_grid",      :default => false
+    t.boolean  "show_tool_tip_coords", :default => false
   end
 
   add_index "prediction_graph_panes", ["x_unit_id"], :name => "index_prediction_graph_panes_on_x_unit_id"
@@ -413,6 +416,9 @@ ActiveRecord::Schema.define(:version => 20130109162629) do
     t.datetime "updated_at"
     t.integer  "y_unit_id"
     t.integer  "x_unit_id"
+    t.boolean  "show_cross_hairs",     :default => false
+    t.boolean  "show_graph_grid",      :default => false
+    t.boolean  "show_tool_tip_coords", :default => false
   end
 
   add_index "sensor_graph_panes", ["x_unit_id"], :name => "index_sensor_graph_panes_on_x_unit_id"

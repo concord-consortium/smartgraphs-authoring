@@ -21,6 +21,9 @@
           "xTicks": 1.0,
           "xPrecision": 0.1,
           "yPrecision": 0.1,
+          "showCrossHairs":false,
+          "showToolTipCoords":false,
+          "showGraphGrid":false,
           "predictionType": "continuous_curves",
           "includedDataSets": []
         },
@@ -38,6 +41,9 @@
           "xPrecision": 0.1,
           "yPrecision": 0.1,
           "includedDataSets": [],
+          "showCrossHairs":false,
+          "showToolTipCoords":false,
+          "showGraphGrid":false,
           "predictionType": "continuous_curves"
         }
       ]
@@ -62,6 +68,9 @@
           "includeAnnotationsFrom": ["page/1/pane/1"],
           "xPrecision": 0.1,
           "yPrecision": 0.1,
+          "showCrossHairs":false,
+          "showToolTipCoords":false,
+          "showGraphGrid":false,
           "predictionType": "connecting_points"
         }
       ]
@@ -86,6 +95,9 @@
           "includeAnnotationsFrom": ["page/1/pane/2"],
           "xPrecision": 0.1,
           "yPrecision": 0.1,
+          "showCrossHairs":false,
+          "showToolTipCoords":false,
+          "showGraphGrid":false,
           "predictionType": "continuous_curves"
         }
       ]

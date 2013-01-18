@@ -30,6 +30,10 @@ class PredefinedGraphPane < ActiveRecord::Base
     x_ticks :float, :required
     x_precision :float, :default => 0.1
 
+    show_cross_hairs :boolean, :default => false
+    show_graph_grid  :boolean, :default => false
+    show_tool_tip_coords :boolean, :default => false
+
     # Keep these fields around to migrate older data, 
     # even though data_set.rb now provides this kind of
     # data.  See DataSet#from_predefined_graph_pane
@@ -37,9 +41,6 @@ class PredefinedGraphPane < ActiveRecord::Base
     line_snap_distance :float, :default => 0.1
     line_type  SgGraphPane::LineType,   :default => "none"
     point_type SgGraphPane::PointType,  :default => "dot"
-    show_cross_hairs :boolean, :default => false
-    show_graph_grid  :boolean, :default => false
-    show_tool_tip_coords :boolean, :default => false
     data :text
     # end of LegacyFields
     
@@ -72,14 +73,6 @@ class PredefinedGraphPane < ActiveRecord::Base
 
   def graph_type
     'PredefinedGraphPane'
-  end
-
-  def to_hash
-    hash = super()
-    hash["showCrossHairs"] = show_cross_hairs
-    hash["showToolTipCoords"] = show_tool_tip_coords
-    hash["showGraphGrid"] = show_graph_grid
-    return hash
   end
 
   def included_datasets
