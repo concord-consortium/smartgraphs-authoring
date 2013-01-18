@@ -285,6 +285,15 @@
     </a>
 </def>
 
+<extend tag="form" for="DataSet">
+  <old-form merge>
+    <field-list: fields="&this.field_order">
+      <y_unit-tag: include-none blank-message="No units"/>
+      <x_unit-tag: include-none blank-message="No units"/>
+    </field-list:>
+  </old-form>
+</extend>
+
 <extend tag="form" for="Page">
   <old-form merge>
     <after-field-list:>
