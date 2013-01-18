@@ -33,7 +33,7 @@ class LineConstructionSequence < ActiveRecord::Base
   end
 
   def field_order
-    "title, slope, slope_tolerance, y_intercept, y_intercept_tolerance, initial_prompt, slope_incorrect, y_intercept_incorrect, all_incorrect, confirm_correct"
+    "title, data_set, slope, slope_tolerance, y_intercept, y_intercept_tolerance, initial_prompt, slope_incorrect, y_intercept_incorrect, all_incorrect, confirm_correct"
   end
 
   has_one :page_sequence, :as => :sequence, :dependent => :destroy
@@ -68,7 +68,7 @@ class LineConstructionSequence < ActiveRecord::Base
         "slopeIncorrect"      => slope_incorrect,
         "yInterceptIncorrect" => y_intercept_incorrect,
         "allIncorrect"        => all_incorrect,
-        'dataSetName'         => data_set.name
+        'dataSetName'         => data_set ? data_set.name : ''
     }
   end
 
