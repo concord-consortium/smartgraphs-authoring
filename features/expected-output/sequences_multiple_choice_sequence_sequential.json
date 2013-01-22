@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "Page",
-      "name": "Page 1",
+      "name": "1 Page 1",
       "text": "In this page...",
       "sequence": {
         "type": "MultipleChoiceWithSequentialHintsSequence",
