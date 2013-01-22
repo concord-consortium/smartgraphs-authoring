@@ -707,6 +707,7 @@
       <header: param>
         <h4 param="heading"><name/></h4>
         <div param="actions">
+          <a action="edit" param="edit-link">Edit</a>
           <delete-button label="X" param/>
         </div>
       </header:>
