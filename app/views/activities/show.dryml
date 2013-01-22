@@ -1,5 +1,5 @@
 <show-page>
   <after-heading:>
-    <a action='author_preview'>View as author</a> or <a action='student_preview'>view as student</a> in SmartGraphs
+    <a action='author_preview'>Run as author</a> or <a action='student_preview'>run as student</a> in SmartGraphs
   </after-heading:>
 </show-page>
