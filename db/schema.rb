@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121009191901) do
+ActiveRecord::Schema.define(:version => 20130117175102) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -56,6 +56,23 @@ ActiveRecord::Schema.define(:version => 20121009191901) do
   add_index "annotation_inclusions", ["included_graph_id"], :name => "included_graph_idx"
   add_index "annotation_inclusions", ["including_graph_type", "including_graph_id"], :name => "including_graph_idx"
 
+  create_table "best_fit_sequences", :force => true do |t|
+    t.float    "correct_tolerance",   :default => 0.1
+    t.float    "close_tolerance",     :default => 0.2
+    t.integer  "max_attempts",        :default => 4
+    t.text     "initial_prompt"
+    t.text     "incorrect_prompt"
+    t.text     "close_prompt"
+    t.text     "confirm_correct"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "data_set_id"
+    t.integer  "learner_data_set_id"
+  end
+
+  add_index "best_fit_sequences", ["data_set_id"], :name => "index_best_fit_sequences_on_data_set_id"
+  add_index "best_fit_sequences", ["learner_data_set_id"], :name => "index_best_fit_sequences_on_learner_data_set_id"
+
   create_table "confirm_correct_prompts", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -76,6 +93,59 @@ ActiveRecord::Schema.define(:version => 20121009191901) do
     t.datetime "updated_at"
     t.text     "initial_content"
   end
+
+  create_table "data_set_predefined_graphs", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "data_set_id"
+    t.integer  "predefined_graph_pane_id"
+    t.boolean  "in_legend",                :default => false
+  end
+
+  add_index "data_set_predefined_graphs", ["data_set_id"], :name => "index_data_set_predefined_graphs_on_data_set_id"
+  add_index "data_set_predefined_graphs", ["predefined_graph_pane_id"], :name => "index_data_set_predefined_graphs_on_predefined_graph_pane_id"
+
+  create_table "data_set_prediction_graphs", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "data_set_id"
+    t.integer  "prediction_graph_pane_id"
+    t.boolean  "in_legend",                :default => false
+  end
+
+  add_index "data_set_prediction_graphs", ["data_set_id"], :name => "index_data_set_prediction_graphs_on_data_set_id"
+  add_index "data_set_prediction_graphs", ["prediction_graph_pane_id"], :name => "index_data_set_prediction_graphs_on_prediction_graph_pane_id"
+
+  create_table "data_set_sensor_graphs", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "data_set_id"
+    t.integer  "sensor_graph_pane_id"
+    t.boolean  "in_legend",            :default => false
+  end
+
+  add_index "data_set_sensor_graphs", ["data_set_id"], :name => "index_data_set_sensor_graphs_on_data_set_id"
+  add_index "data_set_sensor_graphs", ["sensor_graph_pane_id"], :name => "index_data_set_sensor_graphs_on_sensor_graph_pane_id"
+
+  create_table "data_sets", :force => true do |t|
+    t.string   "name"
+    t.float    "y_precision",        :default => 0.1
+    t.float    "x_precision",        :default => 0.1
+    t.float    "line_snap_distance", :default => 0.1
+    t.string   "expression",         :default => ""
+    t.string   "line_type",          :default => "none"
+    t.string   "point_type",         :default => "dot"
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "y_unit_id"
+    t.integer  "x_unit_id"
+    t.integer  "activity_id"
+  end
+
+  add_index "data_sets", ["activity_id"], :name => "index_data_sets_on_activity_id"
+  add_index "data_sets", ["x_unit_id"], :name => "index_data_sets_on_x_unit_id"
+  add_index "data_sets", ["y_unit_id"], :name => "index_data_sets_on_y_unit_id"
 
   create_table "give_up_prompts", :force => true do |t|
     t.datetime "created_at"
@@ -144,7 +214,10 @@ ActiveRecord::Schema.define(:version => 20121009191901) do
     t.text     "all_incorrect"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "data_set_id"
   end
+
+  add_index "line_construction_sequences", ["data_set_id"], :name => "index_line_construction_sequences_on_data_set_id"
 
   create_table "multiple_choice_choices", :force => true do |t|
     t.string   "name"
@@ -176,7 +249,10 @@ ActiveRecord::Schema.define(:version => 20121009191901) do
     t.text     "give_up"
     t.text     "confirm_correct"
     t.boolean  "use_sequential_feedback", :default => true
+    t.integer  "data_set_id"
   end
+
+  add_index "multiple_choice_sequences", ["data_set_id"], :name => "index_multiple_choice_sequences_on_data_set_id"
 
   create_table "numeric_sequences", :force => true do |t|
     t.string   "title"
@@ -187,7 +263,10 @@ ActiveRecord::Schema.define(:version => 20121009191901) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.float    "tolerance",       :default => 0.01
+    t.integer  "data_set_id"
   end
+
+  add_index "numeric_sequences", ["data_set_id"], :name => "index_numeric_sequences_on_data_set_id"
 
   create_table "page_panes", :force => true do |t|
     t.datetime "created_at"
@@ -236,7 +315,10 @@ ActiveRecord::Schema.define(:version => 20121009191901) do
     t.float    "correct_answer_y_min"
     t.float    "correct_answer_x_max"
     t.float    "correct_answer_y_max"
+    t.integer  "data_set_id"
   end
+
+  add_index "pick_a_point_sequences", ["data_set_id"], :name => "index_pick_a_point_sequences_on_data_set_id"
 
   create_table "point_axis_line_visual_prompts", :force => true do |t|
     t.string   "name"
@@ -301,8 +383,11 @@ ActiveRecord::Schema.define(:version => 20121009191901) do
     t.integer  "y_unit_id"
     t.integer  "x_unit_id"
     t.string   "prediction_type"
-    t.float    "y_precision",     :default => 0.1
-    t.float    "x_precision",     :default => 0.1
+    t.float    "y_precision",          :default => 0.1
+    t.float    "x_precision",          :default => 0.1
+    t.boolean  "show_cross_hairs",     :default => false
+    t.boolean  "show_graph_grid",      :default => false
+    t.boolean  "show_tool_tip_coords", :default => false
   end
 
   add_index "prediction_graph_panes", ["x_unit_id"], :name => "index_prediction_graph_panes_on_x_unit_id"
@@ -331,6 +416,9 @@ ActiveRecord::Schema.define(:version => 20121009191901) do
     t.datetime "updated_at"
     t.integer  "y_unit_id"
     t.integer  "x_unit_id"
+    t.boolean  "show_cross_hairs",     :default => false
+    t.boolean  "show_graph_grid",      :default => false
+    t.boolean  "show_tool_tip_coords", :default => false
   end
 
   add_index "sensor_graph_panes", ["x_unit_id"], :name => "index_sensor_graph_panes_on_x_unit_id"
@@ -362,7 +450,10 @@ ActiveRecord::Schema.define(:version => 20121009191901) do
     t.datetime "updated_at"
     t.string   "case_type",           :default => "case_a"
     t.string   "point_constraints",   :default => "any"
+    t.integer  "data_set_id"
   end
+
+  add_index "slope_tool_sequences", ["data_set_id"], :name => "index_slope_tool_sequences_on_data_set_id"
 
   create_table "subject_areas", :force => true do |t|
     t.string   "name"
@@ -374,6 +465,8 @@ ActiveRecord::Schema.define(:version => 20121009191901) do
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "x_label"
+    t.string   "y_label"
   end
 
   create_table "text_hint_prompts", :force => true do |t|

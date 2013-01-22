@@ -25,7 +25,7 @@ module SgPermissions
     current_top = self
     while (current_top.respond_to? :sg_parent)
       current_top = current_top.send(:sg_parent)
-      throw "cant find activity" if current_top.nil?
+      throw "can't find activity in #{current_top.class.to_s}" if current_top.nil?
       return current_top if current_top.kind_of? Activity
     end
   end

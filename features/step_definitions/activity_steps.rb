@@ -9,6 +9,11 @@ module BetterHashDiff
   end
 end
 
+# Cucumber doesn't have a scenario-level pending keyword: http://stackoverflow.com/a/5983793/306084
+Given /^PENDING/ do
+  pending
+end
+
 Given(/^I am logged in as (?:a|an) (admin|user) named '(\w+)'$/) do |admin_text,name|
   admin = admin_text == 'admin' ? true : false
   do_login(name,admin)
@@ -41,10 +46,21 @@ Then(/^I should see a link to "([^"]*)" in the navigation$/) do |url|
   end
 end
 
+When /^I create a "([^"]*)" from semantic json$/ do |arg1|
+  filename = arg1.gsub(/\s+/,'').underscore + '.json'
+  activity_hash = SemanticJSONImport.new(filename).load.to_hash
+  @activity = create_activity(activity_hash)
+end
 
 When(/^I create (?:a new|an) activity:$/)do |text|
   activity_def = YAML.load(text)
   @activity = create_activity(activity_def)
+end
+
+Then(/^when serialization is fixed I should be able to copy the activity/) do
+  pending "We need to come back to check serialization on this"
+  the_copy = @activity.copy_activity
+  the_copy.to_hash.to_s.should == @activity.to_hash.to_s
 end
 
 Then(/^I should be able to copy the activity/) do
@@ -173,6 +189,7 @@ def create_activity(activity_def)
 
   activity_url = current_url
   activity_def[:units].each{|unit_def| create_unit(unit_def); visit activity_url } if activity_def[:units]
+  activity_def[:data_sets].each{|data_set_def| create_data_set(data_set_def); visit activity_url } if activity_def[:data_sets]  
   activity_def[:pages].each{|page_def| create_page(page_def); visit activity_url } if activity_def[:pages]
   return Activity.last
 end
@@ -197,8 +214,61 @@ def create_page(page_def)
   create_multiple_choice_sequencese(page_def[:multiple_choice_sequence]) if page_def[:multiple_choice_sequence]
 end
 
+def create_data_set(definition)
+  click_link 'New Data set'
+  fill_in 'data_set_name', :with => definition[:name]
+  fill_in 'data_set_y_precision', :with => definition[:yPrecision]
+  fill_in 'data_set_x_precision', :with => definition[:xPrecision]
+  fill_in 'data_set_line_snap_distance', :with => definition[:lineSnapDistance]
+  fill_in 'data_set_expression', :with => definition[:expression]
+  select definition[:lineType].capitalize, :from => 'data_set[line_type]'
+  select definition[:pointType].capitalize, :from => 'data_set[point_type]'
+  fill_in 'data_set_data', :with => definition[:data]
+  select definition[:xUnits], :from => 'data_set[x_unit_id]'
+  select definition[:yUnits], :from => 'data_set[y_unit_id]'
+  click_button 'Create Data set'
+end
+
+def create_data_set_model(definition)
+  x_unit    = definition['x']['unit'] if definition['x']
+  y_unit    = definition['y']['unit'] if definition['y']
+  data       = definition['data'] || ""
+  expression = definition['expression'] || ""
+  name       = definition['data_set_name'] || 'default_data_set'
+  x_unit = Unit.find_by_name(x_unit) if x_unit
+  y_unit = Unit.find_by_name(y_unit) if y_unit
+  atts = {
+    :name       => name,
+    :x_unit     => x_unit,
+    :y_unit     => y_unit,
+    :data       => data,
+    :expression => expression
+  }
+  return DataSet.create!(atts)
+end
+
+def select_included_data_sets(included_defs = [])
+  included_defs.each do |data_set_name|
+    select_node = find(:css, '.select-many select')
+    select_node.find(:xpath, XPath::HTML.option(data_set_name), :message => "cannot select option with text '#{data_set_name}'").select_option
+  end
+end
+
+def select_included_data_sets_for_panes(included_defs = [])
+  included_defs.each do |data_set_name|
+    click_button "+"
+    # That button triggers a prototype transition which causes the next step to fail on second, third, etc.
+    # datasets if we don't wait. 0.15s is not enough wait; 0.2 seems to be the least we can get away with.
+    sleep 0.5
+    within(:xpath, "(//div[@class='input-many-item'])[last()]/select") do
+      find(:xpath, XPath::HTML.option(data_set_name), :message => "cannot select option with text '#{data_set_name}'").select_option
+    end
+  end
+end
+
 def create_pane(pane_def)
   case pane_def[:type]
+  
   when "ImagePane"
     click_link 'New Image pane'
     fill_in 'image_pane_name', :with => pane_def[:name]
@@ -206,6 +276,7 @@ def create_pane(pane_def)
     fill_in 'image_pane_license', :with => pane_def[:license]
     fill_in 'image_pane_attribution', :with => pane_def[:attribution]
     click_button 'Create Image pane'
+
   when "PredefinedGraphPane"
     click_link 'New Predefined graph pane'
     fill_in 'predefined_graph_pane_title', :with => pane_def[:title]
@@ -214,22 +285,14 @@ def create_pane(pane_def)
     fill_in 'predefined_graph_pane_y_min', :with => pane_def[:y][:min]
     fill_in 'predefined_graph_pane_y_max', :with => pane_def[:y][:max]
     fill_in 'predefined_graph_pane_y_ticks', :with => pane_def[:y][:ticks]
-    select pane_def[:y][:unit], :from => 'predefined_graph_pane[y_unit_id]'
-
+    
     fill_in 'predefined_graph_pane_x_label', :with => pane_def[:x][:label]
     fill_in 'predefined_graph_pane_x_min', :with => pane_def[:x][:min]
     fill_in 'predefined_graph_pane_x_max', :with => pane_def[:x][:max]
     fill_in 'predefined_graph_pane_x_ticks', :with => pane_def[:x][:ticks]
-    select pane_def[:x][:unit], :from => 'predefined_graph_pane[x_unit_id]'
-
-    # oddly, when the submit button is beneith the fold we can't click
-    # on it, at least using chrome webdriver. One solution is to scroll the 
-    # page like this:
-    # page.execute_script "window.scrollBy(0,10000)"
-    # another would be to fill out something else in the page just before
-    # the button. Go figure.
-    fill_in 'predefined_graph_pane_data', :with => pane_def[:data]
+    
     select_included_graphs(pane_def[:included_graphs])
+    select_included_data_sets_for_panes(pane_def[:data_sets])
     click_button 'Create Predefined graph pane'
     
   when "SensorGraphPane"
@@ -275,6 +338,8 @@ def create_pane(pane_def)
   when "TablePane"
     click_link 'New Table pane'
     fill_in 'table_pane_title', :with => pane_def[:title]
+    fill_in 'table_pane_x_label', :with => pane_def[:x_label] if pane_def[:x_label]
+    fill_in 'table_pane_y_label', :with => pane_def[:y_label] if pane_def[:y_label]
     click_button 'Create Table pane'
   end
 end
@@ -282,7 +347,7 @@ end
 def select_included_graphs(included_def = [])
   (included_def || []).each do |graph_name|
     # select the graph to be included
-    select_node = find(:css, '.select-many select')
+    select_node = find(:css, '.custom.select-many select')
     select_node.find(:xpath, XPath::HTML.option(graph_name), :message => "cannot select option with text '#{graph_name}'").select_option
   end
 end
@@ -299,6 +364,7 @@ def create_sequence(sequence_def)
     fill_in 'pick_a_point_sequence_initial_prompt', :with => sequence_def[:initialPrompt]
     fill_in 'pick_a_point_sequence_give_up', :with => sequence_def[:giveUp]
     fill_in 'pick_a_point_sequence_confirm_correct', :with => sequence_def[:confirmCorrect]
+    select sequence_def[:dataSet], :from => 'pick_a_point_sequence[data_set_id]'
 
     if sequence_def[:correctAnswerX] || sequence_def[:correctAnswerY]
       fill_in 'pick_a_point_sequence_correct_answer_x', :with => sequence_def[:correctAnswerX]
@@ -309,7 +375,6 @@ def create_sequence(sequence_def)
       fill_in 'pick_a_point_sequence_correct_answer_x_max', :with => sequence_def[:correctAnswerXMax]
       fill_in 'pick_a_point_sequence_correct_answer_y_max', :with => sequence_def[:correctAnswerYMax]
     end
-
     click_button 'Create Pick a point sequence'
   when "NumericSequence"
     click_link 'New Numeric sequence'
@@ -319,6 +384,7 @@ def create_sequence(sequence_def)
     fill_in 'numeric_sequence_tolerance', :with => sequence_def[:tolerance]
     fill_in 'numeric_sequence_give_up', :with => sequence_def[:giveUp]
     fill_in 'numeric_sequence_confirm_correct', :with => sequence_def[:confirmCorrect]
+    select sequence_def[:dataSet], :from => 'numeric_sequence[data_set_id]'
     click_button 'Create Numeric sequence'
   when "ConstructedResponseSequence"
     click_link 'New Constructed response sequence'
@@ -330,6 +396,8 @@ def create_sequence(sequence_def)
     extract_multiple_choice_sequence!(sequence_def)
   when "SlopeToolSequence"
     create_slope_tool_sequence!(sequence_def)
+  when "BestFitSequence"
+    create_best_fit_sequence!(sequence_def)
   end
 
   sequence_url = current_url
@@ -415,6 +483,7 @@ def extract_multiple_choice_sequence!(mc_seq_def)
   else
     uncheck 'multiple_choice_sequence_use_sequential_feedback' 
   end
+  select mc_seq_def[:dataSetName], :from => 'multiple_choice_sequence[data_set_id]'
   click_button 'Create Multiple choice sequence'
   mc_seq_def[:choices].each do |choice_def|
     within('form.new.multiple-choice-choice') do
@@ -451,7 +520,20 @@ def create_slope_tool_sequence!(opts)
   fill_in 'slope_tool_sequence_x_max', :with => opts[:x_max]
   fill_in 'slope_tool_sequence_y_max', :with => opts[:y_max]
   fill_in 'slope_tool_sequence_tolerance', :with => opts[:tolerance]
+  select opts[:data_set_name], :from => 'slope_tool_sequence[data_set_id]'
   click_button 'Create Slope tool sequence'
 end
 
-
+def create_best_fit_sequence!(opts)
+  click_link 'New Best fit sequence'
+  fill_in 'best_fit_sequence_correct_tolerance', :with => opts[:correct_tolerance]
+  fill_in 'best_fit_sequence_close_tolerance', :with => opts[:close_tolerance]
+  fill_in 'best_fit_sequence_initial_prompt', :with => opts[:initial_prompt]
+  fill_in 'best_fit_sequence_confirm_correct', :with => opts[:confirm_correct]
+  fill_in 'best_fit_sequence_incorrect_prompt', :with => opts[:incorrect_prompt]
+  fill_in 'best_fit_sequence_close_prompt', :with => opts[:close_prompt]
+  fill_in 'best_fit_sequence_max_attempts', :with => opts[:max_attempts]
+  select opts[:data_set_name], :from => 'best_fit_sequence[data_set_id]'
+  select opts[:learner_data_set_name], :from => 'best_fit_sequence[learner_data_set_id]'
+  click_button 'Create Best fit sequence'
+end

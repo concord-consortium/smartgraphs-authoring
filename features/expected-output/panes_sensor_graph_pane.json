@@ -12,19 +12,22 @@
           "type": "SensorGraphPane",
           "title": "Graph Pane",
           "yLabel": "Distance",
-          "yUnits": "Distance",
           "yMin": 0.0,
           "yMax": 10.0,
-          "yTicks": 1.0,
           "xLabel": "Time",
-          "xUnits": "Time",
           "xMin": 0.0,
           "xMax": 10.0,
-          "xTicks": 1.0
+          "yTicks": 1.0,
+          "xTicks": 1.0,
+          "showCrossHairs":false,
+          "showToolTipCoords":false,
+          "showGraphGrid":false,
+          "includedDataSets": []
         }
       ]
     }
   ],
+  "datasets": [],
   "units": [
     {
       "type": "Unit",

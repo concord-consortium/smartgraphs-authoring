@@ -16,6 +16,10 @@ class MultipleChoiceSequence < ActiveRecord::Base
     timestamps
   end
 
+  def field_order
+    "data_set, initial_prompt, give_up, confirm_correct, use_sequential_feedback"
+  end
+
   has_one :page_sequence, :as => :sequence, :dependent => :destroy
 
   has_one :page, :through => :page_sequence
@@ -29,6 +33,8 @@ class MultipleChoiceSequence < ActiveRecord::Base
   children :multiple_choice_choices, :multiple_choice_hints
   #children  :multiple_choice_hints, :multiple_choice_choices
 
+  belongs_to :data_set
+
   def to_hash
     {
       'type' => type,
@@ -37,7 +43,8 @@ class MultipleChoiceSequence < ActiveRecord::Base
       'correctAnswerIndex' => correct_answer_index,
       'giveUp' => give_up,
       'confirmCorrect' => confirm_correct,
-      'hints' => hints
+      'hints' => hints,
+      'dataSetName'         => data_set ? data_set.name : ''
     }
   end
 
@@ -116,5 +123,15 @@ class MultipleChoiceSequence < ActiveRecord::Base
     else
       @pending_callbacks << callback
     end
+  end
+
+  def data_set_name_from_hash(definition)
+    callback = Proc.new do
+      self.reload
+      found_data_set = self.page.activity.data_sets.find_by_name(definition)
+      self.data_set = found_data_set
+      self.save!
+    end
+    self.add_marshal_callback(callback)
   end
 end

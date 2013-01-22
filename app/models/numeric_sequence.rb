@@ -19,6 +19,10 @@ class NumericSequence < ActiveRecord::Base
     timestamps
   end
 
+  def field_order
+    "title, data_set, initial_prompt, give_up, confirm_correct, correct_answer, tolerance"
+  end
+
   validates :title, :presence => true
   validates :initial_prompt, :presence => true
   validates :give_up, :presence => true
@@ -66,6 +70,8 @@ class NumericSequence < ActiveRecord::Base
 
   children :sequence_hints, :initial_prompt_prompts, :confirm_correct_prompts, :give_up_prompts
 
+  belongs_to :data_set
+
   def to_hash
     hash = {
       'type' => 'NumericSequence',
@@ -73,9 +79,20 @@ class NumericSequence < ActiveRecord::Base
       'correctAnswer' => correct_answer,
       'tolerance' => tolerance,
       'giveUp' => {'text' => give_up.to_s },
-      'confirmCorrect' => {'text' => confirm_correct.to_s }
+      'confirmCorrect' => {'text' => confirm_correct.to_s },
+      'dataSetName' => data_set ? data_set.name : ''
     }
     update_sequence_prompts(hash)
     hash
+  end
+
+  def data_set_name_from_hash(definition)
+    callback = Proc.new do
+      self.reload
+      found_data_set = self.page.activity.data_sets.find_by_name(definition)
+      self.data_set = found_data_set
+      self.save!
+    end
+    self.add_marshal_callback(callback)
   end
 end

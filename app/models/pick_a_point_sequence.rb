@@ -35,7 +35,7 @@ class PickAPointSequence < ActiveRecord::Base
   validates :confirm_correct, :presence => true
 
   def field_order
-    "title, initial_prompt, give_up, confirm_correct, correct_answer_x, correct_answer_y, correct_answer_x_min, correct_answer_y_min, correct_answer_x_max, correct_answer_y_max"
+    "title, data_set, initial_prompt, give_up, confirm_correct, correct_answer_x, correct_answer_y, correct_answer_x_min, correct_answer_y_min, correct_answer_x_max, correct_answer_y_max"
   end
 
   has_one :page_sequence, :as => :sequence, :dependent => :destroy
@@ -79,12 +79,15 @@ class PickAPointSequence < ActiveRecord::Base
 
   children :sequence_hints, :initial_prompt_prompts, :confirm_correct_prompts, :give_up_prompts
 
+  belongs_to :data_set
+
   def to_hash
     hash = {
       'type' => 'PickAPointSequence',
       'initialPrompt' => {'text' => initial_prompt.to_s },
       'giveUp' => {'text' => give_up.to_s },
-      'confirmCorrect' => {'text' => confirm_correct.to_s }
+      'confirmCorrect' => {'text' => confirm_correct.to_s },
+      'dataSetName' => data_set.name
     }
     if correct_answer_x && correct_answer_y
       hash['correctAnswerPoint'] = [correct_answer_x, correct_answer_y]
@@ -98,6 +101,16 @@ class PickAPointSequence < ActiveRecord::Base
     end
     update_sequence_prompts(hash)
     hash
+  end
+
+  def data_set_name_from_hash(definition)
+    callback = Proc.new do
+      self.reload
+      found_data_set = self.page.activity.data_sets.find_by_name(definition)
+      self.data_set = found_data_set
+      self.save!
+    end
+    self.add_marshal_callback(callback)
   end
 
   def correct_answer_point_from_hash(definition)

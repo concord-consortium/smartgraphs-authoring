@@ -12,29 +12,21 @@
           "type": "PredefinedGraphPane",
           "title": "Graph Pane",
           "yLabel": "Distance",
-          "yUnits": "Distance",
           "yMin": 0.0,
           "yMax": 10.0,
-          "yTicks": 1.0,
           "xLabel": "Time",
-          "xUnits": "Time",
           "xMin": 0.0,
           "xMax": 10.0,
+          "yTicks": 1.0,
           "xTicks": 1.0,
-          "xPrecision": 0.1,
-          "yPrecision": 0.1,
-          "expression": "",
-          "lineSnapDistance": 0.1,
-          "lineType": "none",
-          "pointType":"dot",
           "showCrossHairs": false,
           "showToolTipCoords": false,
           "showGraphGrid": false,
-          "data": [
-            [1.0, 100.0],
-            [2.0, 200.0],
-            [3.0, 300.0],
-            [4.0, 400.0]
+          "includedDataSets": [
+            {
+              "name": "default_data_set",
+              "inLegend": false
+            }
           ]
         }
       ],
@@ -47,8 +39,22 @@
               "type": "PointAxisLineVisualPrompt",
               "name": "Red prompt",
               "point": [1.0, 100.0],
+              "color": "red",
+              "axis": "x_axis"
+            }
+          ]
+        },
+        "correctAnswer": 200.0,
+        "tolerance": 0.123,
+        "giveUp": {
+          "text": "That's not right.",
+          "visualPrompts": [
+            {
+              "type": "PointAxisLineVisualPrompt",
+              "name": "Green prompt",
+              "point": [2.0, 200.0],
               "axis": "x_axis",
-              "color": "red"
+              "color": "green"
             }
           ]
         },
@@ -64,20 +70,7 @@
             }
           ]
         },
-        "giveUp": {
-          "text": "That's not right.",
-          "visualPrompts": [
-            {
-              "type": "PointAxisLineVisualPrompt",
-              "name": "Green prompt",
-              "point": [2.0, 200.0],
-              "axis": "x_axis",
-              "color": "green"
-            }
-          ]
-        },
-        "correctAnswer": 200.0,
-        "tolerance": 0.123,
+        "dataSetName": "default_data_set",
         "hints": [
           {
             "name": "Hint 1",
@@ -87,8 +80,8 @@
                 "type": "PointAxisLineVisualPrompt",
                 "name": "Yellow prompt",
                 "point": [4.0, 400.0],
-                "axis": "y_axis",
-                "color": "yellow"
+                "color": "yellow",
+                "axis": "y_axis"
               }
             ]
           }
@@ -96,6 +89,25 @@
       }
     }
   ],
+  "datasets": [
+  {
+    "type": "datadef",
+    "name": "default_data_set",
+    "yUnits": "Distance",
+    "xUnits": "Time",
+    "xPrecision": 0.1,
+    "yPrecision": 0.1,
+    "lineSnapDistance": 0.1,
+    "lineType": "none",
+    "pointType": "dot",
+    "data": [
+      [1.0, 100.0],
+      [2.0, 200.0],
+      [3.0, 300.0],
+      [4.0, 400.0]
+    ],
+    "expression": ""
+  }],
   "units": [
     {
       "type": "Unit",

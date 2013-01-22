@@ -9,6 +9,8 @@ class PredictionGraphPane < ActiveRecord::Base
   include SgGraphPane
   sg_parent :page
   
+  children :data_set_prediction_graphs
+
   fields do
     title   :string
     y_label :string
@@ -22,6 +24,9 @@ class PredictionGraphPane < ActiveRecord::Base
     x_ticks :float
     x_precision :float, :default => 0.1
     prediction_type  enum_string(:connecting_points, :continuous_curves)
+    show_cross_hairs :boolean, :default => false
+    show_graph_grid  :boolean, :default => false
+    show_tool_tip_coords :boolean, :default => false
     timestamps
   end
 
@@ -39,8 +44,11 @@ class PredictionGraphPane < ActiveRecord::Base
   has_many :annotation_inclusions, :as => :including_graph, :dependent => :destroy
   has_many :included_graphs, :through => :annotation_inclusions
 
+  has_many :data_sets, :through => :data_set_prediction_graphs
+  has_many :data_set_prediction_graphs, :accessible => true, :dependent => :destroy
+
   def field_order
-    "title, y_label, y_unit, y_min, y_max, y_ticks, y_precision, x_label, x_unit, x_min, x_max, x_ticks, x_precision, prediction_type"
+    "title, y_label, y_unit, y_min, y_max, y_ticks, y_precision, x_label, x_unit, x_min, x_max, x_ticks, x_precision, prediction_type, show_graph_grid, show_cross_hairs, show_tool_tip_coords"
   end
 
   def graph_type
@@ -55,18 +63,8 @@ class PredictionGraphPane < ActiveRecord::Base
     return hash
   end
 
-  # returns a 1-based indexed path string
-  # eg page/2/pane/1
-  def get_indexed_path
-    page.activity.pages.each_with_index do |pg,pg_i|
-      pg.page_panes.each_with_index do |pg_pn, pn_i|
-        pn = pg_pn.pane
-        if pn == self
-          return "page/#{pg_i+1}/pane/#{pn_i+1}"
-        end
-      end
-    end
-    return nil
+  def included_datasets
+    return data_set_prediction_graphs.map {|j| {"name" => j.data_set.name, "inLegend" => j.in_legend} }
   end
 
   def self.get_all_graph_panes_before(pane)

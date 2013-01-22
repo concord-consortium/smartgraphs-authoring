@@ -4,7 +4,11 @@ describe LineConstructionSequence do
 
   describe "default values" do
     before :each do
-      @instance = LineConstructionSequence.create
+      data_set = mock_model(DataSet, {
+        :name => "dataSetA"
+      })
+
+      @instance = LineConstructionSequence.create(:data_set => data_set)
     end
     it "should be valid" do
       @instance.should be_valid
@@ -27,7 +31,8 @@ describe LineConstructionSequence do
         "confirmCorrect"      => "That is Correct.",
         "slopeIncorrect"      => "Incorrect, your slope is wrong.",
         "yInterceptIncorrect" => "Incorrect, your y-intercept is wrong.",
-        "allIncorrect"        => "Incorrect. Try again."
+        "allIncorrect"        => "Incorrect. Try again.",
+        "dataSetName"         => 'dataSetA'
         # these moved to GraphPane....
         # "showCrossHairs"      => true,
         # "showToolTipCoords"   => false,

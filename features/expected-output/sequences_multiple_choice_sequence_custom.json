@@ -2,7 +2,6 @@
   "type": "Activity",
   "name": "Sequences Multiple Choice Sequence Custom",
   "authorName": "",
-  "units" : [],
   "pages": [
     {
       "type": "Page",
@@ -11,8 +10,14 @@
       "sequence": {
         "type": "MultipleChoiceWithCustomHintsSequence",
         "initialPrompt": "Whats the blah blah.",
-        "confirmCorrect": "Yes, that's right!",
+        "choices": [
+          "choice a",
+          "choice b",
+          "choice c"
+        ],
+        "correctAnswerIndex": 1,
         "giveUp": "That's not right.",
+        "confirmCorrect": "Yes, that's right!",
         "hints": [{
           "name": "Choice choice a Hint",
           "choiceIndex":0,
@@ -26,14 +31,24 @@
           "choiceIndex":2,
           "text": "try choice B instead."
         }],
-        "choices": [
-          "choice a",
-          "choice b",
-          "choice c"
-        ],
-        "correctAnswerIndex": 1
+        "dataSetName":"default_data_set"
       }
     }
-  ]
+  ],
+  "datasets":
+   [{"type":"datadef",
+     "name":"default_data_set",
+     "yUnits":"Meters",
+     "xUnits":"Seconds",
+     "xPrecision":0.1,
+     "yPrecision":0.1,
+     "lineSnapDistance":0.1,
+     "lineType":"none",
+     "pointType":"dot",
+     "data":[[1.0, 100.0], [2.0, 200.0], [3.0, 300.0], [4.0, 400.0]],
+     "expression":""}],
+  "units":
+   [{"type":"Unit", "name":"Seconds", "abbreviation":"s"},
+    {"type":"Unit", "name":"Meters", "abbreviation":"m"}]
 }
 

@@ -70,4 +70,46 @@ describe Activity do
     end
   end
 
+  describe "copy" do
+    subject do
+      @data_set = DataSet.new(:name => "test")
+      @page = Page.new(:name => "test")
+      @prediction = PredictionGraphPane.create!(:title => 'Prediction')
+      @page.prediction_graph_panes << @prediction
+      @predefined = PredefinedGraphPane.new({
+        :title => "test",
+        # :page => @page,
+        :included_graphs => [@prediction],
+        :y_label => "y",
+        :y_min   => 0.0,
+        :y_max   => 1.0,
+        :y_ticks => 0.1,
+        :x_label => "x",
+        :x_min   => 0.0,
+        :x_max   => 10.0,
+        :x_ticks => 1.0,
+        :data_sets => [@data_set]
+      })
+      @sequence = PickAPointSequence.create({
+        :title            => "string",
+        :initial_prompt   => "text",
+        :give_up          => "text",
+        :confirm_correct  => "text",
+        :data_set         => @data_set
+      })
+      @page.pick_a_point_sequences << @sequence
+      @page.predefined_graph_panes << @predefined
+      @original = Activity.create({
+        :name => "testing",
+        :data_sets => [@data_set],
+        :pages => [@page]
+      })
+      @original.copy_activity
+    end
+
+    it "should match original" do
+      subject.to_hash.should == @original.to_hash
+    end
+  end
+
 end

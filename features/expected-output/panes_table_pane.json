@@ -10,10 +10,13 @@
       "panes": [
         {
           "type": "TablePane",
-          "title": "Table Pane"
+          "title": "Table Pane",
+          "yLabel": "",
+          "xLabel": ""
         }
       ]
     }
   ],
+  "datasets": [],
   "units": []
 }

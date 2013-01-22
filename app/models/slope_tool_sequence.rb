@@ -25,9 +25,15 @@ class SlopeToolSequence < ActiveRecord::Base
     timestamps
   end
 
+  def field_order
+    "data_set, case_type, point_constraints, first_question, slope_variable_name, x_min, y_min, x_max, y_max, tolerance"
+  end
+
   has_one :page_sequence, :as => :sequence, :dependent => :destroy
   has_one :page, :through => :page_sequence
   reverse_association_of :page, 'Page#slope_tool_sequences'
+
+  belongs_to :data_set
 
   def to_hash
     {
@@ -43,7 +49,8 @@ class SlopeToolSequence < ActiveRecord::Base
       'yMin' => y_min,
       'yMax' => y_max,
       'selectedPointsMustBeAdjacent'      => selected_points_must_be_adjacent,
-      'tolerance' => tolerance
+      'tolerance' => tolerance,
+      'dataSetName' => data_set.name
     }
   end
 
@@ -131,4 +138,13 @@ class SlopeToolSequence < ActiveRecord::Base
     end
   end  
 
+  def data_set_name_from_hash(definition)
+    callback = Proc.new do
+      self.reload
+      found_data_set = self.page.activity.data_sets.find_by_name(definition)
+      self.data_set = found_data_set
+      self.save!
+    end
+    self.add_marshal_callback(callback)
+  end
 end

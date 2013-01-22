@@ -2,6 +2,8 @@ class PredefinedGraphPane < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
 
+  view_hints.parent :page
+  
   # standard owner and admin permissions
   # defined in models/standard_permissions.rb
   include SgPermissions
@@ -9,6 +11,9 @@ class PredefinedGraphPane < ActiveRecord::Base
   include SgGraphPane
 
   sg_parent :page
+  
+  children :data_set_predefined_graphs
+  # children  :data_set_graphs, :data_sets
 
   fields do
     title :string, :required
@@ -25,19 +30,27 @@ class PredefinedGraphPane < ActiveRecord::Base
     x_ticks :float, :required
     x_precision :float, :default => 0.1
 
+    show_cross_hairs :boolean, :default => false
+    show_graph_grid  :boolean, :default => false
+    show_tool_tip_coords :boolean, :default => false
+
+    # Keep these fields around to migrate older data, 
+    # even though data_set.rb now provides this kind of
+    # data.  See DataSet#from_predefined_graph_pane
     expression :string, :default =>"" #y = 0.5 * x + 5",
     line_snap_distance :float, :default => 0.1
     line_type  SgGraphPane::LineType,   :default => "none"
     point_type SgGraphPane::PointType,  :default => "dot"
-    show_cross_hairs :boolean, :default => false
-    show_graph_grid  :boolean, :default => false
-    show_tool_tip_coords :boolean, :default => false
     data :text
+    # end of LegacyFields
+    
     timestamps
   end
 
+  # legacy associations
   belongs_to :y_unit, :class_name => 'Unit'
   belongs_to :x_unit, :class_name => 'Unit'
+  # end 
 
   has_one :page_pane, :as => :pane, :dependent => :destroy
   has_one :page, :through => :page_pane
@@ -47,74 +60,22 @@ class PredefinedGraphPane < ActiveRecord::Base
   has_many :annotation_inclusions, :as => :including_graph, :dependent => :destroy
   has_many :included_graphs, :through => :annotation_inclusions
 
-  before_validation do
-    normalize_data
-    normalize_expression
-  end
-
-  validate :validate_expression
+  has_many :data_sets, :through => :data_set_predefined_graphs
+  has_many :data_set_predefined_graphs, :accessible => true, :dependent => :destroy
+  
 
   def field_order
-    fo  = %w[title y_label y_unit y_min y_max y_ticks y_precision]
-    fo << %w[x_label x_unit x_min x_max x_ticks x_precision]
+    fo  = %w[title y_label y_min y_max y_ticks ]
+    fo << %w[x_label x_min x_max x_ticks ]
     fo << %w[show_graph_grid show_cross_hairs show_tool_tip_coords]
-    fo << %w[expression line_snap_distance line_type point_type]
-    fo << %w[data]
     fo.flatten.compact.join(", ") # silly hobo
-
   end
 
   def graph_type
     'PredefinedGraphPane'
   end
 
-  def to_hash
-    hash = super()
-    hash['xPrecision'] = x_precision
-    hash['yPrecision'] = y_precision
-    hash['xPrecision'] = x_precision
-    hash['data']       = data_to_hash
-    hash["expression"] = expression_to_hash
-    hash["lineSnapDistance"] = line_snap_distance
-    hash["lineType"] = line_type
-    hash["pointType"] = point_type
-    hash["showCrossHairs"] = show_cross_hairs
-    hash["showToolTipCoords"] = show_tool_tip_coords
-    hash["showGraphGrid"] = show_graph_grid
-    return hash
+  def included_datasets
+    return data_set_predefined_graphs.map {|j| {"name" => j.data_set.name, "inLegend" => j.in_legend} }
   end
-
-  def expression_to_hash
-    if expression.empty?
-      return ""
-    else
-      return "y  = #{expression}"
-    end
-  end
-  def data_to_hash
-    normalize_data
-    data.split("\n").map {|point| point.split(',').map{|value| value.to_f}}
-  end
-
-  def normalize_data
-    self.data ||= ""
-    points = self.data.strip.split("\n").map {|point| point.strip }
-    points.map! {|point| point.split(/\s*[,\t]\s*/)}
-    self.data = points.map! { |point| point.join(',')}.join("\n")
-  end
-
-  def normalize_expression
-    self.expression.gsub!(/^\s*y\s*=\s*/,"")
-  end
-
-  # Validation must now support compound expressions..
-  def validate_expression
-    slope_regex = /^(\-?\d+\s*\*\s*)?x\s*([+|-]\s*\d+)?$/
-    compound_regex = /^(sin|cos|tan|asin|acos|atan|pow|log|sqrt|X|x|\,|\.|\+|\-|\*|\/|\(|\)|\s|[0-9])+$/
-    return if self.expression.empty?
-    return if self.expression.match(slope_regex)
-    return if self.expression.match(compound_regex)
-    errors.add(:expression, "unkown expression format. Please use '[m] * x + [b]' for slope-form. You may also use sin cos, tan, asin, acos, atan, pow, log, sqrt")
-  end
-
 end

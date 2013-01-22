@@ -17,20 +17,23 @@ class Activity < ActiveRecord::Base
 
   has_many   :pages, :order => :position
   belongs_to :owner, :class_name => "User"
-  children   :pages
-
+  children   :pages, :data_sets
+  
   has_many   :activity_grade_levels, :dependent => :destroy
   has_many   :grade_levels, :through => :activity_grade_levels, :accessible => true
 
   has_many   :activity_subject_areas, :dependent => :destroy
   has_many   :subject_areas, :through => :activity_subject_areas, :accessible => true
 
+  has_many   :data_sets
+  
   def to_hash
     {
       'type' => 'Activity',
       'name' => name,
       'authorName' => author_name,
       'pages' => pages.map(&:to_hash),
+      'datasets' => data_sets.map(&:to_hash),
       'units' => Unit.find(:all).map(&:to_hash)
     }
   end
@@ -72,10 +75,18 @@ class Activity < ActiveRecord::Base
     true
   end
 
+  def datasets_from_hash(definitions)
+    self.data_sets = definitions.map {|d| DataSet.from_hash(d)}
+  end
+
   def edit_permitted?(attribute)
     return true if acting_user.administrator?
     return false if attribute == :owner
     return self.is_owner?
   end
 
+  def extract_graphs
+    graphs = self.pages.map { |p| [p.predefined_graph_panes,p.prediction_graph_panes,p.sensor_graph_panes]}
+    graphs.flatten!
+  end
 end

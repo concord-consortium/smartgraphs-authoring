@@ -32,11 +32,17 @@ class LineConstructionSequence < ActiveRecord::Base
     timestamps
   end
 
+  def field_order
+    "title, data_set, slope, slope_tolerance, y_intercept, y_intercept_tolerance, initial_prompt, slope_incorrect, y_intercept_incorrect, all_incorrect, confirm_correct"
+  end
+
   has_one :page_sequence, :as => :sequence, :dependent => :destroy
   has_one :page, :through => :page_sequence
   reverse_association_of :page, 'Page#line_construction_sequences'
   
   before_validation :default_text_values
+
+  belongs_to :data_set
   
   validates :title,                 :presence => true
   validates :initial_prompt,        :presence => true
@@ -62,11 +68,22 @@ class LineConstructionSequence < ActiveRecord::Base
         "slopeIncorrect"      => slope_incorrect,
         "yInterceptIncorrect" => y_intercept_incorrect,
         "allIncorrect"        => all_incorrect,
+        'dataSetName'         => data_set ? data_set.name : ''
     }
   end
 
   def type
     "LineConstructionSequence"
+  end
+
+  def data_set_name_from_hash(definition)
+    callback = Proc.new do
+      self.reload
+      found_data_set = self.page.activity.data_sets.find_by_name(definition)
+      self.data_set = found_data_set
+      self.save!
+    end
+    self.add_marshal_callback(callback)
   end
 
   protected
