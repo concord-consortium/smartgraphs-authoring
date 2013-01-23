@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "Page",
-      "name": "Simple Page 2",
+      "name": "1 Simple Page 2",
       "text": "In this page...",
       "panes": [
         {
@@ -31,7 +31,7 @@
     },
     {
       "type": "Page",
-      "name": "Simple Page 3",
+      "name": "2 Simple Page 3",
       "text": "In this page...",
       "panes": [
         {

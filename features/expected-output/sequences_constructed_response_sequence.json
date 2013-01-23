@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "Page",
-      "name": "Simple Page 1",
+      "name": "1 Simple Page 1",
       "text": "In this page...",
       "sequence": {
         "type": "ConstructedResponseSequence",

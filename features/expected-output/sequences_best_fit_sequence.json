@@ -33,7 +33,7 @@
  "pages": [
    {
      "type": "Page",
-     "name": "Best Fit Sequence Page 1",
+     "name": "1 Best Fit Sequence Page 1",
      "text": "On this page, students will be asked to find the line of best fit for a series of points.",
      "panes": [
        {
