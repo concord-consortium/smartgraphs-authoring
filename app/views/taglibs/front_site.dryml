@@ -715,6 +715,17 @@
   </card>
 </def>
 
+<!-- don't show a select for all multiple choice sequences this choice may belong to --> 
+<def tag="form" for="MultipleChoiceChoice">
+  <form merge param="default">
+    <error-messages param/>
+    <field-list fields="name, correct, feedback, position" param/>
+    <div param="actions">
+      <submit label="#{ht 'multiple_choice_choice.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
+    </div>
+  </form>
+</def>
+
 <extend tag="show-page" for="MultipleChoiceSequence">
   <old-show-page merge>
     <collection-section:>
@@ -776,3 +787,4 @@
     </prepend-content-header:>
   </old-show-page>
 </extend>
+
