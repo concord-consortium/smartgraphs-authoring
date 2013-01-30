@@ -26,7 +26,9 @@ describe BestFitSequence do
         "incorrectPrompt"=> "Your estimate can be better; try again.",
         "closePrompt"=> "Your estimate is close; try again.",
         "confirmCorrect"=> "You made an excellent estimate.",
-        "maxAttempts"=> 4
+        "maxAttempts"=> 4,
+        "giveUp" => "Your estimate was not correct."
+        
       }
       @instance.to_hash.should == expected_hash
     end
