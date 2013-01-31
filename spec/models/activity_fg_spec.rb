@@ -67,6 +67,9 @@ describe Activity do
     end
 
     it "should copy" do
+      copy = activity_with_dataset.copy_activity
+      activity_with_dataset.to_hash.should == copy.to_hash
+      
     end
   end
 end

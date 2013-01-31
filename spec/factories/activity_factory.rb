@@ -22,6 +22,7 @@ FactoryGirl.define do
 
       after(:create) do |activity, evaluator|
         activity.data_sets = FactoryGirl.create_list(:full_data_set, 1, :activity => activity)
+        activity.pages = FactoryGirl.create_list(:page, 3, :activity => activity)
       end
     end
 

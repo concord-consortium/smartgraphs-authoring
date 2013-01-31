@@ -11,6 +11,7 @@ class BestFitSequence < ActiveRecord::Base
       'initial_prompt'        => "Find the line of best fit for this scatter plot.",
       'confirm_correct'       => "You made an excellent estimate.",
       'close_prompt'          => "Your estimate is close; try again.",
+      'give_up'               => "Your estimate was not correct.",
       'incorrect_prompt'      => "Your estimate can be better; try again.",
     }
   end
@@ -29,6 +30,7 @@ class BestFitSequence < ActiveRecord::Base
     incorrect_prompt :text
     close_prompt :text
     confirm_correct :text
+    give_up :text
     timestamps
   end
 
@@ -56,7 +58,8 @@ class BestFitSequence < ActiveRecord::Base
       'incorrectPrompt'     => incorrect_prompt,
       'closePrompt'         => close_prompt,
       'confirmCorrect'      => confirm_correct,
-      'maxAttempts'         => max_attempts
+      'maxAttempts'         => max_attempts,
+      'giveUp'              => give_up
     }
   end
 

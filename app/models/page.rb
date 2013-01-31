@@ -68,7 +68,7 @@ class Page < ActiveRecord::Base
   def to_hash
     hash = {
       'type' => 'Page',
-      'name' => name,
+      'name' => page_name,
       'text' => text.to_s
     }
     unless page_panes.empty?
@@ -82,6 +82,21 @@ class Page < ActiveRecord::Base
     hash
   end
 
+  # append a page number to the page if it doesn't already
+  # begin with a number
+  def page_name
+    # return the name if name starts with a digit
+    return name if name =~ /^\s*\d+.*$/ || !sg_parent
+    pos = 0
+    sg_parent.pages.each_with_index do |p, i|
+      if self.id == p.id
+        pos = i + 1
+        break
+      end
+    end
+    "#{pos} #{name}"
+  end
+
   # see SgMarshal
   def panes_from_hash(defs)
     defs.each do |definition|
@@ -92,4 +107,5 @@ class Page < ActiveRecord::Base
       self.send(method_name) << obj
     end
   end
+
 end

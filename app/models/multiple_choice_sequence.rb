@@ -27,7 +27,6 @@ class MultipleChoiceSequence < ActiveRecord::Base
   
   has_many :multiple_choice_choices, :dependent => :destroy, :order => :position
 
-
   has_many :multiple_choice_hints, :dependent => :destroy, :order => :position
 
   children :multiple_choice_choices, :multiple_choice_hints

@@ -49,9 +49,7 @@ class DataSet < ActiveRecord::Base
   validate :validate_expression
 
   def field_order
-    fo  = %w[name expression line_snap_distance line_type point_type]
-    fo << %w[data]
-    fo.flatten.compact.join(", ") # silly hobo
+    "name, expression, line_snap_distance, line_type, point_type, data, x_unit, y_unit, x_precision, y_precision"
   end
 
   def to_hash

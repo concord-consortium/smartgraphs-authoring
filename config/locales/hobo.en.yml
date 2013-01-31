@@ -14,7 +14,7 @@ en:
 
     show:
       title: "%{model}"
-      heading: "%{model} %{name}"
+      heading: "%{model}: %{name}"
       back_link: "Back"
       edit_link: "Edit %{model}"
       new_link: "New %{model}"

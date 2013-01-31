@@ -69,8 +69,8 @@
       </if>
     </append-header:>
     <append-body:>
-       <a action='author_preview'>View as author</a> 
-       or <a action='student_preview'>view as student</a> in SmartGraphs
+       <a action='author_preview'>Run as author</a>
+       or <a action='student_preview'>run as student</a> in SmartGraphs
        <a action='copy' if="&can_create?">Copy this</a>
     </append-body:>
   </old-card>
@@ -284,6 +284,15 @@
       <ht key="point_axis_line_visual_prompt.actions.new" >New Point Axis Line Visual Prompt element</ht>
     </a>
 </def>
+
+<extend tag="form" for="DataSet">
+  <old-form merge>
+    <field-list: fields="&this.field_order">
+      <y_unit-tag: include-none blank-message="No units"/>
+      <x_unit-tag: include-none blank-message="No units"/>
+    </field-list:>
+  </old-form>
+</extend>
 
 <extend tag="form" for="Page">
   <old-form merge>
@@ -698,11 +707,23 @@
       <header: param>
         <h4 param="heading"><name/></h4>
         <div param="actions">
+          <a action="edit" param="edit-link">Edit</a>
           <delete-button label="X" param/>
         </div>
       </header:>
     </div>
   </card>
+</def>
+
+<!-- don't show a select for all multiple choice sequences this choice may belong to --> 
+<def tag="form" for="MultipleChoiceChoice">
+  <form merge param="default">
+    <error-messages param/>
+    <field-list fields="name, correct, feedback, position" param/>
+    <div param="actions">
+      <submit label="#{ht 'multiple_choice_choice.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
+    </div>
+  </form>
 </def>
 
 <extend tag="show-page" for="MultipleChoiceSequence">
@@ -761,8 +782,9 @@
   <old-show-page merge>
     <prepend-content-header:>
       <if test="&!this.class.view_hints.parent && this.respond_to?(:sg_parent)">
-        <%= link_to "&laquo; Back to #{@this.sg_parent.class.to_s} \"#{@this.sg_parent}\"".html_safe, @this.sg_parent, :class => 'parent-link page-link'%>
+        <%= link_to "&laquo; Back to #{@this.sg_parent.class.to_s}: \"#{@this.sg_parent}\"".html_safe, @this.sg_parent, :class => 'parent-link page-link'%>
       </if>
     </prepend-content-header:>
   </old-show-page>
 </extend>
+

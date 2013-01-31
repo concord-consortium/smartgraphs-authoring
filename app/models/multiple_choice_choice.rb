@@ -41,7 +41,7 @@ class MultipleChoiceChoice < ActiveRecord::Base
     when 'feedback'
       return false if multiple_choice_sequence.use_sequential_feedback
     when 'correct'
-      return false if multiple_choice_sequence.has_correct_answer?
+      return false if multiple_choice_sequence.has_correct_answer? && !self.correct
     end
     return true
   end
