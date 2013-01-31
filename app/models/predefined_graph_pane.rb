@@ -76,6 +76,6 @@ class PredefinedGraphPane < ActiveRecord::Base
   end
 
   def included_datasets
-    return data_set_predefined_graphs.map {|j| {"name" => j.data_set.name, "inLegend" => j.in_legend} }
+    return data_set_predefined_graphs.map {|j| {"name" => j.data_set.name, "inLegend" => j.in_legend} unless j.data_set.blank? }.compact
   end
 end
