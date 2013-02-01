@@ -27,6 +27,7 @@ describe LineConstructionSequence do
         "slopeTolerance"      => 0.1,
         "yIntercept"          => 0.0,
         "yInterceptTolerance" => 0.1,
+        "maxAttempts"         => 3,
         "initialPrompt"       => "Construct a line with y-interept 0.0, with slope 1.0.",
         "confirmCorrect"      => "That is Correct.",
         "slopeIncorrect"      => "Incorrect, your slope is wrong.",

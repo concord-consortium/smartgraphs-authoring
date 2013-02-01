@@ -24,6 +24,7 @@ class LineConstructionSequence < ActiveRecord::Base
     slope_tolerance       :float,  :default => 0.1
     y_intercept           :float,  :default => 0
     y_intercept_tolerance :float,  :default => 0.1
+    max_attempts          :integer, :default => 3
     initial_prompt        :text  
     confirm_correct       :text  
     slope_incorrect       :text  
@@ -33,7 +34,7 @@ class LineConstructionSequence < ActiveRecord::Base
   end
 
   def field_order
-    "title, data_set, slope, slope_tolerance, y_intercept, y_intercept_tolerance, initial_prompt, slope_incorrect, y_intercept_incorrect, all_incorrect, confirm_correct"
+    "title, data_set, slope, slope_tolerance, y_intercept, y_intercept_tolerance, max_attempts, initial_prompt, slope_incorrect, y_intercept_incorrect, all_incorrect, confirm_correct"
   end
 
   has_one :page_sequence, :as => :sequence, :dependent => :destroy
@@ -55,6 +56,7 @@ class LineConstructionSequence < ActiveRecord::Base
   validates :slope_tolerance,       :numericality => true
   validates :y_intercept,           :numericality => true
   validates :y_intercept_tolerance, :numericality => true
+  validates :max_attempts, :numericality => true
 
   def to_hash
     {
@@ -63,6 +65,7 @@ class LineConstructionSequence < ActiveRecord::Base
         "slopeTolerance"      => slope_tolerance,
         "yIntercept"          => y_intercept,
         "yInterceptTolerance" => y_intercept_tolerance,
+        "maxAttempts"         => max_attempts,
         "initialPrompt"       => sprintf(initial_prompt,y_intercept, slope),
         "confirmCorrect"      => confirm_correct,
         "slopeIncorrect"      => slope_incorrect,

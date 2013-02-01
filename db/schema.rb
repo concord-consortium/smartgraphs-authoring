@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130130210227) do
+ActiveRecord::Schema.define(:version => 20130201190839) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -216,6 +216,7 @@ ActiveRecord::Schema.define(:version => 20130130210227) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "data_set_id"
+    t.integer  "max_attempts",          :default => 3
   end
 
   add_index "line_construction_sequences", ["data_set_id"], :name => "index_line_construction_sequences_on_data_set_id"
