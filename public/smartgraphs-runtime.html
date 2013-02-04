@@ -14,6 +14,9 @@
     
     <title>Smartgraphs</title>
   <script type="text/javascript">
+  <%- if RAILS_ENV != 'production' -%>
+    window['ga-disable-UA-6899787-19'] = true;
+  <%- end -%>
     window.authoredActivityJSON = <%= authored_activity_json %>;
     window.showOutline = <%= show_outline %>;
     window.showEditButton = <%= show_edit_button %>;
