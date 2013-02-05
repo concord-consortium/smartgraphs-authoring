@@ -29,10 +29,11 @@ describe LineConstructionSequence do
         "yInterceptTolerance" => 0.1,
         "maxAttempts"         => 3,
         "initialPrompt"       => "Construct a line with y-interept 0.0, with slope 1.0.",
-        "confirmCorrect"      => "That is Correct.",
+        "confirmCorrect"      => "That is correct.",
         "slopeIncorrect"      => "Incorrect, your slope is wrong.",
         "yInterceptIncorrect" => "Incorrect, your y-intercept is wrong.",
         "allIncorrect"        => "Incorrect. Try again.",
+        "giveUp"              => "The correct answer is shown.",
         "dataSetName"         => 'dataSetA'
         # these moved to GraphPane....
         # "showCrossHairs"      => true,
