@@ -5,10 +5,11 @@ class LineConstructionSequence < ActiveRecord::Base
   def self.defaults
     @defaults ||= {
       'initial_prompt'        => "Construct a line with y-interept %s, with slope %s.",
-      'confirm_correct'       => "That is Correct.",
+      'confirm_correct'       => "That is correct.",
       'slope_incorrect'       => "Incorrect, your slope is wrong.",
       'y_intercept_incorrect' => "Incorrect, your y-intercept is wrong.",
-      'all_incorrect'         => "Incorrect. Try again." 
+      'all_incorrect'         => "Incorrect. Try again." ,
+      'give_up'               => "The correct answer is shown."
     }
   end
 
@@ -24,16 +25,18 @@ class LineConstructionSequence < ActiveRecord::Base
     slope_tolerance       :float,  :default => 0.1
     y_intercept           :float,  :default => 0
     y_intercept_tolerance :float,  :default => 0.1
+    max_attempts          :integer, :default => 3
     initial_prompt        :text  
     confirm_correct       :text  
     slope_incorrect       :text  
     y_intercept_incorrect :text  
-    all_incorrect         :text  
+    all_incorrect         :text
+    give_up               :text
     timestamps
   end
 
   def field_order
-    "title, data_set, slope, slope_tolerance, y_intercept, y_intercept_tolerance, initial_prompt, slope_incorrect, y_intercept_incorrect, all_incorrect, confirm_correct"
+    "title, data_set, slope, slope_tolerance, y_intercept, y_intercept_tolerance, max_attempts, initial_prompt, slope_incorrect, y_intercept_incorrect, all_incorrect, confirm_correct, give_up"
   end
 
   has_one :page_sequence, :as => :sequence, :dependent => :destroy
@@ -55,6 +58,7 @@ class LineConstructionSequence < ActiveRecord::Base
   validates :slope_tolerance,       :numericality => true
   validates :y_intercept,           :numericality => true
   validates :y_intercept_tolerance, :numericality => true
+  validates :max_attempts, :numericality => true
 
   def to_hash
     {
@@ -63,11 +67,13 @@ class LineConstructionSequence < ActiveRecord::Base
         "slopeTolerance"      => slope_tolerance,
         "yIntercept"          => y_intercept,
         "yInterceptTolerance" => y_intercept_tolerance,
+        "maxAttempts"         => max_attempts,
         "initialPrompt"       => sprintf(initial_prompt,y_intercept, slope),
         "confirmCorrect"      => confirm_correct,
         "slopeIncorrect"      => slope_incorrect,
         "yInterceptIncorrect" => y_intercept_incorrect,
         "allIncorrect"        => all_incorrect,
+        "giveUp"              => give_up,
         'dataSetName'         => data_set ? data_set.name : nil
     }
   end
