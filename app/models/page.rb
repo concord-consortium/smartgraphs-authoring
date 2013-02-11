@@ -65,9 +65,6 @@ class Page < ActiveRecord::Base
 
   acts_as_list
 
-  # Validate on edit that the activity isn't changing - pages shouldn't move from activity to activity.
-  attr_readonly :activity_id
-
   def to_hash
     hash = {
       'type' => 'Page',

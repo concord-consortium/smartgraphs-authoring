@@ -36,15 +36,5 @@ describe Page do
         subject.to_hash["name"].should == "1 The First Page"
       end
     end
-
-    it "can't be moved to another activity" do
-      subject() { create(:page, :activity => activity, :name => "2 The Second Page")}
-      act2 = Activity.create(:name => "Target Activity")
-      subject.activity_id.should == activity.id
-      subject.activity = act2
-      subject.save
-      subject.reload
-      subject.activity_id.should == activity.id
-    end
   end
 end
