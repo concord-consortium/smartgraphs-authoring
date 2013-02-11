@@ -47,6 +47,14 @@ class User < ActiveRecord::Base
 
   end
 
+  # --- Class methods --- #
+
+  def self.census(state='active')
+    User.count(:conditions => { :state => state })
+  end
+
+  # --- Instance methods --- #
+
   def signed_up?
     state=="active"
   end

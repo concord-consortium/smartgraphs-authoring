@@ -26,7 +26,25 @@ class Activity < ActiveRecord::Base
   has_many   :subject_areas, :through => :activity_subject_areas, :accessible => true
 
   has_many   :data_sets
-  
+
+  # --- Class methods --- #
+
+  def self.public_count
+    Activity.count(:conditions => { :publication_status => 'public' })
+  end
+
+  def self.private_count
+    Activity.count(:conditions => { :publication_status => 'private' })
+  end
+
+  def self.public_count_since(date)
+  end
+
+  def self.private_count_since(date)
+  end
+
+  # --- Instance methods --- #
+
   def to_hash
     {
       'type' => 'Activity',
