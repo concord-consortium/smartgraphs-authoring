@@ -65,6 +65,18 @@ class Page < ActiveRecord::Base
 
   acts_as_list
 
+  # There was once an issue with [Pages "jumping" unexpectedly to different activites when edited][1]. We think that
+  # was fixed by removing the Activity select menu from the Page edit form, but if that's not sufficient, Hobo's 
+  # permissions might be a reasonable approach:
+
+  # def update_permitted?
+  #   acting_user.administrator && (activity_id_was_null || !activity_id_changed?)
+  # end
+
+  # We also considered attr_readonly, but this breaks Activity copying.
+
+  # [1]: https://www.pivotaltracker.com/story/show/44098927
+
   def to_hash
     hash = {
       'type' => 'Page',
