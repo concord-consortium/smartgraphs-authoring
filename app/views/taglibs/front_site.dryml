@@ -32,7 +32,7 @@
   <old-page merge>
     <custom-scripts:>
       <script type="text/javascript">
-      <%- if RAILS_ENV != 'production' -%>
+      <%- if ::Rails.env != 'production' -%>
         window['ga-disable-UA-6899787-29'] = true;
       <%- end -%>
         var _gaq = _gaq || [];
