@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
   end
 
   def self.registered_since(date=Date.today)
-    User.count("created_at lt ?", date.to_s(:db))
+    User.where("created_at > ?", date.to_s(:db)).count
   end
 
   # --- Instance methods --- #
