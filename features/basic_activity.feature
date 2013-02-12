@@ -120,3 +120,22 @@ Feature: Basic Activities
     And I should see "Private Activity" in the all activities list
     And I should not see "Private Activity" in the listing
 
+  Scenario: Editing pages
+    Given I am logged in as an admin named 'admin'
+    When I create a new activity:
+      """
+      ---
+      :name: Simple Activity
+      :author_name: Mr. Author
+      :publication_status: private
+      :pages:
+      - :name: Simple Page 1
+        :text: In this page...
+      - :name: Simple Page 2
+        :text: Now, in this other page...
+      """
+    When I am on my activities page
+    When I enter the activity
+    When I edit the first page
+    When I change the page name to "First Page"
+    Then the activity should still have 2 pages

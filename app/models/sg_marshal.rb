@@ -2,20 +2,19 @@ module SgMarshal
   module ClassMethods
 
     def from_hash(defs, context=nil)
-      defs               = Hash[defs.map {|k,v| [k.underscore, v]}]
-      object             = self.new(filter_attributes(defs))
-      object.marshal_context = context || object
-      object.create_hash = defs
-      object.create_collections
-      object.create_associations
-      object.process_nested_lists
-      object.custom_from_hashes
+      object = build_object_from_hash(defs, context)
       object.save
       object.invoke_marshal_callbacks if object.marshal_context == object
       object
     end
 
     def from_hash_to_mem(defs, context=nil)
+      object = build_object_from_hash(defs, context)
+      object.invoke_marshal_callbacks if object.marshal_context == object
+      object
+    end
+
+    def build_object_from_hash(defs, context)
       defs               = Hash[defs.map {|k,v| [k.underscore, v]}]
       object             = self.new(filter_attributes(defs))
       object.marshal_context = context || object
@@ -24,7 +23,6 @@ module SgMarshal
       object.create_associations
       object.process_nested_lists
       object.custom_from_hashes
-      object.invoke_marshal_callbacks if object.marshal_context == object
       object
     end
 

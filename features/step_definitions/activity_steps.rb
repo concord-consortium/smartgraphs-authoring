@@ -57,6 +57,23 @@ When(/^I create (?:a new|an) activity:$/)do |text|
   @activity = create_activity(activity_def)
 end
 
+When /^I enter the activity$/ do
+  visit activity_url(@activity) # N.B. assumes @activity is defined
+end
+
+When /^I edit the first page$/ do
+  visit edit_page_path(@activity.pages.first)
+end
+
+When /^I change the page name to "([^"]*)"$/ do |arg1|
+  fill_in "page_name", :with => arg1
+  click_button "Save Page"
+end
+
+Then /^the activity should still have (\d+) pages$/ do |arg1|
+  @activity.pages.length.should == arg1.to_i
+end
+
 Then(/^when serialization is fixed I should be able to copy the activity/) do
   pending "We need to come back to check serialization on this"
   the_copy = @activity.copy_activity

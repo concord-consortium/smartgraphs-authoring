@@ -9,6 +9,9 @@ class User < ActiveRecord::Base
     timestamps
   end
 
+  scope :active, where("state = 'active'")
+  scope :inactive, where("state = 'inactive'")
+
   # This gives admin rights and an :active state to the first sign-up.
   # Just remove it if you don't want that
   before_create do |user|
@@ -46,6 +49,22 @@ class User < ActiveRecord::Base
                :params => [ :password, :password_confirmation ]
 
   end
+
+  # --- Class methods --- #
+
+  def self.census(state='active')
+    if state == 'active'
+      return active.length
+    else
+      return inactive.length
+    end
+  end
+
+  def self.registered_since(date=Date.today)
+    User.where("created_at > ?", date.to_s(:db)).count
+  end
+
+  # --- Instance methods --- #
 
   def signed_up?
     state=="active"

@@ -15,6 +15,9 @@ class Activity < ActiveRecord::Base
     timestamps
   end 
 
+  scope :public, where("publication_status = 'public'")
+  scope :private, where("publication_status = 'private'")
+
   has_many   :pages, :order => :position
   belongs_to :owner, :class_name => "User"
   children   :pages, :data_sets
@@ -26,7 +29,19 @@ class Activity < ActiveRecord::Base
   has_many   :subject_areas, :through => :activity_subject_areas, :accessible => true
 
   has_many   :data_sets
-  
+
+  # --- Class methods --- #
+
+  def self.public_count_since(date=Date.today)
+    public.where("created_at > ?", date.to_s(:db)).count
+  end
+
+  def self.private_count_since(date=Date.today)
+    private.where("created_at > ?", date.to_s(:db)).count
+  end
+
+  # --- Instance methods --- #
+
   def to_hash
     {
       'type' => 'Activity',
