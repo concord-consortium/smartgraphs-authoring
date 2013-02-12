@@ -52,10 +52,13 @@
       <p id="nsf">
         This material is based upon work supported by the National Science Foundation under Grant No. DRL-0918522. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.
       </p>
-      <div id="admin-links">
-        <a href="&admin_users_url" if="&current_user.administrator?">
+      <div id="admin-links" if="&current_user.administrator?">
+        <a href="&admin_users_url">
           <t key="hobo.admin.subsite_name">Admin</t>
         </a>
+        <p class="inventory"><%= User.census %> active users, <%= User.registered_since(1.week.ago)%> registered in the last week.</p>
+        <p class="inventory"><%= Activity.public.count %> public activities, <%= Activity.public_count_since(1.week.ago) %> created in the last week.</p>
+        <p class="inventory"><%= Activity.private.count %> private activities, <%= Activity.private_count_since(1.week.ago) %> created in the last week.</p>
       </div>
     </footer:>
   </old-page>
