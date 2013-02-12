@@ -130,6 +130,10 @@ a.button {
 	clear: both;
 	}
 
+.inventory {
+  color: #000;
+}
+
 .category_tag {
 	font-weight: bold;
 	margin-left: 1.5em;
