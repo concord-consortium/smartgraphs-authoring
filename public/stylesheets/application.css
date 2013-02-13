@@ -39,6 +39,7 @@ a.button {
 	}
 .page-header .navigation li {
 	color: #3f3f3f;
+	font-size: 1.2em;
 	}
 .page-header .navigation a:link, .page-header .navigation a:visited {
 	color: #3a878b;
@@ -90,6 +91,35 @@ a.button {
 	border-bottom-left-radius: 13px;
 	border-bottom-right-radius: 13px;
 	}
+.front-page .welcome-message {
+	float: left;
+	width: 600px;
+	}
+	.front-page .welcome-message li, .front-page .welcome-message p {
+		margin-bottom: 1em;
+		}
+	.activities-preview li {
+		float: left;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		width: 200px;
+		}
+		.activities-preview li a {
+			background: #fff !important;
+			border: none !important;
+			color: #479492;
+			display: block;
+			font-weight: bold;
+			text-decoration: none !important;
+			}
+			.activities-preview li a:hover, .activities-preview li a:focus {
+				color: #da5936;
+				}
+		.activities-preview li img {
+			clear: both;
+			width: 190px;
+			}
 	.content-header {
 		background: #fff;
 		border: none !important;
@@ -108,6 +138,56 @@ a.button {
 			color: #3a878b;
 			text-transform: capitalize;
 			}
+.sidebar-right {
+	float: right;
+	width: 255px;
+	}
+	.sidebar-right .callout {
+		background: #fee9aa !important;
+		margin-bottom: .75em;
+		padding: 15px;
+		-webkit-border-radius: 13px;
+		-webkit-border-radius: 13px;
+		-moz-border-radius: 13px;
+		-moz-border-radius: 13px;
+		border-radius: 13px;
+		border-radius: 13px;
+		}
+	.sidebar-right .callout a.button {
+		font-size: 1.2em;
+		margin-bottom: 5px;
+		padding: 10px;
+		text-align: center;
+		width: 205px;
+		}
+	.sidebar-right .callout h2 {
+		color: #3a878b;
+		line-height: 130%;
+		margin: 0;
+		}
+	.sidebar-right .nav-links {
+		margin: 0;
+		padding: 0;
+		}
+		.sidebar-right .nav-links li {
+			border-bottom: dotted 1px #ccc;
+			list-style: none;
+			margin-left: 0;
+			}
+		.sidebar-right .nav-links li:last-child {
+			border-bottom: none;
+			}
+			.sidebar-right .nav-links li a {
+				background: transparent !important;
+				color: #479492 !important;
+				display: block;
+				padding: 10px 5px;
+				}
+			.sidebar-right .nav-links li a:hover {
+				background: #fef7e0 !important;
+				color: #da5936 !important;
+				}
+
 #copyright {
 	clear: left;
 	color: #3f3f3f;

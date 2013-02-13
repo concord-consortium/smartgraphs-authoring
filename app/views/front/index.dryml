@@ -6,7 +6,24 @@
     <header class="content-header">
       <h1>Welcome to the SmartGraphs Authoring Tool</h1>
       <section class="welcome-message">
-        <p>SmartGraphs allows users to customize existing activities or create new ones. View the <a href="https://docs.google.com/document/d/1-T8AOLteF6gwo-7grUY8vsCu3txH74-QHC-RBg-kwcY/edit " title="SmartGraphs Authoring Manual" target="_blank">Authoring Manual</a> and the <a href="http://smartgraphs-authoring.concord.org/activities/146-authoring-demo/author_preview " title="SmartGraphs Authoring Demonstration">Authoring Demo</a> for more information.</p>
+      
+      <p>Check out these existing activities to see what SmartGraphs authors can do.</p>
+
+      <ul class="activities-preview">
+      <li><a href="http://smartgraphs-authoring.concord.org/activities/105-biker-betty/student_preview" title="Biker Betty SmartGraphs Activity">Biker Betty &raquo;
+      <img src="/images/biker-betty.jpg" alt="Biker Betty SmartGraphs Activity" title="Biker Betty SmartGraphs Activity" /></a></li>
+
+      <li><a href="http://smartgraphs-authoring.concord.org/activities/106-college-debt/student_preview" title="College Debt SmartGraphs Activity">College Debt &raquo;
+      <img src="/images/college-debt.jpg" alt="College Debt SmartGraphs Activity" title="College Debt SmartGraphs Activity" /></a></li>
+
+      <li><a href="http://smartgraphs-authoring.concord.org/activities/98-radioactive-decay/student_preview" title="Radioactive Decay SmartGraphs Activity">Radioactive Decay &raquo;
+      <img src="/images/radioactive-decay.jpg" alt="Radioactive Decay SmartGraphs Activity" title="Radioactive Decay SmartGraphs Activity" /></a>
+      </li>
+      </ul>
+      <p>You can investigate more free activities by clicking the Activities tab above, finding one that interests you and clicking "Run As Student" for that activity. You do NOT need to register or login to use these activities.</p>
+
+      <p>SmartGraphs allows users to customize existing activities or create new ones. View the <a href="https://docs.google.com/document/d/1-T8AOLteF6gwo-7grUY8vsCu3txH74-QHC-RBg-kwcY/edit" title="SmartGraphs Authoring Manual" target="_blank">Authoring Manual</a> and the <a href="http://smartgraphs-authoring.concord.org/activities/146-authoring-demo/author_preview" title="SmartGraphs Authoring Demonstration">Authoring Demo</a> for more information. Click the Signup link at the top right to register as an author.</p>   
+
         <% if User.count == 0 -%>
           <h3 style="margin-top: 20px;">There are no user accounts - please provide the details of the site administrator</h3>
           <form with="&this || User.new" without-cancel>
@@ -17,8 +34,20 @@
 
 
       </section>
+      <section class="sidebar-right">
+        <section class="callout">
+          <h2>Want to Create Your Own SmartGraphs Activities?</h2>
+          <a class="button" href="/users/signup">Register as an Author &raquo;</a>
+        </section>
+        <ul class="nav-links">
+          <li><a href="/login" title="Author Login">Author Login</a></li>
+          <li><a href="https://docs.google.com/document/d/1-T8AOLteF6gwo-7grUY8vsCu3txH74-QHC-RBg-kwcY/edit" title="SmartGraphs Authoring Manual" target="_blank">Authoring Manual</a></li>
+          <li><a href="http://smartgraphs-authoring.concord.org/activities/146-authoring-demo/author_preview" title="SmartGraphs Authoring Demonstration">Authoring Demo</a></li>
+          <li><a href="/activities" title="SmartGraphs Activities">Existing Activities</a></li>
+        </ul>
+      </section>
     </header>
-
+    <br style="clear: both;" />
     <section class="content-body">
     </section>
   </content:>
