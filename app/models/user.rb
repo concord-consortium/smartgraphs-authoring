@@ -68,7 +68,11 @@ class User < ActiveRecord::Base
   end
 
   def self.have_activities
-    User.joins(:activities).uniq!.count
+    begin
+      return User.joins(:activities).uniq!.count
+    rescue
+      return 0
+    end
   end
 
   # --- Instance methods --- #
