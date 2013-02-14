@@ -57,6 +57,7 @@
           <t key="hobo.admin.subsite_name">Admin</t>
         </a>
         <p class="inventory"><%= User.census %> active users, <%= User.registered_since(1.week.ago)%> registered in the last week.</p>
+        <p class="inventory"><%= User.have_activities %> users have started or copied at least one activity.</p>
         <p class="inventory"><%= Activity.public.count %> public activities, <%= Activity.public_count_since(1.week.ago) %> created in the last week.</p>
         <p class="inventory"><%= Activity.private.count %> private activities, <%= Activity.private_count_since(1.week.ago) %> created in the last week.</p>
       </div>

@@ -12,6 +12,9 @@ class User < ActiveRecord::Base
   scope :active, where("state = 'active'")
   scope :inactive, where("state = 'inactive'")
 
+  has_many :activities, :foreign_key => 'owner_id'
+  reverse_association_of :activities, 'Activity#owner'
+
   # This gives admin rights and an :active state to the first sign-up.
   # Just remove it if you don't want that
   before_create do |user|
@@ -62,6 +65,10 @@ class User < ActiveRecord::Base
 
   def self.registered_since(date=Date.today)
     User.where("created_at > ?", date.to_s(:db)).count
+  end
+
+  def self.have_activities
+    User.joins(:activities).uniq!.count
   end
 
   # --- Instance methods --- #
