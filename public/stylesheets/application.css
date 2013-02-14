@@ -80,6 +80,9 @@ a.button {
 	border: none;
 	color: #fff;
 	}
+.front-page .content {
+	min-height: 400px;
+	}
 .section, .front-page .welcome-message {
 	background: #fff !important;
 	border: none !important;
