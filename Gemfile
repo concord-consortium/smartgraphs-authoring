@@ -4,7 +4,7 @@ gem 'rails', '~> 3.0.20'
 gem "hobo", "= 1.3.0.RC2"
 gem "acts_as_list", '~> 0.1.4'
 gem "yaml_db", "0.2.2"
-gem 'fastercsv'
+gem 'csv_pirate'
 
 group :development do
   gem 'ffi', '1.0.9'
