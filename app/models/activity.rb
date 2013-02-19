@@ -2,6 +2,8 @@ class Activity < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
   
+  has_csv_pirate_ship # This lets us create a CSV serialization using csv_pirate
+
   PublicationStatus  = HoboFields::Types::EnumString.for(:public, :private)
 
   # standard owner and admin permissions
