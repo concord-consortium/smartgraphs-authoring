@@ -11,6 +11,7 @@ class ActivitiesController < ApplicationController
       load_activities(Activity.publication_status_is('public'))
       hobo_index @activities do |expects|
         expects.json { render :json => @activities.to_json }
+        expects.csv { render :text => @activities.weigh_anchor.maroon } # Uses csv_pirate to create a CSV serialization
         expects.html { hobo_index @activities }
       end
   end
@@ -88,7 +89,10 @@ class ActivitiesController < ApplicationController
 
   index_action :all_activities do
     load_activities(Activity)
-    hobo_index @activities
+    hobo_index @activities do |expects|
+      expects.csv { render :text => Activity.weigh_anchor.maroon } # Uses csv_pirate to create a CSV serialization
+      expects.html { hobo_index @activities }
+    end
   end
 
 

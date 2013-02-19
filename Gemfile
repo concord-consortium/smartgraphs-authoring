@@ -4,6 +4,7 @@ gem 'rails', '~> 3.0.20'
 gem "hobo", "= 1.3.0.RC2"
 gem "acts_as_list", '~> 0.1.4'
 gem "yaml_db", "0.2.2"
+# csv_pirate makes it possible to do CSV exports of models with very little code. However, its "pirate" schtick extends to its method names, which means the code created to use it is difficult to read (it's not at all clear what "Class.weigh_anchor.marooon" does) so if we find a better gem to do this, let's use it.
 gem 'csv_pirate'
 
 group :development do
