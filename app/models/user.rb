@@ -2,6 +2,9 @@ class User < ActiveRecord::Base
 
   hobo_user_model # Don't put anything above this
 
+  # This lets us create a CSV serialization using csv_pirate
+  has_csv_pirate_ship :booty => [:name, :email_address, :administrator, :created_at, :updated_at, :state, :activity_count, :public_activities_count]
+
   fields do
     name          :string, :required, :unique
     email_address :email_address, :login => true
@@ -75,6 +78,14 @@ class User < ActiveRecord::Base
 
   def signed_up?
     state=="active"
+  end
+
+  def activity_count
+    activities.length
+  end
+
+  def public_activities_count
+    activities.public.length
   end
 
   # --- Permissions --- #
