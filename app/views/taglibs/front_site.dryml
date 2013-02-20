@@ -623,6 +623,13 @@
             <ht key="activity.actions.new">new activity</ht>
           </a>
 
+          <!-- There should be a better test for whether to show this, and a better way to link to the csv of the current index -->
+          <if test="&current_user.administrator?">
+            <a class="button" href="/activities/all_activities.csv">
+              <ht key="activity.actions.csv">download csv</ht>
+            </a>
+          </if>
+
           <page-nav param="top-page-nav"/>
         </p>
         <collection param/>
