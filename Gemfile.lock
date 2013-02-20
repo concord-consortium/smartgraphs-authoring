@@ -1,3 +1,8 @@
+PATH
+  remote: ~/Projects/gdata-ruby-util/
+  specs:
+    gdata (1.1.2)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -214,6 +219,7 @@ DEPENDENCIES
   database_cleaner (~> 0.7.0)
   factory_girl_rails
   ffi (= 1.0.9)
+  gdata!
   guard (~> 1.5.4)
   guard-rspec (~> 1.2.1)
   haml (~> 3.1.3)
