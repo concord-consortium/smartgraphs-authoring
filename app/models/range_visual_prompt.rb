@@ -28,6 +28,9 @@ class RangeVisualPrompt < ActiveRecord::Base
   has_one :initial_prompt_numeric_sequence, :through => :initial_prompt_prompt, :source => :numeric_sequence
   reverse_association_of :initial_prompt_numeric_sequence, 'NumericSequence#initial_range_visual_prompts'
 
+  has_one :initial_prompt_multiple_choice_sequence, :through => :initial_prompt_prompt, :source => :multiple_choice_sequence
+  reverse_association_of :initial_prompt_multiple_choice_sequence, 'MultipleChoiceSequence#initial_range_visual_prompts'
+
   has_one :give_up_prompt, :as => :prompt, :dependent => :destroy
   has_one :give_up_sequence, :through => :give_up_prompt, :source => :pick_a_point_sequence
   reverse_association_of :give_up_sequence, 'PickAPointSequence#give_up_range_visual_prompts'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130205155022) do
+ActiveRecord::Schema.define(:version => 20130226183013) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -183,8 +183,10 @@ ActiveRecord::Schema.define(:version => 20130205155022) do
     t.integer  "prompt_id"
     t.string   "prompt_type"
     t.integer  "numeric_sequence_id"
+    t.integer  "multiple_choice_sequence_id"
   end
 
+  add_index "initial_prompt_prompts", ["multiple_choice_sequence_id"], :name => "index_initial_prompt_prompts_on_multiple_choice_sequence_id"
   add_index "initial_prompt_prompts", ["numeric_sequence_id"], :name => "index_initial_prompt_prompts_on_numeric_sequence_id"
   add_index "initial_prompt_prompts", ["pick_a_point_sequence_id"], :name => "index_initial_prompt_prompts_on_pick_a_point_sequence_id"
   add_index "initial_prompt_prompts", ["prompt_type", "prompt_id"], :name => "index_initial_prompt_prompts"
