@@ -8,7 +8,29 @@
 
 <set-theme name="clean"/>
 
+<extend tag="index-page" for="User">
+  <old-index-page merge>
+    <content:>
+      <section param="content-body">
+        <p>
+          <a action="new" to="&model" param="new-link">
+            <ht key="user.actions.new">New User</ht>
+          </a>
+          <a class="button" href="users.csv">
+            <ht key="user.actions.csv">download csv</ht>
+          </a>
+        </p>
 
+        <page-nav param="top-page-nav"/>
+
+        <collection param/>
+
+        <page-nav param="bottom-page-nav"/>
+
+      </section>
+    </content:>
+  </old-index-page>
+</extend>
 
 <extend tag="page">
   <old-page merge>
