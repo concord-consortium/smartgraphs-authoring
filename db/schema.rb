@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130226183013) do
+ActiveRecord::Schema.define(:version => 20130227192629) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -81,8 +81,10 @@ ActiveRecord::Schema.define(:version => 20130226183013) do
     t.integer  "prompt_id"
     t.string   "prompt_type"
     t.integer  "numeric_sequence_id"
+    t.integer  "multiple_choice_sequence_id"
   end
 
+  add_index "confirm_correct_prompts", ["multiple_choice_sequence_id"], :name => "index_confirm_correct_prompts_on_multiple_choice_sequence_id"
   add_index "confirm_correct_prompts", ["numeric_sequence_id"], :name => "index_confirm_correct_prompts_on_numeric_sequence_id"
   add_index "confirm_correct_prompts", ["pick_a_point_sequence_id"], :name => "index_confirm_correct_prompts_on_pick_a_point_sequence_id"
   add_index "confirm_correct_prompts", ["prompt_type", "prompt_id"], :name => "index_confirm_correct_prompts"
@@ -155,8 +157,10 @@ ActiveRecord::Schema.define(:version => 20130226183013) do
     t.integer  "prompt_id"
     t.string   "prompt_type"
     t.integer  "numeric_sequence_id"
+    t.integer  "multiple_choice_sequence_id"
   end
 
+  add_index "give_up_prompts", ["multiple_choice_sequence_id"], :name => "index_give_up_prompts_on_multiple_choice_sequence_id"
   add_index "give_up_prompts", ["numeric_sequence_id"], :name => "index_give_up_prompts_on_numeric_sequence_id"
   add_index "give_up_prompts", ["pick_a_point_sequence_id"], :name => "index_give_up_prompts_on_pick_a_point_sequence_id"
   add_index "give_up_prompts", ["prompt_type", "prompt_id"], :name => "index_give_up_prompts"

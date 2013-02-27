@@ -38,12 +38,18 @@ class RangeVisualPrompt < ActiveRecord::Base
   has_one :give_up_numeric_sequence, :through => :give_up_prompt, :source => :numeric_sequence
   reverse_association_of :give_up_numeric_sequence, 'NumericSequence#give_up_range_visual_prompts'
 
+  has_one :give_up_multiple_choice_sequence, :through => :give_up_prompt, :source => :multiple_choice_sequence
+  reverse_association_of :give_up_multiple_choice_sequence, 'MultipleChoiceSequence#give_up_range_visual_prompts'
+
   has_one :confirm_correct_prompt, :as => :prompt, :dependent => :destroy
   has_one :confirm_correct_sequence, :through => :confirm_correct_prompt, :source => :pick_a_point_sequence
   reverse_association_of :confirm_correct_sequence, 'PickAPointSequence#confirm_range_visual_prompts'
 
   has_one :confirm_correct_numeric_sequence, :through => :confirm_correct_prompt, :source => :numeric_sequence
   reverse_association_of :confirm_correct_numeric_sequence, 'NumericSequence#confirm_range_visual_prompts'
+
+  has_one :confirm_correct_multiple_choice_sequence, :through => :confirm_correct_prompt, :source => :multiple_choice_sequence
+  reverse_association_of :confirm_correct_multiple_choice_sequence, 'MultipleChoiceSequence#confirm_range_visual_prompts'
 
   def to_hash
     hash = {
