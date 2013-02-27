@@ -50,11 +50,11 @@ module SgSequencePrompts
   end
 
   def update_sequence_prompts(hash)
-    # unless sequence_hints.empty?
+    unless hash['type'] == 'MultipleChoiceWithCustomHintsSequence' || hash['type'] == 'MultipleChoiceWithSequentialHintsSequence'
       hash['hints'] = sequence_hints.map do |sequence_hint|
         sequence_hint.hint.to_hash
       end
-    # end
+    end
     unless initial_prompt_prompts.empty?
       hash['initialPrompt']['visualPrompts'] = initial_prompt_prompts.map {|p| p.prompt.to_hash }
     end

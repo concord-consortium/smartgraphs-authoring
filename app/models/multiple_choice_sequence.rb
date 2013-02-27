@@ -66,7 +66,7 @@ class MultipleChoiceSequence < ActiveRecord::Base
   belongs_to :data_set
 
   def to_hash
-    {
+    hash = {
       'type' => type,
       'initialPrompt' => initial_prompt,
       'choices' => multiple_choice_choices.map { |c| c.to_hash },
@@ -76,6 +76,8 @@ class MultipleChoiceSequence < ActiveRecord::Base
       'hints' => hints,
       'dataSetName'         => data_set ? data_set.name : ''
     }
+    update_sequence_prompts(hash)
+    hash
   end
 
   def type
@@ -91,6 +93,11 @@ class MultipleChoiceSequence < ActiveRecord::Base
       return multiple_choice_hints.map { |h| h.to_hash   }
     end
     multiple_choice_choices.map { |c| c.hint_hash }
+  end
+
+  # Stub for sg_sequence_prompts
+  def sequence_hints
+    return []
   end
 
   # return the first correct answer
