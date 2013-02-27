@@ -791,6 +791,13 @@
                   </form>
                 </section>
               </if>
+
+              <h3 param="collection-heading">
+                Initial Visual Prompts
+              </h3>
+              <collection:initial_prompt_prompts/>
+              <!-- This should work, but it doesn't. -->
+              <add-initial-prompt-prompts-toolbar/>
     </collection-section:>
 
     <multiple_choice_hints-collection-section:>
