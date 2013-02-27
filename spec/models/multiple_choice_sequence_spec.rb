@@ -33,10 +33,10 @@ describe MultipleChoiceSequence do
     it "should match the format specified by the generator project" do
         json = @multi_choice.to_hash.to_json
         the_hash = JSON.parse(json)
-        assert_equal the_hash['initialPrompt'], @multi_choice.initial_prompt
+        assert_equal the_hash['initialPrompt'], { 'text' => @multi_choice.initial_prompt }
         assert_equal the_hash['correctAnswerIndex'], @multi_choice.correct_answer_index
-        assert_equal the_hash['giveUp'], @multi_choice.give_up
-        assert_equal the_hash['confirmCorrect'], @multi_choice.confirm_correct
+        assert_equal the_hash['giveUp'], { 'text' => @multi_choice.give_up }
+        assert_equal the_hash['confirmCorrect'], { 'text' => @multi_choice.confirm_correct }
         assert_equal the_hash['choices'][1], @choices[1].name
         assert_equal the_hash['dataSetName'], @data_set.name
     end
