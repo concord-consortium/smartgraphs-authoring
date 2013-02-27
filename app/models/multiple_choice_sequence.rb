@@ -6,6 +6,7 @@ class MultipleChoiceSequence < ActiveRecord::Base
   # defined in models/standard_permissions.rb
   include SgPermissions
   include SgMarshal
+  include SgSequencePrompts
   sg_parent :page
   
   fields do
@@ -39,7 +40,7 @@ class MultipleChoiceSequence < ActiveRecord::Base
   has_many :initial_point_axis_line_visual_prompts, :through => :initial_prompt_prompts, :source => :prompt, :source_type => 'PointAxisLineVisualPrompt'
   reverse_association_of :initial_point_axis_line_visual_prompts, 'PointAxisLineVisualPrompt#initial_prompt_multiple_choice_sequence'
 
-  children :multiple_choice_choices, :initial_prompt_prompts, :multiple_choice_hints
+  children :multiple_choice_choices, :multiple_choice_hints, :initial_prompt_prompts
   #children  :multiple_choice_hints, :multiple_choice_choices
 
   belongs_to :data_set
