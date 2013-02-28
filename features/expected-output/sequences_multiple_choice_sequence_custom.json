@@ -9,15 +9,15 @@
       "text": "In this page...",
       "sequence": {
         "type": "MultipleChoiceWithCustomHintsSequence",
-        "initialPrompt": "Whats the blah blah.",
+        "initialPrompt": {"text": "Whats the blah blah."},
         "choices": [
           "choice a",
           "choice b",
           "choice c"
         ],
         "correctAnswerIndex": 1,
-        "giveUp": "That's not right.",
-        "confirmCorrect": "Yes, that's right!",
+        "giveUp": {"text": "That's not right."},
+        "confirmCorrect": {"text": "Yes, that's right!"},
         "hints": [{
           "name": "Choice choice a Hint",
           "choiceIndex":0,

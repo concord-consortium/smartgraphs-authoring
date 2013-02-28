@@ -23,7 +23,9 @@ module SgSequencePrompts
 
   def initial_prompt_from_hash(defs)
     self.initial_prompt = defs['text']
-    self.title          = defs['text']
+    if self.respond_to?(:title)
+      self.title          = defs['text'] # sequences with titles don't include them in their hash, so we use the initial_prompt
+    end
     add_visual_prompts(defs,'initial')
   end
 
