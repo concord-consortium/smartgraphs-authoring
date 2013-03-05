@@ -7,7 +7,13 @@ module SgPermissions
     def sg_parent(symbol)
       if symbol == :any_sequence
         define_method "sg_parent" do
-          numeric_sequence || pick_a_point_sequence
+          begin
+            numeric_sequence || pick_a_point_sequence || multiple_choice_sequence || best_fit_sequence || slope_tool_sequence || constructed_response_sequence || instruction_sequence
+          rescue NameError
+            # This might be a specific prompt with a join prompt as its parent; let's try going back to its parent, which is probably a sequence
+            local_parent = text_hint_prompt || initial_prompt_prompt || confirm_correct_prompt || give_up_prompt
+            local_parent.sg_parent
+          end
         end
       elsif symbol == :any_prompt
         define_method "sg_parent" do

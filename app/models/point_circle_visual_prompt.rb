@@ -8,7 +8,8 @@ class PointCircleVisualPrompt < ActiveRecord::Base
   include SgMarshal
   include SgVisualPrompt
   
-  sg_parent :any_prompt
+  # sg_parent :any_prompt
+  sg_parent :any_sequence
 
   fields do
     name    :string, :required
