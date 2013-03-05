@@ -6,7 +6,8 @@ class RangeVisualPrompt < ActiveRecord::Base
   # defined in models/standard_permissions.rb
   include SgPermissions
   include SgMarshal
-  sg_parent :any_prompt
+  # sg_parent :any_prompt
+  sg_parent :any_sequence
   
   fields do
     name  :string
