@@ -31,6 +31,9 @@ class PointAxisLineVisualPrompt < ActiveRecord::Base
   has_one :initial_prompt_numeric_sequence, :through => :initial_prompt_prompt, :source => :numeric_sequence
   reverse_association_of :initial_prompt_numeric_sequence, 'NumericSequence#initial_point_axis_line_visual_prompts'
 
+  has_one :initial_prompt_multiple_choice_sequence, :through => :initial_prompt_prompt, :source => :multiple_choice_sequence
+  reverse_association_of :initial_prompt_multiple_choice_sequence, 'MultipleChoiceSequence#initial_point_axis_line_visual_prompts'
+
   has_one :give_up_prompt, :as => :prompt, :dependent => :destroy
   has_one :give_up_sequence, :through => :give_up_prompt, :source => :pick_a_point_sequence
   reverse_association_of :give_up_sequence, 'PickAPointSequence#give_up_point_axis_line_visual_prompts'
@@ -38,12 +41,18 @@ class PointAxisLineVisualPrompt < ActiveRecord::Base
   has_one :give_up_numeric_sequence, :through => :give_up_prompt, :source => :numeric_sequence
   reverse_association_of :give_up_numeric_sequence, 'NumericSequence#give_up_point_axis_line_visual_prompts'
 
+  has_one :give_up_multiple_choice_sequence, :through => :give_up_prompt, :source => :multiple_choice_sequence
+  reverse_association_of :give_up_multiple_choice_sequence, 'MultipleChoiceSequence#give_up_point_axis_line_visual_prompts'
+
   has_one :confirm_correct_prompt, :as => :prompt, :dependent => :destroy
   has_one :confirm_correct_sequence, :through => :confirm_correct_prompt, :source => :pick_a_point_sequence
   reverse_association_of :confirm_correct_sequence, 'PickAPointSequence#confirm_point_axis_line_visual_prompts'
 
   has_one :confirm_correct_numeric_sequence, :through => :confirm_correct_prompt, :source => :numeric_sequence
   reverse_association_of :confirm_correct_numeric_sequence, 'NumericSequence#confirm_point_axis_line_visual_prompts'
+
+  has_one :confirm_correct_multiple_choice_sequence, :through => :confirm_correct_prompt, :source => :multiple_choice_sequence
+  reverse_association_of :confirm_correct_multiple_choice_sequence, 'MultipleChoiceSequence#confirm_point_axis_line_visual_prompts'
 
   def to_hash
     {

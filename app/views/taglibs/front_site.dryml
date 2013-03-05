@@ -791,6 +791,27 @@
                   </form>
                 </section>
               </if>
+
+              <h3 param="collection-heading">
+                Initial Visual Prompts
+              </h3>
+              <collection:initial_prompt_prompts/>
+              <!-- This should work, but it doesn't. -->
+              <add-initial-prompt-prompts-toolbar/>
+
+              <h3 param="collection-heading">
+                Give Up Visual Prompts
+              </h3>
+              <collection:give_up_prompts/>
+              <!-- This should work, but it doesn't. -->
+              <add-give-up-prompts-toolbar/>
+
+              <h3 param="collection-heading">
+                Confirm Correct Visual Prompts
+              </h3>
+              <collection:confirm_correct_prompts/>
+              <!-- This should work, but it doesn't. -->
+              <add-confirm-correct-prompts-toolbar/>
     </collection-section:>
 
     <multiple_choice_hints-collection-section:>

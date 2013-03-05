@@ -23,7 +23,9 @@ module SgSequencePrompts
 
   def initial_prompt_from_hash(defs)
     self.initial_prompt = defs['text']
-    self.title          = defs['text']
+    if self.respond_to?(:title)
+      self.title          = defs['text'] # sequences with titles don't include them in their hash, so we use the initial_prompt
+    end
     add_visual_prompts(defs,'initial')
   end
 
@@ -50,11 +52,11 @@ module SgSequencePrompts
   end
 
   def update_sequence_prompts(hash)
-    # unless sequence_hints.empty?
+    unless hash['type'] == 'MultipleChoiceWithCustomHintsSequence' || hash['type'] == 'MultipleChoiceWithSequentialHintsSequence'
       hash['hints'] = sequence_hints.map do |sequence_hint|
         sequence_hint.hint.to_hash
       end
-    # end
+    end
     unless initial_prompt_prompts.empty?
       hash['initialPrompt']['visualPrompts'] = initial_prompt_prompts.map {|p| p.prompt.to_hash }
     end
