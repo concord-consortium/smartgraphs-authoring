@@ -1,7 +1,7 @@
 class Activity < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
-  
+
   has_csv_pirate_ship # This lets us create a CSV serialization using csv_pirate
 
   PublicationStatus  = HoboFields::Types::EnumString.for(:public, :private)
@@ -9,13 +9,13 @@ class Activity < ActiveRecord::Base
   # standard owner and admin permissions
   # defined in models/standard_permissions.rb
   include SgMarshal
-  
+
   fields do
     name        :string, :required
     author_name :string
     publication_status Activity::PublicationStatus, :default => 'private'
     timestamps
-  end 
+  end
 
   scope :public, where("publication_status = 'public'")
   scope :private, where("publication_status = 'private'")
@@ -23,7 +23,7 @@ class Activity < ActiveRecord::Base
   has_many   :pages, :order => :position
   belongs_to :owner, :class_name => "User"
   children   :pages, :data_sets
-  
+
   has_many   :activity_grade_levels, :dependent => :destroy
   has_many   :grade_levels, :through => :activity_grade_levels, :accessible => true
 
@@ -68,7 +68,7 @@ class Activity < ActiveRecord::Base
     the_copy.save
     return the_copy
   end
-  
+
   def is_owner?(user=acting_user)
     return self.owner_is? user
   end
