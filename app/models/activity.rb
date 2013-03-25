@@ -22,7 +22,7 @@ class Activity < ActiveRecord::Base
 
   has_many   :pages, :order => :position
   belongs_to :owner, :class_name => "User"
-  children   :pages, :data_sets
+  children   :pages, :data_sets, :label_sets
 
   has_many   :activity_grade_levels, :dependent => :destroy
   has_many   :grade_levels, :through => :activity_grade_levels, :accessible => true
