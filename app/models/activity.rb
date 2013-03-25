@@ -31,6 +31,7 @@ class Activity < ActiveRecord::Base
   has_many   :subject_areas, :through => :activity_subject_areas, :accessible => true
 
   has_many   :data_sets
+  has_many   :label_sets
 
   # --- Class methods --- #
 
