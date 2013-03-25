@@ -5,7 +5,10 @@ log/*.log
 tmp/
 bin/
 app/views/taglibs/auto/**/*
+docs/
 config/database.yml
 config/hobo_routes.rb
+db/data.yml
+db/data.*.yml
 node_modules
 chromedriver.log
