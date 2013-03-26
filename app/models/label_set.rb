@@ -2,6 +2,7 @@ class LabelSet < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
 
+  include SgMarshal
   include SgPermissions
   sg_parent :activity
 
