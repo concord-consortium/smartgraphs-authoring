@@ -570,6 +570,12 @@
           New Data set
       </a:data_sets>
     </after-data_sets-collection-section:>
+    <after-label_sets-collection-section:>
+      <hr/>
+      <a:label_sets action="new" if="&can_create?(@activity.label_sets)">
+          New Label Set
+      </a:label_sets>
+    </after-label_sets-collection-section:>
   </old-show-page>
 </extend>
 
