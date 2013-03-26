@@ -307,6 +307,12 @@
   </old-form>
 </extend>
 
+<extend tag="form" for="LabelSet">
+  <old-form merge>
+    <field-list: fields="&this.field_order" />
+  </old-form>
+</extend>
+
 <extend tag="form" for="Page">
   <old-form merge>
     <field-list: fields="name, text" param/>
@@ -651,6 +657,12 @@
     <field-list: fields="&this.field_order">
       <data-tag: with="&this.gsub('&#10;', '<br>').html_safe"/>
     </field-list:>
+  </old-show-page>
+</extend>
+
+<extend tag="show-page" for="LabelSet">
+  <old-show-page merge>
+    <field-list: fields="&this.field_order" />
   </old-show-page>
 </extend>
 

@@ -12,5 +12,8 @@ class LabelSet < ActiveRecord::Base
     timestamps
   end
 
+  def field_order
+    "name"
+  end
 
 end
