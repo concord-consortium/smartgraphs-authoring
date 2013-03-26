@@ -13,6 +13,11 @@ class LabelSet < ActiveRecord::Base
     timestamps
   end
 
+  validates :name, :uniqueness => {
+    :scope => :activity_id,
+    :message => "is already used elsewhere in the activity"
+  }
+
   def field_order
     "name"
   end
