@@ -5,11 +5,12 @@ class LabelSet < ActiveRecord::Base
   include SgPermissions
   sg_parent :activity
 
+  belongs_to :activity
+
   fields do
     name :string, :required => true
     timestamps
   end
 
-  belongs_to :activity
 
 end
