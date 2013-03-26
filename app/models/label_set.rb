@@ -16,4 +16,12 @@ class LabelSet < ActiveRecord::Base
     "name"
   end
 
+  def to_hash
+    {
+      'name' => name,
+      'labels' => []
+    }
+  end
+
+
 end

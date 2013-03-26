@@ -52,6 +52,9 @@ class Activity < ActiveRecord::Base
       'authorName' => author_name,
       'pages' => pages.map(&:to_hash),
       'datasets' => data_sets.map(&:to_hash),
+      # "Dataset" is a single English word and thus is not camel-cased.
+      # However, "labelSets" is a concatenation of two English words and is therefore camel-cased
+      'labelSets' => label_sets.map(&:to_hash),
       'units' => Unit.find(:all).map(&:to_hash)
     }
   end
