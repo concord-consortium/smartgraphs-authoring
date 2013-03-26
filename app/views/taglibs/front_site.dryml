@@ -567,7 +567,7 @@
     <after-data_sets-collection-section:>
       <hr/>
       <a:data_sets action="new" if="&can_create?(@activity.data_sets)">
-          New Data set
+          New Dataset
       </a:data_sets>
     </after-data_sets-collection-section:>
     <after-label_sets-collection-section:>
