@@ -72,7 +72,7 @@
       <activityGrades/>
       <activitySubjects/>
       <if test="&current_user.administrator?">
-        <span class="category_tag">(<view:publication_status/>)</span> 
+        <span class="category_tag">(<view:publication_status/>)</span>
       </if>
     </append-header:>
     <append-body:>
@@ -584,11 +584,11 @@
     <h4 class='checklistHeading'>#{name.humanize.capitalize}</h4>
     <ul class='checkList #{name}' merge-attrs>
       <li class='checkItem' param repeat='&all'>
-        <input 
-            name='#{name}[]' 
-            checked='&this.in?(selected)' 
-            id='#{dom_id(this, :check_many)}' 
-            type='checkbox' 
+        <input
+            name='#{name}[]'
+            checked='&this.in?(selected)'
+            id='#{dom_id(this, :check_many)}'
+            type='checkbox'
             value='#{this.id}' />
         <label for='#{dom_id(this, :check_many)}'><name param/></label>
       </li>
@@ -597,7 +597,7 @@
 </def>
 <def tag='activitySearchFilter'>
   <div class="searchBox">
-    <form method='get' action=''>  
+    <form method='get' action=''>
       <checkboxSelect all='&this.all_grade_levels'  selected='&this.grade_levels'  name='grade_levels' />
       <checkboxSelect all='&this.all_subject_areas' selected='&this.subject_areas' name='subject_areas'/>
       <div class="nameSearch">
@@ -623,7 +623,7 @@
 
       <section param="content-body">
         <activitySearchFilter with="&@activity_filter"/>
-      
+
         <p>
           <a action="new" class="button" to="&model" param="new-link">
             <ht key="activity.actions.new">new activity</ht>
@@ -742,7 +742,7 @@
   </card>
 </def>
 
-<!-- don't show a select for all multiple choice sequences this choice may belong to --> 
+<!-- don't show a select for all multiple choice sequences this choice may belong to -->
 <def tag="form" for="MultipleChoiceChoice">
   <form merge param="default">
     <error-messages param/>
