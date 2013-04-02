@@ -7,6 +7,7 @@ class LabelSet < ActiveRecord::Base
   sg_parent :activity
 
   belongs_to :activity
+  has_many :labels
 
   fields do
     name :string, :required => true
@@ -25,7 +26,7 @@ class LabelSet < ActiveRecord::Base
   def to_hash
     {
       'name' => name,
-      'labels' => []
+      'labels' => labels.map(&:to_hash),
     }
   end
 
