@@ -153,6 +153,15 @@
   </card:prompt>
 </def>
 
+<def tag="card" for="Label">
+  <card class="label" param="default" merge>
+    <header: param>
+      <h4 param="heading"><a><%= h this.text %></a></h4>
+      <delete-button label="Delete" param/>
+    </header:>
+  </card>
+</def>
+
 <def tag="card" for="DataSetPredefinedGraph">
   <if test="&this.data_set">
     <card class="data-set-predefined-graph" param="default" merge>
@@ -663,6 +672,10 @@
 <extend tag="show-page" for="LabelSet">
   <old-show-page merge>
     <field-list: fields="&this.field_order" />
+    <after-field-list:>
+      <h3>Labels</h3>
+      <collection:labels />
+    </after-field-list:>
   </old-show-page>
 </extend>
 
