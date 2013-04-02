@@ -3,6 +3,7 @@ require 'spec_helper'
 describe LabelSet do
   let (:activity) { FactoryGirl.create(:activity_with_labelset) }
   let (:label_set) { FactoryGirl.create(:label_set) }
+  let (:full_label_set) { FactoryGirl.create(:full_label_set) }
 
   describe 'validations' do
     it 'enforces unique names within activities' do
@@ -30,8 +31,8 @@ describe LabelSet do
 
   describe '#to_hash' do
     it 'should return the expected hash' do
-      expected = { 'name' => label_set.name, 'labels' => [] }
-      label_set.to_hash.should == expected
+      expected = { 'name' => full_label_set.name, 'labels' => full_label_set.labels.map { |l| l.to_hash } }
+      full_label_set.to_hash.should == expected
     end
   end
 end
