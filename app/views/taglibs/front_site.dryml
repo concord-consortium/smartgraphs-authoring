@@ -675,6 +675,9 @@
     <after-field-list:>
       <h3>Labels</h3>
       <collection:labels />
+      <a action="new" to="&this.labels">
+        <ht key="label.actions.new" >New Label</ht>
+      </a>
     </after-field-list:>
   </old-show-page>
 </extend>
