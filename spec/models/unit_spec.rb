@@ -1,5 +1,12 @@
 require 'spec_helper'
 
 describe Unit do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let (:unit) { FactoryGirl.create(:unit) }
+
+  describe '#to_hash' do
+    it 'matches the expected hash' do
+      expected = { 'type' => 'Unit', 'name' => unit.name, 'abbreviation' => unit.abbreviation }
+      unit.to_hash.should == expected
+    end
+  end
 end
