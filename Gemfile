@@ -1,8 +1,9 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 3.0.20'
-gem "hobo", "= 1.3.0.RC2"
+gem 'rails'
+gem "hobo"
 gem "acts_as_list", '~> 0.1.4'
+gem "will_paginate", :git => "git://github.com/Hobo/will_paginate.git"
 gem "yaml_db", "0.2.2"
 # csv_pirate makes it possible to do CSV exports of models with very little code. However, its "pirate" schtick extends to its method names, which means the code created to use it is difficult to read (it's not at all clear what "Class.weigh_anchor.marooon" does) so if we find a better gem to do this, let's use it.
 gem 'csv_pirate'
@@ -29,7 +30,7 @@ group :test do
   # ($GEM_HOME)/ffi-1.0.9/lib/ffi/platform.rb:27: Use RbConfig instead of obsolete and deprecated Config.
   # childprocess is the problem, pinned to ffi ~> 1.0, so it won't update past 1.0.9.
   gem 'selenium-webdriver', ">=2.26"
-  gem 'cucumber-rails', '~> 1.3.0', :require => false
+  gem 'cucumber-rails', :require => false
   gem "rspec-rails", ">= 2.5.0"
   gem 'database_cleaner', '~> 0.7.0'
   gem 'launchy', '~> 2.0.5'
