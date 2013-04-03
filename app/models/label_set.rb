@@ -20,7 +20,7 @@ class LabelSet < ActiveRecord::Base
   }
 
   def field_order
-    "name"
+    "name, labels"
   end
 
   def to_hash
