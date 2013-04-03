@@ -7,7 +7,7 @@ FactoryGirl.define do
     factory :full_label_set do
       name "full_data_set"
       after(:create) do |label_set, evaluator|
-        label_set.labels = FactoryGirl.create_list(:label, 3, :label_set => label_set)
+        label_set.graph_labels = FactoryGirl.create_list(:graph_label, 3, :label_set => label_set)
       end
       # TODO: Graph panes?
     end

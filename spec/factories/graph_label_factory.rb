@@ -3,7 +3,7 @@
 FactoryGirl.define do
   sequence (:labeltext) { Faker::Lorem.sentence(5) }
 
-  factory :label do
+  factory :graph_label do
     text      { generate(:labeltext) }
     x_coord   1
     y_coord   1

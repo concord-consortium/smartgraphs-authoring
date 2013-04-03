@@ -1,4 +1,4 @@
-class Label < ActiveRecord::Base
+class GraphLabel < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
   include SgMarshal

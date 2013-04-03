@@ -153,8 +153,8 @@
   </card:prompt>
 </def>
 
-<def tag="card" for="Label">
-  <card class="label" param="default" merge>
+<def tag="card" for="GraphLabel">
+  <card class="graph_label" param="default" merge>
     <header: param>
       <h4 param="heading"><a><%= h this.text %></a></h4>
       <delete-button label="Delete" param/>
@@ -320,7 +320,7 @@
   <old-form merge>
     <field-list: fields="&this.field_order" />
     <after-field-list:>
-      <input-many:labels>
+      <input-many:graph_labels>
         <field-list: fields="text,x_coord,y_coord"/>
       </input-many>
     </after-field-list:>
@@ -679,7 +679,7 @@
     <field-list: fields="&this.field_order" />
     <after-field-list:>
       <h3>Labels</h3>
-      <collection:labels />
+      <collection:graph_labels />
     </after-field-list:>
   </old-show-page>
 </extend>

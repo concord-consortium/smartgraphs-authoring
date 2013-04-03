@@ -1,4 +1,4 @@
-class LabelsController < ApplicationController
+class GraphLabelsController < ApplicationController
 
   hobo_model_controller
 

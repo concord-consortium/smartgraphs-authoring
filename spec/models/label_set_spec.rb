@@ -31,7 +31,7 @@ describe LabelSet do
 
   describe '#to_hash' do
     it 'should return the expected hash' do
-      expected = { 'name' => full_label_set.name, 'labels' => full_label_set.labels.map { |l| l.to_hash } }
+      expected = { 'name' => full_label_set.name, 'labels' => full_label_set.graph_labels.map { |l| l.to_hash } }
       full_label_set.to_hash.should == expected
     end
   end
