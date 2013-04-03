@@ -2,32 +2,31 @@ class LabelSet < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
 
+  include SgMarshal
   include SgPermissions
   sg_parent :activity
+
+  belongs_to :activity
+  has_many :labels
 
   fields do
     name :string, :required => true
     timestamps
   end
 
-  belongs_to :activity
+  validates :name, :uniqueness => {
+    :scope => :activity_id,
+    :message => "is already used elsewhere in the activity"
+  }
 
-  # --- Permissions --- #
-
-  def create_permitted?
-    acting_user.administrator?
+  def field_order
+    "name"
   end
 
-  def update_permitted?
-    acting_user.administrator?
+  def to_hash
+    {
+      'name' => name,
+      'labels' => labels.map(&:to_hash),
+    }
   end
-
-  def destroy_permitted?
-    acting_user.administrator?
-  end
-
-  def view_permitted?(field)
-    true
-  end
-
 end

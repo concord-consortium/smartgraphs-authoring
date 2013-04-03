@@ -72,7 +72,7 @@
       <activityGrades/>
       <activitySubjects/>
       <if test="&current_user.administrator?">
-        <span class="category_tag">(<view:publication_status/>)</span> 
+        <span class="category_tag">(<view:publication_status/>)</span>
       </if>
     </append-header:>
     <append-body:>
@@ -151,6 +151,15 @@
       <delete-button label="Delete" param/>
     </append-heading:>
   </card:prompt>
+</def>
+
+<def tag="card" for="Label">
+  <card class="label" param="default" merge>
+    <header: param>
+      <h4 param="heading"><a><%= h this.text %></a></h4>
+      <delete-button label="Delete" param/>
+    </header:>
+  </card>
 </def>
 
 <def tag="card" for="DataSetPredefinedGraph">
@@ -304,6 +313,17 @@
       <y_unit-tag: include-none blank-message="No units"/>
       <x_unit-tag: include-none blank-message="No units"/>
     </field-list:>
+  </old-form>
+</extend>
+
+<extend tag="form" for="LabelSet">
+  <old-form merge>
+    <field-list: fields="&this.field_order" />
+    <after-field-list:>
+      <input-many:labels>
+        <field-list: fields="text,x_coord,y_coord"/>
+      </input-many>
+    </after-field-list:>
   </old-form>
 </extend>
 
@@ -567,9 +587,15 @@
     <after-data_sets-collection-section:>
       <hr/>
       <a:data_sets action="new" if="&can_create?(@activity.data_sets)">
-          New Data set
+          New Dataset
       </a:data_sets>
     </after-data_sets-collection-section:>
+    <after-label_sets-collection-section:>
+      <hr/>
+      <a:label_sets action="new" if="&can_create?(@activity.label_sets)">
+          New Label Set
+      </a:label_sets>
+    </after-label_sets-collection-section:>
   </old-show-page>
 </extend>
 
@@ -578,11 +604,11 @@
     <h4 class='checklistHeading'>#{name.humanize.capitalize}</h4>
     <ul class='checkList #{name}' merge-attrs>
       <li class='checkItem' param repeat='&all'>
-        <input 
-            name='#{name}[]' 
-            checked='&this.in?(selected)' 
-            id='#{dom_id(this, :check_many)}' 
-            type='checkbox' 
+        <input
+            name='#{name}[]'
+            checked='&this.in?(selected)'
+            id='#{dom_id(this, :check_many)}'
+            type='checkbox'
             value='#{this.id}' />
         <label for='#{dom_id(this, :check_many)}'><name param/></label>
       </li>
@@ -591,7 +617,7 @@
 </def>
 <def tag='activitySearchFilter'>
   <div class="searchBox">
-    <form method='get' action=''>  
+    <form method='get' action=''>
       <checkboxSelect all='&this.all_grade_levels'  selected='&this.grade_levels'  name='grade_levels' />
       <checkboxSelect all='&this.all_subject_areas' selected='&this.subject_areas' name='subject_areas'/>
       <div class="nameSearch">
@@ -617,7 +643,7 @@
 
       <section param="content-body">
         <activitySearchFilter with="&@activity_filter"/>
-      
+
         <p>
           <a action="new" class="button" to="&model" param="new-link">
             <ht key="activity.actions.new">new activity</ht>
@@ -645,6 +671,16 @@
     <field-list: fields="&this.field_order">
       <data-tag: with="&this.gsub('&#10;', '<br>').html_safe"/>
     </field-list:>
+  </old-show-page>
+</extend>
+
+<extend tag="show-page" for="LabelSet">
+  <old-show-page merge>
+    <field-list: fields="&this.field_order" />
+    <after-field-list:>
+      <h3>Labels</h3>
+      <collection:labels />
+    </after-field-list:>
   </old-show-page>
 </extend>
 
@@ -736,7 +772,7 @@
   </card>
 </def>
 
-<!-- don't show a select for all multiple choice sequences this choice may belong to --> 
+<!-- don't show a select for all multiple choice sequences this choice may belong to -->
 <def tag="form" for="MultipleChoiceChoice">
   <form merge param="default">
     <error-messages param/>

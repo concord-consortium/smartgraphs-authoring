@@ -1,15 +1,15 @@
 require 'spec_helper'
 
 # Specs in this file have access to a helper object that includes
-# the RangeVisualPromptsHelper. For example:
+# the LabelsHelper. For example:
 #
-# describe RangeVisualPromptsHelper do
+# describe LabelsHelper do
 #   describe "string concat" do
 #     it "concats two strings with spaces" do
 #       helper.concat_strings("this","that").should == "this that"
 #     end
 #   end
 # end
-describe RangeVisualPromptsHelper do
+describe LabelsHelper do
   # pending "add some examples to (or delete) #{__FILE__}"
 end

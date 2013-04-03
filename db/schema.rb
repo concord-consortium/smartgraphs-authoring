@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130325201438) do
+ActiveRecord::Schema.define(:version => 20130402180718) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -216,6 +216,17 @@ ActiveRecord::Schema.define(:version => 20130325201438) do
   end
 
   add_index "label_sets", ["activity_id"], :name => "index_label_sets_on_activity_id"
+
+  create_table "labels", :force => true do |t|
+    t.integer  "label_set_id"
+    t.string   "text"
+    t.float    "x_coord"
+    t.float    "y_coord"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "labels", ["label_set_id"], :name => "index_labels_on_label_set_id"
 
   create_table "line_construction_sequences", :force => true do |t|
     t.string   "title",                 :default => "new line construction"

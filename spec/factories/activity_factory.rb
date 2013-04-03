@@ -26,5 +26,14 @@ FactoryGirl.define do
       end
     end
 
+    factory :activity_with_labelset do
+      name "Labelset Activity"
+      publication_status 'public'
+
+      after(:create) do |activity, evaluator|
+        activity.label_sets = FactoryGirl.create_list(:full_label_set, 1, :activity => activity)
+        activity.pages = FactoryGirl.create_list(:page, 3, :activity => activity)
+      end
+    end
   end
 end

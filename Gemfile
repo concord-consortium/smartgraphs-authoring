@@ -48,6 +48,7 @@ group :test, :development do
   gem 'pry-stack_explorer', '~> 0.4.7'
   gem 'pry-nav', '~> 0.2.2'
   gem 'factory_girl_rails'
+  gem 'faker'
   gem 'poltergeist'
 end
 
