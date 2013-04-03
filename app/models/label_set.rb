@@ -7,7 +7,7 @@ class LabelSet < ActiveRecord::Base
   sg_parent :activity
 
   belongs_to :activity
-  has_many :graph_labels
+  has_many :graph_labels, :accessible => true
 
   fields do
     name :string, :required => true

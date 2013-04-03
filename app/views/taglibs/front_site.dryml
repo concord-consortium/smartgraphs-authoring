@@ -156,7 +156,7 @@
 <def tag="card" for="GraphLabel">
   <card class="graph_label" param="default" merge>
     <header: param>
-      <h4 param="heading"><a><%= h this.text %></a></h4>
+      <h4 param="heading"><%= h "#{this.text} (#{this.x_coord}, #{this.y_coord})" %></h4>
       <delete-button label="Delete" param/>
     </header:>
   </card>
@@ -320,6 +320,7 @@
   <old-form merge>
     <field-list: fields="&this.field_order" />
     <after-field-list:>
+      <h4>Labels</h4>
       <input-many:graph_labels>
         <field-list: fields="text,x_coord,y_coord"/>
       </input-many>
