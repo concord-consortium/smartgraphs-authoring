@@ -29,4 +29,9 @@ class LabelSet < ActiveRecord::Base
       'labels' => graph_labels.map(&:to_hash),
     }
   end
+
+  def labels_from_hash(definition)
+    # Because labels are actually GraphLabels, we need to handle them differently.
+    self.graph_labels = definitions.map {|d| GraphLabel.from_hash(d)}
+  end
 end
