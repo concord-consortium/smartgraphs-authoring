@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130403153602) do
+ActiveRecord::Schema.define(:version => 20130404154857) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -43,6 +43,15 @@ ActiveRecord::Schema.define(:version => 20130403153602) do
 
   add_index "activity_subject_areas", ["activity_id"], :name => "index_activity_subject_areas_on_activity_id"
   add_index "activity_subject_areas", ["subject_area_id"], :name => "index_activity_subject_areas_on_subject_area_id"
+
+  create_table "animations", :force => true do |t|
+    t.string   "name"
+    t.float    "y_min"
+    t.float    "y_max"
+    t.text     "marked_coordinates"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "annotation_inclusions", :force => true do |t|
     t.datetime "created_at"
