@@ -3,13 +3,14 @@ class Animation < ActiveRecord::Base
   hobo_model # Don't put anything above this
 
   fields do
-    name  :string
-    y_min :float
-    y_max :float
+    name  :string, :required => true
+    y_min :float, :required => true
+    y_max :float, :required => true
     timestamps
   end
 
   belongs_to :activity
+  # not marked as required so that a user can choose to create an animation, *then* its data set
   belongs_to :data_set
   has_many :animation_marked_coordinates, :dependent => :destroy
 
