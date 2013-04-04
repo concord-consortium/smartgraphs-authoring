@@ -1,17 +1,13 @@
-class Animation < ActiveRecord::Base
+class AnimationMarkedCoordinate < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
 
   fields do
-    name  :string
-    y_min :float
-    y_max :float
+    coordinate :float
     timestamps
   end
 
-  belongs_to :activity
-  belongs_to :data_set
-  has_many :animation_marked_coordinates, :dependent => :destroy
+  belongs_to :animation
 
   # --- Permissions --- #
 
