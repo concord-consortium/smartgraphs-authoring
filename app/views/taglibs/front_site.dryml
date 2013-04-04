@@ -249,6 +249,9 @@
       <a action="new" to="&this.best_fit_sequences">
         <ht key="best_fit_sequence.actions.new" >New Line of Best Fit Sequence</ht>
       </a><br/>
+      <a action="new" to="&this.label_sequences">
+        <ht key="label_sequence.actions.new" >New Label Sequence</ht>
+      </a><br/>
     </unless>
   </if>
 </def>
