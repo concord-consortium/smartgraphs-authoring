@@ -54,6 +54,11 @@ describe PredefinedGraphPane do
 
         graph_pane.to_hash.should include("includedDataSets" => [{"name"=>"dataset_a", "inLegend"=>true}, {"name"=>"dataset_b", "inLegend"=>false}])
       end
+
+      it 'should allow labelsets' do
+        graph_pane.label_sets << FactoryGirl.create(:label_set)
+        graph_pane.to_hash.should include('labelSets')
+      end
     end
   end
 
