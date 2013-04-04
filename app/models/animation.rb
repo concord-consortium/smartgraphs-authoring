@@ -10,6 +10,9 @@ class Animation < ActiveRecord::Base
     timestamps
   end
 
+  belongs_to :activity
+  belongs_to :data_set
+
   # --- Permissions --- #
 
   def create_permitted?

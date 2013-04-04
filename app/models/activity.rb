@@ -32,6 +32,7 @@ class Activity < ActiveRecord::Base
 
   has_many   :data_sets
   has_many   :label_sets
+  has_many   :animations
 
   # --- Class methods --- #
 
