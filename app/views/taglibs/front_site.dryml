@@ -710,6 +710,22 @@
   </old-show-page>
 </extend>
 
+<extend tag="show-page" for="Animation">
+  <old-show-page merge>
+    <field-list: fields="&this.field_order" />
+    <after-field-list:>
+      <h3>Marked Coordinates</h3>
+      <collection:animation_marked_coordinates />
+    </after-field-list:>
+  </old-show-page>
+</extend>
+
+<def tag="card" for="AnimationMarkedCoordinate">
+  <card class="animation-marked-coordinate" param="default" merge>
+    <p><%= h "#{this.coordinate}" %></p>
+  </card>
+</def>
+
 <extend tag="show-page" for="SensorGraphPane">
   <old-show-page merge>
     <field-list: fields="&this.field_order" />
