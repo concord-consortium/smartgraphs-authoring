@@ -602,6 +602,12 @@
           New Label Set
       </a:label_sets>
     </after-label_sets-collection-section:>
+    <after-animations-collection-section:>
+      <hr/>
+      <a:animations action="new" if="&can_create?(@activity.animations)">
+          New Animation
+      </a:animations>
+    </after-animations-collection-section:>
   </old-show-page>
 </extend>
 
