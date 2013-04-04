@@ -502,8 +502,9 @@
         <field-list fields="in_legend" />
       </input-many>
       <h3>Included label sets</h3>
+      <p><a action='new' to="&this.page.activity.label_sets">(Create new label set)</a></p>
       <input-many:label_set_predefined_graphs>
-        <select-one:label_set options="&LabelSet.activity_is(activity_for(@this))" />
+        <select-one:label_set options="&LabelSet.activity_is(activity_for(@this))" blank-message="Select label set" />
       </input-many>
       <h3>Included graphs</h3>
       <custom-poly-select-many:included_graphs prompt="Include graph data from:" options="&PredictionGraphPane.get_all_prediction_graph_panes_before(this)"/>
