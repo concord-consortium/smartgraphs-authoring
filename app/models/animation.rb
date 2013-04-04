@@ -26,4 +26,15 @@ class Animation < ActiveRecord::Base
   def field_order
     "name, data_set, y_min, y_max"
   end
+
+  def to_hash
+    {
+      "name" => name,
+      "yMin" => y_min,
+      "yMax" => y_max,
+      "markedCoordinates" => animation_marked_coordinates.map(&:coordinate),
+      "dataset" => data_set.name
+    }
+  end
+
 end
