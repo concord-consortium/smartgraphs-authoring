@@ -328,6 +328,20 @@
   </old-form>
 </extend>
 
+<extend tag="form" for="Animation">
+  <old-form merge>
+    <field-list: fields="&this.field_order">
+      <data_set-tag: options="&DataSet.activity_is(activity_for(@this))" />
+    </field-list>
+    <after-field-list:>
+      <h4>Coordinates to Mark</h4>
+      <input-many:animation_marked_coordinates>
+        <field-list: fields="coordinate"/>
+      </input-many>
+    </after-field-list:>
+  </old-form>
+</extend>
+
 <extend tag="form" for="Page">
   <old-form merge>
     <field-list: fields="name, text" param/>

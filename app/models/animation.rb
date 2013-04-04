@@ -15,7 +15,7 @@ class Animation < ActiveRecord::Base
   belongs_to :activity
   # not marked as required so that a user can choose to create an animation, *then* its data set
   belongs_to :data_set
-  has_many :animation_marked_coordinates, :dependent => :destroy
+  has_many :animation_marked_coordinates, :dependent => :destroy, :accessible => true
 
   validates :name, :uniqueness => {
     :scope => :activity_id,
@@ -23,4 +23,7 @@ class Animation < ActiveRecord::Base
   }
   validates :name, :length => { :minimum => 1 }
 
+  def field_order
+    "name, data_set, y_min, y_max"
+  end
 end
