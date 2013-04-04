@@ -68,7 +68,14 @@ module SgGraphPane
       'showGraphGrid' => show_graph_grid
     }
     if included_graphs.size > 0
-      hash['includeAnnotationsFrom'] = included_graphs.map{|graph| graph.get_indexed_path }
+      hash['includeAnnotationsFrom'] = included_graphs.map{ |graph| graph.get_indexed_path }
+    end
+    begin
+      if label_sets.size > 0
+        hash['labelSets'] = label_sets.map{ |label_set| label_set.name }
+      end
+    rescue NameError
+      # Not all GraphPanes have label_sets yet
     end
     hash
   end
