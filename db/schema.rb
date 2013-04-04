@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130404172343) do
+ActiveRecord::Schema.define(:version => 20130404192356) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -232,6 +232,17 @@ ActiveRecord::Schema.define(:version => 20130404172343) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "label_sequences", :force => true do |t|
+    t.string   "title",        :default => "New label sequence"
+    t.text     "text"
+    t.integer  "label_count",  :default => 1
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "label_set_id"
+  end
+
+  add_index "label_sequences", ["label_set_id"], :name => "index_label_sequences_on_label_set_id"
 
   create_table "label_set_predefined_graphs", :force => true do |t|
     t.integer  "label_set_id"
