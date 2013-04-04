@@ -35,14 +35,13 @@ class LabelSequence < ActiveRecord::Base
   before_validation :default_text_values
 
   validates :title,                 :presence => true
-  validates :text,                  :presence => true
   validates :label_count,           :numericality => true
 
   def to_hash
     {
       "type"            => type,
       "text"            => text,
-      "labelSet"        => label_set.name,
+      "labelSet"        => label_set ? label_set.name : nil,
       "numberOfLabels"  => label_count
     }
   end
