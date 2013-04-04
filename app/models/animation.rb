@@ -18,6 +18,7 @@ class Animation < ActiveRecord::Base
     :scope => :activity_id,
     :message => "is already used elsewhere in the activity"
   }
+  validates :name, :length => { :minimum => 1 }
 
   # --- Permissions --- #
 
