@@ -14,6 +14,11 @@ class Animation < ActiveRecord::Base
   belongs_to :data_set
   has_many :animation_marked_coordinates, :dependent => :destroy
 
+  validates :name, :uniqueness => {
+    :scope => :activity_id,
+    :message => "is already used elsewhere in the activity"
+  }
+
   # --- Permissions --- #
 
   def create_permitted?
