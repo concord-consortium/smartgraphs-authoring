@@ -14,6 +14,7 @@ class LabelSet < ActiveRecord::Base
 
   fields do
     name :string, :required => true
+    is_for_users :boolean, :default => false
     timestamps
   end
 
@@ -22,8 +23,11 @@ class LabelSet < ActiveRecord::Base
     :message => "is already used elsewhere in the activity"
   }
 
+  scope :for_users, where(:is_for_users => true)
+  scope :for_authors, where(:is_for_users => false)
+
   def field_order
-    "name"
+    "name, is_for_users"
   end
 
   def to_hash
@@ -36,5 +40,13 @@ class LabelSet < ActiveRecord::Base
   def labels_from_hash(definition)
     # Because labels are actually GraphLabels, we need to handle them differently.
     self.graph_labels = definitions.map {|d| GraphLabel.from_hash(d)}
+  end
+
+  def is_for_users?
+    is_for_users
+  end
+
+  def is_for_authors?
+    !is_for_users
   end
 end
