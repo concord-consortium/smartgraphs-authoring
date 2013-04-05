@@ -2,6 +2,7 @@ class Animation < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
 
+  include SgMarshal
   include SgPermissions
   sg_parent :activity
 
@@ -35,6 +36,21 @@ class Animation < ActiveRecord::Base
       "markedCoordinates" => animation_marked_coordinates.map(&:coordinate),
       "dataset" => data_set.name
     }
+  end
+
+  def marked_coordinates_from_hash(definitions)
+    self.animation_marked_coordinates = definitions.map do |d|
+      AnimationMarkedCoordinate.new :coordinate => d
+    end
+  end
+
+  def dataset_from_hash(definition)
+    callback = Proc.new do
+      self.reload
+      self.data_set = self.activity.data_sets.find_by_name(definition)
+      self.save!
+    end
+    self.add_marshal_callback(callback)
   end
 
 end
