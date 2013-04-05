@@ -30,9 +30,10 @@ class LabelSequence < ActiveRecord::Base
   has_one :page, :through => :page_sequence
   reverse_association_of :page, 'Page#label_sequences'
 
-  belongs_to :label_set
+  belongs_to :label_set, :conditions => 'is_for_users = 1'
   
   before_validation :default_text_values
+  before_validation :ensure_label_set
 
   validates :title,                 :presence => true
   validates :label_count,           :numericality => true
@@ -66,5 +67,11 @@ class LabelSequence < ActiveRecord::Base
       # self.attributes[key] ||= value
       self.send("#{key}=", value) if self.send(key).nil? || self.send(key).empty?
     end
-  end  
+  end
+
+  def ensure_label_set
+    if !label_set.present? && page.present?
+      create_label_set(:is_for_users => true, :activity_id => page.activity.id, :name => "Labels for #{title}")
+    end
+  end
 end

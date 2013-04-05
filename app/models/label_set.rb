@@ -23,6 +23,9 @@ class LabelSet < ActiveRecord::Base
     :message => "is already used elsewhere in the activity"
   }
 
+  scope :for_users, where(:is_for_users => true)
+  scope :for_authors, where(:is_for_users => false)
+
   def field_order
     "name, is_for_users"
   end
