@@ -24,7 +24,7 @@ class LabelSet < ActiveRecord::Base
   }
 
   def field_order
-    "name"
+    "name, is_for_users"
   end
 
   def to_hash

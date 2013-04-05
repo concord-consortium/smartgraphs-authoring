@@ -25,7 +25,7 @@ describe LabelSet do
 
   describe '#field_order' do
     it 'returns the expected field order' do
-      label_set.field_order.should == 'name'
+      label_set.field_order.should == 'name, is_for_users'
     end
   end
 
