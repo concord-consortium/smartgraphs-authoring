@@ -34,7 +34,9 @@ class Animation < ActiveRecord::Base
       "yMin" => y_min,
       "yMax" => y_max,
       "markedCoordinates" => animation_marked_coordinates.map(&:coordinate),
-      "dataset" => data_set.name
+      # since we don't validate for existence of data_set, and we use to_hash to
+      # copy activities, we need to guard against data_set being nil
+      "dataset" => data_set && data_set.name || ""
     }
   end
 
@@ -45,6 +47,7 @@ class Animation < ActiveRecord::Base
   end
 
   def dataset_from_hash(definition)
+    return if definition.length == 0
     callback = Proc.new do
       self.reload
       self.data_set = self.activity.data_sets.find_by_name(definition)
