@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130404192356) do
+ActiveRecord::Schema.define(:version => 20130405175743) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -259,6 +259,7 @@ ActiveRecord::Schema.define(:version => 20130404192356) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "activity_id"
+    t.boolean  "is_for_users", :default => false
   end
 
   add_index "label_sets", ["activity_id"], :name => "index_label_sets_on_activity_id"

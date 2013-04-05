@@ -14,6 +14,7 @@ class LabelSet < ActiveRecord::Base
 
   fields do
     name :string, :required => true
+    is_for_users :boolean, :default => false
     timestamps
   end
 
@@ -36,5 +37,13 @@ class LabelSet < ActiveRecord::Base
   def labels_from_hash(definition)
     # Because labels are actually GraphLabels, we need to handle them differently.
     self.graph_labels = definitions.map {|d| GraphLabel.from_hash(d)}
+  end
+
+  def is_for_users?
+    is_for_users
+  end
+
+  def is_for_authors?
+    !is_for_users
   end
 end
