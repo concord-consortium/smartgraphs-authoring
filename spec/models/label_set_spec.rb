@@ -36,6 +36,14 @@ describe LabelSet do
     end
   end
 
+  describe '#labels_from_hash' do
+    it 'creates GraphLabels from labels in hash' do
+      source = { 'name' => full_label_set.name, 'labels' => full_label_set.graph_labels.map { |l| l.to_hash } }
+      ls = LabelSet.from_hash(source)
+      ls.graph_labels.length.should_not be(0)
+    end
+  end
+
   describe '#is_for_users?' do
     it 'is the same as is_for_users attribute' do
       label_set.is_for_users?.should == label_set.is_for_users
