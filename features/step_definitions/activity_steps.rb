@@ -232,7 +232,7 @@ def create_page(page_def)
 end
 
 def create_data_set(definition)
-  click_link 'New Data set'
+  click_link 'New Dataset'
   fill_in 'data_set_name', :with => definition[:name]
   fill_in 'data_set_y_precision', :with => definition[:yPrecision]
   fill_in 'data_set_x_precision', :with => definition[:xPrecision]
