@@ -44,7 +44,7 @@ class DummyMarshal
   end
 
   # stub AR save
-  def save
+  def save(args)
   end
 end
 
@@ -71,7 +71,7 @@ class DummyChild
     []
   end
 
-  def save
+  def save(args)
   end
 end
 
@@ -141,7 +141,7 @@ class ASequence
   end
 
   # We don't really want to save these
-  def save
+  def save(args)
   end
 
   # The SgMarshal methods
@@ -172,7 +172,7 @@ class BDataSet
     []
   end
 
-  def save
+  def save(args)
   end
 
   def to_hash
