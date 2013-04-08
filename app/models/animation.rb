@@ -22,7 +22,7 @@ class Animation < ActiveRecord::Base
     :scope => :activity_id,
     :message => "is already used elsewhere in the activity"
   }
-  validates :name, :length => { :minimum => 1 }
+  validates :name, :presence => true
 
   def field_order
     "name, data_set, y_min, y_max"
