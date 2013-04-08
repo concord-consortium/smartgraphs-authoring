@@ -42,7 +42,7 @@ group :test, :development do
   gem 'guard-rspec', '~> 1.2.1'
   gem 'rb-fsevent', '~> 0.9.2'
   gem 'sqlite3', '~> 1.3.4'
-  gem 'rubygems-bundler', '~> 1.1.0'
+  gem 'rubygems-bundler', '~> 1.1.1'
   gem 'pry', '~> 0.9.10'
   gem 'pry-doc', '~> 0.4.4'
   gem 'pry-stack_explorer', '~> 0.4.7'
