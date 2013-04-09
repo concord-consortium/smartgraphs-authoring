@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  
+
   factory :activity do
     # sequence(:name) { |n| "Activity#{n}"}
     name "Activity"
@@ -33,6 +33,14 @@ FactoryGirl.define do
       after(:create) do |activity, evaluator|
         activity.label_sets = FactoryGirl.create_list(:full_label_set, 1, :activity => activity)
         activity.pages = FactoryGirl.create_list(:page, 3, :activity => activity)
+      end
+    end
+
+    factory :activity_with_page do
+      name "Activity With Page"
+
+      after(:create) do |activity, evaluator|
+        activity.pages = FactoryGirl.create_list(:page, 1, :activity => activity)
       end
     end
   end
