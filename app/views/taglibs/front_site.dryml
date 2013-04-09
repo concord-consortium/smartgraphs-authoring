@@ -217,6 +217,9 @@
     </a><br/>
     <a action="new" to="&this.table_panes">
       <ht key="table_pane.actions.new" >New Table Pane element</ht>
+    </a><br />
+    <a action="new" to="&this.animation_panes">
+      <ht key="animation_pane.actions.new" >New Animation Pane element</ht>
     </a>
   </if>
 </def>
