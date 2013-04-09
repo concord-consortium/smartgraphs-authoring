@@ -60,7 +60,22 @@ describe DataSet do
 
     end
   end
-   
+
+  describe "#expression_to_hash" do
+    it "should prefix the expression with 'y = ' to the expression if the expression doesn't start with 'y ='" do
+      test = DataSet.new(
+        :name     => "name",
+        :expression => "x + 5")
+      test.expression_to_hash.should == "y = x + 5"
+    end
+    describe "it should not prefix an additional 'y = ' to the expression if the expression already starts with 'y ='" do
+      test = DataSet.new(
+        :name     => "name",
+        :expression => "    y   = x + 5")
+      test.expression_to_hash.should == "y = x + 5"
+    end
+  end
+
   describe "validations" do
     describe "expression" do
       describe "passing expressions" do

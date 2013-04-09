@@ -86,7 +86,8 @@ class DataSet < ActiveRecord::Base
     if expression.empty?
       return ""
     else
-      return "y  = #{expression}"
+      e = expression.gsub(/^\s*y\s*=\s*/,"")
+      return "y = #{e}"
     end
   end
 
