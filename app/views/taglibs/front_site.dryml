@@ -497,6 +497,12 @@
   </old-form>
 </extend>
 
+<extend tag="form" for="LabelSequence">
+  <old-form merge>
+    <field-list: fields="&this.field_order" />
+  </old-form>
+</extend>
+
 <extend tag="form" for="TextHint">
   <old-form merge>
     <after-field-list:>
