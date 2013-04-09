@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130405175743) do
+ActiveRecord::Schema.define(:version => 20130409183559) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -52,6 +52,14 @@ ActiveRecord::Schema.define(:version => 20130405175743) do
   end
 
   add_index "animation_marked_coordinates", ["animation_id"], :name => "index_animation_marked_coordinates_on_animation_id"
+
+  create_table "animation_panes", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "animation_id"
+  end
+
+  add_index "animation_panes", ["animation_id"], :name => "index_animation_panes_on_animation_id"
 
   create_table "animations", :force => true do |t|
     t.string   "name"
