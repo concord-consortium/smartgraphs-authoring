@@ -3,7 +3,7 @@ class Page < ActiveRecord::Base
   hobo_model # Don't put anything above this
 
   # view_hints.parent nil
-  
+
   # standard owner and admin permissions
   # defined in models/standard_permissions.rb
   include SgPermissions
@@ -54,13 +54,13 @@ class Page < ActiveRecord::Base
 
   has_many :slope_tool_sequences, :through => :page_sequences, :source => :sequence, :source_type => 'SlopeToolSequence'
   reverse_association_of :slope_tool_sequences, 'SlopeToolSequence#page'
-  
+
   has_many :line_construction_sequences, :through => :page_sequences, :source => :sequence, :source_type => 'LineConstructionSequence'
   reverse_association_of :line_construction_sequences, 'LineConstructionSequence#page'
 
   has_many :best_fit_sequences, :through => :page_sequences, :source => :sequence, :source_type => 'BestFitSequence'
   reverse_association_of :best_fit_sequences, 'BestFitSequence#page'
-  
+
   has_many :label_sequences, :through => :page_sequences, :source => :sequence, :source_type => 'LabelSequence'
   reverse_association_of :label_sequences, 'LabelSequence#page'
 
@@ -69,7 +69,7 @@ class Page < ActiveRecord::Base
   acts_as_list
 
   # There was once an issue with [Pages "jumping" unexpectedly to different activites when edited][1]. We think that
-  # was fixed by removing the Activity select menu from the Page edit form, but if that's not sufficient, Hobo's 
+  # was fixed by removing the Activity select menu from the Page edit form, but if that's not sufficient, Hobo's
   # permissions might be a reasonable approach:
 
   # def update_permitted?
