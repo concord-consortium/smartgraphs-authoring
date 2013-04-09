@@ -16,4 +16,11 @@ class AnimationPane < ActiveRecord::Base
 
   reverse_association_of :page, 'Page#animation_panes'
 
+  def to_hash
+    {
+      'type' => 'AnimationPane',
+      'animation' => animation && animation.name || ""
+    }
+  end
+
 end
