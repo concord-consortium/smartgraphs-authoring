@@ -827,6 +827,7 @@ Feature: Sequences Activities
           - default_data_set
         :sequence:
           :type: "LabelSequence"
+          :title: Lorem
           :text: Label the zero crossings
           :label_count: 3
       - :name: Label Sequence Page 2

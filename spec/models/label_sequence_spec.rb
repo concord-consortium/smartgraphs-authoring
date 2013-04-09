@@ -36,6 +36,7 @@ describe LabelSequence do
     context 'with default values' do
       it 'matches the expected hash' do
         expected = {
+          'title' => 'New label sequence',
           'type' => 'LabelSequence',
           'text' => 'Place a label on the graph.',
           'labelSet' => nil,
@@ -51,6 +52,7 @@ describe LabelSequence do
         label_seq.label_set = ls
         expected = {
           'type' => 'LabelSequence',
+          'title' => 'New label sequence',
           'text' => 'Place a label on the graph.',
           'labelSet' => ls.name,
           'numberOfLabels' => 1

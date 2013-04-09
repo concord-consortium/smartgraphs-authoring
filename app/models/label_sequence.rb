@@ -41,6 +41,7 @@ class LabelSequence < ActiveRecord::Base
   def to_hash
     {
       "type"            => type,
+      "title"           => title,
       "text"            => text,
       "labelSet"        => label_set ? label_set.name : nil,
       "numberOfLabels"  => label_count
