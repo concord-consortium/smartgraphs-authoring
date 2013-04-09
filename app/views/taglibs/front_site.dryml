@@ -348,6 +348,14 @@
   </old-form>
 </extend>
 
+<extend tag="form" for="AnimationPane">
+  <old-form merge>
+    <field-list: fields="animation">
+      <animation-tag: options="&Animation.activity_is(activity_for(@this))" />
+    </field-list>
+  </old-form>
+</extend>
+
 <extend tag="form" for="Page">
   <old-form merge>
     <field-list: fields="name, text" param/>
