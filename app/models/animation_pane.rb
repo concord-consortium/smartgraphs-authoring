@@ -2,6 +2,9 @@ class AnimationPane < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
 
+  include SgPermissions
+  sg_parent :page
+
   fields do
     timestamps
   end
@@ -12,23 +15,5 @@ class AnimationPane < ActiveRecord::Base
   has_one :page, :through => :page_pane
 
   reverse_association_of :page, 'Page#animation_panes'
-
-  # --- Permissions --- #
-
-  def create_permitted?
-    acting_user.administrator?
-  end
-
-  def update_permitted?
-    acting_user.administrator?
-  end
-
-  def destroy_permitted?
-    acting_user.administrator?
-  end
-
-  def view_permitted?(field)
-    true
-  end
 
 end
