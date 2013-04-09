@@ -41,6 +41,8 @@
      "pointType":"dot",
      "data":[[1.0, 100.0], [2.0, 200.0], [3.0, 300.0], [4.0, 400.0]],
      "expression":""}],
+     "animations": [],
+     "labelSets": [],
   "units":
    [{"type":"Unit", "name":"Seconds", "abbreviation":"s"},
     {"type":"Unit", "name":"Meters", "abbreviation":"m"}]

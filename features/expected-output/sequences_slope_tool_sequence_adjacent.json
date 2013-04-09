@@ -60,6 +60,8 @@
         [9.0, 8.0],
         [10.0, 7.0]],
       "expression":""}],
+      "animations": [],
+      "labelSets": [],
   "units":
    [{"type": "Unit", "name": "Seconds", "abbreviation": "s"},
     {"type": "Unit", "name": "Meters", "abbreviation": "m"}]

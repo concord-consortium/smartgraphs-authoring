@@ -64,6 +64,8 @@
        [4.0, 400.0]
      ],
      "expression":""}],
+     "animations": [],
+     "labelSets": [],
   "units": [
     {
       "type": "Unit",

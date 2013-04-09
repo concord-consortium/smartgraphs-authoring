@@ -67,6 +67,8 @@
       }
     }
   ],
+  "animations": [],
+  "labelSets": [],
   "units": [
     {
       "type": "Unit",
