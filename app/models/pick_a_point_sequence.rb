@@ -11,10 +11,11 @@ class PickAPointSequence < ActiveRecord::Base
   sg_parent :page
   
   fields do
-    title            :string
-    initial_prompt   :text
-    give_up          :text
-    confirm_correct  :text
+    title             :string
+    initial_prompt    :text
+    answer_with_label :boolean
+    give_up           :text
+    confirm_correct   :text
 
     # support for a distinct point
     correct_answer_x :float
@@ -82,9 +83,13 @@ class PickAPointSequence < ActiveRecord::Base
   belongs_to :data_set
 
   def to_hash
+    ip_hash = {'text' => initial_prompt.to_s }
+    if answer_with_label
+      ip_hash['label'] = "Label for #{title}"
+    end
     hash = {
       'type' => 'PickAPointSequence',
-      'initialPrompt' => {'text' => initial_prompt.to_s },
+      'initialPrompt' => ip_hash,
       'giveUp' => {'text' => give_up.to_s },
       'confirmCorrect' => {'text' => confirm_correct.to_s },
       'dataSetName' => data_set.name
