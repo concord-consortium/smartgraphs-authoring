@@ -1,12 +1,12 @@
 {
   "type": "Activity",
-  "name": "Label Stories Label Sequence",
-  "authorName": "Richard Klancer",
+  "name": "Sequences Label Sequence",
+  "authorName": "",
   "pages": [
     {
       "type": "Page",
-      "name": "1 First Page",
-      "text": "The following is a graph of <em>0.8 sin(x)</em>.",
+      "name": "1 Label Sequence Page 1",
+      "text": "On this page, students will be asked to place a label on the graph.",
       "panes": [
         {
           "type": "PredefinedGraphPane",
@@ -21,26 +21,26 @@
           "xTicks": 16.0,
           "includedDataSets": [
             {
-              "name": "0.8 sin(x)",
+              "name": "default_data_set",
               "inLegend": false
             }
           ],
           "showCrossHairs": false,
           "showToolTipCoords": false,
-          "showGraphGrid": true
+          "showGraphGrid": false
         }
       ],
       "sequence": {
         "type": "LabelSequence",
-        "text": "<p>Label the zero crossings</p>",
-        "labelSet": "student-labels",
+        "text": "Label the zero crossings",
+        "labelSet": "Labels for Lorem",
         "numberOfLabels": 3
       }
     },
     {
       "type": "Page",
-      "name": "2 Second Page",
-      "text": "The following is a graph of <em>0.8 sin(x)</em>, with the zero crossings you labeled.",
+      "name": "2 Label Sequence Page 2",
+      "text": "The following is a graph of 0.8 sin(x), with the zero crossings you labeled.",
       "panes": [
         {
           "type": "PredefinedGraphPane",
@@ -53,16 +53,16 @@
           "xMax": 4.0,
           "yTicks": 10.0,
           "xTicks": 16.0,
-          "labelSets": ["student-labels"],
+          "labelSetNames": ["Labels for Lorem"],
           "includedDataSets": [
             {
-              "name": "0.8 sin(x)",
+              "name": "default_data_set",
               "inLegend": false
             }
           ],
           "showCrossHairs": false,
           "showToolTipCoords": false,
-          "showGraphGrid": true
+          "showGraphGrid": false
         }
       ]
     }
@@ -70,7 +70,7 @@
   "datasets": [
     {
       "type": "dataref",
-      "name": "0.8 sin(x)",
+      "name": "default_data_set",
       "yUnits": "meters",
       "xUnits": "Time",
       "xPrecision": 0.1,
@@ -84,6 +84,8 @@
       "expression": "y  = 0.8 sin(x)"
     }
   ],
+  "animations": [],
+  "labelSets": [],
   "units": [
     {
       "type": "Unit",
@@ -92,83 +94,8 @@
     },
     {
       "type": "Unit",
-      "name": "Distance",
-      "abbreviation": "m"
-    },
-    {
-      "type": "Unit",
-      "name": "degrees Celsius",
-      "abbreviation": "deg C"
-    },
-    {
-      "type": "Unit",
-      "name": "minutes",
-      "abbreviation": "min."
-    },
-    {
-      "type": "Unit",
       "name": "meters",
       "abbreviation": "m"
-    },
-    {
-      "type": "Unit",
-      "name": "seconds",
-      "abbreviation": "s"
-    },
-    {
-      "type": "Unit",
-      "name": "centimeters",
-      "abbreviation": "cm"
-    },
-    {
-      "type": "Unit",
-      "name": "grams",
-      "abbreviation": "gr"
-    },
-    {
-      "type": "Unit",
-      "name": "miles",
-      "abbreviation": "mi"
-    },
-    {
-      "type": "Unit",
-      "name": "hours",
-      "abbreviation": "hr"
-    },
-    {
-      "type": "Unit",
-      "name": "Celsius",
-      "abbreviation": "° C."
-    },
-    {
-      "type": "Unit",
-      "name": "dollars",
-      "abbreviation": "$"
-    },
-    {
-      "type": "Unit",
-      "name": "inches",
-      "abbreviation": "in"
-    },
-    {
-      "type": "Unit",
-      "name": "years",
-      "abbreviation": "yr"
-    },
-    {
-      "type": "Unit",
-      "name": "millimeters",
-      "abbreviation": "mm"
-    },
-    {
-      "type": "Unit",
-      "name": "parts per million",
-      "abbreviation": "ppm"
-    },
-    {
-      "type": "Unit",
-      "name": "meters per second",
-      "abbreviation": "m/s"
     }
   ]
 }

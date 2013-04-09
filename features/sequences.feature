@@ -783,3 +783,71 @@ Feature: Sequences Activities
       """
     Then I should get correct json
     And I should be able to copy the activity
+
+  @javascript
+  Scenario: Create an activity with a label sequence
+    Given I am logged in as an admin named 'admin'
+    And   I am on the Activities page
+    When I create a new activity:
+      """
+      ---
+      :name: Sequences Label Sequence
+      :units:
+      - :name: Time
+        :abbreviation: s
+      - :name: meters
+        :abbreviation: m
+      :data_sets:
+      - :name: default_data_set
+        :yPrecision: 0.1
+        :xPrecision: 0.1
+        :lineSnapDistance: 0.1
+        :expression: y  = 0.8 sin(x)
+        :lineType: Connected
+        :pointType: Dot
+        :xUnits: Time
+        :yUnits: meters
+      :pages:
+      - :name: Label Sequence Page 1
+        :text: On this page, students will be asked to place a label on the graph.
+        :panes:
+        - :type: PredefinedGraphPane
+          :title: Sinusoidal motion
+          :y:
+            :label: Distance
+            :min: -1.0
+            :max: 1.0
+            :ticks: 10.0
+          :x:
+            :label: Time
+            :min: -4.0
+            :max: 4.0
+            :ticks: 16.0
+          :data_sets:
+          - default_data_set
+        :sequence:
+          :type: "LabelSequence"
+          :text: Label the zero crossings
+          :label_count: 3
+      - :name: Label Sequence Page 2
+        :text: The following is a graph of 0.8 sin(x), with the zero crossings you labeled.
+        :panes:
+        - :type: PredefinedGraphPane
+          :title: Sinusoidal motion
+          :y:
+            :label: Distance
+            :min: -1.0
+            :max: 1.0
+            :ticks: 10.0
+          :x:
+            :label: Time
+            :min: -4.0
+            :max: 4.0
+            :ticks: 16.0
+          :data_sets:
+          - default_data_set
+          :label_sets:
+          - Labels for Lorem
+      """
+    Then I should get correct json
+    And I should be able to copy the activity
