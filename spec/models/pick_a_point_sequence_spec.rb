@@ -37,6 +37,13 @@ describe PickAPointSequence do
         output_hash.should have_key 'dataSetName'
         output_hash['dataSetName'].should == "dataSetA"
       end
+
+      context 'answer_with_label is true' do
+        it 'includes a label name with initial_prompt' do
+          sequence.answer_with_label = true
+          sequence.to_hash['initialPrompt'].should have_key 'label'
+        end
+      end
     end
   end
 
