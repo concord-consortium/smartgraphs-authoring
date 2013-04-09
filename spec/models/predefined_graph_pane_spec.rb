@@ -57,7 +57,7 @@ describe PredefinedGraphPane do
 
       it 'should allow labelsets' do
         graph_pane.label_sets << FactoryGirl.create(:label_set)
-        graph_pane.to_hash.should include('labelSets')
+        graph_pane.to_hash.should include('labelSetNames')
       end
     end
   end

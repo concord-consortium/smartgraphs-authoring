@@ -43,7 +43,7 @@ class LabelSequence < ActiveRecord::Base
       "type"            => type,
       "title"           => title,
       "text"            => text,
-      "labelSet"        => label_set ? label_set.name : nil,
+      "labelSetName"    => label_set ? label_set.name : nil,
       "numberOfLabels"  => label_count
     }
   end
@@ -56,10 +56,14 @@ class LabelSequence < ActiveRecord::Base
     callback = Proc.new do
       self.reload
       found_label_set = self.page.activity.label_sets.find_by_name(definition)
-      self.label_set = found_data_set
+      self.label_set = found_label_set
       self.save!
     end
     self.add_marshal_callback(callback)
+  end
+
+  def number_of_labels_from_hash(definition)
+    self.label_count = definition.to_i
   end
 
   protected

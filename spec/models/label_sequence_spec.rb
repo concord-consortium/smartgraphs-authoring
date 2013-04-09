@@ -39,7 +39,7 @@ describe LabelSequence do
           'title' => 'New label sequence',
           'type' => 'LabelSequence',
           'text' => 'Place a label on the graph.',
-          'labelSet' => nil,
+          'labelSetName' => nil,
           'numberOfLabels' => 1
         }
         label_seq.to_hash.should == expected
@@ -54,7 +54,7 @@ describe LabelSequence do
           'type' => 'LabelSequence',
           'title' => 'New label sequence',
           'text' => 'Place a label on the graph.',
-          'labelSet' => ls.name,
+          'labelSetName' => ls.name,
           'numberOfLabels' => 1
         }
         label_seq.to_hash.should == expected

@@ -50,6 +50,21 @@ module SgGraphPane
     self.add_marshal_callback(callback)
   end
 
+  def label_set_names_from_hash(definitions)
+    callback = Proc.new do
+      self.reload
+      definitions.each do |definition|
+        found_label_set = self.page.activity.label_sets.find_by_name(definition)
+        unless found_label_set
+          found_label_set = LabelSet.create(:is_for_users => true, :activity_id => self.page.activity.id, :name => definition)
+        end
+        self.label_sets << found_label_set
+      end
+      self.save!
+    end
+    self.add_marshal_callback(callback)
+  end
+
   def to_hash
     hash = {
       'type'   => self.graph_type,
@@ -72,7 +87,7 @@ module SgGraphPane
     end
     begin
       if label_sets.size > 0
-        hash['labelSets'] = label_sets.map{ |label_set| label_set.name }
+        hash['labelSetNames'] = label_sets.map{ |label_set| label_set.name }
       end
     rescue NameError
       # Not all GraphPanes have label_sets yet

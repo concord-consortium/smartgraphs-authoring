@@ -34,7 +34,7 @@
         "type": "LabelSequence",
         "title": "Lorem",
         "text": "Label the zero crossings",
-        "labelSet": "Labels for Lorem",
+        "labelSetName": "Labels for Lorem",
         "numberOfLabels": 3
       }
     },
