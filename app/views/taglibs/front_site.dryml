@@ -520,15 +520,19 @@
     </field-list:>
     <after-field-list:>
       <h3>Included data sets</h3>
-      <input-many:data_set_predefined_graphs>
-        <select-one:data_set options="&DataSet.activity_is(activity_for(@this))" />
-        <field-list fields="in_legend" />
-      </input-many>
+      <div id="add-data-sets">
+        <input-many:data_set_predefined_graphs>
+          <select-one:data_set options="&DataSet.activity_is(activity_for(@this))" />
+          <field-list fields="in_legend" />
+        </input-many>
+      </div>
       <h3>Included label sets</h3>
       <p><a action='new' to="&this.page.activity.label_sets">(Create new label set)</a></p>
-      <input-many:label_set_predefined_graphs>
-        <select-one:label_set options="&LabelSet.activity_is(activity_for(@this))" blank-message="Select label set" />
-      </input-many>
+      <div id="add-label-sets">
+        <input-many:label_set_predefined_graphs>
+          <select-one:label_set options="&LabelSet.activity_is(activity_for(@this))" blank-message="Select label set" />
+        </input-many>
+      </div>
       <h3>Included graphs</h3>
       <custom-poly-select-many:included_graphs prompt="Include graph data from:" options="&PredictionGraphPane.get_all_prediction_graph_panes_before(this)"/>
     </after-field-list:>
