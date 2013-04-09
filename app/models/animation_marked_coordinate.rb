@@ -10,6 +10,9 @@ class AnimationMarkedCoordinate < ActiveRecord::Base
     timestamps
   end
 
+  # not sure why :required => true in the 'fields' block doesn't pass the spec and this does:
+  validates :coordinate, :presence => true
+
   belongs_to :animation
 
 end
