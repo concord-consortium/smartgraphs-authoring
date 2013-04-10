@@ -88,12 +88,8 @@ module SgGraphPane
     if self.respond_to?(:animation) && animation.present?
       hash['animation'] = animation.name
     end
-    begin
-      if label_sets.size > 0
+    if self.respond_to?(:label_sets) && label_sets.size > 0
         hash['labelSetNames'] = label_sets.map{ |label_set| label_set.name }
-      end
-    rescue NameError
-      # Not all GraphPanes have label_sets yet
     end
     hash
   end
