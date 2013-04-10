@@ -66,6 +66,8 @@ class PredefinedGraphPane < ActiveRecord::Base
   has_many :label_sets, :through => :label_set_predefined_graphs
   has_many :label_set_predefined_graphs, :accessible => true, :dependent => :destroy
 
+  has_one :graph_label
+
   def field_order
     fo  = %w[title y_label y_min y_max y_ticks ]
     fo << %w[x_label x_min x_max x_ticks ]

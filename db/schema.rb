@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130409195918) do
+ActiveRecord::Schema.define(:version => 20130410131953) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -208,9 +208,11 @@ ActiveRecord::Schema.define(:version => 20130409195918) do
     t.float    "y_coord"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "predefined_graph_pane_id"
   end
 
   add_index "graph_labels", ["label_set_id"], :name => "index_graph_labels_on_label_set_id"
+  add_index "graph_labels", ["predefined_graph_pane_id"], :name => "index_graph_labels_on_predefined_graph_pane_id"
 
   create_table "image_panes", :force => true do |t|
     t.string   "name"
