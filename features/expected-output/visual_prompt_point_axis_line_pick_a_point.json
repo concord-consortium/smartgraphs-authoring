@@ -146,5 +146,7 @@
       "name": "Distance",
       "abbreviation": "m"
     }
-  ]
+  ],
+  "animations": [],
+  "labelSets": []
 }

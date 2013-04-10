@@ -208,5 +208,7 @@
       "name": "meters per second",
       "abbreviation": "m/s"
     }
-  ]
+  ],
+  "animations": [],
+  "labelSets": []
 }
