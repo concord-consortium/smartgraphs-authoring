@@ -544,6 +544,13 @@
           <select-one:label_set options="&LabelSet.activity_is(activity_for(@this))" blank-message="Select label set" />
         </input-many>
       </div>
+      <h3>Included labels</h3>
+      <p>Labels which are not part of label sets cannot be reused in other graphs.</p>
+      <div id="add-labels">
+        <input-many:graph_labels>
+          <field-list: fields="text,x_coord,y_coord"/>
+        </input-many>
+      </div>
       <h3>Included graphs</h3>
       <custom-poly-select-many:included_graphs prompt="Include graph data from:" options="&PredictionGraphPane.get_all_prediction_graph_panes_before(this)"/>
     </after-field-list:>
@@ -768,6 +775,8 @@
     <after-field-list:>
       <h3>Included Label Sets</h3>
       <collection:label_sets />
+      <h3>Included Labels</h3>
+      <collection:graph_labels />
     </after-field-list:>
   </old-show-page>
 </extend>
