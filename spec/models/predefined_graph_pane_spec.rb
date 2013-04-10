@@ -6,7 +6,7 @@ describe PredefinedGraphPane do
   let (:dataset_b) { FactoryGirl.create(:data_set, :name => "dataset_b") }
 
   describe "validations" do
-    # TODO: anything we want to validate in our model?    
+    # TODO: anything we want to validate in our model?
   end
 
   describe "graph_type" do
@@ -14,7 +14,7 @@ describe PredefinedGraphPane do
       graph_pane.graph_type.should == "PredefinedGraphPane"
     end
   end
-  
+
   describe "included_datasets" do
     it 'includes data_sets' do
       graph_pane.data_sets << dataset_a
@@ -25,16 +25,16 @@ describe PredefinedGraphPane do
   end
 
   describe "#to_hash" do
-    let(:expected_hash) { 
-      {"type"=>"PredefinedGraphPane", "title"=>'predefined_graph_pane_3', "yLabel"=>'y label', "yMin"=>0.0, "yMax"=>10.0, "xLabel"=>'x label', "xMin"=>0.0, "xMax"=>10.0, "yTicks"=>10.0, "xTicks"=>10.0, "showCrossHairs"=>false, "showToolTipCoords"=>false, "showGraphGrid"=>false, "includedDataSets"=>[]} 
-    }  
+    let(:expected_hash) {
+      {"type"=>"PredefinedGraphPane", "title"=>'predefined_graph_pane_3', "yLabel"=>'y label', "yMin"=>0.0, "yMax"=>10.0, "xLabel"=>'x label', "xMin"=>0.0, "xMax"=>10.0, "yTicks"=>10.0, "xTicks"=>10.0, "showCrossHairs"=>false, "showToolTipCoords"=>false, "showGraphGrid"=>false, "includedDataSets"=>[]}
+    }
     it "matches our expected hash" do
       expected_hash['title'] = graph_pane.title
       graph_pane.to_hash.should == expected_hash
     end
 
     describe "with some interesting attributes" do
-      let(:expected_hash) { 
+      let(:expected_hash) {
         {"type"=>"PredefinedGraphPane", "title"=>"predefined_graph_pane_4", "yLabel"=>"y label", "yMin"=>0.0, "yMax"=>10.0, "xLabel"=>"x label", "xMin"=>0.0, "xMax"=>10.0, "yTicks"=>10.0, "xTicks"=>10.0, "showCrossHairs"=>false, "showToolTipCoords"=>false, "showGraphGrid"=>false, "includedDataSets"=>[{"name"=>"dataset_a", "inLegend"=>false}, {"name"=>"dataset_b", "inLegend"=>false}]}
       }
 
@@ -78,5 +78,5 @@ describe PredefinedGraphPane do
       @test_subject.to_hash.should include({"includeAnnotationsFrom"=>["fake/path/here"]})
     end
   end
-  
+
 end
