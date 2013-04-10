@@ -85,6 +85,9 @@ module SgGraphPane
     if included_graphs.size > 0
       hash['includeAnnotationsFrom'] = included_graphs.map{ |graph| graph.get_indexed_path }
     end
+    if self.respond_to?(:animation) && animation.present?
+      hash['animation'] = animation.name
+    end
     begin
       if label_sets.size > 0
         hash['labelSetNames'] = label_sets.map{ |label_set| label_set.name }
