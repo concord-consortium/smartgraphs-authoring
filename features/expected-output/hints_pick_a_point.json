@@ -12,13 +12,13 @@
           "type": "PredefinedGraphPane",
           "title": "Graph Pane",
           "yLabel": "Distance",
-          "yMin": 0.0,
-          "yMax": 10.0,
+          "yMin": 0,
+          "yMax": 10,
           "xLabel": "Time",
-          "xMin": 0.0,
-          "xMax": 10.0,
-          "yTicks": 1.0,
-          "xTicks": 1.0,
+          "xMin": 0,
+          "xMax": 10,
+          "yTicks": 1,
+          "xTicks": 1,
           "showCrossHairs": false,
           "showToolTipCoords": false,
           "showGraphGrid": false,
@@ -42,7 +42,10 @@
         "giveUp": {
           "text": "That's not right."
         },
-        "correctAnswerPoint": [2.0, 200.0],
+        "correctAnswerPoint": [
+          2,
+          200
+        ],
         "hints": [
           {
             "name": "Hint 1",
@@ -56,19 +59,38 @@
       }
     }
   ],
-  "datasets":[
-    { "type": "datadef",
+  "datasets": [
+    {
+      "type": "datadef",
       "name": "default_data_set",
       "yUnits": "Distance",
-      "xUnits":"Time",
-      "xPrecision":0.1,
-      "yPrecision":0.1,
-      "lineSnapDistance":0.1,
-      "lineType":"none",
-      "pointType":"dot",
-      "data":[[1.0, 100.0], [2.0, 200.0], [3.0, 300.0], [4.0, 400.0]],
-      "expression":""
-  }],
+      "xUnits": "Time",
+      "xPrecision": 0.1,
+      "yPrecision": 0.1,
+      "lineSnapDistance": 0.1,
+      "lineType": "none",
+      "pointType": "dot",
+      "data": [
+        [
+          1,
+          100
+        ],
+        [
+          2,
+          200
+        ],
+        [
+          3,
+          300
+        ],
+        [
+          4,
+          400
+        ]
+      ],
+      "expression": ""
+    }
+  ],
   "units": [
     {
       "type": "Unit",

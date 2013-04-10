@@ -12,13 +12,13 @@
           "type": "PredefinedGraphPane",
           "title": "Graph Pane",
           "yLabel": "Distance",
-          "yMin": 0.0,
-          "yMax": 10.0,
+          "yMin": 0,
+          "yMax": 10,
           "xLabel": "Time",
-          "xMin": 0.0,
-          "xMax": 10.0,
-          "yTicks": 1.0,
-          "xTicks": 1.0,
+          "xMin": 0,
+          "xMax": 10,
+          "yTicks": 1,
+          "xTicks": 1,
           "showCrossHairs": false,
           "showToolTipCoords": false,
           "showGraphGrid": false,
@@ -38,13 +38,16 @@
             {
               "type": "PointAxisLineVisualPrompt",
               "name": "Red prompt",
-              "point": [1.0, 100.0],
+              "point": [
+                1,
+                100
+              ],
               "color": "red",
               "axis": "x_axis"
             }
           ]
         },
-        "correctAnswer": 200.0,
+        "correctAnswer": 200,
         "tolerance": 0.123,
         "giveUp": {
           "text": "That's not right.",
@@ -52,7 +55,10 @@
             {
               "type": "PointAxisLineVisualPrompt",
               "name": "Green prompt",
-              "point": [2.0, 200.0],
+              "point": [
+                2,
+                200
+              ],
               "axis": "x_axis",
               "color": "green"
             }
@@ -64,7 +70,10 @@
             {
               "type": "PointAxisLineVisualPrompt",
               "name": "Blue prompt",
-              "point": [3.0, 300.0],
+              "point": [
+                3,
+                300
+              ],
               "axis": "y_axis",
               "color": "blue"
             }
@@ -79,7 +88,10 @@
               {
                 "type": "PointAxisLineVisualPrompt",
                 "name": "Yellow prompt",
-                "point": [4.0, 400.0],
+                "point": [
+                  4,
+                  400
+                ],
                 "color": "yellow",
                 "axis": "y_axis"
               }
@@ -90,24 +102,37 @@
     }
   ],
   "datasets": [
-  {
-    "type": "datadef",
-    "name": "default_data_set",
-    "yUnits": "Distance",
-    "xUnits": "Time",
-    "xPrecision": 0.1,
-    "yPrecision": 0.1,
-    "lineSnapDistance": 0.1,
-    "lineType": "none",
-    "pointType": "dot",
-    "data": [
-      [1.0, 100.0],
-      [2.0, 200.0],
-      [3.0, 300.0],
-      [4.0, 400.0]
-    ],
-    "expression": ""
-  }],
+    {
+      "type": "datadef",
+      "name": "default_data_set",
+      "yUnits": "Distance",
+      "xUnits": "Time",
+      "xPrecision": 0.1,
+      "yPrecision": 0.1,
+      "lineSnapDistance": 0.1,
+      "lineType": "none",
+      "pointType": "dot",
+      "data": [
+        [
+          1,
+          100
+        ],
+        [
+          2,
+          200
+        ],
+        [
+          3,
+          300
+        ],
+        [
+          4,
+          400
+        ]
+      ],
+      "expression": ""
+    }
+  ],
   "units": [
     {
       "type": "Unit",

@@ -12,13 +12,13 @@
           "type": "PredefinedGraphPane",
           "title": "Sinusoidal motion",
           "yLabel": "Distance",
-          "yMin": -1.0,
-          "yMax": 1.0,
+          "yMin": -1,
+          "yMax": 1,
           "xLabel": "Time",
-          "xMin": -4.0,
-          "xMax": 4.0,
-          "yTicks": 10.0,
-          "xTicks": 16.0,
+          "xMin": -4,
+          "xMax": 4,
+          "yTicks": 10,
+          "xTicks": 16,
           "includedDataSets": [
             {
               "name": "0.8 sin(x)",
@@ -84,14 +84,16 @@
           "type": "PredefinedGraphPane",
           "title": "Sinusoidal motion",
           "yLabel": "Distance",
-          "yMin": -1.0,
-          "yMax": 1.0,
+          "yMin": -1,
+          "yMax": 1,
           "xLabel": "Time",
-          "xMin": -4.0,
-          "xMax": 4.0,
-          "yTicks": 10.0,
-          "xTicks": 16.0,
-          "labels": ["labeled-point"],
+          "xMin": -4,
+          "xMax": 4,
+          "yTicks": 10,
+          "xTicks": 16,
+          "labels": [
+            "labeled-point"
+          ],
           "includedDataSets": [
             {
               "name": "0.8 sin(x)",
@@ -116,9 +118,7 @@
       "lineSnapDistance": 0.1,
       "lineType": "connected",
       "pointType": "dot",
-      "data": [
-
-      ],
+      "data": [],
       "expression": "y  = 0.8 sin(x)"
     }
   ],
