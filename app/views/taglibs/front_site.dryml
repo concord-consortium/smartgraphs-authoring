@@ -544,6 +544,11 @@
           <select-one:label_set options="&LabelSet.activity_is(activity_for(@this))" blank-message="Select label set" />
         </input-many>
       </div>
+      <h3>Animation</h3>
+      <div id="add-animation">
+        <p><a action='new' to="&this.page.activity.animations">(Create new animation)</a></p>
+        <select-one:animation options="&Animation.activity_is(activity_for(@this))" blank-message="Select an animation" />
+      </div>
       <h3>Included graphs</h3>
       <custom-poly-select-many:included_graphs prompt="Include graph data from:" options="&PredictionGraphPane.get_all_prediction_graph_panes_before(this)"/>
     </after-field-list:>
@@ -768,6 +773,8 @@
     <after-field-list:>
       <h3>Included Label Sets</h3>
       <collection:label_sets />
+      <h3>Animation</h3>
+      <card:animation />
     </after-field-list:>
   </old-show-page>
 </extend>
