@@ -538,7 +538,6 @@
         </input-many>
       </div>
       <h3>Included label sets</h3>
-      <p><a action='new' to="&this.page.activity.label_sets">(Create new label set)</a></p>
       <div id="add-label-sets">
         <input-many:label_set_predefined_graphs>
           <select-one:label_set options="&LabelSet.activity_is(activity_for(@this))" blank-message="Select label set" />
