@@ -30,6 +30,8 @@ class PickAPointSequence < ActiveRecord::Base
     timestamps
   end
 
+  before_validation :ensure_label_set
+
   validates :title, :presence => true
   validates :initial_prompt, :presence => true
   validates :give_up, :presence => true
@@ -130,4 +132,10 @@ class PickAPointSequence < ActiveRecord::Base
     self.correct_answer_x_max = definition['xMax']
   end
 
+  protected
+  def ensure_label_set
+    if !label_set.present? && page.present?
+      create_label_set(:is_for_users => true, :activity_id => page.activity.id, :name => "Labels for #{title}")
+    end
+  end
 end
