@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130409195918) do
+ActiveRecord::Schema.define(:version => 20130410142814) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -445,8 +445,10 @@ ActiveRecord::Schema.define(:version => 20130409195918) do
     t.boolean  "show_cross_hairs",     :default => false
     t.boolean  "show_graph_grid",      :default => false
     t.boolean  "show_tool_tip_coords", :default => false
+    t.integer  "animation_id"
   end
 
+  add_index "predefined_graph_panes", ["animation_id"], :name => "index_predefined_graph_panes_on_animation_id"
   add_index "predefined_graph_panes", ["x_unit_id"], :name => "index_predefined_graph_panes_on_x_unit_id"
   add_index "predefined_graph_panes", ["y_unit_id"], :name => "index_predefined_graph_panes_on_y_unit_id"
 
