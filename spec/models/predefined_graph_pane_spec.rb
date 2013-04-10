@@ -65,6 +65,28 @@ describe PredefinedGraphPane do
     end
   end
 
+  describe "when the pane contains an animation" do
+    let (:activity) { FactoryGirl.create(:activity_with_animated_graph_pane)}
+
+    describe "#to_hash" do
+      it "contains the animation" do
+        pane = activity.pages.first.predefined_graph_panes.first
+        pane.to_hash['animation'].should == activity.animations.first.name
+      end
+    end
+
+    describe "when the activity containing the animated PredefinedGraphPane is copied" do
+      it "correctly references the animation in the copy" do
+        pending "Something's up ... this behavior works with real records, doesn't work on FactoryGirl created activity"
+        binding.pry
+        copy = activity.copy_activity
+        pane = copy.pages.first.predefined_graph_panes.first
+        animation = copy.animations.first
+        pane.animation.should == animation
+      end
+    end
+  end
+
   describe "included graphs" do
     # TODO: This might be going away sometime:
     before(:each) do
