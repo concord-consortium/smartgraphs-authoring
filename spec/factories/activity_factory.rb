@@ -42,6 +42,26 @@ FactoryGirl.define do
       after(:create) do |activity, evaluator|
         activity.pages = FactoryGirl.create_list(:page, 1, :activity => activity)
       end
+
+      factory :activity_with_predefined_graph_pane do
+        name "Activity With PredefinedGraphPane"
+
+        after(:create) do |activity, evaluator|
+          page = activity.pages.first
+          page.predefined_graph_panes = FactoryGirl.create_list(:predefined_graph_pane, 1, :page => page)
+        end
+
+        factory :activity_with_animated_graph_pane do
+          name "Activity With Animated PredefinedGraphPane"
+
+          after(:create) do |activity, evaluator|
+            activity.animations = FactoryGirl.create_list(:animation, 1, :activity => activity)
+            pane = activity.pages.first.predefined_graph_panes.first
+            pane.animation = activity.animations.first
+          end
+        end
+      end
     end
   end
+
 end
