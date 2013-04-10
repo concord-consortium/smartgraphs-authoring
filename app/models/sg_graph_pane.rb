@@ -65,6 +65,16 @@ module SgGraphPane
     self.add_marshal_callback(callback)
   end
 
+  def animation_from_hash(definition)
+    return if definition.length == 0
+    callback = Proc.new do
+      self.reload
+      self.animation = self.page.activity.animations.find_by_name(definition)
+      self.save!
+    end
+    self.add_marshal_callback(callback)
+  end
+
   def to_hash
     hash = {
       'type'   => self.graph_type,
