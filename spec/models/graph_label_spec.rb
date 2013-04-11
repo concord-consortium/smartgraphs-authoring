@@ -13,10 +13,4 @@ describe GraphLabel do
       # }
     end
   end
-
-  describe '#field_order' do
-    it 'returns a string with visible/editable fields' do
-      graph_label.field_order.should == 'text, x_coord, y_coord'
-    end
-  end
 end
