@@ -82,10 +82,12 @@ class PickAPointSequence < ActiveRecord::Base
 
   belongs_to :data_set
 
+  has_one :graph_label
+
   def to_hash
     ip_hash = {'text' => initial_prompt.to_s }
-    if answer_with_label
-      ip_hash['label'] = "Label for #{title}"
+    if answer_with_label && graph_label
+      ip_hash['label'] = graph_label.name
     end
     hash = {
       'type' => 'PickAPointSequence',

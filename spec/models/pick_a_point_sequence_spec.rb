@@ -39,8 +39,10 @@ describe PickAPointSequence do
       end
 
       context 'answer_with_label is true' do
-        it 'includes a label name with initial_prompt' do
+        it 'includes a label name' do
           sequence.answer_with_label = true
+          sequence.save
+          sequence.graph_label.should_not be_nil
           sequence.to_hash['initialPrompt'].should have_key 'label'
         end
       end

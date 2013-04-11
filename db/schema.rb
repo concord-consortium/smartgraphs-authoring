@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130411174819) do
+ActiveRecord::Schema.define(:version => 20130411193332) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -210,9 +210,11 @@ ActiveRecord::Schema.define(:version => 20130411174819) do
     t.datetime "updated_at"
     t.integer  "predefined_graph_pane_id"
     t.string   "name"
+    t.integer  "pick_a_point_sequence_id"
   end
 
   add_index "graph_labels", ["label_set_id"], :name => "index_graph_labels_on_label_set_id"
+  add_index "graph_labels", ["pick_a_point_sequence_id"], :name => "index_graph_labels_on_pick_a_point_sequence_id"
   add_index "graph_labels", ["predefined_graph_pane_id"], :name => "index_graph_labels_on_predefined_graph_pane_id"
 
   create_table "image_panes", :force => true do |t|
