@@ -30,6 +30,8 @@ class PickAPointSequence < ActiveRecord::Base
     timestamps
   end
 
+  before_validation :check_labels
+
   validates :title, :presence => true
   validates :initial_prompt, :presence => true
   validates :give_up, :presence => true
@@ -130,5 +132,13 @@ class PickAPointSequence < ActiveRecord::Base
     self.correct_answer_x_min = definition['xMin']
     self.correct_answer_y_max = definition['yMax']
     self.correct_answer_x_max = definition['xMax']
+  end
+
+  protected
+  def check_labels
+    if answer_with_label && graph_label.blank?
+      # The only attribute which should be significant (and included in the semantic JS) is the name. The rest should be (re) built by the runtime when the student adds their label.
+      self.graph_label = GraphLabel.create(:name => "Label for #{title}", :text => "Student label", :x_coord => 0, :y_coord => 0)
+    end
   end
 end
