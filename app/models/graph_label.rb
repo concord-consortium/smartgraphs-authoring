@@ -11,19 +11,22 @@ class GraphLabel < ActiveRecord::Base
 
   fields do
     text :string, :required => true
+    name :string, :required => false
     x_coord :float, :required => true
     y_coord :float, :required => true
     timestamps
   end
 
   def field_order
-    "text, x_coord, y_coord"
+    "name, text, x_coord, y_coord"
   end
 
   def to_hash
-    {
+    label = {
       'text' => text,
       'point' => [x_coord, y_coord]
     }
+    label['name'] = name unless name.blank?
+    label
   end
 end
