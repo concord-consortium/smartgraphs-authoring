@@ -7,6 +7,8 @@ class GraphLabel < ActiveRecord::Base
 
   belongs_to :label_set
 
+  belongs_to :predefined_graph_pane
+
   fields do
     text :string, :required => true
     x_coord :float, :required => true

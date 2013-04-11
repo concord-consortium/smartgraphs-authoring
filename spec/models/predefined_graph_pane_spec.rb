@@ -28,6 +28,7 @@ describe PredefinedGraphPane do
     let(:expected_hash) {
       {"type"=>"PredefinedGraphPane", "title"=>'predefined_graph_pane_3', "yLabel"=>'y label', "yMin"=>0.0, "yMax"=>10.0, "xLabel"=>'x label', "xMin"=>0.0, "xMax"=>10.0, "yTicks"=>10.0, "xTicks"=>10.0, "showCrossHairs"=>false, "showToolTipCoords"=>false, "showGraphGrid"=>false, "includedDataSets"=>[]}
     }
+
     it "matches our expected hash" do
       expected_hash['title'] = graph_pane.title
       graph_pane.to_hash.should == expected_hash
@@ -83,6 +84,13 @@ describe PredefinedGraphPane do
         pane = copy.pages.first.predefined_graph_panes.first
         animation = copy.animations.first
         pane.animation.should == animation
+      end
+
+      it 'includes any labels' do
+        graph_pane.graph_labels << FactoryGirl.create(:graph_label)
+        graph_pane.to_hash.should have_key 'labels'
+        graph_pane.to_hash['labels'].length.should eq(1)
+        graph_pane.to_hash['labels'].first['point'].should eq([1,1])
       end
     end
   end
