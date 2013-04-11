@@ -63,6 +63,13 @@ describe PredefinedGraphPane do
         graph_pane.label_sets << FactoryGirl.create(:label_set)
         graph_pane.to_hash.should have_key 'labelSetNames'
       end
+
+      it 'includes any labels' do
+        graph_pane.graph_labels << FactoryGirl.create(:graph_label)
+        graph_pane.to_hash.should have_key 'labels'
+        graph_pane.to_hash['labels'].length.should eq(1)
+        graph_pane.to_hash['labels'].first['point'].should eq([1,1])
+      end
     end
   end
 
@@ -84,13 +91,6 @@ describe PredefinedGraphPane do
         pane = copy.pages.first.predefined_graph_panes.first
         animation = copy.animations.first
         pane.animation.should == animation
-      end
-
-      it 'includes any labels' do
-        graph_pane.graph_labels << FactoryGirl.create(:graph_label)
-        graph_pane.to_hash.should have_key 'labels'
-        graph_pane.to_hash['labels'].length.should eq(1)
-        graph_pane.to_hash['labels'].first['point'].should eq([1,1])
       end
     end
   end
