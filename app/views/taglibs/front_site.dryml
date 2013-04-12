@@ -545,9 +545,9 @@
       </div>
       <h3>Included labels</h3>
       <div id="add-labels">
-        <input-many:graph_labels>
-          <select-one:graph_label blank-message="Select a label" />
-        </input-many>
+        <select-many:graph_labels>
+          <select-one:graph_label />
+        </select-many>
       </div>
       <h3>Animation</h3>
       <div id="add-animation">
@@ -778,8 +778,8 @@
     <after-field-list:>
       <h3>Included Label Sets</h3>
       <collection:label_sets />
-      <h3>Included Label</h3>
-      <card:graph_label />
+      <h3>Included Labels</h3>
+      <collection:graph_labels />
       <h3>Animation</h3>
       <card:animation />
     </after-field-list:>
