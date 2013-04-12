@@ -23,12 +23,6 @@ describe LabelSet do
     end
   end
 
-  describe '#field_order' do
-    it 'returns the expected field order' do
-      label_set.field_order.should == 'name, is_for_users'
-    end
-  end
-
   describe '#to_hash' do
     it 'returns the expected hash' do
       expected = { 'name' => full_label_set.name, 'labels' => full_label_set.graph_labels.map { |l| l.to_hash } }
