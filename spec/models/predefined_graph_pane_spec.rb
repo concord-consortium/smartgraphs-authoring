@@ -68,7 +68,6 @@ describe PredefinedGraphPane do
         graph_pane.graph_labels << FactoryGirl.create(:graph_label)
         graph_pane.to_hash.should have_key 'labels'
         graph_pane.to_hash['labels'].length.should eq(1)
-        graph_pane.to_hash['labels'].first['point'].should eq([1,1])
       end
     end
   end
