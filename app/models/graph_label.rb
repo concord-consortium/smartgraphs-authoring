@@ -7,21 +7,39 @@ class GraphLabel < ActiveRecord::Base
 
   belongs_to :label_set
 
+  belongs_to :pick_a_point_sequence
+  belongs_to :predefined_graph_pane
+
   fields do
     text :string, :required => true
+    name :string, :required => false
     x_coord :float, :required => true
     y_coord :float, :required => true
     timestamps
   end
 
   def field_order
-    "text, x_coord, y_coord"
+    "name, text, x_coord, y_coord"
   end
 
   def to_hash
-    {
+    label = {
       'text' => text,
       'point' => [x_coord, y_coord]
     }
+    label['name'] = name unless name.blank?
+    label
+  end
+
+  def activity
+    if self.label_set
+      return self.label_set.activity
+    elsif self.pick_a_point_sequence
+      return self.pick_a_point_sequence.page.activity
+    elsif self.predefined_graph_pane
+      return self.predefined_graph_pane.page.activity
+    else
+      nil
+    end
   end
 end

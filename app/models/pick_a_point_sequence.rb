@@ -30,7 +30,7 @@ class PickAPointSequence < ActiveRecord::Base
     timestamps
   end
 
-  before_validation :ensure_label_set
+  before_validation :check_labels
 
   validates :title, :presence => true
   validates :initial_prompt, :presence => true
@@ -84,10 +84,12 @@ class PickAPointSequence < ActiveRecord::Base
 
   belongs_to :data_set
 
+  has_one :graph_label
+
   def to_hash
     ip_hash = {'text' => initial_prompt.to_s }
-    if answer_with_label
-      ip_hash['label'] = "Label for #{title}"
+    if answer_with_label && graph_label
+      ip_hash['label'] = graph_label.name
     end
     hash = {
       'type' => 'PickAPointSequence',
@@ -133,9 +135,10 @@ class PickAPointSequence < ActiveRecord::Base
   end
 
   protected
-  def ensure_label_set
-    if !label_set.present? && page.present?
-      create_label_set(:is_for_users => true, :activity_id => page.activity.id, :name => "Labels for #{title}")
+  def check_labels
+    if answer_with_label && graph_label.blank?
+      # The only attribute which should be significant (and included in the semantic JS) is the name. The rest should be (re) built by the runtime when the student adds their label.
+      self.graph_label = GraphLabel.create(:name => "Label for #{title}", :text => "Student label", :x_coord => 0, :y_coord => 0)
     end
   end
 end
