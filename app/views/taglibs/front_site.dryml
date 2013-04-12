@@ -326,10 +326,12 @@
   <old-form merge>
     <field-list: fields="&this.field_order" />
     <after-field-list:>
-      <h4>Labels</h4>
-      <input-many:graph_labels>
-        <field-list: fields="text,x_coord,y_coord"/>
-      </input-many>
+      <if test="&this.is_for_authors?">
+        <h4>Labels</h4>
+        <input-many:graph_labels>
+          <field-list: fields="text,x_coord,y_coord"/>
+        </input-many>
+      </if>
     </after-field-list:>
   </old-form>
 </extend>
