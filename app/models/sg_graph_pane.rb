@@ -102,7 +102,7 @@ module SgGraphPane
         hash['labelSetNames'] = label_sets.map{ |label_set| label_set.name }
     end
     if self.respond_to?(:graph_labels) && graph_labels.size > 0
-      hash['labels'] = graph_labels.map(&:to_hash)
+      hash['labels'] = graph_labels.map{ |label| label.name }
     end
     hash
   end
