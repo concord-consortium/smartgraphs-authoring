@@ -546,7 +546,7 @@
       <h3>Animation</h3>
       <div id="add-animation">
         <p><a action='new' to="&this.page.activity.animations">(Create new animation)</a></p>
-        <select-one:animation options="&Animation.activity_is(activity_for(@this))" blank-message="Select an animation" />
+        <select-one:animation options="&Animation.activity_is(activity_for(@this))" include-none blank-message="(No animation)" />
       </div>
       <h3>Included graphs</h3>
       <custom-poly-select-many:included_graphs prompt="Include graph data from:" options="&PredictionGraphPane.get_all_prediction_graph_panes_before(this)"/>
