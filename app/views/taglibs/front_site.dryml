@@ -548,7 +548,7 @@
       <h3>Included labels</h3>
       <div id="add-labels">
         <select-many:graph_labels>
-          <select-one:graph_label />
+          <select-one:graph_label options="&GraphLabel.free_for_activity(activity_for(@this))" />
         </select-many>
       </div>
       <h3>Animation</h3>

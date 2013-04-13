@@ -64,6 +64,19 @@ class Activity < ActiveRecord::Base
     }
   end
 
+  def labels
+    labels = self.label_sets.map { |ls| ls.graph_labels }.flatten
+    labels << pages.map { |p| p.predefined_graph_panes.map { |pdgp| pdgp.graph_labels } }.flatten
+    labels << pages.map { |p| p.pick_a_point_sequences.map { |paps| paps.graph_label } }.flatten
+    labels.flatten!.uniq!
+    labels
+  end
+
+  # Array of labels which are not part of a label set
+  def free_labels
+    self.labels.keep_if { |l| l.label_set.blank? }
+  end
+
   def after_user_new
     self.owner = acting_user
     self.author_name ||= acting_user.name
