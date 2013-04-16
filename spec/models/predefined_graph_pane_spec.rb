@@ -24,6 +24,17 @@ describe PredefinedGraphPane do
     end
   end
 
+  describe 'label association' do
+    it 'only associates non-LabelSet GraphLabels' do
+      pending "It's unclear to me why this association works."
+      ls = FactoryGirl.create(:full_label_set)
+      ls.graph_labels.first.label_set_id.should_not be_nil
+      graph_pane.graph_labels << ls.graph_labels.first
+      ls.graph_labels.first.label_set_id.should be_nil
+      graph_pane.graph_labels.length.should eq(1)
+    end
+  end
+
   describe "#to_hash" do
     let(:expected_hash) {
       {"type"=>"PredefinedGraphPane", "title"=>'predefined_graph_pane_3', "yLabel"=>'y label', "yMin"=>0.0, "yMax"=>10.0, "xLabel"=>'x label', "xMin"=>0.0, "xMax"=>10.0, "yTicks"=>10.0, "xTicks"=>10.0, "showCrossHairs"=>false, "showToolTipCoords"=>false, "showGraphGrid"=>false, "includedDataSets"=>[]}
