@@ -68,7 +68,7 @@ class PredefinedGraphPane < ActiveRecord::Base
 
   belongs_to :animation
 
-  has_many :graph_labels, :accessible => true
+  has_many :graph_labels, :accessible => true, :conditions => { :label_set_id => nil }
 
   def field_order
     fo  = %w[title y_label y_min y_max y_ticks ]

@@ -48,16 +48,4 @@ class GraphLabel < ActiveRecord::Base
     label['name'] = name unless name.blank?
     label
   end
-
-  def activity
-    if self.label_set
-      return self.label_set.activity
-    elsif self.pick_a_point_sequence
-      return self.pick_a_point_sequence.page.activity
-    elsif self.predefined_graph_pane
-      return self.predefined_graph_pane.page.activity
-    else
-      nil
-    end
-  end
 end
