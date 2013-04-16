@@ -1,214 +1,128 @@
 {
   "type": "Activity",
-  "name": "Label Stories Label A Point",
-  "authorName": "Richard Klancer",
+  "name": "Sequences Pick A Point With Label Sequence",
+  "authorName": "",
   "pages": [
     {
       "type": "Page",
-      "name": "1 First Page",
-      "text": "The following is a graph of <em>0.8 sin(x)</em>.",
+      "name": "1 Simple Page 1",
+      "text": "In this page...",
       "panes": [
         {
           "type": "PredefinedGraphPane",
-          "title": "Sinusoidal motion",
+          "title": "Graph Pane",
           "yLabel": "Distance",
-          "yMin": -1,
-          "yMax": 1,
+          "yMin": 0.0,
+          "yMax": 10.0,
           "xLabel": "Time",
-          "xMin": -4,
-          "xMax": 4,
-          "yTicks": 10,
-          "xTicks": 16,
+          "xMin": 0.0,
+          "xMax": 10.0,
+          "yTicks": 1.0,
+          "xTicks": 1.0,
           "includedDataSets": [
             {
-              "name": "0.8 sin(x)",
+              "name": "default_data_set",
               "inLegend": false
             }
           ],
           "showCrossHairs": false,
           "showToolTipCoords": false,
-          "showGraphGrid": true
-        },
-        {
-          "type": "TablePane",
-          "xLabel": "Time (s)",
-          "yLabel": "Distance (m)",
-          "title": "Table Pane"
+          "showGraphGrid": false
         }
       ],
       "sequence": {
         "type": "PickAPointSequence",
         "initialPrompt": {
-          "text": "Label the <em>maximum</em> of the function",
-          "label": "labeled-point"
+          "text": "Pick the middle point.",
+          "label": "Label for Pick a point"
         },
         "giveUp": {
-          "text": "The maximum point of the sine function is at π/2, or 1.57, where it attains the value 1. Since we're multiplying it by 0.8, the y-value of the maximum point is 0.8.",
-          "visualPrompts": [
-            {
-              "type": "PointAxisLineVisualPrompt",
-              "name": "Point 1",
-              "point": [
-                1.5708,
-                0.8
-              ],
-              "color": "red",
-              "axis": "y_axis"
-            }
-          ]
+          "text": "That's not right."
         },
         "confirmCorrect": {
-          "text": "That's correct."
+          "text": "Yes, that's right!"
         },
-        "dataSetName": "0.8 sin(x)",
-        "correctAnswerRange": {
-          "xMin": 1.51,
-          "yMin": 0.75,
-          "xMax": 1.69,
-          "yMax": 0.85
-        },
-        "hints": [
-          {
-            "name": "Hint 1",
-            "text": "Remember that the maximum point of a function is the point on the function's graph at which the <em>y-value</em> of the function is larger than it is anywhere else."
-          }
-        ]
+        "dataSetName": "default_data_set",
+        "correctAnswerPoint": [2.0, 200.0],
+        "hints": []
       }
     },
     {
       "type": "Page",
-      "name": "2 Second Page",
-      "text": "The following is a graph of <em>0.8 sin(x)</em>, with the point you labeled.",
+      "name": "2 Simple Page 2",
+      "text": "In this page...",
       "panes": [
         {
           "type": "PredefinedGraphPane",
           "title": "Sinusoidal motion",
           "yLabel": "Distance",
-          "yMin": -1,
-          "yMax": 1,
+          "yMin": -1.0,
+          "yMax": 1.0,
           "xLabel": "Time",
-          "xMin": -4,
-          "xMax": 4,
-          "yTicks": 10,
-          "xTicks": 16,
+          "xMin": -4.0,
+          "xMax": 4.0,
+          "yTicks": 10.0,
+          "xTicks": 16.0,
           "labels": [
-            "labeled-point"
+            "Label for Pick a point"
           ],
           "includedDataSets": [
             {
-              "name": "0.8 sin(x)",
+              "name": "default_data_set",
               "inLegend": false
             }
           ],
           "showCrossHairs": false,
           "showToolTipCoords": false,
-          "showGraphGrid": true
+          "showGraphGrid": false
         }
       ]
     }
   ],
   "datasets": [
     {
-      "type": "dataref",
-      "name": "0.8 sin(x)",
-      "yUnits": "meters",
-      "xUnits": "seconds",
+      "type": "datadef",
+      "name": "default_data_set",
+      "yUnits": "Distance",
+      "xUnits": "Time",
       "xPrecision": 0.1,
       "yPrecision": 0.1,
       "lineSnapDistance": 0.1,
-      "lineType": "connected",
+      "lineType": "none",
       "pointType": "dot",
-      "data": [],
-      "expression": "y  = 0.8 sin(x)"
-    }
-  ],
-  "units": [
-    {
-      "type": "Unit",
-      "name": "Time",
-      "abbreviation": "s"
-    },
-    {
-      "type": "Unit",
-      "name": "Distance",
-      "abbreviation": "m"
-    },
-    {
-      "type": "Unit",
-      "name": "degrees Celsius",
-      "abbreviation": "deg C"
-    },
-    {
-      "type": "Unit",
-      "name": "minutes",
-      "abbreviation": "min."
-    },
-    {
-      "type": "Unit",
-      "name": "meters",
-      "abbreviation": "m"
-    },
-    {
-      "type": "Unit",
-      "name": "seconds",
-      "abbreviation": "s"
-    },
-    {
-      "type": "Unit",
-      "name": "centimeters",
-      "abbreviation": "cm"
-    },
-    {
-      "type": "Unit",
-      "name": "grams",
-      "abbreviation": "gr"
-    },
-    {
-      "type": "Unit",
-      "name": "miles",
-      "abbreviation": "mi"
-    },
-    {
-      "type": "Unit",
-      "name": "hours",
-      "abbreviation": "hr"
-    },
-    {
-      "type": "Unit",
-      "name": "Celsius",
-      "abbreviation": "° C."
-    },
-    {
-      "type": "Unit",
-      "name": "dollars",
-      "abbreviation": "$"
-    },
-    {
-      "type": "Unit",
-      "name": "inches",
-      "abbreviation": "in"
-    },
-    {
-      "type": "Unit",
-      "name": "years",
-      "abbreviation": "yr"
-    },
-    {
-      "type": "Unit",
-      "name": "millimeters",
-      "abbreviation": "mm"
-    },
-    {
-      "type": "Unit",
-      "name": "parts per million",
-      "abbreviation": "ppm"
-    },
-    {
-      "type": "Unit",
-      "name": "meters per second",
-      "abbreviation": "m/s"
+      "data": [
+        [
+          1.0,
+          100.0
+        ],
+        [
+          2.0,
+          200.0
+        ],
+        [
+          3.0,
+          300.0
+        ],
+        [
+          4.0,
+          400.0
+        ]
+      ],
+      "expression": ""
     }
   ],
   "animations": [],
-  "labelSets": []
+  "labelSets": [],
+  "units": [
+      {
+        "type": "Unit",
+        "name": "Time",
+        "abbreviation": "s"
+      },
+      {
+        "type": "Unit",
+        "name": "Distance",
+        "abbreviation": "m"
+      }
+  ]
 }

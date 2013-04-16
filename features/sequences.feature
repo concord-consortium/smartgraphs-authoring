@@ -82,6 +82,87 @@ Feature: Sequences Activities
     And I should be able to copy the activity
 
   @javascript
+  Scenario: Create an activity with a label a point sequence
+    Given I am logged in as an admin named 'admin'
+    And   I am on the Activities page
+    When I create a new activity:
+      """
+      ---
+      :name: Sequences Pick A Point With Label Sequence
+      :units:
+      - :name: Time
+        :abbreviation: s
+      - :name: Distance
+        :abbreviation: m
+
+      :data_sets:
+      - :name: default_data_set
+        :yPrecision: 0.1
+        :xPrecision: 0.1
+        :lineSnapDistance: 0.1
+        :expression:
+        :lineType: None
+        :pointType: Dot
+        :data: |-
+          1,100
+          2,200
+          3,300
+          4,400
+        :xUnits: Time
+        :yUnits: Distance
+
+      :pages:
+      - :name: Simple Page 1
+        :text: In this page...
+        :panes:
+        - :type: PredefinedGraphPane
+          :title: Graph Pane
+          :y:
+            :label: Distance
+            :min: 0
+            :max: 10
+            :ticks: 1
+          :x:
+            :label: Time
+            :min: 0
+            :max: 10
+            :ticks: 1
+          :data_sets:
+          - default_data_set
+        :sequence:
+          :type: "PickAPointSequence"
+          :dataSet: default_data_set
+          :title: Pick a point
+          :initialPrompt: Pick the middle point.
+          :answerWithLabel: true
+          :correctAnswerX: 2
+          :correctAnswerY: 200
+          :giveUp: That's not right.
+          :confirmCorrect: Yes, that's right!
+      - :name: Simple Page 2
+        :text: In this page...
+        :panes:
+        - :type: PredefinedGraphPane
+          :title: Sinusoidal motion
+          :y:
+            :label: Distance
+            :min: -1
+            :max: 1
+            :ticks: 10
+          :x:
+            :label: Time
+            :min: -4
+            :max: 4
+            :ticks: 16
+          :data_sets:
+          - default_data_set
+          :graph_labels:
+          - Label for Pick a point
+      """
+    Then I should get correct json
+    And I should be able to copy the activity
+
+  @javascript
   Scenario: Create an activity with a pick a point within a range sequence
     Given I am logged in as an admin named 'admin'
     And   I am on the Activities page

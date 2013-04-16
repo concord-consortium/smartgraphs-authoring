@@ -326,6 +326,7 @@ def create_pane(pane_def)
     select_included_graphs(pane_def[:included_graphs])
     select_included_data_sets_for_panes(pane_def[:data_sets])
     select_included_label_sets_for_panes(pane_def[:label_sets]) if pane_def[:label_sets].present?
+    select_included_graph_labels(pane_def[:graph_labels]) if pane_def[:graph_labels].present?
     click_button 'Create Predefined graph pane'
     
   when "SensorGraphPane"
@@ -385,6 +386,13 @@ def select_included_graphs(included_def = [])
   end
 end
 
+def select_included_graph_labels(included_def = [])
+  (included_def || []).each do |label_name|
+    select_node = find(:css, '#add-labels .select-many select')
+    select_node.find(:xpath, XPath::HTML.option(label_name), :message => "Cannot select option with text '#{label_name}'").select_option
+  end
+end
+
 def create_sequence(sequence_def)
   case sequence_def[:type]
   when "InstructionSequence"
@@ -395,6 +403,9 @@ def create_sequence(sequence_def)
     click_link 'New Pick a point sequence'
     fill_in 'pick_a_point_sequence_title', :with => sequence_def[:title]
     fill_in 'pick_a_point_sequence_initial_prompt', :with => sequence_def[:initialPrompt]
+    if sequence_def[:answerWithLabel]
+      check 'pick_a_point_sequence_answer_with_label'
+    end
     fill_in 'pick_a_point_sequence_give_up', :with => sequence_def[:giveUp]
     fill_in 'pick_a_point_sequence_confirm_correct', :with => sequence_def[:confirmCorrect]
     select sequence_def[:dataSet], :from => 'pick_a_point_sequence[data_set_id]'
