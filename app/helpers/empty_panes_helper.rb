@@ -1,0 +1,2 @@
+module EmptyPanesHelper
+end
