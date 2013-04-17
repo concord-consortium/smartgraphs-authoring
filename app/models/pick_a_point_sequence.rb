@@ -12,7 +12,7 @@ class PickAPointSequence < ActiveRecord::Base
   
   fields do
     title             :string
-    initial_prompt    :html
+    initial_prompt    :raw_html
     answer_with_label :boolean
     give_up           :html
     confirm_correct   :html

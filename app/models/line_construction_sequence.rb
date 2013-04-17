@@ -26,7 +26,7 @@ class LineConstructionSequence < ActiveRecord::Base
     y_intercept           :float,  :default => 0
     y_intercept_tolerance :float,  :default => 0.1
     max_attempts          :integer, :default => 3
-    initial_prompt        :html  
+    initial_prompt        :raw_html
     confirm_correct       :html  
     slope_incorrect       :html  
     y_intercept_incorrect :html  

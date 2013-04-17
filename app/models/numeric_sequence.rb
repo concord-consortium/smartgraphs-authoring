@@ -11,7 +11,7 @@ class NumericSequence < ActiveRecord::Base
   
   fields do
     title           :string
-    initial_prompt  :html
+    initial_prompt  :raw_html
     give_up         :html
     confirm_correct :html
     correct_answer  :float

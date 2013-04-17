@@ -9,7 +9,7 @@ class InstructionSequence < ActiveRecord::Base
   sg_parent :page
   
   fields do
-    text :html
+    text :raw_html
     timestamps
   end
 

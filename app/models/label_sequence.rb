@@ -17,7 +17,7 @@ class LabelSequence < ActiveRecord::Base
 
   fields do
     title         :string, :default => 'New label sequence'
-    text          :html
+    text          :raw_html
     label_count   :integer, :default => 1
     timestamps
   end

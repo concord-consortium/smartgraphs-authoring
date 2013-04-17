@@ -26,7 +26,7 @@ class BestFitSequence < ActiveRecord::Base
     correct_tolerance :float, :default => 0.1
     close_tolerance :float, :default => 0.2
     max_attempts :integer, :default => 4
-    initial_prompt :html
+    initial_prompt :raw_html
     incorrect_prompt :html
     close_prompt :html
     confirm_correct :html

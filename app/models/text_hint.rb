@@ -11,7 +11,7 @@ class TextHint < ActiveRecord::Base
   
   fields do
     name :string
-    text :html
+    text :raw_html
     timestamps
   end
 
