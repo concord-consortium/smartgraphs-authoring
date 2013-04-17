@@ -12,7 +12,7 @@ class Page < ActiveRecord::Base
 
   fields do
     name :string
-    text :text
+    text :html
     timestamps
   end
 

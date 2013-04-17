@@ -12,10 +12,10 @@ class PickAPointSequence < ActiveRecord::Base
   
   fields do
     title             :string
-    initial_prompt    :text
+    initial_prompt    :html
     answer_with_label :boolean
-    give_up           :text
-    confirm_correct   :text
+    give_up           :html
+    confirm_correct   :html
 
     # support for a distinct point
     correct_answer_x :float

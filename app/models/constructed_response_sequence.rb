@@ -10,8 +10,8 @@ class ConstructedResponseSequence < ActiveRecord::Base
   
   fields do
     title         :string
-    initial_prompt :text
-    initial_content :text
+    initial_prompt :html
+    initial_content :html
     timestamps
   end
   

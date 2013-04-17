@@ -12,7 +12,7 @@ class MultipleChoiceChoice < ActiveRecord::Base
     name      :string
     #position :integer
     correct   :boolean
-    feedback  :text
+    feedback  :html
     timestamps
   end
   inline_booleans true

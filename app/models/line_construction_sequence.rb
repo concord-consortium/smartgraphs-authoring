@@ -26,12 +26,12 @@ class LineConstructionSequence < ActiveRecord::Base
     y_intercept           :float,  :default => 0
     y_intercept_tolerance :float,  :default => 0.1
     max_attempts          :integer, :default => 3
-    initial_prompt        :text  
-    confirm_correct       :text  
-    slope_incorrect       :text  
-    y_intercept_incorrect :text  
-    all_incorrect         :text
-    give_up               :text
+    initial_prompt        :html  
+    confirm_correct       :html  
+    slope_incorrect       :html  
+    y_intercept_incorrect :html  
+    all_incorrect         :html
+    give_up               :html
     timestamps
   end
 

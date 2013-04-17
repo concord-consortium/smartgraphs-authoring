@@ -11,9 +11,9 @@ class NumericSequence < ActiveRecord::Base
   
   fields do
     title           :string
-    initial_prompt  :text
-    give_up         :text
-    confirm_correct :text
+    initial_prompt  :html
+    give_up         :html
+    confirm_correct :html
     correct_answer  :float
     tolerance       :float,  :default => 0.01
     timestamps
