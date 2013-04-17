@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130411193332) do
+ActiveRecord::Schema.define(:version => 20130417150500) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -179,6 +179,11 @@ ActiveRecord::Schema.define(:version => 20130411193332) do
   add_index "data_sets", ["activity_id"], :name => "index_data_sets_on_activity_id"
   add_index "data_sets", ["x_unit_id"], :name => "index_data_sets_on_x_unit_id"
   add_index "data_sets", ["y_unit_id"], :name => "index_data_sets_on_y_unit_id"
+
+  create_table "empty_panes", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "give_up_prompts", :force => true do |t|
     t.datetime "created_at"
