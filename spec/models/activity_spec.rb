@@ -86,7 +86,7 @@ describe Activity do
       it 'should not include duplicates' do
         pdgp = FactoryGirl.create(:predefined_graph_pane)
         activity_with_labels.pages[1].predefined_graph_panes << FactoryGirl.create(:predefined_graph_pane)
-        pdgp.graph_labels << GraphLabel.find_by_name('Label for Test a label') # This could create a dupe
+        pdgp.graph_labels << GraphLabel.find_by_name('Label for Label this!') # This could create a dupe
         activity_with_labels.labels.length.should eq(4)
       end
     end
@@ -94,7 +94,7 @@ describe Activity do
     describe '#free_labels' do
       it 'should return only labels which do not belong to a LabelSet' do
         activity_with_labels.free_labels.length.should eq(1)
-        activity_with_labels.free_labels.first.name.should == 'Label for Test a label'
+        activity_with_labels.free_labels.first.name.should == 'Label for Label this!'
       end
     end
   end

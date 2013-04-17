@@ -17,8 +17,8 @@ describe GraphLabel do
 
     it 'does not include duplicates' do
       pdgp = FactoryGirl.create(:predefined_graph_pane)
-      activity_with_labels.pages[1].predefined_graph_panes << FactoryGirl.create(:predefined_graph_pane)
-      pdgp.graph_labels << GraphLabel.find_by_name('Label for Test a label')
+      activity_with_labels.pages[1].predefined_graph_panes << pdgp
+      pdgp.graph_labels << GraphLabel.find_by_name("Label for Label this!")
       GraphLabel.for_activity(activity_with_labels).length.should eq(4)
     end
   end

@@ -75,6 +75,21 @@ module SgGraphPane
     self.add_marshal_callback(callback)
   end
 
+  def labels_from_hash(definitions)
+    # We may or may not have the GraphLabel already built. Wait to add it later to be safe.
+    callback = Proc.new do
+      self.reload
+      definitions.each do |definition|
+        if (gl = GraphLabel.find_by_name(definition))
+          self.graph_labels << gl
+        else
+          self.graph_labels << GraphLabel.create(:name => definition, :text => "Student label", :x_coord => 0, :y_coord => 0)
+        end
+      end
+    end
+    self.add_marshal_callback(callback)
+  end
+
   def to_hash
     hash = {
       'type'   => self.graph_type,

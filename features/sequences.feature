@@ -157,7 +157,7 @@ Feature: Sequences Activities
           :data_sets:
           - default_data_set
           :graph_labels:
-          - Label for Pick a point
+          - Label for Pick the middle point.
       """
     Then I should get correct json
     And I should be able to copy the activity

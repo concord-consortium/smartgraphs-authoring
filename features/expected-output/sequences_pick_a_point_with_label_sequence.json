@@ -34,7 +34,7 @@
         "type": "PickAPointSequence",
         "initialPrompt": {
           "text": "Pick the middle point.",
-          "label": "Label for Pick a point"
+          "label": "Label for Pick the middle point."
         },
         "giveUp": {
           "text": "That's not right."
@@ -64,7 +64,7 @@
           "yTicks": 10.0,
           "xTicks": 16.0,
           "labels": [
-            "Label for Pick a point"
+            "Label for Pick the middle point."
           ],
           "includedDataSets": [
             {

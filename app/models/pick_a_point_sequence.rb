@@ -138,7 +138,7 @@ class PickAPointSequence < ActiveRecord::Base
   def check_labels
     if answer_with_label && graph_label.blank?
       # The only attribute which should be significant (and included in the semantic JS) is the name. The rest should be (re) built by the runtime when the student adds their label.
-      self.graph_label = GraphLabel.create(:name => "Label for #{title}", :text => "Student label", :x_coord => 0, :y_coord => 0)
+      self.graph_label = GraphLabel.create(:name => "Label for #{initial_prompt.to_s}", :text => "Student label", :x_coord => 0, :y_coord => 0)
     end
   end
 end
