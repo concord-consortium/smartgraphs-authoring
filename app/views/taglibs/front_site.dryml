@@ -220,6 +220,9 @@
     </a><br />
     <a action="new" to="&this.animation_panes">
       <ht key="animation_pane.actions.new" >New Animation Pane element</ht>
+    </a><br />
+    <a action="new" to="&this.empty_panes">
+      <ht key="empty_pane.actions.new" >New Empty Pane element</ht>
     </a>
   </if>
 </def>
