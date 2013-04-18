@@ -3,7 +3,7 @@ class PredefinedGraphPane < ActiveRecord::Base
   hobo_model # Don't put anything above this
 
   view_hints.parent :page
-  
+
   # standard owner and admin permissions
   # defined in models/standard_permissions.rb
   include SgPermissions
@@ -11,7 +11,7 @@ class PredefinedGraphPane < ActiveRecord::Base
   include SgGraphPane
 
   sg_parent :page
-  
+
   children :data_set_predefined_graphs
   # children  :data_set_graphs, :data_sets
 
@@ -34,7 +34,7 @@ class PredefinedGraphPane < ActiveRecord::Base
     show_graph_grid  :boolean, :default => false
     show_tool_tip_coords :boolean, :default => false
 
-    # Keep these fields around to migrate older data, 
+    # Keep these fields around to migrate older data,
     # even though data_set.rb now provides this kind of
     # data.  See DataSet#from_predefined_graph_pane
     expression :string, :default =>"" #y = 0.5 * x + 5",
@@ -43,14 +43,14 @@ class PredefinedGraphPane < ActiveRecord::Base
     point_type SgGraphPane::PointType,  :default => "dot"
     data :text
     # end of LegacyFields
-    
+
     timestamps
   end
 
   # legacy associations
   belongs_to :y_unit, :class_name => 'Unit'
   belongs_to :x_unit, :class_name => 'Unit'
-  # end 
+  # end
 
   has_one :page_pane, :as => :pane, :dependent => :destroy
   has_one :page, :through => :page_pane
@@ -62,7 +62,13 @@ class PredefinedGraphPane < ActiveRecord::Base
 
   has_many :data_sets, :through => :data_set_predefined_graphs
   has_many :data_set_predefined_graphs, :accessible => true, :dependent => :destroy
-  
+
+  has_many :label_sets, :through => :label_set_predefined_graphs
+  has_many :label_set_predefined_graphs, :accessible => true, :dependent => :destroy
+
+  belongs_to :animation
+
+  has_many :graph_labels, :accessible => true, :conditions => { :label_set_id => nil }
 
   def field_order
     fo  = %w[title y_label y_min y_max y_ticks ]

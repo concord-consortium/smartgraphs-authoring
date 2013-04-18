@@ -3,7 +3,10 @@ module SgMarshal
 
     def from_hash(defs, context=nil)
       object = build_object_from_hash(defs, context)
-      object.save
+      # skip validation as object may not be valid until marshal_callbacks complete\
+      # (there are existing cases where activity_id is required for marshal_callbacks to succeed
+      # but activity is not valid because other marshal_callbacks have yet to run)
+      object.save(:validate => false)
       object.invoke_marshal_callbacks if object.marshal_context == object
       object
     end

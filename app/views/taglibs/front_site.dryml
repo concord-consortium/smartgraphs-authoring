@@ -72,7 +72,7 @@
       <activityGrades/>
       <activitySubjects/>
       <if test="&current_user.administrator?">
-        <span class="category_tag">(<view:publication_status/>)</span> 
+        <span class="category_tag">(<view:publication_status/>)</span>
       </if>
     </append-header:>
     <append-body:>
@@ -153,6 +153,15 @@
   </card:prompt>
 </def>
 
+<def tag="card" for="GraphLabel">
+  <card class="graph_label" param="default" merge>
+    <header: param>
+      <h4 param="heading"><%= h "#{this.text} (#{this.x_coord}, #{this.y_coord})" %></h4>
+      <delete-button label="Delete" param/>
+    </header:>
+  </card>
+</def>
+
 <def tag="card" for="DataSetPredefinedGraph">
   <if test="&this.data_set">
     <card class="data-set-predefined-graph" param="default" merge>
@@ -208,6 +217,12 @@
     </a><br/>
     <a action="new" to="&this.table_panes">
       <ht key="table_pane.actions.new" >New Table Pane element</ht>
+    </a><br />
+    <a action="new" to="&this.animation_panes">
+      <ht key="animation_pane.actions.new" >New Animation Pane element</ht>
+    </a><br />
+    <a action="new" to="&this.empty_panes">
+      <ht key="empty_pane.actions.new" >New Empty Pane element</ht>
     </a>
   </if>
 </def>
@@ -239,6 +254,9 @@
       </a><br/>
       <a action="new" to="&this.best_fit_sequences">
         <ht key="best_fit_sequence.actions.new" >New Line of Best Fit Sequence</ht>
+      </a><br/>
+      <a action="new" to="&this.label_sequences">
+        <ht key="label_sequence.actions.new" >New Label Sequence</ht>
       </a><br/>
     </unless>
   </if>
@@ -304,6 +322,42 @@
       <y_unit-tag: include-none blank-message="No units"/>
       <x_unit-tag: include-none blank-message="No units"/>
     </field-list:>
+  </old-form>
+</extend>
+
+<extend tag="form" for="LabelSet">
+  <old-form merge>
+    <field-list: fields="&this.field_order" />
+    <after-field-list:>
+      <if test="&this.is_for_authors?">
+        <h4>Labels</h4>
+        <input-many:graph_labels>
+          <field-list: fields="text,x_coord,y_coord"/>
+        </input-many>
+      </if>
+    </after-field-list:>
+  </old-form>
+</extend>
+
+<extend tag="form" for="Animation">
+  <old-form merge>
+    <field-list: fields="&this.field_order">
+      <data_set-tag: options="&DataSet.activity_is(activity_for(@this))" />
+    </field-list>
+    <after-field-list:>
+      <h4>Coordinates to Mark</h4>
+      <input-many:animation_marked_coordinates>
+        <field-list: fields="coordinate"/>
+      </input-many>
+    </after-field-list:>
+  </old-form>
+</extend>
+
+<extend tag="form" for="AnimationPane">
+  <old-form merge>
+    <field-list: fields="animation">
+      <animation-tag: options="&Animation.activity_is(activity_for(@this))" />
+    </field-list>
   </old-form>
 </extend>
 
@@ -459,6 +513,12 @@
   </old-form>
 </extend>
 
+<extend tag="form" for="LabelSequence">
+  <old-form merge>
+    <field-list: fields="&this.field_order" />
+  </old-form>
+</extend>
+
 <extend tag="form" for="TextHint">
   <old-form merge>
     <after-field-list:>
@@ -476,10 +536,29 @@
     </field-list:>
     <after-field-list:>
       <h3>Included data sets</h3>
-      <input-many:data_set_predefined_graphs>
-        <select-one:data_set options="&DataSet.activity_is(activity_for(@this))" />
-        <field-list fields="in_legend" />
-      </input-many>
+      <div id="add-data-sets">
+        <input-many:data_set_predefined_graphs>
+          <select-one:data_set options="&DataSet.activity_is(activity_for(@this))" />
+          <field-list fields="in_legend" />
+        </input-many>
+      </div>
+      <h3>Included label sets</h3>
+      <div id="add-label-sets">
+        <input-many:label_set_predefined_graphs>
+          <select-one:label_set options="&LabelSet.activity_is(activity_for(@this))" blank-message="Select label set" />
+        </input-many>
+      </div>
+      <h3>Included labels</h3>
+      <div id="add-labels">
+        <select-many:graph_labels>
+          <select-one:graph_label options="activity_for(@this).free_labels" />
+        </select-many>
+      </div>
+      <h3>Animation</h3>
+      <div id="add-animation">
+        <p><a action='new' to="&this.page.activity.animations">(Create new animation)</a></p>
+        <select-one:animation options="&Animation.activity_is(activity_for(@this))" include-none blank-message="(No animation)" />
+      </div>
       <h3>Included graphs</h3>
       <custom-poly-select-many:included_graphs prompt="Include graph data from:" options="&PredictionGraphPane.get_all_prediction_graph_panes_before(this)"/>
     </after-field-list:>
@@ -567,9 +646,21 @@
     <after-data_sets-collection-section:>
       <hr/>
       <a:data_sets action="new" if="&can_create?(@activity.data_sets)">
-          New Data set
+          New Dataset
       </a:data_sets>
     </after-data_sets-collection-section:>
+    <after-label_sets-collection-section:>
+      <hr/>
+      <a:label_sets action="new" if="&can_create?(@activity.label_sets)">
+          New Label Set
+      </a:label_sets>
+    </after-label_sets-collection-section:>
+    <after-animations-collection-section:>
+      <hr/>
+      <a:animations action="new" if="&can_create?(@activity.animations)">
+          New Animation
+      </a:animations>
+    </after-animations-collection-section:>
   </old-show-page>
 </extend>
 
@@ -578,11 +669,11 @@
     <h4 class='checklistHeading'>#{name.humanize.capitalize}</h4>
     <ul class='checkList #{name}' merge-attrs>
       <li class='checkItem' param repeat='&all'>
-        <input 
-            name='#{name}[]' 
-            checked='&this.in?(selected)' 
-            id='#{dom_id(this, :check_many)}' 
-            type='checkbox' 
+        <input
+            name='#{name}[]'
+            checked='&this.in?(selected)'
+            id='#{dom_id(this, :check_many)}'
+            type='checkbox'
             value='#{this.id}' />
         <label for='#{dom_id(this, :check_many)}'><name param/></label>
       </li>
@@ -591,7 +682,7 @@
 </def>
 <def tag='activitySearchFilter'>
   <div class="searchBox">
-    <form method='get' action=''>  
+    <form method='get' action=''>
       <checkboxSelect all='&this.all_grade_levels'  selected='&this.grade_levels'  name='grade_levels' />
       <checkboxSelect all='&this.all_subject_areas' selected='&this.subject_areas' name='subject_areas'/>
       <div class="nameSearch">
@@ -617,7 +708,7 @@
 
       <section param="content-body">
         <activitySearchFilter with="&@activity_filter"/>
-      
+
         <p>
           <a action="new" class="button" to="&model" param="new-link">
             <ht key="activity.actions.new">new activity</ht>
@@ -648,6 +739,32 @@
   </old-show-page>
 </extend>
 
+<extend tag="show-page" for="LabelSet">
+  <old-show-page merge>
+    <field-list: fields="&this.field_order" />
+    <after-field-list:>
+      <h3>Labels</h3>
+      <collection:graph_labels />
+    </after-field-list:>
+  </old-show-page>
+</extend>
+
+<extend tag="show-page" for="Animation">
+  <old-show-page merge>
+    <field-list: fields="&this.field_order" />
+    <after-field-list:>
+      <h3>Marked Coordinates</h3>
+      <collection:animation_marked_coordinates />
+    </after-field-list:>
+  </old-show-page>
+</extend>
+
+<def tag="card" for="AnimationMarkedCoordinate">
+  <card class="animation-marked-coordinate" param="default" merge>
+    <p><%= h "#{this.coordinate}" %></p>
+  </card>
+</def>
+
 <extend tag="show-page" for="SensorGraphPane">
   <old-show-page merge>
     <field-list: fields="&this.field_order" />
@@ -663,10 +780,14 @@
     <field-list: fields="&this.field_order">
       <data-tag: with="&this.gsub('&#10;', '<br>').html_safe"/>
     </field-list:>
-    <!-- after-field-list:>
-      <h3>Included Prediction Graphs</h3>
-      <collection:included_graphs />
-    </after-field-list: -->
+    <after-field-list:>
+      <h3>Included Label Sets</h3>
+      <collection:label_sets />
+      <h3>Included Labels</h3>
+      <collection:graph_labels />
+      <h3>Animation</h3>
+      <card:animation />
+    </after-field-list:>
   </old-show-page>
 </extend>
 
@@ -736,7 +857,7 @@
   </card>
 </def>
 
-<!-- don't show a select for all multiple choice sequences this choice may belong to --> 
+<!-- don't show a select for all multiple choice sequences this choice may belong to -->
 <def tag="form" for="MultipleChoiceChoice">
   <form merge param="default">
     <error-messages param/>

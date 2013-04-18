@@ -2,7 +2,7 @@ module SgGraphPane
 
   LineType  = HoboFields::Types::EnumString.for(:connected, :none)
   PointType = HoboFields::Types::EnumString.for(:none, :dot)
-  
+
   def data_from_hash(points)
     tmp_data  = points.map{ |point| point.join(",") }
     self.data = tmp_data.join("\n")
@@ -50,6 +50,46 @@ module SgGraphPane
     self.add_marshal_callback(callback)
   end
 
+  def label_set_names_from_hash(definitions)
+    callback = Proc.new do
+      self.reload
+      definitions.each do |definition|
+        found_label_set = self.page.activity.label_sets.find_by_name(definition)
+        unless found_label_set
+          found_label_set = LabelSet.create(:is_for_users => true, :activity_id => self.page.activity.id, :name => definition)
+        end
+        self.label_sets << found_label_set
+      end
+      self.save!
+    end
+    self.add_marshal_callback(callback)
+  end
+
+  def animation_from_hash(definition)
+    return if definition.length == 0
+    callback = Proc.new do
+      self.reload
+      self.animation = self.page.activity.animations.find_by_name(definition)
+      self.save!
+    end
+    self.add_marshal_callback(callback)
+  end
+
+  def labels_from_hash(definitions)
+    # We may or may not have the GraphLabel already built. Wait to add it later to be safe.
+    callback = Proc.new do
+      self.reload
+      definitions.each do |definition|
+        if (gl = GraphLabel.find_by_name(definition))
+          self.graph_labels << gl
+        else
+          self.graph_labels << GraphLabel.create(:name => definition, :text => "Student label", :x_coord => 0, :y_coord => 0)
+        end
+      end
+    end
+    self.add_marshal_callback(callback)
+  end
+
   def to_hash
     hash = {
       'type'   => self.graph_type,
@@ -68,7 +108,16 @@ module SgGraphPane
       'showGraphGrid' => show_graph_grid
     }
     if included_graphs.size > 0
-      hash['includeAnnotationsFrom'] = included_graphs.map{|graph| graph.get_indexed_path }
+      hash['includeAnnotationsFrom'] = included_graphs.map{ |graph| graph.get_indexed_path }
+    end
+    if self.respond_to?(:animation) && animation.present?
+      hash['animation'] = animation.name
+    end
+    if self.respond_to?(:label_sets) && label_sets.size > 0
+        hash['labelSetNames'] = label_sets.map{ |label_set| label_set.name }
+    end
+    if self.respond_to?(:graph_labels) && graph_labels.size > 0
+      hash['labels'] = graph_labels.map{ |label| label.name }
     end
     hash
   end

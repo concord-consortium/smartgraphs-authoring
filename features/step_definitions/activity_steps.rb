@@ -232,7 +232,7 @@ def create_page(page_def)
 end
 
 def create_data_set(definition)
-  click_link 'New Data set'
+  click_link 'New Dataset'
   fill_in 'data_set_name', :with => definition[:name]
   fill_in 'data_set_y_precision', :with => definition[:yPrecision]
   fill_in 'data_set_x_precision', :with => definition[:xPrecision]
@@ -273,12 +273,27 @@ end
 
 def select_included_data_sets_for_panes(included_defs = [])
   included_defs.each do |data_set_name|
-    click_button "+"
-    # That button triggers a prototype transition which causes the next step to fail on second, third, etc.
-    # datasets if we don't wait. 0.15s is not enough wait; 0.2 seems to be the least we can get away with.
-    sleep 0.5
-    within(:xpath, "(//div[@class='input-many-item'])[last()]/select") do
-      find(:xpath, XPath::HTML.option(data_set_name), :message => "cannot select option with text '#{data_set_name}'").select_option
+    within(:css, "#add-data-sets") do
+      click_button "+"
+      # That button triggers a prototype transition which causes the next step to fail on second, third, etc.
+      # datasets if we don't wait. 0.15s is not enough wait; 0.2 seems to be the least we can get away with.
+      sleep 0.5
+      within(:xpath, "(//div[@id='add-data-sets']//div[@class='input-many-item'])[last()]/select") do
+        find(:xpath, XPath::HTML.option(data_set_name), :message => "cannot select option with text '#{data_set_name}'").select_option
+      end
+    end
+  end
+end
+
+def select_included_label_sets_for_panes(included_defs = [])
+  included_defs.each do |label_set_name|
+    within(:css, "#add-label-sets") do
+      click_button "+"
+      # See notes above (in #select_included_data_sets_for_panes) about the + button
+      sleep 0.5
+      within(:xpath, "(//div[@id='add-label-sets']//div[@class='input-many-item'])[last()]/select") do
+        find(:xpath, XPath::HTML.option(label_set_name), :message => "cannot select option with text '#{label_set_name}'").select_option
+      end
     end
   end
 end
@@ -310,6 +325,8 @@ def create_pane(pane_def)
     
     select_included_graphs(pane_def[:included_graphs])
     select_included_data_sets_for_panes(pane_def[:data_sets])
+    select_included_label_sets_for_panes(pane_def[:label_sets]) if pane_def[:label_sets].present?
+    select_included_graph_labels(pane_def[:graph_labels]) if pane_def[:graph_labels].present?
     click_button 'Create Predefined graph pane'
     
   when "SensorGraphPane"
@@ -369,6 +386,13 @@ def select_included_graphs(included_def = [])
   end
 end
 
+def select_included_graph_labels(included_def = [])
+  (included_def || []).each do |label_name|
+    select_node = find(:css, '#add-labels .select-many select')
+    select_node.find(:xpath, XPath::HTML.option(label_name), :message => "Cannot select option with text '#{label_name}'").select_option
+  end
+end
+
 def create_sequence(sequence_def)
   case sequence_def[:type]
   when "InstructionSequence"
@@ -379,6 +403,9 @@ def create_sequence(sequence_def)
     click_link 'New Pick a point sequence'
     fill_in 'pick_a_point_sequence_title', :with => sequence_def[:title]
     fill_in 'pick_a_point_sequence_initial_prompt', :with => sequence_def[:initialPrompt]
+    if sequence_def[:answerWithLabel]
+      check 'pick_a_point_sequence_answer_with_label'
+    end
     fill_in 'pick_a_point_sequence_give_up', :with => sequence_def[:giveUp]
     fill_in 'pick_a_point_sequence_confirm_correct', :with => sequence_def[:confirmCorrect]
     select sequence_def[:dataSet], :from => 'pick_a_point_sequence[data_set_id]'
@@ -415,6 +442,8 @@ def create_sequence(sequence_def)
     create_slope_tool_sequence!(sequence_def)
   when "BestFitSequence"
     create_best_fit_sequence!(sequence_def)
+  when "LabelSequence"
+    create_label_sequence!(sequence_def)
   end
 
   sequence_url = current_url
@@ -553,4 +582,12 @@ def create_best_fit_sequence!(opts)
   select opts[:data_set_name], :from => 'best_fit_sequence[data_set_id]'
   select opts[:learner_data_set_name], :from => 'best_fit_sequence[learner_data_set_id]'
   click_button 'Create Best fit sequence'
+end
+
+def create_label_sequence!(opts)
+  click_link 'New Label sequence'
+  fill_in 'label_sequence_title', :with => 'Lorem'
+  fill_in 'label_sequence_text', :with => opts[:text]
+  fill_in 'label_sequence_label_count', :with => opts[:label_count]
+  click_button 'Create Label sequence'
 end
