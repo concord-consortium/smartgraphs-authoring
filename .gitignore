@@ -2,6 +2,7 @@
 .rvmrc
 db/*.sqlite3
 log/*.log
+log/csv/**/*
 tmp/
 bin/
 app/views/taglibs/auto/**/*
