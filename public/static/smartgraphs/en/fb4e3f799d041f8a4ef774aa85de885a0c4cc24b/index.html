@@ -8,20 +8,12 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link rel="apple-touch-icon" href="/static/sproutcore/foundation/en/1e3562c3eded0e237a64955cae12d1a7789e90d1/source/images/sproutcore-logo.png" />
-	  <link rel="apple-touch-startup-image" media="screen and (orientation:portrait)" href="/static/sproutcore/foundation/en/1e3562c3eded0e237a64955cae12d1a7789e90d1/source/images/sproutcore-startup-portrait.png" />
+	  <link rel="apple-touch-startup-image" media="screen and (orientation:portrait)" href="/static/sproutcore/foundation/en/1e3562c3eded0e237a64955cae12d1a7789e90d1/source/images/sproutcore-startup-portrait.png" /> 
 	  <link rel="apple-touch-startup-image" media="screen and (orientation:landscape)" href="/static/sproutcore/foundation/en/1e3562c3eded0e237a64955cae12d1a7789e90d1/source/images/sproutcore-startup-landscape.png" />
 	  <link rel="shortcut icon" href="" type="image/x-icon" />
-
+    
     <title>Smartgraphs</title>
-    <script>
-    window['ga-disable-UA-6899787-19'] = true;
-    </script>
-  <script type="text/javascript">
-    window.authoredActivityJSON = <%= authored_activity_json %>;
-    window.showOutline = <%= show_outline %>;
-    window.showEditButton = <%= show_edit_button %>;
-    String.preferredLanguage = "en";
-  </script>
+  <script type="text/javascript">String.preferredLanguage = "en";</script>
 <script type="text/javascript">
 /* >>>>>>>>>> BEGIN source/core.js */
 // ==========================================================================
@@ -100,16 +92,16 @@ SC.setupBodyClassNames = function() {
   browser = SC.browser.current ;
   platform = SC.browser.windows ? 'windows' : SC.browser.mac ? 'mac' : 'other-platform' ;
   style = document.documentElement.style;
-  shadows = (style.MozBoxShadow !== undefined) ||
+  shadows = (style.MozBoxShadow !== undefined) || 
                 (style.webkitBoxShadow !== undefined) ||
                 (style.oBoxShadow !== undefined) ||
                 (style.boxShadow !== undefined);
-
-  borderRad = (style.MozBorderRadius !== undefined) ||
+  
+  borderRad = (style.MozBorderRadius !== undefined) || 
               (style.webkitBorderRadius !== undefined) ||
               (style.oBorderRadius !== undefined) ||
               (style.borderRadius !== undefined);
-
+  
   classNames = el.className ? el.className.split(' ') : [] ;
   if(shadows) classNames.push('box-shadow');
   if(borderRad) classNames.push('border-rad');
@@ -122,16 +114,14 @@ SC.setupBodyClassNames = function() {
   el.className = classNames.join(' ') ;
 } ;
 
-/* >>>>>>>>>> BEGIN bundle_loaded.js */
-; if ((typeof SC !== 'undefined') && SC && SC.bundleDidLoad) SC.bundleDidLoad('sproutcore/bootstrap');
 
 </script>
-<script type="text/javascript">SC.buildMode = "production";
+<script type="text/javascript">SC.buildMode = "production"; 
  SC.urlPrefix = null; </script>
 
      <link href="/static/smartgraphs/en/fb4e3f799d041f8a4ef774aa85de885a0c4cc24b/stylesheet-packed.css" rel="stylesheet" type="text/css" />
-
-
+   
+    
     <script type="text/javascript">
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-6899787-19']);
@@ -143,10 +133,10 @@ SC.setupBodyClassNames = function() {
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
     </script>
-
+    
   </head>
-
-  <body class="sc-theme focus">
+    
+  <body class="sc-theme focus">  
 <script type="text/javascript">
 // ==========================================================================
 // Project:   SproutCore - JavaScript Application Framework
