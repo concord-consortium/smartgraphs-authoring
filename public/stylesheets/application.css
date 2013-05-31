@@ -45,7 +45,7 @@ a.button {
 	color: #3a878b;
 	}
 .header {
-	background: #f4b626;
+	background: #8cbbb8;
 	-webkit-border-top-left-radius: 13px;
 	-webkit-border-top-right-radius: 13px;
 	-moz-border-radius-topleft: 13px;
@@ -71,12 +71,12 @@ a.button {
 	border-top-right-radius: 8px;
 	}
 .page-header .navigation.main-nav a:hover {
-	background: #69afad;
+	background: #3a878b;
 	border: none;
 	color: #fff;
 	}
 .page-header .navigation.main-nav li.current a {
-	background: #69afad;
+	background: #3a878b;
 	border: none;
 	color: #fff;
 	}
