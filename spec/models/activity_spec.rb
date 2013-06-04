@@ -14,15 +14,15 @@ describe Activity do
     before (:each) do
       subject.name = "a valid name"
     end
-    
+
     it "should have a publication status" do
       should.respond_to? :publication_status
     end
-    
+
     it "should use the default value of private" do
       subject.publication_status.should eql 'private'
     end
-    
+
     it "should allow 'public' as a value" do
       subject.publication_status = 'public'
       subject.should be_valid
@@ -42,6 +42,9 @@ describe Activity do
       @math    = SubjectArea.create(:name => "math")
       @mid     = GradeLevel.create(:name  => "6-9")
       @high    = GradeLevel.create(:name  => "10-12")
+    end
+
+    before(:each ) do
       subject.name = "testing"
     end
 

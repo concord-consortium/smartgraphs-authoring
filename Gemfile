@@ -30,7 +30,6 @@ group :test do
   # childprocess is the problem, pinned to ffi ~> 1.0, so it won't update past 1.0.9.
   gem 'selenium-webdriver', ">=2.26"
   gem 'cucumber-rails', '~> 1.3.0', :require => false
-  gem "rspec-rails", ">= 2.5.0"
   gem 'database_cleaner', '~> 0.7.0'
   gem 'launchy', '~> 2.0.5'
   # Addressable is a launchy dependency
@@ -38,6 +37,7 @@ group :test do
 end
 
 group :test, :development do
+  gem "rspec-rails", ">= 2.13.1"
   gem 'guard', '~> 1.5.4'
   gem 'guard-rspec', '~> 1.2.1'
   gem 'rb-fsevent', '~> 0.9.2'
