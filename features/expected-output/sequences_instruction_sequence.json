@@ -9,6 +9,7 @@
       "text": "In this page...",
       "sequence": {
         "type": "InstructionSequence",
+        "title": "My first instruction sequence",
         "text": "Click ok..."
       }
     }

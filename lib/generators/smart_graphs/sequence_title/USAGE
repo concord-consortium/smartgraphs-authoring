@@ -1,0 +1,7 @@
+Description:
+    Set each InstructionSequence title attribute to be the first five
+    words of the text attribute. This is because the title attribute
+    was added after some InstructionSequences where created.
+
+Example:
+    rails generate smart_graphs:sequence_title
