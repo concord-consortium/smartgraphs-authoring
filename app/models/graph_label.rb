@@ -43,8 +43,7 @@ class GraphLabel < ActiveRecord::Base
   def to_hash
     label = {
       'text' => text,
-      'x_coord' => x_coord,
-      'y_coord' => y_coord
+      'point' => [x_coord, y_coord]
     }
     label['name'] = name unless name.blank?
     label

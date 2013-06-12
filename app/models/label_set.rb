@@ -39,7 +39,9 @@ class LabelSet < ActiveRecord::Base
 
   def labels_from_hash(definitions)
     # Because labels are actually GraphLabels, we need to handle them differently.
-    self.graph_labels = definitions.map {|d| GraphLabel.from_hash(d)}
+    self.graph_labels = definitions.map do |d|
+      GraphLabel.create!(:text => d['text'], :name => d['name'], :x_coord => d['point'][0], :y_coord => d['point'][1], )
+    end
   end
 
   def is_for_users?
