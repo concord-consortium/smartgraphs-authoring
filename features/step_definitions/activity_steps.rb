@@ -2,7 +2,7 @@ module BetterHashDiff
   def diff(other)
     self.keys.inject({}) do |memo, key|
       unless self[key] == other[key]
-        memo[key] = [self[key], other[key]] 
+        memo[key] = [self[key], other[key]]
       end
       memo
     end
@@ -169,7 +169,7 @@ Then(/^I should get correct json$/)do
   visit activity_url
   body = page.driver.respond_to?('response') ? page.driver.response.body : page.driver.body
   actual_json = JSON.parse(body.gsub(/.*<pre[^>]*>/,'').gsub(/<\/pre>.*/,''))
-  # Uncomment if you want slightly better 
+  # Uncomment if you want slightly better
   # display of hash differences:
   #actual_json.extend BetterHashDiff
   #expected_json.extend BetterHashDiff
@@ -189,7 +189,7 @@ def create_activity(activity_def)
   if activity_def[:publication_status]
     select activity_def[:publication_status].capitalize, :from => 'activity[publication_status]'
   end
-  
+
   if activity_def[:grade_levels]
     activity_def[:grade_levels].each do |grade_level|
       select grade_level.capitalize
@@ -206,7 +206,7 @@ def create_activity(activity_def)
 
   activity_url = current_url
   activity_def[:units].each{|unit_def| create_unit(unit_def); visit activity_url } if activity_def[:units]
-  activity_def[:data_sets].each{|data_set_def| create_data_set(data_set_def); visit activity_url } if activity_def[:data_sets]  
+  activity_def[:data_sets].each{|data_set_def| create_data_set(data_set_def); visit activity_url } if activity_def[:data_sets]
   activity_def[:pages].each{|page_def| create_page(page_def); visit activity_url } if activity_def[:pages]
   return Activity.last
 end
@@ -300,7 +300,7 @@ end
 
 def create_pane(pane_def)
   case pane_def[:type]
-  
+
   when "ImagePane"
     click_link 'New Image pane'
     fill_in 'image_pane_name', :with => pane_def[:name]
@@ -312,23 +312,23 @@ def create_pane(pane_def)
   when "PredefinedGraphPane"
     click_link 'New Predefined graph pane'
     fill_in 'predefined_graph_pane_title', :with => pane_def[:title]
-    
+
     fill_in 'predefined_graph_pane_y_label', :with => pane_def[:y][:label]
     fill_in 'predefined_graph_pane_y_min', :with => pane_def[:y][:min]
     fill_in 'predefined_graph_pane_y_max', :with => pane_def[:y][:max]
     fill_in 'predefined_graph_pane_y_ticks', :with => pane_def[:y][:ticks]
-    
+
     fill_in 'predefined_graph_pane_x_label', :with => pane_def[:x][:label]
     fill_in 'predefined_graph_pane_x_min', :with => pane_def[:x][:min]
     fill_in 'predefined_graph_pane_x_max', :with => pane_def[:x][:max]
     fill_in 'predefined_graph_pane_x_ticks', :with => pane_def[:x][:ticks]
-    
+
     select_included_graphs(pane_def[:included_graphs])
     select_included_data_sets_for_panes(pane_def[:data_sets])
     select_included_label_sets_for_panes(pane_def[:label_sets]) if pane_def[:label_sets].present?
     select_included_graph_labels(pane_def[:graph_labels]) if pane_def[:graph_labels].present?
     click_button 'Create Predefined graph pane'
-    
+
   when "SensorGraphPane"
     click_link 'New Sensor graph pane'
     fill_in 'sensor_graph_pane_title', :with => pane_def[:title]
@@ -398,6 +398,7 @@ def create_sequence(sequence_def)
   when "InstructionSequence"
     click_link 'New Instruction sequence'
     fill_in 'instruction_sequence_text', :with => sequence_def[:text]
+    fill_in 'instruction_sequence_title', :with => sequence_def[:title]
     click_button 'Create Instruction sequence'
   when "PickAPointSequence"
     click_link 'New Pick a point sequence'
@@ -527,7 +528,7 @@ def extract_multiple_choice_sequence!(mc_seq_def)
   if mc_seq_def[:useSequentialFeedback] == true
     check 'multiple_choice_sequence_use_sequential_feedback'
   else
-    uncheck 'multiple_choice_sequence_use_sequential_feedback' 
+    uncheck 'multiple_choice_sequence_use_sequential_feedback'
   end
   select mc_seq_def[:dataSetName], :from => 'multiple_choice_sequence[data_set_id]'
   click_button 'Create Multiple choice sequence'
@@ -552,7 +553,7 @@ def extract_multiple_choice_sequence!(mc_seq_def)
   end
   # multiple choice handles hints differently, so delete them from the hash
   mc_seq_def.delete(:hints)
-end 
+end
 
 
 def create_slope_tool_sequence!(opts)

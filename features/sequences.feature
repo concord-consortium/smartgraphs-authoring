@@ -15,6 +15,7 @@ Feature: Sequences Activities
         :text: In this page...
         :sequence:
           :type: InstructionSequence
+          :title: My first instruction sequence
           :text: Click ok...
       """
     Then I should get correct json
