@@ -24,6 +24,9 @@ class DataSet < ActiveRecord::Base
     point_type DataSet::PointType,  :default => "dot"
 
     data :text
+
+    piecewise_linear :boolean, :default => false
+
     timestamps
   end
 
@@ -41,6 +44,9 @@ class DataSet < ActiveRecord::Base
   has_many :data_set_prediction_graphs, :dependent => :destroy
   has_many :prediction_graph_panes, :through => :data_set_prediction_graphs
 
+  belongs_to :derivative_of, :inverse_of => :derivative, :class_name => 'DataSet'
+  has_one :derivative, :inverse_of => :derivative_of, :class_name => 'DataSet'
+
   before_validation do
     reformat_data_text
     reformat_expression
@@ -49,7 +55,7 @@ class DataSet < ActiveRecord::Base
   validate :validate_expression
 
   def field_order
-    "name, expression, line_snap_distance, line_type, point_type, data, x_unit, y_unit, x_precision, y_precision"
+    "name, expression, derivative_of, piecewise_linear, line_snap_distance, line_type, point_type, data, x_unit, y_unit, x_precision, y_precision"
   end
 
   def to_hash
@@ -64,7 +70,9 @@ class DataSet < ActiveRecord::Base
       'lineType'         => line_type,
       'pointType'        => point_type,
       'data'             => data_to_hash,
-      'expression'       => expression_to_hash
+      'expression'       => expression_to_hash,
+      'derivativeOf'     => derivative_of ? derivative_of.name : nil,
+      'piecewiseLinear'  => derivative_of ? piecewise_linear? : nil
     }
     hash
   end

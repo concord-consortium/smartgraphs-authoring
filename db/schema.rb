@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130702202450) do
+ActiveRecord::Schema.define(:version => 20130702202809) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -174,9 +174,12 @@ ActiveRecord::Schema.define(:version => 20130702202450) do
     t.integer  "y_unit_id"
     t.integer  "x_unit_id"
     t.integer  "activity_id"
+    t.boolean  "piecewise_linear",   :default => false
+    t.integer  "derivative_of_id"
   end
 
   add_index "data_sets", ["activity_id"], :name => "index_data_sets_on_activity_id"
+  add_index "data_sets", ["derivative_of_id"], :name => "index_data_sets_on_derivative_of_id"
   add_index "data_sets", ["x_unit_id"], :name => "index_data_sets_on_x_unit_id"
   add_index "data_sets", ["y_unit_id"], :name => "index_data_sets_on_y_unit_id"
 
