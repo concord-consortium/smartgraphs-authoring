@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130607151344) do
+ActiveRecord::Schema.define(:version => 20130702202450) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -250,7 +250,7 @@ ActiveRecord::Schema.define(:version => 20130607151344) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "text"
-    t.string   "title",      :default => ""
+    t.string   "title",      :default => "new instruction sequence"
   end
 
   create_table "json_activities", :force => true do |t|
