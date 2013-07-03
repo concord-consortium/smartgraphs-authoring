@@ -319,7 +319,7 @@
 <extend tag="form" for="DataSet">
   <old-form merge>
     <field-list: fields="&this.field_order">
-      <derivative_of-tag: options="&DataSet.where('activity_id = ' + @this.activity_id.to_s + ' AND id != ' + @this.id.to_s)" blank-message="This dataset is not a derivative"/>
+      <derivative_of-tag: options="&DataSet.where('activity_id = ' + @this.activity_id.to_s + ' AND id != ' + (@this.id || -1).to_s)" blank-message="This dataset is not a derivative"/>
       <y_unit-tag: include-none blank-message="No units"/>
       <x_unit-tag: include-none blank-message="No units"/>
     </field-list:>
