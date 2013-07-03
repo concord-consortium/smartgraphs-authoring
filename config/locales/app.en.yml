@@ -28,15 +28,21 @@ en:
       page:
         page_panes: Page Panes
         page_sequences: Page Sequence
+      data_set:
+        piecewise_linear: Source data is piecewise linear?
       text_hint:
         text_hint_prompts: Prompts
       pick_a_point_sequence:
         sequence_hints: Hints
       predefined_graph_pane:
-        expression: Expression  (y=) 
+        expression: Expression  (y=)
+
     attribute_help:
       table_pane:
         title: this is not displayed in the runtime
+      data_set:
+        data: If this dataset is the derivative of another dataset, any data points entered here will be ignored.
+        piecewise_linear: If this dataset is the derivative of another dataset, check this box if the source dataset contains piecewise-linear data. Knowing whether the data is piecewise linear allows SmartGraphs to depict the derivative more accurately.
       page:
         name: this is not displayed in the runtime
       predefined_graph_pane:
