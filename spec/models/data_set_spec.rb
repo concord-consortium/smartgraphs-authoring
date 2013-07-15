@@ -46,11 +46,11 @@ describe DataSet do
       subject.expression.should == "z + y = 22 * x + 6"
     end
   end
-  
+
   describe "#to_hash" do
     describe "default values" do
       let(:expected_hash) {
-        {"type"=>"datadef", "name"=>nil, "yUnits"=>nil, "xUnits"=>nil, "xPrecision"=>0.1, "yPrecision"=>0.1, "lineSnapDistance"=>0.1, "lineType"=>"none", "pointType"=>"dot", "data"=>[], "expression"=>""}
+        {"type"=>"datadef", "name"=>nil, "yUnits"=>nil, "xUnits"=>nil, "xPrecision"=>0.1, "yPrecision"=>0.1, "lineSnapDistance"=>0.1, "lineType"=>"none", "pointType"=>"dot", "data"=>[], "expression"=>"", 'derivativeOf' => nil,  'piecewiseLinear' => nil}
       }
       it "should match our expected hash" do
         subject.to_hash.should == expected_hash
