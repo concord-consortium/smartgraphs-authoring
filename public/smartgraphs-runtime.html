@@ -1,18 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html class="no-js" lang="en">
   <head>
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=8" />
-    <meta http-equiv="Content-Script-Type" content="text/javascript" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <link rel="apple-touch-icon" href="/static/sproutcore/foundation/en/01b7ef43031f5d4a99f7ebe2e42b5d974566d43c/source/resources/images/sproutcore-logo.png" />
-    <link rel="apple-touch-startup-image" media="screen and (orientation:portrait)" href="/static/sproutcore/foundation/en/01b7ef43031f5d4a99f7ebe2e42b5d974566d43c/source/resources/images/sproutcore-startup-portrait.png" />
-    <link rel="apple-touch-startup-image" media="screen and (orientation:landscape)" href="/static/sproutcore/foundation/en/01b7ef43031f5d4a99f7ebe2e42b5d974566d43c/source/resources/images/sproutcore-startup-landscape.png" />
-    <link rel="shortcut icon" href="/static/sproutcore/foundation/en/01b7ef43031f5d4a99f7ebe2e42b5d974566d43c/resources/images/favicon.ico" type="image/x-icon" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"  >
+
+    <script>
+      var SC_benchmarkPreloadEvents = { headStart: new Date().getTime() };
+      var docElem = window.documentElement || document.documentElement;
+      if(docElem) {
+        docElem.className = docElem.className.replace(/(^|\s)no-js(\s|$)/, '$1js$2');
+        docElem = null;
+      }
+    </script>
+
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"  >
+    <meta http-equiv="Content-Script-Type" content="text/javascript"  >
+    <meta name="apple-mobile-web-app-capable" content="yes"  >
+    <meta name="apple-mobile-web-app-status-bar-style" content="default"  >
+    <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"  >
+
+    <link rel="apple-touch-icon" href="/static/smartgraphs/en/d9438833a68b2d12729a18688515cbf59b297133/source/resources/icon-57.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/static/smartgraphs/en/d9438833a68b2d12729a18688515cbf59b297133/source/resources/icon-72.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="/static/smartgraphs/en/d9438833a68b2d12729a18688515cbf59b297133/source/resources/icon-114.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="/static/smartgraphs/en/d9438833a68b2d12729a18688515cbf59b297133/source/resources/icon-120.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="/static/smartgraphs/en/d9438833a68b2d12729a18688515cbf59b297133/source/resources/icon-144.png" />
+    <link rel="apple-touch-startup-image" media="screen and (orientation:portrait)" href="/static/smartgraphs/en/d9438833a68b2d12729a18688515cbf59b297133/source/resources/icon-144.png"  >
+    <link rel="apple-touch-startup-image" media="screen and (orientation:landscape)" href="/static/smartgraphs/en/d9438833a68b2d12729a18688515cbf59b297133/source/resources/icon-144.png"  >
+
+    <link rel="shortcut icon" href="/static/smartgraphs/en/d9438833a68b2d12729a18688515cbf59b297133/resources/favicon.ico" type="image/x-icon"  >
+
 
     <title>SmartGraphs</title>
+
+    <script>
+      window.SC = window.SC || { MODULE_INFO: {}, LAZY_INSTANTIATION: {} };
+      SC.buildMode = 'production';
+      SC.buildNumber = 'd9438833a68b2d12729a18688515cbf59b297133';
+      SC.buildLocale = 'en';
+    </script>
+
+    <script type="text/javascript">String.preferredLanguage = "en";</script>
+
     <script>
     window['ga-disable-UA-6899787-19'] = true;
     </script>
@@ -22,6 +49,7 @@
       window.showEditButton = <%= show_edit_button %>;
       String.preferredLanguage = "en";
     </script>
+
 <script type="text/javascript">
 /* >>>>>>>>>> BEGIN source/core.js */
 // ==========================================================================
@@ -572,8 +600,36 @@ SC.setupBodyClassNames = function() {
 
 </script>
 
-     <link href="/static/smartgraphs/en/1cd87ff0dbcc05774376a624800cabbe9685ae4a/stylesheet-packed.css" rel="stylesheet" type="text/css" />
 
+    <script>
+      (function() {
+        var styles = [];
+        if (window.devicePixelRatio == 2 || window.location.search.indexOf("2x") > -1) {
+          styles = ["/static/smartgraphs/en/d9438833a68b2d12729a18688515cbf59b297133/stylesheet@2x-packed.css"];
+          SC.APP_IMAGE_ASSETS = ["/static/sproutcore/desktop/en/6e748825d6bf6321ad8ac1c803c078f3b703271e/stylesheet-no-repeat@2x.png","/static/sproutcore/ace/en/c5426e10bb56eddc7875bb2f4df1c9b013c4c166/stylesheet-no-repeat@2x.png","/static/sproutcore/ace/en/c5426e10bb56eddc7875bb2f4df1c9b013c4c166/stylesheet-repeat-x@2x.png","/static/sproutcore/ace/en/c5426e10bb56eddc7875bb2f4df1c9b013c4c166/stylesheet-repeat-y@2x.png"];
+        } else {
+          styles = ["/static/smartgraphs/en/d9438833a68b2d12729a18688515cbf59b297133/stylesheet-packed.css"];
+          SC.APP_IMAGE_ASSETS = ["/static/sproutcore/desktop/en/6e748825d6bf6321ad8ac1c803c078f3b703271e/stylesheet-no-repeat.png","/static/sproutcore/ace/en/c5426e10bb56eddc7875bb2f4df1c9b013c4c166/stylesheet-no-repeat.png","/static/sproutcore/ace/en/c5426e10bb56eddc7875bb2f4df1c9b013c4c166/stylesheet-repeat-x.png","/static/sproutcore/ace/en/c5426e10bb56eddc7875bb2f4df1c9b013c4c166/stylesheet-repeat-y.png"];
+        }
+
+
+        var head = document.getElementsByTagName("head")[0],
+            len = styles.length, idx, css;
+        for (idx = 0; idx < len; idx++) {
+          css = document.createElement('link');
+          css.rel   = 'stylesheet';
+          css.type  = 'text/css';
+          css.href  = styles[idx];
+          css.media = 'screen'
+          head.appendChild(css);
+        }
+      })();
+    </script>
+
+
+    <script>
+      SC.benchmarkPreloadEvents['headEnd'] = new Date().getTime();
+    </script>
 
     <script type="text/javascript">
       var _gaq = _gaq || [];
@@ -589,7 +645,10 @@ SC.setupBodyClassNames = function() {
 
   </head>
 
-  <body class="sc-theme focus">
+  <body class="sc-theme sc-focus">
+    <script>
+      SC.benchmarkPreloadEvents['bodyStart'] = new Date().getTime();
+    </script>
 <script type="text/javascript">
 // ==========================================================================
 // Project:   SproutCore - JavaScript Application Framework
@@ -608,7 +667,7 @@ if (SC.setupBodyClassNames) SC.setupBodyClassNames() ;
 <div id="loading">
 <div class='app-loading'>
   <!-- loading spinner courtesy of http://loadinfo.net/ -->
-  <img src="/static/smartgraphs/en/1cd87ff0dbcc05774376a624800cabbe9685ae4a/source/resources/images/app_loading.gif"
+  <img src="/static/smartgraphs/en/d9438833a68b2d12729a18688515cbf59b297133/source/resources/images/app_loading.gif"
        style='margin-top: -63px; margin-left:-24px'>
   <p class='sc-theme sc-view' style='margin-top: 3px; width: 200px; margin-left: -100px;'>
     Loading SmartGraphs...
@@ -617,8 +676,14 @@ if (SC.setupBodyClassNames) SC.setupBodyClassNames() ;
 
 
 </div>
-  <script type="text/javascript" src="/static/smartgraphs/en/1cd87ff0dbcc05774376a624800cabbe9685ae4a/javascript-packed.js"></script>
+  <script type="text/javascript" src="/static/smartgraphs/en/d9438833a68b2d12729a18688515cbf59b297133/javascript-packed.js"></script>
+
+  <script>
+    SC.benchmarkPreloadEvents['bodyEnd'] = new Date().getTime();
+  </script>
+
   <script type="text/javascript" src="http://use.typekit.com/hdw8ayt.js"></script>
   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
   </body>
 </html>
