@@ -3,7 +3,7 @@ require 'spec_helper'
 describe EmptyPane do
   describe '#sg_parent' do
     it 'returns the parent page' do
-      page = Page.create
+      page = Page.create(:name => 'Dummy Page')
       page.empty_panes = [EmptyPane.create]
       page.empty_panes.first.sg_parent.should == page
     end

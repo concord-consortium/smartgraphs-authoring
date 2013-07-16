@@ -11,7 +11,7 @@ class Page < ActiveRecord::Base
   sg_parent :activity
 
   fields do
-    name :string
+    name :string, :required
     text :raw_html
     timestamps
   end
