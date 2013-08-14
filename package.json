@@ -2,6 +2,6 @@
   "description" : "package file which installs authoring dependency: smartgraphs-generator",
   "version" : "0.0.1",
   "dependencies" : {
-    "smartgraphs-generator" : "git://github.com/concord-consortium/smartgraphs-generator.git#production-2013-07-17"
+    "smartgraphs-generator" : "git://github.com/concord-consortium/smartgraphs-generator.git#production-2013-08-14"
   }
 }
