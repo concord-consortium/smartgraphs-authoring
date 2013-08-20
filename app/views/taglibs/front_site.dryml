@@ -44,6 +44,11 @@
           var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
         })();
       </script>
+      <link rel="apple-touch-icon" href="/images/icon-57.png" />
+      <link rel="apple-touch-icon" sizes="72x72" href="/images/icon-72.png" />
+      <link rel="apple-touch-icon" sizes="114x114" href="/images/icon-114.png" />
+      <link rel="apple-touch-icon" sizes="120x120" href="/images/icon-120.png" />
+      <link rel="apple-touch-icon" sizes="144x144" href="/images/icon-144.png" />
     </custom-scripts:>
     <footer:>
       <p id="copyright">
