@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130702202809) do
+ActiveRecord::Schema.define(:version => 20130821173217) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -57,6 +57,8 @@ ActiveRecord::Schema.define(:version => 20130702202809) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "animation_id"
+    t.float    "spec_min_x"
+    t.float    "spec_max_x"
   end
 
   add_index "animation_panes", ["animation_id"], :name => "index_animation_panes_on_animation_id"
