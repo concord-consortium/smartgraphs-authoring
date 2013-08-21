@@ -43,9 +43,16 @@ class AnimationPane < ActiveRecord::Base
   # for those values. These methods try to get the values from the animation's
   # dataset, and return nil if it's an expression.
   def calc_min_x
-    if animation.data_set.expression.blank?
-      # x-min is the first value of the point which is first in the order when the points are sorted.
-      return animation.data_set.data_to_hash.sort.first[0]
+    if animation.data_set.derivative_of
+      # Data set is a derivative of another, and we'll need to get x-max and x-min from there
+      source_data = animation.data_set.derivative_of
+    else
+      # Not a derivative, start here.
+      source_data = animation.data_set
+    end
+    if source_data.expression.blank?
+      # If there are points, x-min is the first value of the point which is first in the order when the points are sorted.
+      return source_data.data_to_hash.sort.first[0]
     else
       # The data set is defined by an expression, so we need a starting and ending point.
       return nil
@@ -53,9 +60,16 @@ class AnimationPane < ActiveRecord::Base
   end
 
   def calc_max_x
-    if animation.data_set.expression.blank?
+    if animation.data_set.derivative_of
+      # Data set is a derivative of another, and we'll need to get x-max and x-min from there
+      source_data = animation.data_set.derivative_of
+    else
+      # Not a derivative, start here.
+      source_data = animation.data_set
+    end
+    if source_data.expression.blank?
       # x-max is the first value of the point which is last in the order when the points are sorted.
-      return animation.data_set.data_to_hash.sort.last[0]
+      return source_data.data_to_hash.sort.last[0]
     else
       # The data set is defined by an expression, so we need a starting and ending point.
       return nil
