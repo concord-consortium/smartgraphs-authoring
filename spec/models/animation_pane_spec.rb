@@ -30,15 +30,9 @@ describe AnimationPane do
       activity.pages.first.animation_panes.first.animation.save
     end
 
-    describe '#calc_min_x' do
+    describe '#calc_range' do
       it 'returns nil' do
-        activity.pages.first.animation_panes.first.calc_min_x.should be_nil
-      end
-    end
-
-    describe '#calc_max_x' do
-      it 'returns nil if the animation data_set is an expression' do
-        activity.pages.first.animation_panes.first.calc_max_x.should be_nil
+        activity.pages.first.animation_panes.first.calc_range.should be_nil
       end
     end
   end
@@ -49,16 +43,13 @@ describe AnimationPane do
       activity.pages.first.animation_panes.first.animation.save
     end
 
-    describe '#calc_min_x' do
+    describe '#calc_range' do
       it 'returns the min x value of the data_set if the data is points' do
-        activity.pages.first.animation_panes.first.calc_min_x.should == 1.0
+        activity.pages.first.animation_panes.first.calc_range[:min].should == 1.0
       end
-    end
 
-
-    describe '#calc_max_x' do
       it 'returns the max x value of the data_set if the data is points' do
-        activity.pages.first.animation_panes.first.calc_max_x.should == 5.0
+        activity.pages.first.animation_panes.first.calc_range[:max].should == 5.0
       end
     end
   end

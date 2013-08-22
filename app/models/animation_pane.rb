@@ -23,26 +23,32 @@ class AnimationPane < ActiveRecord::Base
     {
       'type' => 'AnimationPane',
       'animation' => animation && animation.name || "",
-      'xMin' => calc_min_x ? calc_min_x : spec_min_x,
-      'xMax' => calc_max_x ? calc_max_x : spec_max_x
+      'xMin' => calc_range ? calc_range[:min] : spec_min_x,
+      'xMax' => calc_range ? calc_range[:max] : spec_max_x
     }
   end
 
   def x_min_from_hash(definition)
     self.spec_min_x = definition
-    # TODO: Should we zero this if calc_min_x returns a value?
+    # TODO: Should we zero this if calc_range returns a value?
   end
 
   def x_max_from_hash(definition)
     self.spec_max_x = definition
-    # TODO: Should we zero this if calc_min_x returns a value?
+    # TODO: Should we zero this if calc_range returns a value?
   end
 
   # If we can get x-min and x-max from the animation's dataset, we should.
   # However, if it's an expression, we can't, and we need to ask the author
   # for those values. These methods try to get the values from the animation's
   # dataset, and return nil if it's an expression.
-  def calc_min_x
+  def calc_range
+    # If the animation isn't set yet, or its data set is empty, bail out.
+    if animation.blank? || animation.data_set.blank?
+      return nil
+    end
+
+    # Figure out which data set to derive from
     if animation.data_set.derivative_of
       # Data set is a derivative of another, and we'll need to get x-max and x-min from there
       source_data = animation.data_set.derivative_of
@@ -50,30 +56,21 @@ class AnimationPane < ActiveRecord::Base
       # Not a derivative, start here.
       source_data = animation.data_set
     end
+
+    # Derive the numbers
     if source_data.expression.blank?
-      # If there are points, x-min is the first value of the point which is first in the order when the points are sorted.
-      return source_data.data_to_hash.sort.first[0]
+      # If there are points, x-min is the first value of the point which is first in the order
+      # when the points are sorted, and x-max is the last.
+      return {:min => source_data.data_to_hash.sort.first[0], :max => source_data.data_to_hash.sort.last[0]}
     else
       # The data set is defined by an expression, so we need a starting and ending point.
       return nil
     end
   end
 
-  def calc_max_x
-    if animation.data_set.derivative_of
-      # Data set is a derivative of another, and we'll need to get x-max and x-min from there
-      source_data = animation.data_set.derivative_of
-    else
-      # Not a derivative, start here.
-      source_data = animation.data_set
-    end
-    if source_data.expression.blank?
-      # x-max is the first value of the point which is last in the order when the points are sorted.
-      return source_data.data_to_hash.sort.last[0]
-    else
-      # The data set is defined by an expression, so we need a starting and ending point.
-      return nil
-    end
+  # Do we need an x-min and x-max supplied by the author?
+  def needs_x_range?
+    return self.calc_range.nil?
   end
 
   def animation_from_hash(definition)
