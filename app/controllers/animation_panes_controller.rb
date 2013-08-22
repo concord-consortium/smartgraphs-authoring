@@ -10,13 +10,6 @@ class AnimationPanesController < ApplicationController
     hobo_destroy :redirect => animation_pane.page
   end
 
-  # def edit
-  #   self.this = AnimationPane.create(params[:animation_pane]) if params[:animation_pane]
-  #   hobo_show do
-  #     hobo_ajax_response if request.xhr?
-  #   end
-  # end
-
   def edit
     self.this = AnimationPane.new(params[:animation_pane]) if params[:animation_pane]
     hobo_show do
@@ -25,11 +18,10 @@ class AnimationPanesController < ApplicationController
     end
   end
 
-  # # This isn't saving the activity
-  # def new_for_page
-  #   hobo_create(AnimationPane.create(params[:animation_pane])) do
-  #     hobo_ajax_response if request.xhr?
-  #   end
-  # end
-
+  # This isn't saving the activity
+  def new
+    hobo_create(AnimationPane.create(params[:animation_pane])) do
+      hobo_ajax_response if request.xhr?
+    end
+  end
 end
