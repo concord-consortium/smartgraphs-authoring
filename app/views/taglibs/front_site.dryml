@@ -364,9 +364,8 @@
     <old-form>
       <field-list: fields="&this.field_order">
         <animation-tag: options="&Animation.activity_is(activity_for(@this))" />
-        <!-- TODO: The spec_min_x and spec_max_x fields should be hidden if calc_range returns a value -->
-        <spec_min_x-tag: disabled="&this.has_x_range?"/>
-        <spec_max_x-tag: disabled="&this.has_x_range?"/>
+        <spec_min_x-tag: disabled="&@animation_pane.has_x_range?"/>
+        <spec_max_x-tag: disabled="&@animation_pane.has_x_range?"/>
       </field-list>
     </old-form>
   </do>
