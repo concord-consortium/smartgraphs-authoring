@@ -35,6 +35,18 @@ describe AnimationPane do
         activity.pages.first.animation_panes.first.calc_range.should be_nil
       end
     end
+
+    describe '#has_x_range?' do
+      it 'returns false' do
+        activity.pages.first.animation_panes.first.has_x_range?.should be_false
+      end
+    end
+
+    describe '#needs_x_range?' do
+      it 'returns true' do
+        activity.pages.first.animation_panes.first.needs_x_range?.should be_true
+      end
+    end
   end
 
   context 'when data_set is a set of points' do
@@ -50,6 +62,18 @@ describe AnimationPane do
 
       it 'returns the max x value of the data_set if the data is points' do
         activity.pages.first.animation_panes.first.calc_range[:max].should == 5.0
+      end
+    end
+
+    describe '#has_x_range?' do
+      it 'returns true' do
+        activity.pages.first.animation_panes.first.has_x_range?.should be_true
+      end
+    end
+
+    describe '#needs_x_range?' do
+      it 'returns false' do
+        activity.pages.first.animation_panes.first.needs_x_range?.should be_false
       end
     end
   end

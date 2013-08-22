@@ -19,6 +19,10 @@ class AnimationPane < ActiveRecord::Base
 
   reverse_association_of :page, 'Page#animation_panes'
 
+  def field_order
+    "animation, spec_min_x, spec_max_x"
+  end
+
   def to_hash
     {
       'type' => 'AnimationPane',
@@ -71,6 +75,10 @@ class AnimationPane < ActiveRecord::Base
   # Do we need an x-min and x-max supplied by the author?
   def needs_x_range?
     return self.calc_range.nil?
+  end
+
+  def has_x_range?
+    return !self.calc_range.nil?
   end
 
   def animation_from_hash(definition)
