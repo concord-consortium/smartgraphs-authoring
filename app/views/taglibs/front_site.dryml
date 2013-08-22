@@ -360,11 +360,16 @@
 </extend>
 
 <extend tag="form" for="AnimationPane">
-  <old-form merge>
-    <field-list: fields="animation">
-      <animation-tag: options="&Animation.activity_is(activity_for(@this))" />
-    </field-list>
-  </old-form>
+  <do part="animation-part">
+    <old-form>
+      <field-list: fields="&this.field_order">
+        <animation-tag: options="&Animation.activity_is(activity_for(@this))" />
+        <!-- TODO: The spec_min_x and spec_max_x fields should be hidden if calc_range returns a value -->
+        <spec_min_x-tag: disabled="has_x_range?"/>
+        <spec_max_x-tag: disabled="has_x_range?"/>
+      </field-list>
+    </old-form>
+  </do>
 </extend>
 
 <extend tag="form" for="Page">
