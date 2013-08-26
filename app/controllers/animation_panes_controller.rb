@@ -11,16 +11,22 @@ class AnimationPanesController < ApplicationController
   end
 
   def edit
-    self.this = AnimationPane.new(params[:animation_pane]) if params[:animation_pane]
-    hobo_show do
-      @animation_pane = this
+    hobo_edit do
+      this.attributes = params[:animation_pane] || {}
       hobo_ajax_response if request.xhr?
     end
   end
 
-  # This isn't saving the activity
   def new
-    hobo_create(AnimationPane.create(params[:animation_pane])) do
+    hobo_new do
+      this.attributes = params[:animation_pane] || {}
+      hobo_ajax_response if request.xhr?
+    end
+  end
+
+  def new_for_page
+    hobo_new_for :page do
+      this.attributes = params[:animation_pane] || {}
       hobo_ajax_response if request.xhr?
     end
   end
