@@ -7,8 +7,8 @@ class AnimationPane < ActiveRecord::Base
   sg_parent :page
 
   fields do
-    spec_min_x :float
-    spec_max_x :float
+    specify_start_x :float
+    specify_end_x :float
     timestamps
   end
 
@@ -20,25 +20,25 @@ class AnimationPane < ActiveRecord::Base
   reverse_association_of :page, 'Page#animation_panes'
 
   def field_order
-    "animation, spec_min_x, spec_max_x"
+    "animation, specify_start_x, specify_end_x"
   end
 
   def to_hash
     {
       'type' => 'AnimationPane',
       'animation' => animation && animation.name || "",
-      'xMin' => calc_range ? calc_range[:min] : spec_min_x,
-      'xMax' => calc_range ? calc_range[:max] : spec_max_x
+      'xMin' => calc_range ? calc_range[:min] : specify_start_x,
+      'xMax' => calc_range ? calc_range[:max] : specify_end_x
     }
   end
 
   def x_min_from_hash(definition)
-    self.spec_min_x = definition
+    self.specify_start_x = definition
     # TODO: Should we zero this if calc_range returns a value?
   end
 
   def x_max_from_hash(definition)
-    self.spec_max_x = definition
+    self.specify_end_x = definition
     # TODO: Should we zero this if calc_range returns a value?
   end
 

@@ -364,8 +364,10 @@
     <old-form>
       <field-list: fields="&this.field_order">
         <animation-tag: options="&Animation.activity_is(activity_for(@this))" />
-        <spec_min_x-tag: disabled="&@animation_pane.has_x_range?"/>
-        <spec_max_x-tag: disabled="&@animation_pane.has_x_range?"/>
+        <label-tag:>Starting X value for animation</label-tag:>
+        <specify_start_x-tag: disabled="&@animation_pane.has_x_range?" />
+        <!-- h3>Ending X value for animation</h3 -->
+        <specify_end_x-tag: disabled="&@animation_pane.has_x_range?" />
       </field-list>
     </old-form>
   </do>
