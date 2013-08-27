@@ -359,20 +359,6 @@
   </old-form>
 </extend>
 
-<!-- <extend tag="form" for="AnimationPane">
-  <do part="animation-part">
-    <old-form>
-      <field-list: fields="&this.field_order">
-        <animation-tag: options="&Animation.activity_is(activity_for(@this))" />
-        <specify_start_x-label:>Starting X value for animation</specify_start_x-label:>
-        <specify_start_x-tag: disabled="&@animation_pane.has_x_range?" />
-        <specify_end_x-label:>Ending X value for animation</specify_end_x-label:>
-        <specify_end_x-tag: disabled="&@animation_pane.has_x_range?" />
-      </field-list>
-    </old-form>
-  </do>
-</extend> -->
-
 <extend tag="form" for="Page">
   <old-form merge>
     <field-list: fields="name, text" param/>

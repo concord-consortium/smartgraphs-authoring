@@ -17,8 +17,11 @@ class AnimationPanesController < ApplicationController
   #   end
   # end
 
-  def new
+  def new_for_page
     @animation_pane = AnimationPane.new
+    if params[:page_path]
+      params[:page_path] = CGI.unescape(params[:page_path])
+    end
     if request.xhr? && !params[:animation_id].blank?
       @animation_pane.animation = Animation.find(params[:animation_id])
       hobo_ajax_response
