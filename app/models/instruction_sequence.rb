@@ -7,14 +7,16 @@ class InstructionSequence < ActiveRecord::Base
   include SgPermissions
   include SgMarshal
   sg_parent :page
-  
+
   fields do
-    text :text
+    title                 :string, :default => "new instruction sequence"
+    text :raw_html
     timestamps
   end
 
   validates :text, :presence => true
-  
+  validates :title, :presence => true
+
   has_one :page_sequence, :as => :sequence, :dependent => :destroy
 
   has_one :page, :through => :page_sequence
@@ -23,12 +25,13 @@ class InstructionSequence < ActiveRecord::Base
   def to_hash
     {
       'type' => 'InstructionSequence',
-      'text' => text
+      'text' => text,
+      'title' => title
     }
   end
 
   def name
-    text
+    title
   end
 
 end

@@ -1,11 +1,7 @@
 FactoryGirl.define do
 
-  sequence :user_name do |n|
-    "person#{n}"
-  end
-
   factory :user do
-    name user_name
+    sequence(:name){ |n| "person#{n}" }
     email_address { |u| u.name+"@example.com"}
     administrator false
     state 'active'
@@ -16,7 +12,7 @@ FactoryGirl.define do
       name "admin"
       email_address "admin@concord.org"
       administrator true
-      state 'active'      
+      state 'active'
       password 'admin1234'
       password_confirmation 'admin1234'
     end
@@ -27,6 +23,6 @@ FactoryGirl.define do
         email_address "#{n}@concord.org"
       end
     end
-    
+
   end
 end

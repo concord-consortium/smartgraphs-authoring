@@ -1,0 +1,2 @@
+module AnimationPanesHelper
+end

@@ -46,11 +46,11 @@ describe DataSet do
       subject.expression.should == "z + y = 22 * x + 6"
     end
   end
-  
+
   describe "#to_hash" do
     describe "default values" do
       let(:expected_hash) {
-        {"type"=>"datadef", "name"=>nil, "yUnits"=>nil, "xUnits"=>nil, "xPrecision"=>0.1, "yPrecision"=>0.1, "lineSnapDistance"=>0.1, "lineType"=>"none", "pointType"=>"dot", "data"=>[], "expression"=>""}
+        {"type"=>"datadef", "name"=>nil, "yUnits"=>nil, "xUnits"=>nil, "xPrecision"=>0.1, "yPrecision"=>0.1, "lineSnapDistance"=>0.1, "lineType"=>"none", "pointType"=>"dot", "data"=>[], "expression"=>"", 'derivativeOf' => nil,  'piecewiseLinear' => nil}
       }
       it "should match our expected hash" do
         subject.to_hash.should == expected_hash
@@ -60,7 +60,22 @@ describe DataSet do
 
     end
   end
-   
+
+  describe "#expression_to_hash" do
+    it "should prefix the expression with 'y = ' to the expression if the expression doesn't start with 'y ='" do
+      test = DataSet.new(
+        :name     => "name",
+        :expression => "x + 5")
+      test.expression_to_hash.should == "y = x + 5"
+    end
+    describe "it should not prefix an additional 'y = ' to the expression if the expression already starts with 'y ='" do
+      test = DataSet.new(
+        :name     => "name",
+        :expression => "    y   = x + 5")
+      test.expression_to_hash.should == "y = x + 5"
+    end
+  end
+
   describe "validations" do
     describe "expression" do
       describe "passing expressions" do

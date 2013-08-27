@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130325201438) do
+ActiveRecord::Schema.define(:version => 20130826201515) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -43,6 +43,38 @@ ActiveRecord::Schema.define(:version => 20130325201438) do
 
   add_index "activity_subject_areas", ["activity_id"], :name => "index_activity_subject_areas_on_activity_id"
   add_index "activity_subject_areas", ["subject_area_id"], :name => "index_activity_subject_areas_on_subject_area_id"
+
+  create_table "animation_marked_coordinates", :force => true do |t|
+    t.float    "coordinate"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "animation_id"
+  end
+
+  add_index "animation_marked_coordinates", ["animation_id"], :name => "index_animation_marked_coordinates_on_animation_id"
+
+  create_table "animation_panes", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "animation_id"
+    t.float    "specify_start_x"
+    t.float    "specify_end_x"
+  end
+
+  add_index "animation_panes", ["animation_id"], :name => "index_animation_panes_on_animation_id"
+
+  create_table "animations", :force => true do |t|
+    t.string   "name"
+    t.float    "y_min"
+    t.float    "y_max"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "activity_id"
+    t.integer  "data_set_id"
+  end
+
+  add_index "animations", ["activity_id"], :name => "index_animations_on_activity_id"
+  add_index "animations", ["data_set_id"], :name => "index_animations_on_data_set_id"
 
   create_table "annotation_inclusions", :force => true do |t|
     t.datetime "created_at"
@@ -144,11 +176,19 @@ ActiveRecord::Schema.define(:version => 20130325201438) do
     t.integer  "y_unit_id"
     t.integer  "x_unit_id"
     t.integer  "activity_id"
+    t.boolean  "piecewise_linear",   :default => false
+    t.integer  "derivative_of_id"
   end
 
   add_index "data_sets", ["activity_id"], :name => "index_data_sets_on_activity_id"
+  add_index "data_sets", ["derivative_of_id"], :name => "index_data_sets_on_derivative_of_id"
   add_index "data_sets", ["x_unit_id"], :name => "index_data_sets_on_x_unit_id"
   add_index "data_sets", ["y_unit_id"], :name => "index_data_sets_on_y_unit_id"
+
+  create_table "empty_panes", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "give_up_prompts", :force => true do |t|
     t.datetime "created_at"
@@ -170,6 +210,22 @@ ActiveRecord::Schema.define(:version => 20130325201438) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "graph_labels", :force => true do |t|
+    t.integer  "label_set_id"
+    t.string   "text"
+    t.float    "x_coord"
+    t.float    "y_coord"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "predefined_graph_pane_id"
+    t.string   "name"
+    t.integer  "pick_a_point_sequence_id"
+  end
+
+  add_index "graph_labels", ["label_set_id"], :name => "index_graph_labels_on_label_set_id"
+  add_index "graph_labels", ["pick_a_point_sequence_id"], :name => "index_graph_labels_on_pick_a_point_sequence_id"
+  add_index "graph_labels", ["predefined_graph_pane_id"], :name => "index_graph_labels_on_predefined_graph_pane_id"
 
   create_table "image_panes", :force => true do |t|
     t.string   "name"
@@ -199,6 +255,7 @@ ActiveRecord::Schema.define(:version => 20130325201438) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "text"
+    t.string   "title",      :default => "new instruction sequence"
   end
 
   create_table "json_activities", :force => true do |t|
@@ -208,11 +265,33 @@ ActiveRecord::Schema.define(:version => 20130325201438) do
     t.datetime "updated_at"
   end
 
+  create_table "label_sequences", :force => true do |t|
+    t.string   "title",        :default => "New label sequence"
+    t.text     "text"
+    t.integer  "label_count",  :default => 1
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "label_set_id"
+  end
+
+  add_index "label_sequences", ["label_set_id"], :name => "index_label_sequences_on_label_set_id"
+
+  create_table "label_set_predefined_graphs", :force => true do |t|
+    t.integer  "label_set_id"
+    t.integer  "predefined_graph_pane_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "label_set_predefined_graphs", ["label_set_id"], :name => "index_label_set_predefined_graphs_on_label_set_id"
+  add_index "label_set_predefined_graphs", ["predefined_graph_pane_id"], :name => "index_label_set_predefined_graphs_on_predefined_graph_pane_id"
+
   create_table "label_sets", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "activity_id"
+    t.boolean  "is_for_users", :default => false
   end
 
   add_index "label_sets", ["activity_id"], :name => "index_label_sets_on_activity_id"
@@ -334,6 +413,7 @@ ActiveRecord::Schema.define(:version => 20130325201438) do
     t.float    "correct_answer_x_max"
     t.float    "correct_answer_y_max"
     t.integer  "data_set_id"
+    t.boolean  "answer_with_label"
   end
 
   add_index "pick_a_point_sequences", ["data_set_id"], :name => "index_pick_a_point_sequences_on_data_set_id"
@@ -381,8 +461,10 @@ ActiveRecord::Schema.define(:version => 20130325201438) do
     t.boolean  "show_cross_hairs",     :default => false
     t.boolean  "show_graph_grid",      :default => false
     t.boolean  "show_tool_tip_coords", :default => false
+    t.integer  "animation_id"
   end
 
+  add_index "predefined_graph_panes", ["animation_id"], :name => "index_predefined_graph_panes_on_animation_id"
   add_index "predefined_graph_panes", ["x_unit_id"], :name => "index_predefined_graph_panes_on_x_unit_id"
   add_index "predefined_graph_panes", ["y_unit_id"], :name => "index_predefined_graph_panes_on_y_unit_id"
 

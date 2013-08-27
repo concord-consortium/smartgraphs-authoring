@@ -14,7 +14,7 @@ describe ApplicationHelper do
   describe 'activity_for' do
     before(:all) do
       @act = Activity.create!(:name => 'Activity to be found')
-      @page = Page.create!()
+      @page = Page.create!(:name => "Dummy Page")
       @page.activity = @act
       @page.save
     end

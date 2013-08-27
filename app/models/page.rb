@@ -3,7 +3,7 @@ class Page < ActiveRecord::Base
   hobo_model # Don't put anything above this
 
   # view_hints.parent nil
-  
+
   # standard owner and admin permissions
   # defined in models/standard_permissions.rb
   include SgPermissions
@@ -11,8 +11,8 @@ class Page < ActiveRecord::Base
   sg_parent :activity
 
   fields do
-    name :string
-    text :text
+    name :string, :required
+    text :raw_html
     timestamps
   end
 
@@ -35,6 +35,12 @@ class Page < ActiveRecord::Base
   has_many :table_panes, :through => :page_panes, :source => :pane, :source_type => 'TablePane'
   reverse_association_of :table_panes, 'TablePane#page'
 
+  has_many :animation_panes, :through => :page_panes, :source => :pane, :source_type => 'AnimationPane'
+  reverse_association_of :animation_panes, 'AnimationPane#page'
+
+  has_many :empty_panes, :through => :page_panes, :source => :pane, :source_type => 'EmptyPane'
+  reverse_association_of :empty_panes, 'EmptyPane#page'
+
   has_many :page_sequences
 
   has_many :instruction_sequences, :through => :page_sequences, :source => :sequence, :source_type => 'InstructionSequence'
@@ -54,19 +60,22 @@ class Page < ActiveRecord::Base
 
   has_many :slope_tool_sequences, :through => :page_sequences, :source => :sequence, :source_type => 'SlopeToolSequence'
   reverse_association_of :slope_tool_sequences, 'SlopeToolSequence#page'
-  
+
   has_many :line_construction_sequences, :through => :page_sequences, :source => :sequence, :source_type => 'LineConstructionSequence'
   reverse_association_of :line_construction_sequences, 'LineConstructionSequence#page'
 
   has_many :best_fit_sequences, :through => :page_sequences, :source => :sequence, :source_type => 'BestFitSequence'
   reverse_association_of :best_fit_sequences, 'BestFitSequence#page'
-  
+
+  has_many :label_sequences, :through => :page_sequences, :source => :sequence, :source_type => 'LabelSequence'
+  reverse_association_of :label_sequences, 'LabelSequence#page'
+
   children :page_sequences, :page_panes
 
   acts_as_list
 
   # There was once an issue with [Pages "jumping" unexpectedly to different activites when edited][1]. We think that
-  # was fixed by removing the Activity select menu from the Page edit form, but if that's not sufficient, Hobo's 
+  # was fixed by removing the Activity select menu from the Page edit form, but if that's not sufficient, Hobo's
   # permissions might be a reasonable approach:
 
   # def update_permitted?

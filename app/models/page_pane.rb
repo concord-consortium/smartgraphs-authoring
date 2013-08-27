@@ -14,6 +14,7 @@ class PagePane < ActiveRecord::Base
   belongs_to :page
   belongs_to :pane, :polymorphic => true
 
+  # TODO: This should be scoped to page?
   acts_as_list
 
 end

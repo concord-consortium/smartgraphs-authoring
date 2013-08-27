@@ -14,7 +14,7 @@ class SlopeToolSequence < ActiveRecord::Base
     case_type                              SlopeToolSequence::CaseType,         :default => "case_a"
     point_constraints                      SlopeToolSequence::PointConstraint,  :default => "any"
 
-    first_question                         :text
+    first_question                         :raw_html
     slope_variable_name                    :string,   :default => "slope"
     x_min                                  :float,    :default => 0
     y_min                                  :float,    :default => 0

@@ -10,9 +10,9 @@ class MultipleChoiceSequence < ActiveRecord::Base
   sg_parent :page
   
   fields do
-    initial_prompt :text
-    give_up :text
-    confirm_correct :text
+    initial_prompt :raw_html
+    give_up :html
+    confirm_correct :html
     use_sequential_feedback :boolean, :default => true
     timestamps
   end

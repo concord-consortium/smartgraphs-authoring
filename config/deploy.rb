@@ -269,6 +269,13 @@ namespace :hobo do
   end
 end
 
+namespace :db do
+  desc 'invoke the rails generator to set the InstructionSequence titles'
+  task :update_instruction_sequence_titles do
+    run("cd #{deploy_to}/current; bundle exec rails generate smart_graphs:sequence_title RAILS_ENV=#{rails_env}")
+  end
+end
+
 namespace :converter do
   desc 'install the smartgraph-generator node package and convert binary'
   task :install do
@@ -281,3 +288,4 @@ after 'deploy:update_code', 'deploy:shared_symlinks'
 before 'deploy:restart', 'hobo:generate_taglibs'
 before 'deploy:restart', 'converter:install'
 after 'deploy:migrate', 'hobo:generate_taglibs'
+after 'deploy:restart', 'deploy:cleanup'

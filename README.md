@@ -45,13 +45,25 @@ Or just read that file, and follow along.
     /static/smartgraphs/en/82b404e9816653aae3437852c272301c88eb986a/index.html
 5. Move the index.html file from the newly-built smartgraphs folder to the root of the smartgraphs-authoring
    applications public folder, and rename it smartgraphs-runtime.html
-    # from inside smartgraphs-authoring
+    from inside smartgraphs-authoring
     mv public/static/smartgraphs/en/{build-number}/index.html public/smartgraphs-runtime.html
 6. Add the following lines to smartgraphs-runtime.html, just after the opening of the first script tag (currently line
-   16):   
+   16):
     window.authoredActivityJSON = <%= authored_activity_json %>;
     window.showOutline = <%= show_outline %>;
     window.showEditButton = <%= show_edit_button %>;
+
+## How to update the generator: ##
+
+1. Tag your commit in the 'smartgraphs-generator' on github using a good name (eg: `git tag -a production-2013-07-17 && git push --tags`)
+2. Checkout the 'smartgraphs-authoring', and modify package.json to use the tag you just pushed.
+3. Commit your changes to the deployment of 'smartgraphs-authoring' branch, and re-deploy.
+
+Details:
+
+On deployment, before the server restart is done, a cap-task named "converter::install" is invoked, This uninstalls the local node_module named 'smartgraphs-generator', and then installs a fresh version from the git repo and tag pointed at in package.json.  The cap task is defined in config/deploy.rb.
+
+
 
 ## handy hobo notes ##
 * after substantial modification of a model, run `hobo g migration` to update the schema.

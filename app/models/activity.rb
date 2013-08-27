@@ -22,7 +22,7 @@ class Activity < ActiveRecord::Base
 
   has_many   :pages, :order => :position
   belongs_to :owner, :class_name => "User"
-  children   :pages, :data_sets, :label_sets
+  children   :pages, :data_sets, :label_sets, :animations
 
   has_many   :activity_grade_levels, :dependent => :destroy
   has_many   :grade_levels, :through => :activity_grade_levels, :accessible => true
@@ -32,6 +32,7 @@ class Activity < ActiveRecord::Base
 
   has_many   :data_sets
   has_many   :label_sets
+  has_many   :animations
 
   # --- Class methods --- #
 
@@ -46,6 +47,9 @@ class Activity < ActiveRecord::Base
   # --- Instance methods --- #
 
   def to_hash
+    label_set_array = []
+    # LabelSets for users aren't serialized
+    label_sets.for_authors.each { |ls| label_set_array << ls.to_hash }
     {
       'type' => 'Activity',
       'name' => name,
@@ -54,9 +58,23 @@ class Activity < ActiveRecord::Base
       'datasets' => data_sets.map(&:to_hash),
       # "Dataset" is a single English word and thus is not camel-cased.
       # However, "labelSets" is a concatenation of two English words and is therefore camel-cased
-      'labelSets' => label_sets.map(&:to_hash),
+      'animations' => animations.map(&:to_hash),
+      'labelSets' => label_set_array,
       'units' => Unit.find(:all).map(&:to_hash)
     }
+  end
+
+  def labels
+    labels = self.label_sets.map { |ls| ls.graph_labels }.flatten
+    labels << pages.map { |p| p.predefined_graph_panes.map { |pdgp| pdgp.graph_labels } }.flatten
+    labels << pages.map { |p| p.pick_a_point_sequences.map { |paps| paps.graph_label } }.flatten
+    labels.flatten!.uniq!
+    labels
+  end
+
+  # Array of labels which are not part of a label set
+  def free_labels
+    self.labels.keep_if { |l| l.label_set.blank? }
   end
 
   def after_user_new

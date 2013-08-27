@@ -1,0 +1,102 @@
+{
+  "type": "Activity",
+  "name": "Sequences Label Sequence",
+  "authorName": "",
+  "pages": [
+    {
+      "type": "Page",
+      "name": "1 Label Sequence Page 1",
+      "text": "On this page, students will be asked to place a label on the graph.",
+      "panes": [
+        {
+          "type": "PredefinedGraphPane",
+          "title": "Sinusoidal motion",
+          "yLabel": "Distance",
+          "yMin": -1,
+          "yMax": 1,
+          "xLabel": "Time",
+          "xMin": -4,
+          "xMax": 4,
+          "yTicks": 10,
+          "xTicks": 16,
+          "includedDataSets": [
+            {
+              "name": "default_data_set",
+              "inLegend": false
+            }
+          ],
+          "showCrossHairs": false,
+          "showToolTipCoords": false,
+          "showGraphGrid": false
+        }
+      ],
+      "sequence": {
+        "type": "LabelSequence",
+        "title": "Lorem",
+        "text": "Label the zero crossings",
+        "labelSetName": "Labels for Lorem",
+        "numberOfLabels": 3
+      }
+    },
+    {
+      "type": "Page",
+      "name": "2 Label Sequence Page 2",
+      "text": "The following is a graph of 0.8 sin(x), with the zero crossings you labeled.",
+      "panes": [
+        {
+          "type": "PredefinedGraphPane",
+          "title": "Sinusoidal motion",
+          "yLabel": "Distance",
+          "yMin": -1,
+          "yMax": 1,
+          "xLabel": "Time",
+          "xMin": -4,
+          "xMax": 4,
+          "yTicks": 10,
+          "xTicks": 16,
+          "labelSetNames": [
+            "Labels for Lorem"
+          ],
+          "includedDataSets": [
+            {
+              "name": "default_data_set",
+              "inLegend": false
+            }
+          ],
+          "showCrossHairs": false,
+          "showToolTipCoords": false,
+          "showGraphGrid": false
+        }
+      ]
+    }
+  ],
+  "datasets": [
+    {
+      "type": "dataref",
+      "name": "default_data_set",
+      "yUnits": "meters",
+      "xUnits": "Time",
+      "xPrecision": 0.1,
+      "yPrecision": 0.1,
+      "lineSnapDistance": 0.1,
+      "lineType": "connected",
+      "pointType": "dot",
+      "data": [],
+      "expression": "y = 0.8 sin(x)"
+    }
+  ],
+  "animations": [],
+  "labelSets": [],
+  "units": [
+    {
+      "type": "Unit",
+      "name": "Time",
+      "abbreviation": "s"
+    },
+    {
+      "type": "Unit",
+      "name": "meters",
+      "abbreviation": "m"
+    }
+  ]
+}

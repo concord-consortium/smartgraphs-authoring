@@ -10,7 +10,7 @@ class MultipleChoiceHint < ActiveRecord::Base
   
   fields do
     name      :string
-    hint_text :text
+    hint_text :raw_html
     timestamps
   end
 

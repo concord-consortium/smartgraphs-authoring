@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
-gem 'rails'
-gem "hobo"
+gem 'rails', '~> 3.0.20'
+gem "hobo", "~> 1.3"
 gem "acts_as_list", '~> 0.1.4'
 gem "will_paginate", :git => "git://github.com/Hobo/will_paginate.git"
 gem "yaml_db", "0.2.2"
@@ -31,7 +31,6 @@ group :test do
   # childprocess is the problem, pinned to ffi ~> 1.0, so it won't update past 1.0.9.
   gem 'selenium-webdriver', ">=2.26"
   gem 'cucumber-rails', :require => false
-  gem "rspec-rails", ">= 2.5.0"
   gem 'database_cleaner', '~> 0.7.0'
   gem 'launchy', '~> 2.0.5'
   # Addressable is a launchy dependency
@@ -39,16 +38,18 @@ group :test do
 end
 
 group :test, :development do
+  gem "rspec-rails", ">= 2.13.1"
   gem 'guard', '~> 1.5.4'
   gem 'guard-rspec', '~> 1.2.1'
   gem 'rb-fsevent', '~> 0.9.2'
   gem 'sqlite3', '~> 1.3.4'
-  gem 'rubygems-bundler', '~> 1.1.0'
+  gem 'rubygems-bundler', '~> 1.1.1'
   gem 'pry', '~> 0.9.10'
   gem 'pry-doc', '~> 0.4.4'
   gem 'pry-stack_explorer', '~> 0.4.7'
   gem 'pry-nav', '~> 0.2.2'
   gem 'factory_girl_rails'
+  gem 'faker'
   gem 'poltergeist'
 end
 

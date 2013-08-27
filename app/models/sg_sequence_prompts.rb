@@ -23,6 +23,9 @@ module SgSequencePrompts
 
   def initial_prompt_from_hash(defs)
     self.initial_prompt = defs['text']
+    if self.respond_to?(:answer_with_label) && defs['label']
+      self.answer_with_label = true
+    end
     if self.respond_to?(:title)
       self.title          = defs['text'] # sequences with titles don't include them in their hash, so we use the initial_prompt
     end
