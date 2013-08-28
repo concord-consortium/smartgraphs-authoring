@@ -14,7 +14,7 @@ part="specifyEndX"/></specify_end_x-view:>
 
 <def tag="check-animation-input" attrs="myfield">
   <%
-  if @animation_pane.animation
+  if @animation_pane.animation && !@animation_pane.calc_range.nil?
     animation_attribute = case myfield
       when 'specify_start_x' then eval "@animation_pane.calc_range[:min]"
       when 'specify_end_x' then eval "@animation_pane.calc_range[:max]"
