@@ -17,6 +17,7 @@ class Animation < ActiveRecord::Base
   # not marked as required so that a user can choose to create an animation, *then* its data set
   belongs_to :data_set
   has_many :animation_marked_coordinates, :dependent => :destroy, :accessible => true
+  has_and_belongs_to_many :linked_animations, :class_name => 'DataSet'
 
   validates :name, :uniqueness => {
     :scope => :activity_id,
@@ -36,7 +37,8 @@ class Animation < ActiveRecord::Base
       "markedCoordinates" => animation_marked_coordinates.map(&:coordinate),
       # since we don't validate for existence of data_set, and we use to_hash to
       # copy activities, we need to guard against data_set being nil
-      "dataset" => data_set && data_set.name || ""
+      "dataset" => data_set && data_set.name || "",
+      "linkedAnimations" => linked_animations.map { |la| { "dataSet" => la.name } }
     }
   end
 

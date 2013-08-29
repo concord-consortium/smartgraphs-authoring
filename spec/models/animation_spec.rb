@@ -38,6 +38,7 @@ describe Animation do
         'dataset' => animation.data_set.name,
         'yMin' => animation.y_min,
         'yMax' => animation.y_max,
+        'linkedAnimations' => [],
         'markedCoordinates' => animation.animation_marked_coordinates.map { |mc| mc.coordinate }
       }
     end
