@@ -57,7 +57,7 @@ describe DataSet do
       end
     end
     describe "a more interesting instance" do
-
+      # TODO: Validate that a dataset with a derivative_of value copies properly
     end
   end
 

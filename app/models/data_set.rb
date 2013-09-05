@@ -90,6 +90,16 @@ class DataSet < ActiveRecord::Base
     self.data = tmp_data.join("\n")
   end
 
+  def derivative_of_from_hash(definition)
+    # TODO: test this.
+    callback = Proc.new do
+      self.reload
+      self.derivative_of = self.activity.data_sets.find_by_name(definition)
+      self.save!
+    end
+    self.add_marshal_callback(callback)
+  end
+
   def expression_to_hash
     if expression.empty?
       return ""
