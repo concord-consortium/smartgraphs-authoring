@@ -882,6 +882,28 @@ value="&animation_attribute"/>
 
 <!-- MultipleChoiceSequence -->
 
+<def tag="card" for="MultipleChoiceHint">
+  <card class="multiple-choice-hint" param="default" merge>
+      <header: param>
+        <h4 param="heading"><name/></h4>
+        <div param="actions">
+          <a action="edit" param="edit-link">Edit</a>
+          <delete-button label="X" param/>
+        </div>
+      </header:>
+  </card>
+</def>
+
+<def tag="form" for="MultipleChoiceHint">
+  <form merge param="default">
+    <error-messages param/>
+    <field-list fields="name, hint_text, position" param/>
+    <div param="actions">
+      <submit label="#{ht 'multiple_choice_hint.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
+    </div>
+  </form>
+</def>
+
 <def tag="card" for="MultipleChoiceChoice">
   <card class="multiple-choice-choice" param="default" merge>
     <div class="#{this.correct ? 'correct' : 'incorrect'}">
@@ -989,4 +1011,3 @@ value="&animation_attribute"/>
     </prepend-content-header:>
   </old-show-page>
 </extend>
-
