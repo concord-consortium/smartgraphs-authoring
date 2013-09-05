@@ -71,9 +71,9 @@ class PredefinedGraphPane < ActiveRecord::Base
   has_many :graph_labels, :accessible => true, :conditions => { :label_set_id => nil }
 
   def field_order
-    fo  = %w[title y_label y_min y_max y_ticks ]
-    fo << %w[x_label x_min x_max x_ticks ]
-    fo << %w[show_graph_grid show_cross_hairs show_tool_tip_coords]
+    fo  = %w[title x_label x_min x_max x_ticks ]
+    fo << %w[y_label y_min y_max y_ticks]
+    fo << %w[show_graph_grid show_tool_tip_coords]
     fo.flatten.compact.join(", ") # silly hobo
   end
 
