@@ -42,10 +42,8 @@ class LinkedAnimationPane < ActiveRecord::Base
   has_many :data_set_panes, :accessible => true, :as => :pane, :dependent => :destroy
   has_many :data_sets, :through => :data_set_panes
 
-  has_many :label_sets, :through => :label_set_linked_animations
-  has_many :label_set_linked_animations, :accessible => true, :dependent => :destroy
-
-  has_many :graph_labels, :accessible => true, :conditions => { :label_set_id => nil }
+  has_many :label_set_graph_panes, :accessible => true, :as => :pane, :dependent => :destroy
+  has_many :label_sets, :through => :label_set_graph_panes
 
   def graph_type
     'LinkedAnimationPane'

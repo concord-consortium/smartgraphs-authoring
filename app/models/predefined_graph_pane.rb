@@ -63,8 +63,8 @@ class PredefinedGraphPane < ActiveRecord::Base
   has_many :data_set_panes, :accessible => true, :as => :pane, :dependent => :destroy
   has_many :data_sets, :through => :data_set_panes
 
-  has_many :label_sets, :through => :label_set_predefined_graphs
-  has_many :label_set_predefined_graphs, :accessible => true, :dependent => :destroy
+  has_many :label_set_graph_panes, :accessible => true, :as => :pane, :dependent => :destroy
+  has_many :label_sets, :through => :label_set_graph_panes
 
   belongs_to :animation
 
