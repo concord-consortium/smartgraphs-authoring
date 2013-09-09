@@ -107,7 +107,7 @@ module SgGraphPane
       'showToolTipCoords' => show_tool_tip_coords,
       'showGraphGrid' => show_graph_grid
     }
-    if included_graphs.size > 0
+    if self.respond_to?(:included_graphs) && included_graphs.size > 0
       hash['includeAnnotationsFrom'] = included_graphs.map{ |graph| graph.get_indexed_path }
     end
     if self.respond_to?(:animation) && animation.present?
