@@ -39,8 +39,8 @@ class LinkedAnimationPane < ActiveRecord::Base
 
   reverse_association_of :page, 'Page#linked_animation_panes'
 
-  has_many :data_sets, :through => :data_set_linked_animations
-  has_many :data_set_linked_animations, :accessible => true, :dependent => :destroy
+  has_many :data_set_panes, :accessible => true, :as => :pane, :dependent => :destroy
+  has_many :data_sets, :through => :data_set_panes
 
   has_many :label_sets, :through => :label_set_linked_animations
   has_many :label_set_linked_animations, :accessible => true, :dependent => :destroy

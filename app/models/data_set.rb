@@ -40,14 +40,14 @@ class DataSet < ActiveRecord::Base
   has_many :predefined_graph_panes, :through => :data_set_panes, :source => :pane, :source_type => 'PredefinedGraphPane'
   reverse_association_of :predefined_graph_panes, 'PredefinedGraphPane#data_sets'
 
+  has_many :linked_animation_panes, :through => :data_set_panes, :source => :pane, :source_type => 'LinkedAnimationPane'
+  reverse_association_of :linked_animation_panes, 'LinkedAnimationPane#data_sets'
+
   has_many :data_set_sensor_graphs, :dependent => :destroy
   has_many :sensor_graph_panes, :through => :data_set_sensor_graphs
 
   has_many :data_set_prediction_graphs, :dependent => :destroy
   has_many :prediction_graph_panes, :through => :data_set_prediction_graphs
-
-  has_many :data_set_linked_animations, :dependent => :destroy
-  has_many :linked_animation_panes, :through => :data_set_linked_animations
 
   belongs_to :derivative_of, :inverse_of => :derivative, :class_name => 'DataSet'
   has_one :derivative, :inverse_of => :derivative_of, :class_name => 'DataSet'

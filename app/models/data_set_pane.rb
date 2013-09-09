@@ -8,6 +8,7 @@ class DataSetPane < ActiveRecord::Base
   sg_parent :page
   
   fields do
+    in_legend :boolean, :default => false
     timestamps
   end
 
