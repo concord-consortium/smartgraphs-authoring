@@ -45,6 +45,10 @@ class LinkedAnimationPane < ActiveRecord::Base
   has_many :label_set_graph_panes, :accessible => true, :as => :pane, :dependent => :destroy
   has_many :label_sets, :through => :label_set_graph_panes
 
+  def field_order
+    "title, x_label, x_min, x_max, x_ticks, x_precision, y_label, y_min, y_max, y_ticks, y_precision, show_cross_hairs, show_graph_grid, show_tool_tip_coords"
+  end
+
   def graph_type
     'LinkedAnimationPane'
   end
