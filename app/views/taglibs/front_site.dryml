@@ -611,11 +611,10 @@ value="&animation_attribute"/>
   <old-form merge>
     <field-list: fields="&this.field_order" />
     <after-field-list:>
-    <!-- Do what? -->
       <h3>Included data sets</h3>
       <div id="add-data-sets">
         <input-many:data_set_panes>
-          <select-one:data_set options="&DataSet.activity_is(activity_for(@this))" />
+          <select-one:data_set options="&DataSet.derivatives_by_activity(activity_for(@this))" />
           <field-list fields="in_legend" />
         </input-many>
       </div>

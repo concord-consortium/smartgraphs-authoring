@@ -149,6 +149,10 @@ class DataSet < ActiveRecord::Base
     return 'datadef'
   end
 
+  def self.derivatives_by_activity(activity)
+    where("activity_id = ? AND derivative_of_id IS NOT NULL", activity.id)
+  end
+
   ##
   ## create one or more datasets from
   ## a PredefinedGraphPane or a PredictionGraphPane
