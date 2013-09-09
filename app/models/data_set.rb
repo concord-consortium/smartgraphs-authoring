@@ -35,7 +35,7 @@ class DataSet < ActiveRecord::Base
 
   belongs_to :activity
 
-  has_many :data_set_panes
+  has_many :data_set_panes, :dependent => :destroy
 
   has_many :predefined_graph_panes, :through => :data_set_panes, :source => :pane, :source_type => 'PredefinedGraphPane'
   reverse_association_of :predefined_graph_panes, 'PredefinedGraphPane#data_sets'
@@ -43,8 +43,8 @@ class DataSet < ActiveRecord::Base
   has_many :linked_animation_panes, :through => :data_set_panes, :source => :pane, :source_type => 'LinkedAnimationPane'
   reverse_association_of :linked_animation_panes, 'LinkedAnimationPane#data_sets'
 
-  has_many :data_set_sensor_graphs, :dependent => :destroy
-  has_many :sensor_graph_panes, :through => :data_set_sensor_graphs
+  has_many :sensor_graph_panes, :through => :data_set_panes, :source => :pane, :source_type => 'SensorGraphPane'
+  reverse_association_of :sensor_graph_panes, 'SensorGraphPane#data_sets'
 
   has_many :data_set_prediction_graphs, :dependent => :destroy
   has_many :prediction_graph_panes, :through => :data_set_prediction_graphs
