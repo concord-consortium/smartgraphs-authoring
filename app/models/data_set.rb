@@ -35,8 +35,10 @@ class DataSet < ActiveRecord::Base
 
   belongs_to :activity
 
-  has_many :data_set_predefined_graphs, :dependent => :destroy
-  has_many :predefined_graph_panes, :through => :data_set_predefined_graphs
+  has_many :data_set_panes
+
+  has_many :predefined_graph_panes, :through => :data_set_panes, :source => :pane, :source_type => 'PredefinedGraphPane'
+  reverse_association_of :predefined_graph_panes, 'PredefinedGraphPane#data_sets'
 
   has_many :data_set_sensor_graphs, :dependent => :destroy
   has_many :sensor_graph_panes, :through => :data_set_sensor_graphs
@@ -90,15 +92,15 @@ class DataSet < ActiveRecord::Base
     self.data = tmp_data.join("\n")
   end
 
-  def derivative_of_from_hash(definition)
-    # TODO: test this.
-    callback = Proc.new do
-      self.reload
-      self.derivative_of = self.activity.data_sets.find_by_name(definition)
-      self.save!
-    end
-    self.add_marshal_callback(callback)
-  end
+  # def derivative_of_from_hash(definition)
+  #   # TODO: test this.
+  #   callback = Proc.new do
+  #     self.reload
+  #     self.derivative_of = self.activity.data_sets.find_by_name(definition)
+  #     self.save!
+  #   end
+  #   self.add_marshal_callback(callback)
+  # end
 
   def expression_to_hash
     if expression.empty?

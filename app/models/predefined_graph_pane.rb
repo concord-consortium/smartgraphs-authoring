@@ -12,7 +12,7 @@ class PredefinedGraphPane < ActiveRecord::Base
 
   sg_parent :page
 
-  children :data_set_predefined_graphs
+  children :data_set_panes
   # children  :data_set_graphs, :data_sets
 
   fields do
@@ -60,8 +60,8 @@ class PredefinedGraphPane < ActiveRecord::Base
   has_many :annotation_inclusions, :as => :including_graph, :dependent => :destroy
   has_many :included_graphs, :through => :annotation_inclusions
 
-  has_many :data_sets, :through => :data_set_predefined_graphs
-  has_many :data_set_predefined_graphs, :accessible => true, :dependent => :destroy
+  has_many :data_set_panes, :accessible => true, :as => :pane, :dependent => :destroy
+  has_many :data_sets, :through => :data_set_panes
 
   has_many :label_sets, :through => :label_set_predefined_graphs
   has_many :label_set_predefined_graphs, :accessible => true, :dependent => :destroy
@@ -82,6 +82,6 @@ class PredefinedGraphPane < ActiveRecord::Base
   end
 
   def included_datasets
-    return data_set_predefined_graphs.map {|j| {"name" => j.data_set.name, "inLegend" => j.in_legend} unless j.data_set.blank? }.compact
+    return data_set_panes.map {|j| {"name" => j.data_set.name, "inLegend" => j.in_legend} unless j.data_set.blank? }.compact
   end
 end

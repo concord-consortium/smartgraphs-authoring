@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130826201515) do
+ActiveRecord::Schema.define(:version => 20130909151153) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -129,16 +129,17 @@ ActiveRecord::Schema.define(:version => 20130826201515) do
     t.text     "initial_content"
   end
 
-  create_table "data_set_predefined_graphs", :force => true do |t|
+  create_table "data_set_panes", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "data_set_id"
-    t.integer  "predefined_graph_pane_id"
-    t.boolean  "in_legend",                :default => false
+    t.integer  "pane_id"
+    t.boolean  "in_legend",   :default => false
+    t.string   "pane_type",   :default => "PredefinedGraphPane"
   end
 
-  add_index "data_set_predefined_graphs", ["data_set_id"], :name => "index_data_set_predefined_graphs_on_data_set_id"
-  add_index "data_set_predefined_graphs", ["predefined_graph_pane_id"], :name => "index_data_set_predefined_graphs_on_predefined_graph_pane_id"
+  add_index "data_set_panes", ["data_set_id"], :name => "index_data_set_panes_on_data_set_id"
+  add_index "data_set_panes", ["pane_type", "pane_id"], :name => "index_data_set_panes_on_pane_type_and_pane_id"
 
   create_table "data_set_prediction_graphs", :force => true do |t|
     t.datetime "created_at"

@@ -62,7 +62,7 @@ describe PredefinedGraphPane do
         # pending 'This is working in console but not in rspec.'
         graph_pane.data_sets << dataset_a
         graph_pane.data_sets << dataset_b
-        graph_pane.data_set_predefined_graphs.first.in_legend = true
+        graph_pane.data_set_panes.first.in_legend = true
 
         graph_pane.to_hash.should have_key "includedDataSets"
         graph_pane.to_hash['includedDataSets'].length.should eq(2)
