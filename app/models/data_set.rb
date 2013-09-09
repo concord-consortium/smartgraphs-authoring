@@ -46,8 +46,8 @@ class DataSet < ActiveRecord::Base
   has_many :sensor_graph_panes, :through => :data_set_panes, :source => :pane, :source_type => 'SensorGraphPane'
   reverse_association_of :sensor_graph_panes, 'SensorGraphPane#data_sets'
 
-  has_many :data_set_prediction_graphs, :dependent => :destroy
-  has_many :prediction_graph_panes, :through => :data_set_prediction_graphs
+  has_many :prediction_graph_panes, :through => :data_set_panes, :source => :pane, :source_type => 'PredictionGraphPane'
+  reverse_association_of :prediction_graph_panes, 'PredictionGraphPane#data_sets'
 
   belongs_to :derivative_of, :inverse_of => :derivative, :class_name => 'DataSet'
   has_one :derivative, :inverse_of => :derivative_of, :class_name => 'DataSet'

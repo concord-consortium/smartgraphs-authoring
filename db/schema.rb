@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130909155634) do
+ActiveRecord::Schema.define(:version => 20130909161304) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -140,17 +140,6 @@ ActiveRecord::Schema.define(:version => 20130909155634) do
 
   add_index "data_set_panes", ["data_set_id"], :name => "index_data_set_panes_on_data_set_id"
   add_index "data_set_panes", ["pane_type", "pane_id"], :name => "index_data_set_panes_on_pane_type_and_pane_id"
-
-  create_table "data_set_prediction_graphs", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "data_set_id"
-    t.integer  "prediction_graph_pane_id"
-    t.boolean  "in_legend",                :default => false
-  end
-
-  add_index "data_set_prediction_graphs", ["data_set_id"], :name => "index_data_set_prediction_graphs_on_data_set_id"
-  add_index "data_set_prediction_graphs", ["prediction_graph_pane_id"], :name => "index_data_set_prediction_graphs_on_prediction_graph_pane_id"
 
   create_table "data_sets", :force => true do |t|
     t.string   "name"
