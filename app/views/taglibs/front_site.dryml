@@ -579,14 +579,14 @@ value="&animation_attribute"/>
     <after-field-list:>
       <h3>Included data sets</h3>
       <div id="add-data-sets">
-        <input-many:data_set_predefined_graphs>
+        <input-many:data_set_panes>
           <select-one:data_set options="&DataSet.activity_is(activity_for(@this))" />
           <field-list fields="in_legend" />
         </input-many>
       </div>
       <h3>Included label sets</h3>
       <div id="add-label-sets">
-        <input-many:label_set_predefined_graphs>
+        <input-many:label_set_graph_panes>
           <select-one:label_set options="&LabelSet.activity_is(activity_for(@this))" blank-message="Select label set" />
         </input-many>
       </div>
@@ -637,7 +637,7 @@ value="&animation_attribute"/>
     </field-list:>
     <after-field-list:>
       <h3>Included data sets</h3>
-      <input-many:data_set_prediction_graphs>
+      <input-many:data_set_panes>
         <select-one:data_set options="&DataSet.activity_is(activity_for(@this))" />
         <field-list fields="in_legend" />
       </input-many>
@@ -655,7 +655,7 @@ value="&animation_attribute"/>
     </field-list:>
     <after-field-list:>
       <h3>Included data sets</h3>
-      <input-many:data_set_sensor_graphs>
+      <input-many:data_set_panes>
         <select-one:data_set options="&DataSet.activity_is(activity_for(@this))" />
         <field-list fields="in_legend" />
       </input-many>
