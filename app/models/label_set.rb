@@ -12,6 +12,9 @@ class LabelSet < ActiveRecord::Base
   has_many :predefined_graph_panes, :through => :label_set_predefined_graphs
   has_many :label_set_predefined_graphs, :dependent => :destroy
 
+  has_many :linked_animation_panes, :through => :label_set_linked_animations
+  has_many :label_set_linked_animations, :dependent => :destroy
+
   fields do
     name :string, :required => true
     is_for_users :boolean, :default => false

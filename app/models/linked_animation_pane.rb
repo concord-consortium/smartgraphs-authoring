@@ -1,0 +1,54 @@
+class LinkedAnimationPane < ActiveRecord::Base
+
+  hobo_model # Don't put anything above this
+
+  view_hints.parent :page
+
+  # standard owner and admin permissions
+  # defined in models/standard_permissions.rb
+  include SgPermissions
+  include SgMarshal
+  include SgGraphPane
+
+  sg_parent :page
+
+  fields do
+    title :string, :required
+
+    x_label :string, :required
+    x_min :float, :required
+    x_max :float, :required
+    x_ticks :float, :required
+    x_precision :float, :default => 0.1
+
+    y_label :string, :required
+    y_min :float, :required
+    y_max :float, :required
+    y_ticks :float, :required
+    y_precision :float, :default => 0.1
+
+    show_cross_hairs :boolean, :default => false
+    show_graph_grid  :boolean, :default => false
+    show_tool_tip_coords :boolean, :default => false
+
+    timestamps
+  end
+
+  has_one :page_pane, :as => :pane, :dependent => :destroy
+  has_one :page, :through => :page_pane
+
+  reverse_association_of :page, 'Page#linked_animation_panes'
+
+  has_many :data_sets, :through => :data_set_linked_animations
+  has_many :data_set_linked_animations, :accessible => true, :dependent => :destroy
+
+  has_many :label_sets, :through => :label_set_linked_animations
+  has_many :label_set_linked_animations, :accessible => true, :dependent => :destroy
+
+  has_many :graph_labels, :accessible => true, :conditions => { :label_set_id => nil }
+
+  def graph_type
+    'LinkedAnimationPane'
+  end
+
+end
