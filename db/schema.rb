@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130909173826) do
+ActiveRecord::Schema.define(:version => 20130909175702) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -260,7 +260,7 @@ ActiveRecord::Schema.define(:version => 20130909173826) do
     t.integer  "pane_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "pane_type",    :default => "PredefinedGraphPane"
+    t.string   "pane_type"
   end
 
   add_index "label_set_graph_panes", ["label_set_id"], :name => "index_label_set_graph_panes_on_label_set_id"
