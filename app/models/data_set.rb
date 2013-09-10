@@ -97,12 +97,17 @@ class DataSet < ActiveRecord::Base
 
   # def derivative_of_from_hash(definition)
   #   # TODO: test this.
-  #   callback = Proc.new do
-  #     self.reload
-  #     self.derivative_of = self.activity.data_sets.find_by_name(definition)
-  #     self.save!
+  #   if definition
+  #     self_ref = self
+  #     callback = Proc.new do
+  #       self_ref.reload
+  #       self_ref.derivative_of = self_ref.activity.data_sets.find_by_name(definition)
+  #       self_ref.save!
+  #     end
+  #     self.add_marshal_callback(callback)
+  #   else
+  #     self.derivative_of = nil
   #   end
-  #   self.add_marshal_callback(callback)
   # end
 
   def expression_to_hash
