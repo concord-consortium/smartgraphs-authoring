@@ -68,7 +68,8 @@ class PredefinedGraphPane < ActiveRecord::Base
 
   belongs_to :animation
 
-  has_many :graph_labels, :accessible => true, :conditions => { :label_set_id => nil }
+  has_many :graph_labels, :accessible => true #, :conditions => 'label_set_id = NULL'
+  # http://stackoverflow.com/q/18721695/306084
 
   def field_order
     fo  = %w[title x_label x_min x_max x_ticks ]

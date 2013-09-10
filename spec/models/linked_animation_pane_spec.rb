@@ -10,4 +10,18 @@ describe LinkedAnimationPane do
       graph_pane.graph_type.should == 'LinkedAnimationPane'
     end
   end
+
+  describe '#included_datasets' do
+    it 'returns a hash of dataset names and inLegend values' do
+      dataset_hash = [{
+        'name' => 'dataset_a',
+        'inLegend' => false
+      }, {
+        'name' => 'dataset_b',
+        'inLegend' => false
+      }]
+      graph_pane.data_sets << [dataset_a, dataset_b]
+      graph_pane.included_datasets.should == dataset_hash
+    end
+  end
 end
