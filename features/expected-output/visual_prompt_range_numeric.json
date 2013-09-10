@@ -31,7 +31,9 @@
           4,
           400
         ]
-      ]
+      ],
+      "derivativeOf": null,
+      "piecewiseLinear": null
     }
   ],
   "pages": [

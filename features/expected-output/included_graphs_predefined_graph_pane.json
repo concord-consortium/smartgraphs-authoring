@@ -90,7 +90,9 @@
           400
         ]
       ],
-      "expression": ""
+      "expression": "",
+      "derivativeOf": null,
+      "piecewiseLinear": null
     }
   ],
   "units": [

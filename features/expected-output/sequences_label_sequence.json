@@ -82,7 +82,9 @@
       "lineType": "connected",
       "pointType": "dot",
       "data": [],
-      "expression": "y = 0.8 sin(x)"
+      "expression": "y = 0.8 sin(x)",
+      "derivativeOf": null,
+      "piecewiseLinear": null
     }
   ],
   "animations": [],

@@ -39,7 +39,9 @@
       "lineType": "none",
       "pointType": "dot",
       "yUnits": "Distance",
-      "xUnits": "Time"
+      "xUnits": "Time",
+      "derivativeOf": null,
+      "piecewiseLinear": null
     },
     {
       "name": "learner_data_set",
@@ -52,7 +54,9 @@
       "lineType": "connected",
       "pointType": "none",
       "data": [],
-      "expression": ""
+      "expression": "",
+      "derivativeOf": null,
+      "piecewiseLinear": null
     }
   ],
   "pages": [
