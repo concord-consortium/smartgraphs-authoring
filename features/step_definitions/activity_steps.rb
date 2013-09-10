@@ -220,7 +220,7 @@ def create_unit(unit_def)
 end
 
 def create_page(page_def)
-  click_link 'New Pages'
+  click_link 'New Page'
   fill_in 'page_name', :with => page_def[:name]
   fill_in 'page_text', :with => page_def[:text]
   click_button 'Create Page'
