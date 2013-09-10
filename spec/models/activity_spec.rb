@@ -145,6 +145,7 @@ describe Activity do
                                   })
       @original.copy_activity
     end
+    let(:derivative) { FactoryGirl.create(:data_set, :name => 'Derivative', :derivative_of_id => @data_set.id) }
 
     it "should match original" do
       subject.to_hash.should == @original.to_hash
@@ -171,5 +172,11 @@ describe Activity do
       gl1.y_coord.should == 5.2
     end
 
+    it 'should retain derivative relationships' do
+      subject
+      @original.data_sets << derivative
+      this_copy = @original.copy_activity
+      this_copy.data_sets.find_by_name('Derivative').derivative_of_id.should_not be_nil
+    end
   end
 end

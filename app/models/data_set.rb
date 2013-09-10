@@ -95,20 +95,24 @@ class DataSet < ActiveRecord::Base
     self.data = tmp_data.join("\n")
   end
 
-  # def derivative_of_from_hash(definition)
-  #   # TODO: test this.
-  #   if definition
-  #     self_ref = self
-  #     callback = Proc.new do
-  #       self_ref.reload
-  #       self_ref.derivative_of = self_ref.activity.data_sets.find_by_name(definition)
-  #       self_ref.save!
-  #     end
-  #     self.add_marshal_callback(callback)
-  #   else
-  #     self.derivative_of = nil
-  #   end
-  # end
+  def derivative_of_from_hash(definition)
+    if definition
+      self_ref = self
+      callback = Proc.new do
+        self_ref.reload
+        # HACK. We can't find this activity's datasets because the activity
+        # itself isn't yet valid; the callback happens after the DataSets are created
+        # but before the Activity. (ugh)
+        # So we count on the last DataSet created by this name being the one just created
+        # in this copy and therefore the local one.
+        self_ref.derivative_of = DataSet.find_all_by_name(definition).last
+        self_ref.save!
+      end
+      self.add_marshal_callback(callback)
+    else
+      self.derivative_of = nil
+    end
+  end
 
   def expression_to_hash
     if expression.empty?

@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe DataSet do
+
+  let(:source_data_set) { FactoryGirl.create(:data_set, :name => 'Source', :expression => 'sin(x)+1') }
+  let(:derivative_data_set) { FactoryGirl.create(:data_set, :name => 'Derivative', :derivative_of => source_data_set ) }
+
   describe "#reformat_data_text" do
     it "should run on empty DataSet" do
       empty_data = ""
@@ -56,8 +60,18 @@ describe DataSet do
         subject.to_hash.should == expected_hash
       end
     end
-    describe "a more interesting instance" do
+
+    describe 'a dataset with values' do
+    end
+
+    describe 'a dataset which is a derivative of another' do
       # TODO: Validate that a dataset with a derivative_of value copies properly
+      let(:expected_hash) {
+        {"type"=>"datadef", "name"=>'Derivative', "yUnits"=>nil, "xUnits"=>nil, "xPrecision"=>0.1, "yPrecision"=>0.1, "lineSnapDistance"=>0.1, "lineType"=>"none", "pointType"=>"dot", "data"=>[], "expression"=>"", 'derivativeOf' => 'Source',  'piecewiseLinear' => false}
+      }
+      it "should match our expected hash" do
+        derivative_data_set.to_hash.should == expected_hash
+      end
     end
   end
 
