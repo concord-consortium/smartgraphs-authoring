@@ -36,13 +36,10 @@ describe Activity do
 
 
   describe "associations" do
-    before(:all) do
-      # mock these instead?
-      @physics = SubjectArea.create(:name => "pysics")
-      @math    = SubjectArea.create(:name => "math")
-      @mid     = GradeLevel.create(:name  => "6-9")
-      @high    = GradeLevel.create(:name  => "10-12")
-    end
+    let(:physics) { FactoryGirl.create(:subject_area, :name => 'physics' ) }
+    let(:math) { FactoryGirl.create(:subject_area, :name => 'math' ) }
+    let(:mid) { FactoryGirl.create(:grade_level, :name => '6-9' ) }
+    let(:high) { FactoryGirl.create(:grade_level, :name => '10-12' ) }
 
     before(:each ) do
       subject.name = "testing"
@@ -54,9 +51,9 @@ describe Activity do
       end
 
       it "can belong to multiple subject areas" do
-        subject.subject_areas = [@physics,@math]
-        subject.subject_areas.should include(@math)
-        subject.subject_areas.should include(@physics)
+        subject.subject_areas = [physics,math]
+        subject.subject_areas.should include(math)
+        subject.subject_areas.should include(physics)
       end
     end
 
@@ -66,9 +63,9 @@ describe Activity do
       end
 
       it "can belong to multiple subject areas" do
-        subject.grade_levels = [@mid,@high]
-        subject.grade_levels.should include(@mid)
-        subject.grade_levels.should include(@high)
+        subject.grade_levels = [mid,high]
+        subject.grade_levels.should include(mid)
+        subject.grade_levels.should include(high)
       end
     end
   end
