@@ -593,6 +593,7 @@ value="&animation_attribute"/>
       <h3>Included labels</h3>
       <div id="add-labels">
         <select-many:graph_labels>
+        <!-- TODO: this shows too many labels -->
           <select-one:graph_label options="activity_for(@this).free_labels" />
         </select-many>
       </div>
