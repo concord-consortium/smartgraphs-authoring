@@ -41,14 +41,26 @@ en:
       table_pane:
         title: this is not displayed in the runtime
       data_set:
-        data: If this dataset is the derivative of another dataset, any data points entered here will be ignored.
-        piecewise_linear: If this dataset is the derivative of another dataset, check this box if the source dataset contains piecewise-linear data. Knowing whether the data is piecewise linear allows SmartGraphs to depict the derivative more accurately.
+        data: 'If this dataset is the derivative of another dataset, any data points entered here will be ignored.'
+        piecewise_linear: 'If this dataset is the derivative of another dataset, check this box if the source dataset contains piecewise-linear data. Knowing whether the data is piecewise linear allows SmartGraphs to depict the derivative more accurately.'
       page:
-        name: this is not displayed in the runtime
+        name: 'this is not displayed in the runtime'
       predefined_graph_pane:
-        x_ticks: number of ticks on the x axis
-        y_ticks: number of ticks on the y axis
-        expression: Right hand side of the equation e.g. "3 * x + 3" or "pow(x,10) * (4 * atan( log(x) + 3))".
+        title: 'required; displayed above the graph'
+        x_label: 'text label showed under the x axis'
+        y_label: 'text label showed next to the y axis'
+        x_min: 'lowest x value to display on the graph, i.e. the x value at the left edge of the graph'
+        x_max: 'highest x value to display on the graph, i.e. the x value at the right edge of the graph'
+        y_min: 'lowest y value to display on the graph, i.e. the y value at the bottom edge of the graph'
+        y_max: 'highest y value to display on the graph, i.e. the y value at the top edge of the graph'
+        x_ticks: 'number of ticks on the x axis'
+        y_ticks: 'number of ticks on the y axis'
+        expression: 'Right hand side of the equation e.g. "3 * x + 3" or "pow(x,10) * (4 * atan( log(x) + 3))".'
+        show_graph_grid: 'display grid lines within the graph when checked'
+        show_tool_tip_coords: "when the mouse is over the graph, show the mouse pointer's current coordinates"
+      linked_animation_pane:
+        x_ticks: 'number of ticks on the x axis'
+        y_ticks: 'number of ticks on the y axis'
       slope_tool_sequence:
         case_type: |
           Choose one of the following forms for this tool:

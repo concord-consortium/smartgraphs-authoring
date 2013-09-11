@@ -601,7 +601,7 @@ value="&animation_attribute"/>
         <p><a action='new' to="&this.page.activity.animations">(Create new animation)</a></p>
         <select-one:animation options="&Animation.activity_is(activity_for(@this))" include-none blank-message="(No animation)" />
       </div>
-      <h3>Included graphs</h3>
+      <h3>Included prediction graphs</h3>
       <custom-poly-select-many:included_graphs prompt="Include Prediction graph data from:" options="&PredictionGraphPane.get_all_prediction_graph_panes_before(this)"/>
     </after-field-list:>
   </old-form>
