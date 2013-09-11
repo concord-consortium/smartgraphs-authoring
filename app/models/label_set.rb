@@ -7,7 +7,7 @@ class LabelSet < ActiveRecord::Base
   sg_parent :activity
 
   belongs_to :activity
-  has_many :graph_labels, :accessible => true
+  has_many :graph_labels, :accessible => true, :as => :parent
 
   has_many :predefined_graph_panes, :through => :label_set_predefined_graphs
   has_many :label_set_predefined_graphs, :dependent => :destroy

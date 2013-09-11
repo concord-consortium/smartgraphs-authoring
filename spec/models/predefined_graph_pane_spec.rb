@@ -26,14 +26,17 @@ describe PredefinedGraphPane do
 
   describe 'label association' do
     it 'only associates non-LabelSet GraphLabels' do
-      pending "It's unclear to me why this association works."
       # http://stackoverflow.com/q/18721695/306084
       ls = FactoryGirl.create(:full_label_set)
       free_labels_length = graph_pane.graph_labels.length
-      ls.graph_labels.first.label_set_id.should_not be_nil
-      # The following association should fail, because the label is in a LabelSet.
+      label_set_label = ls.graph_labels.first
+      label_set_label.parent_id.should == ls.id
+      label_set_label.parent_type.should == 'LabelSet'
+      # This association will take the GraphLabel out of the LabelSet
       graph_pane.graph_labels << ls.graph_labels.first
-      graph_pane.graph_labels.length.should eq(free_labels_length)
+      graph_pane.graph_labels.length.should eq(free_labels_length + 1)
+      label_set_label.parent_id.should == graph_pane.id
+      label_set_label.parent_type.should == 'PredefinedGraphPane'
     end
   end
 
