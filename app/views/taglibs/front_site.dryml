@@ -612,6 +612,7 @@ value="&animation_attribute"/>
     <field-list: fields="&this.field_order" />
     <after-field-list:>
       <h3>Included data sets</h3>
+      <p>Select a derivative data set to be animated along with the primary animation.</p>
       <div id="add-data-sets">
         <input-many:data_set_panes>
           <select-one:data_set options="&DataSet.derivatives_by_activity(activity_for(@this))" />
