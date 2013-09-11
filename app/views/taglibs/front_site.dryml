@@ -845,6 +845,8 @@ value="&animation_attribute"/>
       <data-tag: with="&this.gsub('&#10;', '<br>').html_safe"/>
     </field-list:>
     <after-field-list:>
+      <h3>Included Data Sets</h3>
+      <collection:data_sets />
       <h3>Included Label Sets</h3>
       <collection:label_sets />
       <h3>Included Labels</h3>
@@ -852,6 +854,7 @@ value="&animation_attribute"/>
       <h3>Animation</h3>
       <card:animation />
     </after-field-list:>
+    <collection-section:></collection-section:>
   </old-show-page>
 </extend>
 
