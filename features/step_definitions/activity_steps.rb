@@ -388,8 +388,7 @@ end
 
 def select_included_graph_labels(included_def = [])
   (included_def || []).each do |label_name|
-    select_node = find(:css, '#add-labels .select-many select')
-    select_node.find(:xpath, XPath::HTML.option(label_name), :message => "Cannot select option with text '#{label_name}'").select_option
+    check label_name
   end
 end
 
