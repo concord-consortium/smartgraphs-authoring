@@ -590,13 +590,12 @@ value="&animation_attribute"/>
           <select-one:label_set options="&LabelSet.activity_is(activity_for(@this))" blank-message="Select label set" />
         </input-many>
       </div>
-      <h3>Included labels</h3>
-      <div id="add-labels">
-        <select-many:graph_labels>
-        <!-- TODO: this shows too many labels -->
-          <select-one:graph_label options="activity_for(@this).free_labels" />
-        </select-many>
-      </div>
+      <if test="&activity_for(@this).free_labels">
+        <h3>Included labels</h3>
+        <div id="add-labels">
+          <check-many:graph_labels options="&activity_for(@this).free_labels" />
+        </div>
+      </if>
       <h3>Animation</h3>
       <div id="add-animation">
         <p><a action='new' to="&this.page.activity.animations">(Create new animation)</a></p>

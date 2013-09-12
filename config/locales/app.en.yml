@@ -58,6 +58,7 @@ en:
         expression: 'Right hand side of the equation e.g. "3 * x + 3" or "pow(x,10) * (4 * atan( log(x) + 3))".'
         show_graph_grid: 'display grid lines within the graph when checked'
         show_tool_tip_coords: "when the mouse is over the graph, show the mouse pointer's current coordinates"
+        graph_labels: "Add a label to the graph which is not part of an existing label set, if any such labels exist"
       linked_animation_pane:
         x_ticks: 'number of ticks on the x axis'
         y_ticks: 'number of ticks on the y axis'
