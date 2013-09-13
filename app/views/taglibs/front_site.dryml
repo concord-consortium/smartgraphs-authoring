@@ -95,6 +95,7 @@
     <append-heading:>
       <delete-button label="Delete" param/>
     </append-heading:>
+    <body:></body:>
   </card:pane>
 </def>
 
