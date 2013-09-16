@@ -865,7 +865,10 @@ value="&animation_attribute"/>
     <after-field-list:>
       <h3>Included Prediction Graphs</h3>
       <collection:included_graphs />
+      <h3>Included Data Sets</h3>
+      <collection:data_sets />
     </after-field-list:>
+    <collection-section:></collection-section:>
   </old-show-page>
 </extend>
 
