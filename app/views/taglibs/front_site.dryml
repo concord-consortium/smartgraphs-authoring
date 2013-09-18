@@ -49,6 +49,8 @@
       <link rel="apple-touch-icon" sizes="114x114" href="/images/icon-114.png" />
       <link rel="apple-touch-icon" sizes="120x120" href="/images/icon-120.png" />
       <link rel="apple-touch-icon" sizes="144x144" href="/images/icon-144.png" />
+      <!-- VideoJS CSS -->
+      <link href="http://vjs.zencdn.net/4.1/video-js.css" rel="stylesheet" />
     </custom-scripts:>
     <footer:>
       <p id="copyright">
@@ -67,6 +69,9 @@
         <p class="inventory"><%= Activity.private.count %> private activities, <%= Activity.private_count_since(1.week.ago) %> created in the last week.</p>
       </div>
     </footer:>
+    <after-footer: >
+      <script src="http://vjs.zencdn.net/4.1/video.js"></script>
+    </after-footer:>
   </old-page>
 </extend>
 
