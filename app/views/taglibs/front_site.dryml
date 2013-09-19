@@ -49,6 +49,8 @@
       <link rel="apple-touch-icon" sizes="114x114" href="/images/icon-114.png" />
       <link rel="apple-touch-icon" sizes="120x120" href="/images/icon-120.png" />
       <link rel="apple-touch-icon" sizes="144x144" href="/images/icon-144.png" />
+      <!-- VideoJS CSS -->
+      <link href="http://vjs.zencdn.net/4.1/video-js.css" rel="stylesheet" />
     </custom-scripts:>
     <footer:>
       <p id="copyright">
@@ -67,6 +69,9 @@
         <p class="inventory"><%= Activity.private.count %> private activities, <%= Activity.private_count_since(1.week.ago) %> created in the last week.</p>
       </div>
     </footer:>
+    <after-footer: >
+      <script src="http://vjs.zencdn.net/4.1/video.js"></script>
+    </after-footer:>
   </old-page>
 </extend>
 
@@ -95,6 +100,7 @@
     <append-heading:>
       <delete-button label="Delete" param/>
     </append-heading:>
+    <body:></body:>
   </card:pane>
 </def>
 
@@ -220,6 +226,9 @@
     <a action="new" to="&this.prediction_graph_panes">
       <ht key="prediction_graph_pane.actions.new" >New Prediction Graph Pane element</ht>
     </a><br/>
+    <a action="new" to="&this.linked_animation_panes">
+      <ht key="linked_animation_pane.actions.new" >New Linked Animation Pane element</ht>
+    </a><br/>
     <a action="new" to="&this.table_panes">
       <ht key="table_pane.actions.new" >New Table Pane element</ht>
     </a><br />
@@ -321,6 +330,47 @@
     </a>
 </def>
 
+<extend tag="form" for="AnimationPane">
+  <old-form merge>
+    <field-list: fields="&this.field_order">
+      <animation-view:><select-animation-input/></animation-view:>
+      <specify_start_x-label:>Starting X value for animation</specify_start_x-label:>
+      <specify_start_x-view:><check-animation-input myfield="specify_start_x"
+  part="specifyStartX"/></specify_start_x-view:>
+      <specify_end_x-label:>Ending X value for animation</specify_end_x-label:>
+      <specify_end_x-view:><check-animation-input myfield="specify_end_x"
+  part="specifyEndX"/></specify_end_x-view:>
+    </field-list:>
+  </old-form>
+</extend>
+
+<def tag="check-animation-input" attrs="myfield">
+  <%
+  if @animation_pane.animation && !@animation_pane.calc_range.nil?
+    animation_attribute = case myfield
+      when 'specify_start_x' then eval "@animation_pane.calc_range[:min]"
+      when 'specify_end_x' then eval "@animation_pane.calc_range[:max]"
+    end
+  else
+    animation_attribute = nil
+  end
+  %>
+  <if test="&animation_attribute && !animation_attribute.blank?">
+    <input type="text" name="animation_pane[#{myfield}]" disabled
+value="&animation_attribute"/>
+  </if>
+  <else>
+    <input type="text" name="animation_pane[#{myfield}]"/>
+  </else>
+</def>
+
+<def tag="select-animation-input">
+  <select-one onchange="Hobo.ajaxRequest(
+    window.location.href+'?animation_id='+this.value,
+    ['specifyStartX', 'specifyEndX'],
+    {method: 'get'})" options="&Animation.activity_is(activity_for(@this))"/>
+</def>
+
 <extend tag="form" for="DataSet">
   <old-form merge>
     <field-list: fields="&this.field_order">
@@ -356,14 +406,6 @@
         <field-list: fields="coordinate"/>
       </input-many>
     </after-field-list:>
-  </old-form>
-</extend>
-
-<extend tag="form" for="AnimationPane">
-  <old-form merge>
-    <field-list: fields="animation">
-      <animation-tag: options="&Animation.activity_is(activity_for(@this))" />
-    </field-list>
   </old-form>
 </extend>
 
@@ -543,30 +585,52 @@
     <after-field-list:>
       <h3>Included data sets</h3>
       <div id="add-data-sets">
-        <input-many:data_set_predefined_graphs>
+        <input-many:data_set_panes>
           <select-one:data_set options="&DataSet.activity_is(activity_for(@this))" />
           <field-list fields="in_legend" />
         </input-many>
       </div>
       <h3>Included label sets</h3>
       <div id="add-label-sets">
-        <input-many:label_set_predefined_graphs>
+        <input-many:label_set_graph_panes>
           <select-one:label_set options="&LabelSet.activity_is(activity_for(@this))" blank-message="Select label set" />
         </input-many>
       </div>
-      <h3>Included labels</h3>
-      <div id="add-labels">
-        <select-many:graph_labels>
-          <select-one:graph_label options="activity_for(@this).free_labels" />
-        </select-many>
-      </div>
+      <if test="&activity_for(@this).free_labels">
+        <h3>Included labels</h3>
+        <div id="add-labels">
+          <check-many:graph_labels options="&activity_for(@this).free_labels" />
+        </div>
+      </if>
       <h3>Animation</h3>
       <div id="add-animation">
         <p><a action='new' to="&this.page.activity.animations">(Create new animation)</a></p>
         <select-one:animation options="&Animation.activity_is(activity_for(@this))" include-none blank-message="(No animation)" />
       </div>
-      <h3>Included graphs</h3>
-      <custom-poly-select-many:included_graphs prompt="Include graph data from:" options="&PredictionGraphPane.get_all_prediction_graph_panes_before(this)"/>
+      <h3>Included prediction graphs</h3>
+      <custom-poly-select-many:included_graphs prompt="Include Prediction graph data from:" options="&PredictionGraphPane.get_all_prediction_graph_panes_before(this)"/>
+    </after-field-list:>
+  </old-form>
+</extend>
+
+<extend tag="form" for="LinkedAnimationPane">
+  <old-form merge>
+    <field-list: fields="&this.field_order" />
+    <after-field-list:>
+      <h3>Included data sets</h3>
+      <p>Select a derivative data set to be animated along with the primary animation.</p>
+      <div id="add-data-sets">
+        <input-many:data_set_panes>
+          <select-one:data_set options="&DataSet.derivatives_by_activity(activity_for(@this))" />
+          <field-list fields="in_legend" />
+        </input-many>
+      </div>
+      <h3>Included label sets</h3>
+      <div id="add-label-sets">
+        <input-many:label_set_graph_panes>
+          <select-one:label_set options="&LabelSet.activity_is(activity_for(@this))" blank-message="Select label set" />
+        </input-many>
+      </div>
     </after-field-list:>
   </old-form>
 </extend>
@@ -579,12 +643,12 @@
     </field-list:>
     <after-field-list:>
       <h3>Included data sets</h3>
-      <input-many:data_set_prediction_graphs>
+      <input-many:data_set_panes>
         <select-one:data_set options="&DataSet.activity_is(activity_for(@this))" />
         <field-list fields="in_legend" />
       </input-many>
       <h3>Included prediction graphs</h3>
-      <custom-poly-select-many:included_graphs prompt="Include graph data from:" options="&PredictionGraphPane.get_all_prediction_graph_panes_before(this)"/>
+      <custom-poly-select-many:included_graphs prompt="Include Prediction graph data from:" options="&PredictionGraphPane.get_all_prediction_graph_panes_before(this)"/>
     </after-field-list:>
   </old-form>
 </extend>
@@ -597,12 +661,12 @@
     </field-list:>
     <after-field-list:>
       <h3>Included data sets</h3>
-      <input-many:data_set_sensor_graphs>
+      <input-many:data_set_panes>
         <select-one:data_set options="&DataSet.activity_is(activity_for(@this))" />
         <field-list fields="in_legend" />
       </input-many>
       <h3>Included prediction graphs</h3>
-      <custom-poly-select-many:included_graphs prompt="Include graph data from:" options="&PredictionGraphPane.get_all_prediction_graph_panes_before(this)"/>
+      <custom-poly-select-many:included_graphs prompt="Include Prediction graph data from:" options="&PredictionGraphPane.get_all_prediction_graph_panes_before(this)"/>
     </after-field-list:>
   </old-form>
 </extend>
@@ -787,6 +851,8 @@
       <data-tag: with="&this.gsub('&#10;', '<br>').html_safe"/>
     </field-list:>
     <after-field-list:>
+      <h3>Included Data Sets</h3>
+      <collection:data_sets />
       <h3>Included Label Sets</h3>
       <collection:label_sets />
       <h3>Included Labels</h3>
@@ -794,6 +860,7 @@
       <h3>Animation</h3>
       <card:animation />
     </after-field-list:>
+    <collection-section:></collection-section:>
   </old-show-page>
 </extend>
 
@@ -803,7 +870,10 @@
     <after-field-list:>
       <h3>Included Prediction Graphs</h3>
       <collection:included_graphs />
+      <h3>Included Data Sets</h3>
+      <collection:data_sets />
     </after-field-list:>
+    <collection-section:></collection-section:>
   </old-show-page>
 </extend>
 
@@ -849,6 +919,28 @@
 
 <!-- MultipleChoiceSequence -->
 
+<def tag="card" for="MultipleChoiceHint">
+  <card class="multiple-choice-hint" param="default" merge>
+      <header: param>
+        <h4 param="heading"><name/></h4>
+        <div param="actions">
+          <a action="edit" param="edit-link">Edit</a>
+          <delete-button label="X" param/>
+        </div>
+      </header:>
+  </card>
+</def>
+
+<def tag="form" for="MultipleChoiceHint">
+  <form merge param="default">
+    <error-messages param/>
+    <field-list fields="name, hint_text, position" param/>
+    <div param="actions">
+      <submit label="#{ht 'multiple_choice_hint.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
+    </div>
+  </form>
+</def>
+
 <def tag="card" for="MultipleChoiceChoice">
   <card class="multiple-choice-choice" param="default" merge>
     <div class="#{this.correct ? 'correct' : 'incorrect'}">
@@ -877,68 +969,67 @@
 <extend tag="show-page" for="MultipleChoiceSequence">
   <old-show-page merge>
     <collection-section:>
+      <!-- choices -->
+      <h3 param="collection-heading">
+        <ht key="multiple_choice_choice.collection.heading" count="&this.multiple_choice_choices.count" >
+          <human-collection-name collection="multiple_choice_choices" your/>
+        </ht>
+      </h3>
 
-              <!-- choices -->
-              <h3 param="collection-heading">
-                <ht key="multiple_choice_choice.collection.heading" count="&this.multiple_choice_choices.count" >
-                  <human-collection-name collection="multiple_choice_choices" your/>
-                </ht>
-              </h3>
+      <sortable-collection:multiple_choice_choices param="collection"/>
+      <section param="add-to-collection" if="&can_edit?">
+        <h3 param="add-form-heading">
+          <ht key="multiple_choice_choice.collection.add_form_heading" count="1">
+            Add a Multiple Choice choice
+          </ht>
+        </h3>
+        <form with="&@multiple_choice_choice || new_for_current_user(@multiple_choice_sequence.multiple_choice_choices)" owner="multiple_choice_sequence" without-cancel param>
+          <field-list: skip="multiple_choice_sequence, position"/>
+          <submit: label="#{ht 'multiple_choice_choice.actions.add', :default=>['Add'] }"/>
+        </form>
+      </section>
 
-              <sortable-collection:multiple_choice_choices param="collection"/>
-              <section param="add-to-collection" if="&can_edit?">
-                <h3 param="add-form-heading">
-                  <ht key="multiple_choice_choice.collection.add_form_heading" count="1">
-                    Add a Multiple Choice choice
-                  </ht>
-                </h3>
-                <form with="&@multiple_choice_choice || new_for_current_user(@multiple_choice_sequence.multiple_choice_choices)" owner="multiple_choice_sequence" without-cancel param>
-                  <field-list: skip="multiple_choice_sequence, position"/>
-                  <submit: label="#{ht 'multiple_choice_choice.actions.add', :default=>['Add'] }"/>
-                </form>
-              </section>
+      <!-- sequential feedback if enabled -->
+      <if test="&this.use_sequential_feedback">
+        <h3 param="collection-heading">
+          <ht key="multiple_choice_hint.collection.heading" count="&this.multiple_choice_hints.count" >
+            <human-collection-name collection="multiple_choice_hints" your/>
+          </ht>
+        </h3>
+        <sortable-collection:multiple_choice_hints param="collection"/>
+        <section param="add-to-collection" if="&can_edit?">
+          <h3 param="add-form-heading">
+            <ht key="multiple_choice_hint.collection.add_form_heading" count="1">
+              Add a Multiple Choice choice
+            </ht>
+          </h3>
+          <form with="&@multiple_choice_hint || new_for_current_user(@multiple_choice_sequence.multiple_choice_hints)" owner="multiple_choice_sequence" without-cancel param>
+            <field-list: skip="multiple_choice_sequence, position"/>
+            <submit: label="#{ht 'multiple_choice_hint.actions.add', :default=>['Add'] }"/>
+          </form>
+        </section>
+      </if>
 
-              <!-- sequential feedback if enabled -->
-              <if test="&this.use_sequential_feedback">
-                <h3 param="collection-heading">
-                  <ht key="multiple_choice_hint.collection.heading" count="&this.multiple_choice_hints.count" >
-                    <human-collection-name collection="multiple_choice_hints" your/>
-                  </ht>
-                </h3>
-                <sortable-collection:multiple_choice_hints param="collection"/>
-                <section param="add-to-collection" if="&can_edit?">
-                  <h3 param="add-form-heading">
-                    <ht key="multiple_choice_hint.collection.add_form_heading" count="1">
-                      Add a Multiple Choice choice
-                    </ht>
-                  </h3>
-                  <form with="&@multiple_choice_hint || new_for_current_user(@multiple_choice_sequence.multiple_choice_hints)" owner="multiple_choice_sequence" without-cancel param>
-                    <field-list: skip="multiple_choice_sequence, position"/>
-                    <submit: label="#{ht 'multiple_choice_hint.actions.add', :default=>['Add'] }"/>
-                  </form>
-                </section>
-              </if>
+      <h3 param="collection-heading">
+        Initial Visual Prompts
+      </h3>
+      <collection:initial_prompt_prompts/>
+      <!-- This should work, but it doesn't. -->
+      <add-initial-prompt-prompts-toolbar/>
 
-              <h3 param="collection-heading">
-                Initial Visual Prompts
-              </h3>
-              <collection:initial_prompt_prompts/>
-              <!-- This should work, but it doesn't. -->
-              <add-initial-prompt-prompts-toolbar/>
+      <h3 param="collection-heading">
+        Give Up Visual Prompts
+      </h3>
+      <collection:give_up_prompts/>
+      <!-- This should work, but it doesn't. -->
+      <add-give-up-prompts-toolbar/>
 
-              <h3 param="collection-heading">
-                Give Up Visual Prompts
-              </h3>
-              <collection:give_up_prompts/>
-              <!-- This should work, but it doesn't. -->
-              <add-give-up-prompts-toolbar/>
-
-              <h3 param="collection-heading">
-                Confirm Correct Visual Prompts
-              </h3>
-              <collection:confirm_correct_prompts/>
-              <!-- This should work, but it doesn't. -->
-              <add-confirm-correct-prompts-toolbar/>
+      <h3 param="collection-heading">
+        Confirm Correct Visual Prompts
+      </h3>
+      <collection:confirm_correct_prompts/>
+      <!-- This should work, but it doesn't. -->
+      <add-confirm-correct-prompts-toolbar/>
     </collection-section:>
 
     <multiple_choice_hints-collection-section:>
@@ -956,4 +1047,3 @@
     </prepend-content-header:>
   </old-show-page>
 </extend>
-

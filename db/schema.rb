@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130702202809) do
+ActiveRecord::Schema.define(:version => 20130911142307) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -57,6 +57,8 @@ ActiveRecord::Schema.define(:version => 20130702202809) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "animation_id"
+    t.float    "specify_start_x"
+    t.float    "specify_end_x"
   end
 
   add_index "animation_panes", ["animation_id"], :name => "index_animation_panes_on_animation_id"
@@ -127,38 +129,17 @@ ActiveRecord::Schema.define(:version => 20130702202809) do
     t.text     "initial_content"
   end
 
-  create_table "data_set_predefined_graphs", :force => true do |t|
+  create_table "data_set_panes", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "data_set_id"
-    t.integer  "predefined_graph_pane_id"
-    t.boolean  "in_legend",                :default => false
+    t.integer  "pane_id"
+    t.boolean  "in_legend",   :default => false
+    t.string   "pane_type"
   end
 
-  add_index "data_set_predefined_graphs", ["data_set_id"], :name => "index_data_set_predefined_graphs_on_data_set_id"
-  add_index "data_set_predefined_graphs", ["predefined_graph_pane_id"], :name => "index_data_set_predefined_graphs_on_predefined_graph_pane_id"
-
-  create_table "data_set_prediction_graphs", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "data_set_id"
-    t.integer  "prediction_graph_pane_id"
-    t.boolean  "in_legend",                :default => false
-  end
-
-  add_index "data_set_prediction_graphs", ["data_set_id"], :name => "index_data_set_prediction_graphs_on_data_set_id"
-  add_index "data_set_prediction_graphs", ["prediction_graph_pane_id"], :name => "index_data_set_prediction_graphs_on_prediction_graph_pane_id"
-
-  create_table "data_set_sensor_graphs", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "data_set_id"
-    t.integer  "sensor_graph_pane_id"
-    t.boolean  "in_legend",            :default => false
-  end
-
-  add_index "data_set_sensor_graphs", ["data_set_id"], :name => "index_data_set_sensor_graphs_on_data_set_id"
-  add_index "data_set_sensor_graphs", ["sensor_graph_pane_id"], :name => "index_data_set_sensor_graphs_on_sensor_graph_pane_id"
+  add_index "data_set_panes", ["data_set_id"], :name => "index_data_set_panes_on_data_set_id"
+  add_index "data_set_panes", ["pane_type", "pane_id"], :name => "index_data_set_panes_on_pane_type_and_pane_id"
 
   create_table "data_sets", :force => true do |t|
     t.string   "name"
@@ -210,20 +191,19 @@ ActiveRecord::Schema.define(:version => 20130702202809) do
   end
 
   create_table "graph_labels", :force => true do |t|
-    t.integer  "label_set_id"
+    t.integer  "parent_id"
     t.string   "text"
     t.float    "x_coord"
     t.float    "y_coord"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "predefined_graph_pane_id"
     t.string   "name"
     t.integer  "pick_a_point_sequence_id"
+    t.string   "parent_type",              :default => "LabelSet"
   end
 
-  add_index "graph_labels", ["label_set_id"], :name => "index_graph_labels_on_label_set_id"
+  add_index "graph_labels", ["parent_type", "parent_id"], :name => "index_graph_labels_on_parent_type_and_parent_id"
   add_index "graph_labels", ["pick_a_point_sequence_id"], :name => "index_graph_labels_on_pick_a_point_sequence_id"
-  add_index "graph_labels", ["predefined_graph_pane_id"], :name => "index_graph_labels_on_predefined_graph_pane_id"
 
   create_table "image_panes", :force => true do |t|
     t.string   "name"
@@ -274,15 +254,16 @@ ActiveRecord::Schema.define(:version => 20130702202809) do
 
   add_index "label_sequences", ["label_set_id"], :name => "index_label_sequences_on_label_set_id"
 
-  create_table "label_set_predefined_graphs", :force => true do |t|
+  create_table "label_set_graph_panes", :force => true do |t|
     t.integer  "label_set_id"
-    t.integer  "predefined_graph_pane_id"
+    t.integer  "pane_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "pane_type"
   end
 
-  add_index "label_set_predefined_graphs", ["label_set_id"], :name => "index_label_set_predefined_graphs_on_label_set_id"
-  add_index "label_set_predefined_graphs", ["predefined_graph_pane_id"], :name => "index_label_set_predefined_graphs_on_predefined_graph_pane_id"
+  add_index "label_set_graph_panes", ["label_set_id"], :name => "index_label_set_graph_panes_on_label_set_id"
+  add_index "label_set_graph_panes", ["pane_type", "pane_id"], :name => "index_label_set_graph_panes_on_pane_type_and_pane_id"
 
   create_table "label_sets", :force => true do |t|
     t.string   "name"
@@ -313,6 +294,25 @@ ActiveRecord::Schema.define(:version => 20130702202809) do
   end
 
   add_index "line_construction_sequences", ["data_set_id"], :name => "index_line_construction_sequences_on_data_set_id"
+
+  create_table "linked_animation_panes", :force => true do |t|
+    t.string   "title"
+    t.string   "x_label"
+    t.float    "x_min"
+    t.float    "x_max"
+    t.float    "x_ticks"
+    t.float    "x_precision",          :default => 0.1
+    t.string   "y_label"
+    t.float    "y_min"
+    t.float    "y_max"
+    t.float    "y_ticks"
+    t.float    "y_precision",          :default => 0.1
+    t.boolean  "show_cross_hairs",     :default => false
+    t.boolean  "show_graph_grid",      :default => false
+    t.boolean  "show_tool_tip_coords", :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "multiple_choice_choices", :force => true do |t|
     t.string   "name"

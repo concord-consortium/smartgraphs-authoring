@@ -20,12 +20,12 @@ Feature: Basic Activities
     And  I create a new activity:
       """
       --- 
-      :name: Joe's Activity
+      :name: ActivityByJoe
       :author_name: Joe
       :publication_status: public
       """
     Then I should see "Bob's Activity" in the listing
-    And  I should see "Joe's Activity" in the listing
+    And  I should see "ActivityByJoe" in the listing
     And  I should not be able to edit "Bob's Activity"
-    And  I should be able to edit "Joe's Activity"
-    And  I should be able to change the name of "Joe's Activity"
+    And  I should be able to edit "ActivityByJoe"
+    And  I should be able to change the name of "ActivityByJoe"

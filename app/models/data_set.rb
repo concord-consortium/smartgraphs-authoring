@@ -35,14 +35,19 @@ class DataSet < ActiveRecord::Base
 
   belongs_to :activity
 
-  has_many :data_set_predefined_graphs, :dependent => :destroy
-  has_many :predefined_graph_panes, :through => :data_set_predefined_graphs
+  has_many :data_set_panes, :dependent => :destroy
 
-  has_many :data_set_sensor_graphs, :dependent => :destroy
-  has_many :sensor_graph_panes, :through => :data_set_sensor_graphs
+  has_many :predefined_graph_panes, :through => :data_set_panes, :source => :pane, :source_type => 'PredefinedGraphPane'
+  reverse_association_of :predefined_graph_panes, 'PredefinedGraphPane#data_sets'
 
-  has_many :data_set_prediction_graphs, :dependent => :destroy
-  has_many :prediction_graph_panes, :through => :data_set_prediction_graphs
+  has_many :linked_animation_panes, :through => :data_set_panes, :source => :pane, :source_type => 'LinkedAnimationPane'
+  reverse_association_of :linked_animation_panes, 'LinkedAnimationPane#data_sets'
+
+  has_many :sensor_graph_panes, :through => :data_set_panes, :source => :pane, :source_type => 'SensorGraphPane'
+  reverse_association_of :sensor_graph_panes, 'SensorGraphPane#data_sets'
+
+  has_many :prediction_graph_panes, :through => :data_set_panes, :source => :pane, :source_type => 'PredictionGraphPane'
+  reverse_association_of :prediction_graph_panes, 'PredictionGraphPane#data_sets'
 
   belongs_to :derivative_of, :inverse_of => :derivative, :class_name => 'DataSet'
   has_one :derivative, :inverse_of => :derivative_of, :class_name => 'DataSet'
@@ -90,6 +95,25 @@ class DataSet < ActiveRecord::Base
     self.data = tmp_data.join("\n")
   end
 
+  def derivative_of_from_hash(definition)
+    if definition
+      self_ref = self
+      callback = Proc.new do
+        self_ref.reload
+        # HACK. We can't find this activity's datasets because the activity
+        # itself isn't yet valid; the callback happens after the DataSets are created
+        # but before the Activity. (ugh)
+        # So we count on the last DataSet created by this name being the one just created
+        # in this copy and therefore the local one.
+        self_ref.derivative_of = DataSet.find_all_by_name(definition).last
+        self_ref.save!
+      end
+      self.add_marshal_callback(callback)
+    else
+      self.derivative_of = nil
+    end
+  end
+
   def expression_to_hash
     if expression.empty?
       return ""
@@ -132,6 +156,10 @@ class DataSet < ActiveRecord::Base
   def type
     return 'dataref' if self.is_data_ref?
     return 'datadef'
+  end
+
+  def self.derivatives_by_activity(activity)
+    where("activity_id = ? AND derivative_of_id IS NOT NULL", activity.id)
   end
 
   ##

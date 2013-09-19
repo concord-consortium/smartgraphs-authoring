@@ -26,12 +26,17 @@ describe PredefinedGraphPane do
 
   describe 'label association' do
     it 'only associates non-LabelSet GraphLabels' do
-      pending "It's unclear to me why this association works."
+      # http://stackoverflow.com/q/18721695/306084
       ls = FactoryGirl.create(:full_label_set)
-      ls.graph_labels.first.label_set_id.should_not be_nil
+      free_labels_length = graph_pane.graph_labels.length
+      label_set_label = ls.graph_labels.first
+      label_set_label.parent_id.should == ls.id
+      label_set_label.parent_type.should == 'LabelSet'
+      # This association will take the GraphLabel out of the LabelSet
       graph_pane.graph_labels << ls.graph_labels.first
-      ls.graph_labels.first.label_set_id.should be_nil
-      graph_pane.graph_labels.length.should eq(1)
+      graph_pane.graph_labels.length.should eq(free_labels_length + 1)
+      label_set_label.parent_id.should == graph_pane.id
+      label_set_label.parent_type.should == 'PredefinedGraphPane'
     end
   end
 
@@ -62,7 +67,7 @@ describe PredefinedGraphPane do
         # pending 'This is working in console but not in rspec.'
         graph_pane.data_sets << dataset_a
         graph_pane.data_sets << dataset_b
-        graph_pane.data_set_predefined_graphs.first.in_legend = true
+        graph_pane.data_set_panes.first.in_legend = true
 
         graph_pane.to_hash.should have_key "includedDataSets"
         graph_pane.to_hash['includedDataSets'].length.should eq(2)
@@ -96,7 +101,6 @@ describe PredefinedGraphPane do
     describe "when the activity containing the animated PredefinedGraphPane is copied" do
       it "correctly references the animation in the copy" do
         pending "Something's up ... this behavior works with real records, doesn't work on FactoryGirl created activity"
-        binding.pry
         copy = activity.copy_activity
         pane = copy.pages.first.predefined_graph_panes.first
         animation = copy.animations.first

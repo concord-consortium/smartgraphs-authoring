@@ -19,24 +19,21 @@ describe ApplicationHelper do
       @page.save
     end
 
-    it 'returns an activity if there is a page_id' do
-      pending "This can't be effectively tested until I can supply params the helper can read"
-      controller.request = ActionController::TestRequest.new(:params => { :page_id => @page.id })
-      pp = PickAPointSequence.new()
-      helper.activity_for(pp).should == @act
-    end
+    describe 'when there are request parameters' do
+      it 'returns an activity if there is a page_id' do
+        pending 'How do we supply a params hash to a helper?'
+        request.params[:page_id] = page.id
+        helper.activity_for(nil).should == @act
+      end
 
-    it 'returns an activity if there is an activity_id' do
-      pending "This can't be effectively tested until I can supply params the helper can read"
-      controller.request = ActionController::TestRequest.new(:params => { :activity_id => @act.id })
-      pp = PickAPointSequence.new()
-      helper.activity_for(pp).should == @act
+      it 'returns an activity if there is an activity_id' do
+        pending 'How do we supply a params hash to a helper?'
+        helper.activity_for(nil).should == @act
+      end
     end
 
     it 'returns an activity if the supplied argument responds to activity' do
-      pp = PickAPointSequence.new()
-      pp.page = @page
-      helper.activity_for(pp).should == @act
+      helper.activity_for(@page).should == @act
     end
 
     it 'returns nil if it has no way to find an activity' do

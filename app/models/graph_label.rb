@@ -5,10 +5,11 @@ class GraphLabel < ActiveRecord::Base
   include SgPermissions
   sg_parent :label_set
 
-  belongs_to :label_set
 
   belongs_to :pick_a_point_sequence
-  belongs_to :predefined_graph_pane
+  # belongs_to :label_set
+  # belongs_to :predefined_graph_pane
+  belongs_to :parent, :polymorphic => true
 
   scope :no_label_set, where(:label_set_id => nil)
 
@@ -33,6 +34,30 @@ class GraphLabel < ActiveRecord::Base
       nil
     else
       activity.free_labels
+    end
+  end
+
+  def label_set=(ls)
+    parent = ls
+  end
+
+  def label_set
+    if parent_type == 'LabelSet'
+      return parent
+    else
+      return nil
+    end
+  end
+
+  def predefined_graph_pane=(pdgp)
+    parent = pdgp
+  end
+
+  def predefined_graph_pane
+    if parent_type == 'PredefinedGraphPane'
+      return parent
+    else
+      return nil
     end
   end
 

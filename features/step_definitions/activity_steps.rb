@@ -220,7 +220,7 @@ def create_unit(unit_def)
 end
 
 def create_page(page_def)
-  click_link 'New Pages'
+  click_link 'New Page'
   fill_in 'page_name', :with => page_def[:name]
   fill_in 'page_text', :with => page_def[:text]
   click_button 'Create Page'
@@ -388,8 +388,7 @@ end
 
 def select_included_graph_labels(included_def = [])
   (included_def || []).each do |label_name|
-    select_node = find(:css, '#add-labels .select-many select')
-    select_node.find(:xpath, XPath::HTML.option(label_name), :message => "Cannot select option with text '#{label_name}'").select_option
+    check label_name
   end
 end
 

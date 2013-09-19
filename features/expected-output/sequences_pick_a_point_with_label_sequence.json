@@ -108,7 +108,9 @@
           400.0
         ]
       ],
-      "expression": ""
+      "expression": "",
+      "derivativeOf": null,
+      "piecewiseLinear": null
     }
   ],
   "animations": [],

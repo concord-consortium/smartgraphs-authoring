@@ -74,7 +74,7 @@ class Activity < ActiveRecord::Base
 
   # Array of labels which are not part of a label set
   def free_labels
-    self.labels.keep_if { |l| l.label_set.blank? }
+    self.labels.keep_if { |l| l && (l.parent_type != 'LabelSet' || l.parent_id.blank?) }
   end
 
   def after_user_new
