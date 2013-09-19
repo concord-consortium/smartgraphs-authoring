@@ -55,7 +55,7 @@ en:
         y_max: 'highest y value to display on the graph, i.e. the y value at the top edge of the graph'
         x_ticks: 'intervals (gaps between ticks) on the x axis'
         y_ticks: 'intervals (gaps between ticks) on the y axis'
-        expression: 'Right hand side of the equation e.g. "3 * x + 3" or "pow(x,10) * (4 * atan( log(x) + 3))".'
+        expression: 'right hand side of the equation e.g. "3 * x + 3" or "pow(x,10) * (4 * atan( log(x) + 3))"'
         show_graph_grid: 'display grid lines within the graph when checked'
         show_tool_tip_coords: "when the mouse is over the graph, show the mouse pointer's current coordinates"
         graph_labels: "Add a label to the graph which is not part of an existing label set, if any such labels exist"
