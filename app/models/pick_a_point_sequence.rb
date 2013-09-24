@@ -14,8 +14,8 @@ class PickAPointSequence < ActiveRecord::Base
     title             :string
     initial_prompt    :raw_html
     answer_with_label :boolean
-    give_up           :html
-    confirm_correct   :html
+    give_up           :raw_html
+    confirm_correct   :raw_html
 
     # support for a distinct point
     correct_answer_x :float
