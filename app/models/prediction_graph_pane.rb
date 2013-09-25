@@ -48,7 +48,7 @@ class PredictionGraphPane < ActiveRecord::Base
   has_many :data_sets, :through => :data_set_panes
 
   def field_order
-    "title, y_label, y_unit, y_min, y_max, y_ticks, y_precision, x_label, x_unit, x_min, x_max, x_ticks, x_precision, prediction_type, show_graph_grid, show_cross_hairs, show_tool_tip_coords"
+    "title, y_label, y_unit, y_min, y_max, y_ticks, y_precision, x_label, x_unit, x_min, x_max, x_ticks, x_precision, prediction_type, show_graph_grid, show_tool_tip_coords"
   end
 
   def graph_type

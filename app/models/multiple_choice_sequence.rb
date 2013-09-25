@@ -11,8 +11,8 @@ class MultipleChoiceSequence < ActiveRecord::Base
   
   fields do
     initial_prompt :raw_html
-    give_up :html
-    confirm_correct :html
+    give_up :raw_html
+    confirm_correct :raw_html
     use_sequential_feedback :boolean, :default => true
     timestamps
   end
