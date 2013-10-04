@@ -31,8 +31,11 @@ module SgPermissions
     current_top = self
     while (current_top.respond_to? :sg_parent)
       current_top = current_top.send(:sg_parent)
-      throw "can't find activity in #{current_top.class.to_s}" if current_top.nil?
-      return current_top if current_top.kind_of? Activity
+      if current_top.nil?
+        raise RuntimeError, "Reached top of tree and can't find activity in #{current_top.class.to_s}"
+      else
+        return current_top if current_top.kind_of? Activity
+      end
     end
   end
 
@@ -41,10 +44,15 @@ module SgPermissions
   end
   
   def is_owner?(user)
-    activity = self.sg_activity
+    begin
+      activity = self.sg_activity
+    rescue RuntimeError => e
+      message = e.message
+      activity = nil
+    end
     if activity.nil?
-      message = "cant find owner for #{self}"
-      Rails.log message
+      message = "can't find owner for #{self} (no activity found)"
+      logger.debug message
       puts message
       return true
     end
@@ -52,6 +60,7 @@ module SgPermissions
   end
 
   def create_permitted?
+    logger.debug "Checking create permissions for #{self}"
     if acting_user.signed_up?
       return true
       # self.is_owner?(acting_user)
@@ -60,22 +69,26 @@ module SgPermissions
   end
 
   def update_permitted?
-   return true if acting_user.administrator?
-   return true if self.is_owner?(acting_user)
-   return false
+    logger.debug "Checking update permissions for #{self}"
+    return true if acting_user.administrator?
+    return true if self.is_owner?(acting_user)
+    return false
   end
 
   def destroy_permitted?
-   return true if acting_user.administrator?
-   return true if self.is_owner?(acting_user)
-   return false
+    logger.debug "Checking destroy permissions for #{self}"
+    return true if acting_user.administrator?
+    return true if self.is_owner?(acting_user)
+    return false
   end
 
   def view_permitted?(field)
+    logger.debug "Checking view permissions for #{self}"
     true
   end
 
   def edit_permitted?(attribute)
+    logger.debug "Checking edit permissions for #{self}"
     return true if acting_user.administrator?
     return self.is_owner?(acting_user)
   end
