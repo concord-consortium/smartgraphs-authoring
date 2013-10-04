@@ -44,7 +44,7 @@ module SgPermissions
     activity = self.sg_activity
     if activity.nil?
       message = "cant find owner for #{self}"
-      Rails.log message
+      logger.debug message
       puts message
       return true
     end
@@ -52,30 +52,35 @@ module SgPermissions
   end
 
   def create_permitted?
+    logger.debug "Checking create permissions for #{self}"
     if acting_user.signed_up?
-      return true
-      # self.is_owner?(acting_user)
+      # return true
+      self.is_owner?(acting_user)
     end
     return false
   end
 
   def update_permitted?
-   return true if acting_user.administrator?
-   return true if self.is_owner?(acting_user)
-   return false
+    logger.debug "Checking update permissions for #{self}"
+    return true if acting_user.administrator?
+    return true if self.is_owner?(acting_user)
+    return false
   end
 
   def destroy_permitted?
-   return true if acting_user.administrator?
-   return true if self.is_owner?(acting_user)
-   return false
+    logger.debug "Checking destroy permissions for #{self}"
+    return true if acting_user.administrator?
+    return true if self.is_owner?(acting_user)
+    return false
   end
 
   def view_permitted?(field)
+    logger.debug "Checking view permissions for #{self}"
     true
   end
 
   def edit_permitted?(attribute)
+    logger.debug "Checking edit permissions for #{self}"
     return true if acting_user.administrator?
     return self.is_owner?(acting_user)
   end
