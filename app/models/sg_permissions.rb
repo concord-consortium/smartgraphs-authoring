@@ -62,8 +62,8 @@ module SgPermissions
   def create_permitted?
     logger.debug "Checking create permissions for #{self}"
     if acting_user.signed_up?
-      # return true
-      self.is_owner?(acting_user)
+      return true
+      # self.is_owner?(acting_user)
     end
     return false
   end
