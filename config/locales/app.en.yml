@@ -43,6 +43,7 @@ en:
       data_set:
         data: 'If this dataset is the derivative of another dataset, any data points entered here will be ignored.'
         piecewise_linear: 'If this dataset is the derivative of another dataset, check this box if the source dataset contains piecewise-linear data. Knowing whether the data is piecewise linear allows SmartGraphs to depict the derivative more accurately.'
+        line_type: 'Should Smartgraphs connect the dots?'
       page:
         name: 'this is not displayed in the runtime'
       predefined_graph_pane:
