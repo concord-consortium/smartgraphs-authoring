@@ -31,8 +31,11 @@ module SgPermissions
     current_top = self
     while (current_top.respond_to? :sg_parent)
       current_top = current_top.send(:sg_parent)
-      throw "can't find activity in #{current_top.class.to_s}" if current_top.nil?
-      return current_top if current_top.kind_of? Activity
+      if current_top.nil?
+        raise RuntimeError, "Reached top of tree and can't find activity in #{current_top.class.to_s}"
+      else
+        return current_top if current_top.kind_of? Activity
+      end
     end
   end
 
@@ -41,9 +44,14 @@ module SgPermissions
   end
   
   def is_owner?(user)
-    activity = self.sg_activity
+    begin
+      activity = self.sg_activity
+    rescue RuntimeError => e
+      message = e.message
+      activity = nil
+    end
     if activity.nil?
-      message = "cant find owner for #{self}"
+      message = "can't find owner for #{self} (no activity found)"
       logger.debug message
       puts message
       return true
