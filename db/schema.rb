@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130911142307) do
+ActiveRecord::Schema.define(:version => 20131230191731) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -199,7 +199,7 @@ ActiveRecord::Schema.define(:version => 20130911142307) do
     t.datetime "updated_at"
     t.string   "name"
     t.integer  "pick_a_point_sequence_id"
-    t.string   "parent_type",              :default => "LabelSet"
+    t.string   "parent_type"
   end
 
   add_index "graph_labels", ["parent_type", "parent_id"], :name => "index_graph_labels_on_parent_type_and_parent_id"
