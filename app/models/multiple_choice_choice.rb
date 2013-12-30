@@ -11,7 +11,7 @@ class MultipleChoiceChoice < ActiveRecord::Base
   fields do
     name      :string
     #position :integer
-    correct   :boolean
+    correct   :boolean, :default => false
     feedback  :raw_html
     timestamps
   end
