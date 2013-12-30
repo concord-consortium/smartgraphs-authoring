@@ -39,6 +39,7 @@ class LabelSequence < ActiveRecord::Base
   validates :label_count,           :numericality => true
 
   def to_hash
+    ensure_label_set
     {
       "type"            => type,
       "title"           => title,
