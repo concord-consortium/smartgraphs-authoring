@@ -51,14 +51,28 @@ describe MultipleChoiceSequence do
     describe "when using choice based hints" do
       it "should match the format specified by the generator project" do
         @multi_choice.use_sequential_feedback = false
-        json = @multi_choice.to_hash.to_json
-        the_hash = JSON.parse(json)
-        assert_equal the_hash['hints'].first['name'], @choices.first.hint_name
-        assert_equal the_hash['hints'].first['text'], @choices.first.feedback
-        assert_equal the_hash['hints'].first['choiceIndex'], @choices.first.position - 1
-        assert_equal the_hash['hints'].last['name'], @choices.last.hint_name
-        assert_equal the_hash['hints'].last['text'], @choices.last.feedback
-        assert_equal the_hash['hints'].last['choiceIndex'], @choices.last.position - 1
+        @multi_choice.to_hash['hints'].should == [
+          { "name" => "Choice choice 1 Hint",
+            "choiceIndex" => 0,
+            "text" => "feedback for choice 1",
+            "correct" => false
+          },
+          { "name"=>"Choice choice 2 Hint",
+            "choiceIndex"=>1,
+            "text"=>"feedback for choice 2",
+            "correct" => true
+          },
+          { "name"=>"Choice choice 3 Hint",
+            "choiceIndex"=>2,
+            "text"=>"feedback for choice 3",
+            "correct" => false
+          },
+          { "name"=>"Choice choice 4 Hint",
+            "choiceIndex"=>3,
+            "text"=>"feedback for choice 4",
+            "correct" => false
+          }
+        ]
       end
     end
 

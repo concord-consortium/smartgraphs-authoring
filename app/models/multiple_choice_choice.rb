@@ -28,7 +28,8 @@ class MultipleChoiceChoice < ActiveRecord::Base
     {
       "name" => hint_name,
       "choiceIndex" => (position - 1),
-      "text" => feedback
+      "text" => feedback,
+      "correct" => correct
     }
   end
 

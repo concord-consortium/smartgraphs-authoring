@@ -28,17 +28,20 @@
           {
             "name": "Choice choice a Hint",
             "choiceIndex": 0,
-            "text": "this aint right"
+            "text": "this aint right",
+            "correct": false
           },
           {
             "name": "Choice choice b Hint",
             "choiceIndex": 1,
-            "text": "You got it!"
+            "text": "You got it!",
+            "correct": true
           },
           {
             "name": "Choice choice c Hint",
             "choiceIndex": 2,
-            "text": "try choice B instead."
+            "text": "try choice B instead.",
+            "correct": false
           }
         ],
         "dataSetName": "default_data_set"
