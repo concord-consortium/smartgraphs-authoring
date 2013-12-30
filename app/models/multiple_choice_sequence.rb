@@ -112,10 +112,10 @@ class MultipleChoiceSequence < ActiveRecord::Base
   end
 
   def choices_from_hash(definition)
-    definition.each do |d|
-      self.multiple_choice_choices << MultipleChoiceChoice.from_hash({'name' => d},self.marshal_context)
-      # later we are going to have to add references to these choices
-      # for correct item number &etc.
+    definition.each_with_index do |d, i|
+      choice = MultipleChoiceChoice.from_hash({'name' => d},self.marshal_context)
+      self.multiple_choice_choices << choice
+      choice.set_list_position(i+1)
     end
     if @pending_callbacks
       @pending_callbacks.each do |callback|
