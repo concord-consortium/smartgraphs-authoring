@@ -1,17 +1,17 @@
 class MultipleChoiceChoice < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
-  
+
   # standard owner and admin permissions
   # defined in models/standard_permissions.rb
   include SgPermissions
   include SgMarshal
   sg_parent :multiple_choice_sequence
-  
+
   fields do
     name      :string
     #position :integer
-    correct   :boolean
+    correct   :boolean, :default => false
     feedback  :raw_html
     timestamps
   end
@@ -28,7 +28,8 @@ class MultipleChoiceChoice < ActiveRecord::Base
     {
       "name" => hint_name,
       "choiceIndex" => (position - 1),
-      "text" => feedback
+      "text" => feedback,
+      "correct" => correct
     }
   end
 
