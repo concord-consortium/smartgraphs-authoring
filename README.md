@@ -43,15 +43,23 @@ Or just read that file, and follow along.
 4. You might want check the existing files in the public folder and decide if they should be replaced
    or kept. Currently after doing this you can run SmartGraphs going going to:
     /static/smartgraphs/en/82b404e9816653aae3437852c272301c88eb986a/index.html
-5. Move the index.html file from the newly-built smartgraphs folder to the root of the smartgraphs-authoring
+5. ✖ Move the index.html file from the newly-built smartgraphs folder to the root of the smartgraphs-authoring
    applications public folder, and rename it smartgraphs-runtime.html
     from inside smartgraphs-authoring
     mv public/static/smartgraphs/en/{build-number}/index.html public/smartgraphs-runtime.html
-6. Add the following lines to smartgraphs-runtime.html, just after the opening of the first script tag (currently line
+6. ✖ Add the following lines to smartgraphs-runtime.html, just after the opening of the first script tag (currently line
    16):
     window.authoredActivityJSON = <%= authored_activity_json %>;
     window.showOutline = <%= show_outline %>;
     window.showEditButton = <%= show_edit_button %>;
+7. Add Mathjax support: 
+     <script type="text/javascript"
+                src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+8. *IMPORTANT*: Instead of doing the above, its probably better to
+simply edit the smartgraphs-runtime.html file, and replace the old
+smartgraphs build number with the new smartgraphs build number. But
+this might not be the case if there are large framework changes.
 
 ## How to update the generator: ##
 
