@@ -11,9 +11,11 @@ module MathjaxHelper
       <script src="/javascripts/tinymce/tinymce.min.js"></script>
       <script>
               tinymce.init({
-                plugins: [ "image", "link"],
+                plugins: [ "image", "link", "maths"],
                 menu: {},
-                toolbar: "undo redo | bullist numlist | outdent indent blockquote | bold italic | subscript superscript | link image",
+                toolbar: "undo redo | bullist numlist | outdent indent blockquote " +
+                         "| bold italic | subscript superscript | " +
+                         "| mathblock sqrt prod sum fraction | link image",
                 selector:'textarea'
               });
       </script>
