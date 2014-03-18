@@ -8,7 +8,7 @@ module MathjaxHelper
   end
   def tinymce_tags
     return <<-EOF
-      <script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+      <script src="/javascripts/tinymce/tinymce.min.js"></script>
       <script>
               tinymce.init({
                 plugins: [ "image", "link"],
