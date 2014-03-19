@@ -1,0 +1,1 @@
+This file must be here so that we can find the jars directory with sc_static, without needing to know the jar timestamp in the code.
