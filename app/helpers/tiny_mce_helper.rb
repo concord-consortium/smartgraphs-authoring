@@ -12,7 +12,7 @@ module TinyMceHelper
                 statusbar : false,
                 style_formats: [
                         {title: 'regular', block: 'p'},
-                        {title: 'big', block: 'h3'},
+                        {title: 'big', block: 'h2'},
                         {title: 'huge', block: 'h1'},
                 ],
                 selector:'textarea'
