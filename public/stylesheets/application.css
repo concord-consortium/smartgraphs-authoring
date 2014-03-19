@@ -270,14 +270,14 @@ a.button {
 		}
 
 .top-actions {
-  float: right;
+  width: 100%;
   margin-bottom: 12px;
-  clear: both;
+  text-align: right;
 }
 .bottom-actions {
-  float: right;
+  width: 100%;
   margin-bottom: 12px;
-  clear: both;
+  text-align: right;
 }
 #page_pane_ordering {
   clear: both;
