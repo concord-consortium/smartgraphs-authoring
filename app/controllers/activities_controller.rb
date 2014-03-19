@@ -33,7 +33,7 @@ class ActivitiesController < ApplicationController
   end
   
   def sg_runtime_json
-    Converter.new().convert(Activity.find(params[:id]).to_hash.to_json)
+    Converter.new().convert(Activity.find(params[:id]).to_hash.to_json).output
   end
   
   def json_text
