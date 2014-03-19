@@ -106,6 +106,22 @@
   </card:pane>
 </def>
 
+<def tag="card" for="Page">
+  <card class="page" param="default" merge>
+    <header: param>
+      <h4 param="heading"><a><name/></a></h4>
+      <div class="top-actions">
+        <delete-button label="Delete" param/>
+      </div>
+    </header:>
+    <body: param>
+      <ht key="page_sequence.collection.count" count="&this.page_sequences.size">
+         <count:page_sequences param/>
+      </ht>
+    </body:>
+  </card>
+</def>
+
 <def tag="card" for="PageSequence">
   <!-- By default a recursive tag inside a polymorphic definition just calls the base card
        So we have to explicitly set the type-->
