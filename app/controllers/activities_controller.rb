@@ -57,6 +57,7 @@ class ActivitiesController < ApplicationController
         render :text => templated_json(template_filename, binding)
       }
     end
+    cache_page(response.body, request.path)
   end
   
   show_action :student_preview do
@@ -71,6 +72,7 @@ class ActivitiesController < ApplicationController
         render :text => templated_json(template_filename, binding)
       }
     end
+    cache_page(response.body, request.path)
   end
 
   show_action :copy do
