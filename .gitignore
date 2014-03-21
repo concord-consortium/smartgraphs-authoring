@@ -14,3 +14,4 @@ db/data.*.yml
 node_modules
 chromedriver.log
 smartgraphs-authoring.sublime-workspace
+public/activities
