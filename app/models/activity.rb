@@ -9,6 +9,7 @@ class Activity < ActiveRecord::Base
   # standard owner and admin permissions
   # defined in models/standard_permissions.rb
   include SgMarshal
+  include SgRuntimeJsonCaching
 
   fields do
     name        :string, :required
@@ -33,6 +34,10 @@ class Activity < ActiveRecord::Base
   has_many   :data_sets
   has_many   :label_sets
   has_many   :animations
+
+  # --- Event Hooks   --- #
+  after_update  :remove_cached_runtime_json
+  after_touch   :remove_cached_runtime_json
 
   # --- Class methods --- #
 
@@ -127,5 +132,10 @@ class Activity < ActiveRecord::Base
   def extract_graphs
     graphs = self.pages.map { |p| [p.predefined_graph_panes,p.prediction_graph_panes,p.sensor_graph_panes]}
     graphs.flatten!
+  end
+
+  def remove_cached_runtime_json
+    # see RuntimeJsonCaching module
+    delete_cache_entries
   end
 end

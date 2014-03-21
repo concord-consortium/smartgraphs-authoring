@@ -39,8 +39,16 @@ module SgPermissions
     end
   end
 
+  def mark_activity_dirty
+    activity = self.sg_activity
+    activity.touch if activity
+  end
+
   def self.included(base)
     base.extend(ClassMethods)
+    base.class_eval do
+      after_update :mark_activity_dirty
+    end
   end
   
   def is_owner?(user)
