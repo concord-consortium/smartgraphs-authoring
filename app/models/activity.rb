@@ -14,6 +14,7 @@ class Activity < ActiveRecord::Base
   fields do
     name        :string, :required
     author_name :string
+    errors      :text
     publication_status Activity::PublicationStatus, :default => 'private'
     timestamps
   end
@@ -38,6 +39,9 @@ class Activity < ActiveRecord::Base
   # --- Event Hooks   --- #
   after_update  :remove_cached_runtime_json
   after_touch   :remove_cached_runtime_json
+
+  after_update  :validate_runtime_json
+  after_touch   :validate_runtime_json
 
   # --- Class methods --- #
 
@@ -134,8 +138,22 @@ class Activity < ActiveRecord::Base
     graphs.flatten!
   end
 
-  def remove_cached_runtime_json
-    # see RuntimeJsonCaching module
-    delete_cache_entries
+  def validate_runtime_json
+    if run_conversion
+      # see RuntimeJsonCaching module
+      delete_cache_entries
+    end
   end
+   
+  def to_json
+    to_hash.to_json
+  end
+
+  def run_conversion
+    converter = Converter.new()
+    converter.convert(to_json)
+    return true unless convert.has_errors?
+    return false
+  end
+
 end
