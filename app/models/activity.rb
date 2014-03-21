@@ -37,8 +37,6 @@ class Activity < ActiveRecord::Base
   has_many   :animations
 
   # --- Event Hooks   --- #
-  after_update  :remove_cached_runtime_json
-  after_touch   :remove_cached_runtime_json
 
   after_update  :validate_runtime_json
   after_touch   :validate_runtime_json
@@ -152,7 +150,7 @@ class Activity < ActiveRecord::Base
   def run_conversion
     converter = Converter.new()
     converter.convert(to_json)
-    return true unless convert.has_errors?
+    return true unless converter.has_errors?
     return false
   end
 
