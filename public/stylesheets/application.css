@@ -268,3 +268,17 @@ a.button {
 		.checkList .checkItem {
 			margin: 0;
 		}
+
+.top-actions {
+  width: 100%;
+  margin-bottom: 12px;
+  text-align: right;
+}
+.bottom-actions {
+  width: 100%;
+  margin-bottom: 12px;
+  text-align: right;
+}
+#page_pane_ordering {
+  clear: both;
+}

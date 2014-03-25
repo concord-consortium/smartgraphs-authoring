@@ -51,6 +51,8 @@
       <link rel="apple-touch-icon" sizes="144x144" href="/images/icon-144.png" />
       <!-- VideoJS CSS -->
       <link href="http://vjs.zencdn.net/4.1/video-js.css" rel="stylesheet" />
+      <%= mathjax_tags.html_safe %>
+      <%= tinymce_tags.html_safe %>
     </custom-scripts:>
     <footer:>
       <p id="copyright">
@@ -102,6 +104,22 @@
     </append-heading:>
     <body:></body:>
   </card:pane>
+</def>
+
+<def tag="card" for="Page">
+  <card class="page" param="default" merge>
+    <header: param>
+      <h4 param="heading"><a><name/></a></h4>
+      <div class="top-actions">
+        <delete-button label="Delete" param/>
+      </div>
+    </header:>
+    <body: param>
+      <ht key="page_sequence.collection.count" count="&this.page_sequences.size">
+         <count:page_sequences param/>
+      </ht>
+    </body:>
+  </card>
 </def>
 
 <def tag="card" for="PageSequence">
@@ -410,15 +428,21 @@ value="&animation_attribute"/>
 </extend>
 
 <extend tag="form" for="Page">
-  <old-form merge>
-    <field-list: fields="name, text" param/>
-    <after-field-list:>
-      <sortable-collection:page_panes/>
-      <add-panes-toolbar/>
-      <collection:page_sequences/>
-      <add-sequences-toolbar/>
-    </after-field-list:>
-  </old-form>
+  <form merge>
+    <div param ="top_actions">
+      <submit label="#{ht 'page.actions.save', :default=>['Save']}" param/>
+      <or-cancel param="cancel"/>
+    </div>
+    <field-list fields="name, text" param/>
+    <div param ="bottom_actions">
+      <submit label="#{ht 'page.actions.save', :default=>['Save']}" param/>
+    </div>
+    <br/>
+    <sortable-collection:page_panes/>
+    <add-panes-toolbar/>
+    <collection:page_sequences/>
+    <add-sequences-toolbar/>
+  </form>
 </extend>
 
 <extend tag="labelled-item">
@@ -1047,3 +1071,32 @@ value="&animation_attribute"/>
     </prepend-content-header:>
   </old-show-page>
 </extend>
+
+<!-- shown at urls like /pages/1-introduction/edit -->
+<def tag="edit-page" for="Page">
+  <page merge title="#{ht 'page.edit.title', :default=>['Edit Page'], :name => name(:no_wrapper => true) }">
+
+    <body: class="edit-page page" param/>
+
+    <content:>
+      <section param="content-header">
+        <h2 param="heading">
+          <ht key="page.edit.heading" name="#{name(:no_wrapper => true)}">
+            Edit Page
+          </ht>
+        </h2>
+      </section>
+
+      <section param="content-body">
+        <form param/>
+      </section>
+      <section param="content-footer">
+        <div class="bottom-actions">
+          <delete-button label="#{ht 'page.actions.delete', :default=>['Remove This Page']}" param/>
+        </div>
+      </section>
+      <br/>
+    </content:>
+
+  </page>
+</def>
