@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131230192135) do
+ActiveRecord::Schema.define(:version => 20140327180056) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(:version => 20131230192135) do
     t.string   "author_name"
     t.integer  "owner_id"
     t.string   "publication_status", :default => "private"
+    t.text     "activity_errors"
+    t.boolean  "prevent_conversion", :default => false
   end
 
   add_index "activities", ["owner_id"], :name => "index_activities_on_owner_id"

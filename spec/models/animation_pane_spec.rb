@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe AnimationPane do
-  let (:activity) { FactoryGirl.create(:activity_with_animation_pane) }
+  let (:activity) { FactoryGirl.create(:activity_with_animation_pane, :prevent_conversion => true) }
 
   let (:data_set_expression) do 
     ds = FactoryGirl.create(:data_set)

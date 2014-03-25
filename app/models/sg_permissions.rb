@@ -1,5 +1,5 @@
 module SgPermissions
-  
+  class CantFindRootError < RuntimeError; end 
   module ClassMethods
     # sg_parent :activity  
     # sg_parent :any_sequence
@@ -29,19 +29,27 @@ module SgPermissions
 
   def sg_activity
     current_top = self
+    last_top = current_top
     while (current_top.respond_to? :sg_parent)
       current_top = current_top.send(:sg_parent)
       if current_top.nil?
-        raise RuntimeError, "Reached top of tree and can't find activity in #{current_top.class.to_s}"
+        raise CantFindRootError, "Reached top of tree and can't find activity in #{last_top.class.to_s}"
       else
         return current_top if current_top.kind_of? Activity
       end
+      last_top = current_top
     end
   end
 
   def mark_activity_dirty
-    activity = self.sg_activity
-    activity.touch if activity
+    begin
+      activity = self.sg_activity
+      if activity
+        activity.validate_runtime_json unless activity.prevent_conversion?
+      end
+    rescue SgPermissions::CantFindRootError => e
+      Rails.logger.info("No activity found for #{self}: #{e}")
+    end
   end
 
   def self.included(base)
@@ -54,7 +62,7 @@ module SgPermissions
   def is_owner?(user)
     begin
       activity = self.sg_activity
-    rescue RuntimeError => e
+    rescue CantFindRootError => e
       message = e.message
       activity = nil
     end

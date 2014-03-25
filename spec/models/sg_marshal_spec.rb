@@ -2,7 +2,7 @@ require 'spec_helper'
 require_relative 'dummy_marshal.rb'
 
 describe SgMarshal do
-
+  
   let(:input_hash) { { 'attr1_key' => "attr1_value", 'attr2_key' => "attr2_value", 'Attr3Key' => "Attr3Value", 'attr4_key' => ["attr4_value"], 'attr5_key' => {'text' => "some Text" }, "attr6_key" => {:my_key => "my Value"}}}
 
   let(:underscored_hash) {  {"attr1_key"=>"attr1_value", "attr2_key"=>"attr2_value", "attr3_key"=>"Attr3Value", "attr4_key"=>["attr4_value"], "attr5_key"=>{"text"=>"some Text"}, "attr6_key"=>{:my_key=>"my Value"}} }
@@ -13,7 +13,7 @@ describe SgMarshal do
       u_hash = Hash[input_hash.map {|k,v| [k.underscore, v]}]
       u_hash['attr1_key'].should == 'attr1_value'
       u_hash['attr2_key'].should == 'attr2_value'
-      u_hash['attr3_key'].should == 'Attr3Value'    
+      u_hash['attr3_key'].should == 'Attr3Value'
       u_hash['attr4_key'].should == ['attr4_value']
       u_hash.should == underscored_hash
     end
@@ -54,11 +54,11 @@ describe SgMarshal do
       # AND it had a key 'text'
       obj.attr5_key.should == "some Text"
 
-      # This was set to nil because the input value was a Hash      
+      # This was set to nil because the input value was a Hash
       obj.attr6_key.should == nil
     end
   end
-  
+
   describe "#create_hash" do
     it "should create an internal hash that holds arg1 to from_hash method" do
       dummy =  DummyMarshal.from_hash(input_hash)
@@ -81,7 +81,7 @@ describe SgMarshal do
       dummy_marshal_obj.dummy_children[0].attr1.should == "child_val1"
       dummy_marshal_obj.dummy_children[0].attr2.should == "child_val2"
     end
-    
+
   end
 
   describe "#from_hash" do

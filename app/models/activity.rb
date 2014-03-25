@@ -12,9 +12,10 @@ class Activity < ActiveRecord::Base
   include SgRuntimeJsonCaching
 
   fields do
-    name        :string, :required
-    author_name :string
-    errors      :text
+    name               :string, :required
+    author_name        :string
+    activity_errors    :text
+    prevent_conversion         :boolean,  :default => false
     publication_status Activity::PublicationStatus, :default => 'private'
     timestamps
   end
@@ -36,10 +37,7 @@ class Activity < ActiveRecord::Base
   has_many   :label_sets
   has_many   :animations
 
-  # --- Event Hooks   --- #
-
-  after_update  :validate_runtime_json
-  after_touch   :validate_runtime_json
+  after_update :check_for_field_changes
 
   # --- Class methods --- #
 
@@ -92,7 +90,9 @@ class Activity < ActiveRecord::Base
   def copy_activity(user = self.owner)
     hash_rep = self.to_hash
     the_copy = Activity.from_hash(hash_rep)
+    raise "Activity.prevent_conversion should be true after from_hash" unless the_copy.prevent_conversion?
     the_copy.owner = user
+    the_copy.prevent_conversion = false
     the_copy.save
     return the_copy
   end
@@ -142,16 +142,40 @@ class Activity < ActiveRecord::Base
       delete_cache_entries
     end
   end
-   
+
+  def add_error(msg)
+    _errors = (activity_errors || "") << "msg" << "\n"
+    update_attribute(:activity_errors, _errors)
+  end
+  
+  def clear_errors
+    update_attribute(:activity_errors, nil)
+  end
+
+  def has_errors?
+    return (! activity_errors.nil?)
+  end
+
   def to_json
     to_hash.to_json
   end
 
   def run_conversion
+    return true if prevent_conversion?
     converter = Converter.new()
     converter.convert(to_json)
-    return true unless converter.has_errors?
-    return false
+    if converter.has_errors?
+      self.add_error "unable to generate runtime json"
+      self.add_error converter.error
+      return false
+    end
+    clear_errors
+    return true
   end
 
+  def check_for_field_changes
+    if name_changed? || author_name_changed?
+      delete_cache_entries
+    end
+  end
 end

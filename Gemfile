@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 3.0.20'
+gem 'rails', '~> 3.0'
 gem "hobo", "~> 1.3"
 gem "acts_as_list", '~> 0.1.4'
 gem "yaml_db", "0.2.2"
