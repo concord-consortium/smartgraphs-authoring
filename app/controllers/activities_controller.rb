@@ -21,6 +21,9 @@ class ActivitiesController < ApplicationController
       format.json {
         render :text => JSON.pretty_generate(@activity.to_hash)
       }
+      format.runtime_json {
+        render :text => json_text
+      }
       format.yaml {
         render :text => @activity.to_hash.to_yaml
       }
