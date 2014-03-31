@@ -41,7 +41,7 @@ class ActivitiesController < ApplicationController
         render :text => @activity.runtime_json
       }
       format.html {
-        render :text => Activity.find(params[:id]).author_runtime_html
+        render :text => @activity.author_runtime_html
         cache_page(response.body, request.path)
       }
     end
@@ -53,7 +53,7 @@ class ActivitiesController < ApplicationController
         render :text => @activity.runtime_json
       }
       format.html {
-        render :text => Activity.find(params[:id]).student_runtime_html
+        render :text => @activity.student_runtime_html
         cache_page(response.body, request.path)
       }
     end
