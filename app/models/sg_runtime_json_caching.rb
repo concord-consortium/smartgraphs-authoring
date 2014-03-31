@@ -2,10 +2,10 @@ module SgRuntimeJsonCaching
   CACHE_DIR = "#{Rails.root.to_s}/public/"
   RUNTIME_TEMPLATE = "#{CACHE_DIR}/smartgraphs-runtime.html"
 
-  def json_cache_path
+  def json_cache_path(filename)
     base = self.class.name.underscore.pluralize
     # to_param is part of hobo_model http://hobocentral.net/manual/model
-    "#{CACHE_DIR}/#{base}/#{to_param}"
+    "#{CACHE_DIR}/#{base}/#{to_param}/#{filename}"
   end
 
   def cached_files
@@ -14,7 +14,7 @@ module SgRuntimeJsonCaching
 
   def delete_cache_entries
     cached_files.each do |file|
-      path = "#{json_cache_path}/#{file}"
+      path = json_cache_path(file)
       File.delete(path) if File.exists?(path)
     end
   end
@@ -30,10 +30,14 @@ module SgRuntimeJsonCaching
 
   def student_runtime_html
     runtime_html
+    cache(result,"student_preview.html")
+    result
   end
 
   def author_runtime_html
-    runtime_html(true,true)
+    result = runtime_html(true,true)
+    cache(result,"author_preview.html")
+    result
   end
 
   def runtime_html(show_outline = false, show_edit_button = false)
@@ -41,6 +45,12 @@ module SgRuntimeJsonCaching
     template = ERB.new(File.read(RUNTIME_TEMPLATE))
     result = template.result(binding)
     result
+  end
+
+  def cache(content,name)
+    File.open(json_cache_path(name), 'w') do | file|
+      file.write(content)
+    end
   end
 end
 

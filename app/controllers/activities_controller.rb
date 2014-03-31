@@ -42,7 +42,6 @@ class ActivitiesController < ApplicationController
       }
       format.html {
         render :text => @activity.author_runtime_html
-        cache_page(response.body, request.path)
       }
     end
   end
@@ -54,7 +53,6 @@ class ActivitiesController < ApplicationController
       }
       format.html {
         render :text => @activity.student_runtime_html
-        cache_page(response.body, request.path)
       }
     end
   end
