@@ -56,6 +56,8 @@ module SgPermissions
     base.extend(ClassMethods)
     base.class_eval do
       after_update :mark_activity_dirty
+      after_create :mark_activity_dirty
+      after_destroy :mark_activity_dirty
     end
   end
   
