@@ -1,7 +1,7 @@
 module SgPermissions
-  class CantFindRootError < RuntimeError; end 
+  class CantFindRootError < RuntimeError; end
   module ClassMethods
-    # sg_parent :activity  
+    # sg_parent :activity
     # sg_parent :any_sequence
     # sg_parent :any_prompt
     def sg_parent(symbol)
@@ -17,7 +17,7 @@ module SgPermissions
         end
       elsif symbol == :any_prompt
         define_method "sg_parent" do
-          text_hint_prompt || initial_prompt_prompt || confirm_correct_prompt || give_up_prompt 
+          text_hint_prompt || initial_prompt_prompt || confirm_correct_prompt || give_up_prompt
         end
       else
         define_method "sg_parent" do
@@ -60,7 +60,7 @@ module SgPermissions
       after_destroy :mark_activity_dirty
     end
   end
-  
+
   def is_owner?(user)
     begin
       activity = self.sg_activity
