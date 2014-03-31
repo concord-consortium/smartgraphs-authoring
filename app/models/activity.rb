@@ -140,6 +140,8 @@ class Activity < ActiveRecord::Base
     if run_conversion
       # see RuntimeJsonCaching module
       delete_cache_entries
+      cache_runtimes # see sg_runtime_caching
+      clear_errors
     end
   end
 
@@ -169,7 +171,6 @@ class Activity < ActiveRecord::Base
       self.add_error converter.error
       return false
     end
-    clear_errors
     return true
   end
 

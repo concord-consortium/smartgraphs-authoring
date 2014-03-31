@@ -29,7 +29,7 @@ module SgRuntimeJsonCaching
   end
 
   def student_runtime_html
-    runtime_html
+    result = runtime_html
     cache(result,"student_preview.html")
     result
   end
@@ -38,6 +38,11 @@ module SgRuntimeJsonCaching
     result = runtime_html(true,true)
     cache(result,"author_preview.html")
     result
+  end
+
+  def cache_runtimes
+    author_runtime_html
+    student_runtime_html
   end
 
   def runtime_html(show_outline = false, show_edit_button = false)
