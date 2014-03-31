@@ -9,7 +9,7 @@ class Activity < ActiveRecord::Base
   # standard owner and admin permissions
   # defined in models/standard_permissions.rb
   include SgMarshal
-  include SgRuntimeJsonCaching
+  include SgActivityCaching
 
   fields do
     name               :string, :required
