@@ -19,7 +19,9 @@ class Activity < ActiveRecord::Base
     publication_status Activity::PublicationStatus, :default => 'private'
     timestamps
   end
-
+  def field_order
+    "name, author_name, publication_status, grade_levels, subject_areas"
+  end
   scope :public, where("publication_status = 'public'")
   scope :private, where("publication_status = 'private'")
 
