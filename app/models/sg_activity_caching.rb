@@ -53,7 +53,9 @@ module SgActivityCaching
   end
 
   def cache(content,name)
-    File.open(cache_path(name), 'w') do | file|
+    path = cache_path(name)
+    FileUtils.mkdir_p(File.dirname(path))
+    File.open(path, 'w') do | file|
       file.write(content)
     end
   end
