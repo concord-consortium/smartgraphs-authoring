@@ -15,7 +15,7 @@ module TinyMceHelper
                         {title: 'big', block: 'h2'},
                         {title: 'huge', block: 'h1'},
                 ],
-                selector:'textarea'
+                selector:'textarea:not(.data-tag)'
               });
       </script>
     EOF
