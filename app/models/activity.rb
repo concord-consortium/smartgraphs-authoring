@@ -139,16 +139,18 @@ class Activity < ActiveRecord::Base
   end
 
   def validate_runtime_json
+    clear_errors
     if run_conversion
       # see RuntimeJsonCaching module
       delete_cache_entries
       cache_runtimes # see sg_runtime_caching
-      clear_errors
     end
+    return true # Must return true to prevent AR methods from failing
   end
 
+
   def add_error(msg)
-    _errors = (activity_errors || "") << "msg" << "\n"
+    _errors = (activity_errors || "") << msg.to_s << "\n"
     update_attribute(:activity_errors, _errors)
   end
   

@@ -50,6 +50,7 @@ module SgPermissions
     rescue SgPermissions::CantFindRootError => e
       Rails.logger.info("No activity found for #{self}: #{e}")
     end
+    return true # We don't prevent saving
   end
 
   def self.included(base)
