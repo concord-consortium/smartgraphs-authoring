@@ -171,7 +171,7 @@ class Activity < ActiveRecord::Base
     converter = Converter.new()
     converter.convert(to_json)
     if converter.has_errors?
-      self.add_error "unable to generate runtime json"
+      self.add_error "Unable to generate smartgraphs activty."
       self.add_error converter.error
       return false
     end

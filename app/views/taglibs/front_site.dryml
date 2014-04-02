@@ -724,8 +724,15 @@ value="&animation_attribute"/>
   </div>
 </def>
 
+<extend tag="form" for="Activity">
+  <old-form merge>
+    <field-list: fields="&this.field_order" />
+  </old-form>
+</extend>
+
 <extend tag="show-page" for="Activity">
   <old-show-page merge>
+    <field-list: fields="&this.field_order" />
     <append-content-header:>
       <br/><br/>
       <activityCategories/>
@@ -1061,13 +1068,21 @@ value="&animation_attribute"/>
   </old-show-page>
 </extend>
 
+<def tag="activity-crumbs">
+  <if test="&!this.class.view_hints.parent && this.respond_to?(:sg_parent)">
+    <%= link_to "&laquo; Back to #{@this.sg_parent.class.to_s}: \"#{@this.sg_parent}\"".html_safe, @this.sg_parent, :class => 'parent-link page-link'%>
+  </if>
+</def>
+
+<def tag="activity-error-tag">
+  <%= activity_errors(@this) %>
+</def>
 
 <extend tag="show-page">
   <old-show-page merge>
     <prepend-content-header:>
-      <if test="&!this.class.view_hints.parent && this.respond_to?(:sg_parent)">
-        <%= link_to "&laquo; Back to #{@this.sg_parent.class.to_s}: \"#{@this.sg_parent}\"".html_safe, @this.sg_parent, :class => 'parent-link page-link'%>
-      </if>
+    <activity-crumbs/>
+    <activity-error-tag/>
     </prepend-content-header:>
   </old-show-page>
 </extend>

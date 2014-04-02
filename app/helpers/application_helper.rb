@@ -13,4 +13,13 @@ module ApplicationHelper
       @activity_context = nil
     end
   end
+
+  def activity_errors(item=nil)
+    activity    = nil
+    activity   = item if (item.class == Activity)
+    activity ||= item.sg_activity if (item.respond_to? :sg_activity)
+    return "" unless activity
+    return "" if activity.activity_errors.blank?
+    return "<div class='activity-errors'>#{activity.activity_errors}</div>".html_safe
+  end
 end
