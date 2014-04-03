@@ -125,6 +125,7 @@ module SgGraphPane
   # returns a 1-based indexed path string
   # eg page/2/pane/1
   def get_indexed_path
+    return "unknown" unless page && page.activity
     page.activity.pages.each_with_index do |pg,pg_i|
       pg.page_panes.each_with_index do |pg_pn, pn_i|
         pn = pg_pn.pane
