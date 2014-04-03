@@ -20,8 +20,8 @@ class Converter
   end
 
   # convert(string)
-  # shell out through process pipe and return STDOUT of
-  # process
+  # shell out through process pipe and read STDOUT & STDERR 
+  # of process
   def convert(string)
     self.input= string
     retval = nil
