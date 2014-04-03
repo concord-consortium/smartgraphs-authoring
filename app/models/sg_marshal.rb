@@ -21,7 +21,7 @@ module SgMarshal
       defs               = Hash[defs.map {|k,v| [k.underscore, v]}]
       object             = self.new(filter_attributes(defs))
       if object.kind_of? Activity
-        object.prevent_conversion = true
+        object.update_attribute(:prevent_conversion,true)
       end
       object.marshal_context = context || object
       object.create_hash = defs

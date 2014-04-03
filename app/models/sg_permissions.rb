@@ -44,6 +44,7 @@ module SgPermissions
   def mark_activity_dirty
     begin
       activity = self.sg_activity
+      activity.reload
       if activity
         activity.validate_runtime_json unless activity.prevent_conversion?
       end
