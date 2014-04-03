@@ -42,6 +42,8 @@ module SgPermissions
   end
 
   def mark_activity_dirty
+    # this is method can slow things down in tests.
+    return if ENV['SKIP_ACTIVITY_MARKING'] 
     begin
       activity = self.sg_activity
       activity.reload
