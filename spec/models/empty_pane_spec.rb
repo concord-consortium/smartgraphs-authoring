@@ -5,7 +5,7 @@ describe EmptyPane do
     it 'returns the parent page' do
       page = Page.create(:name => 'Dummy Page')
       page.empty_panes = [EmptyPane.create]
-      page.empty_panes.first.sg_parent.should == page
+      page.empty_panes.first.reload.sg_parent.should == page
     end
   end
 
