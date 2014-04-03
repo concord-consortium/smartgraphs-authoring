@@ -35,6 +35,7 @@ class Converter
         stderr.each_line { |line| error_msgs << line }
         stdout.each_line { |line| self.output << line }
         retval = wait_thr.value
+        self.output.chomp!
       end
       if (!retval.success?)
         if error_msgs.match(/^Error:/)
