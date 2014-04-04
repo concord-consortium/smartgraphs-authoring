@@ -40,7 +40,12 @@ class Converter
       if (!retval.success?)
         if error_msgs.match(/^Error:/)
           error_msgs = error_msgs.scan(/^Error:(.*)$/).flatten.join(" ")
+        else
+          error_msgs = "Unknown converter error"
         end
+          error_msgs.strip! # remove surrounding whitespace
+          # add a terminating period to the error message.
+          error_msgs << "." unless error_msgs.split("").last == "."
         raise ConvertError.new(error_msgs)
       end
     rescue Exception => e
