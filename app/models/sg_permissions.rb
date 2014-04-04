@@ -1,5 +1,4 @@
 module SgPermissions
-  class CantFindRootError < RuntimeError; end
   module ClassMethods
     # sg_parent :activity
     # sg_parent :any_sequence
@@ -33,7 +32,7 @@ module SgPermissions
     while (current_top.respond_to? :sg_parent)
       current_top = current_top.send(:sg_parent)
       if current_top.nil?
-        raise CantFindRootError, "Reached top of tree and can't find activity in #{last_top.class.to_s}"
+        return nil
       else
         return current_top if current_top.kind_of? Activity
       end
@@ -44,14 +43,12 @@ module SgPermissions
   def mark_activity_dirty
     # this is method can slow things down in tests.
     return if ENV['SKIP_ACTIVITY_MARKING'] 
-    begin
-      activity = self.sg_activity
+    activity = self.sg_activity
+    if activity
       activity.reload
-      if activity
-        activity.validate_runtime_json unless activity.prevent_conversion?
-      end
-    rescue SgPermissions::CantFindRootError => e
-      Rails.logger.info("No activity found for #{self}: #{e}")
+      activity.validate_runtime_json unless activity.prevent_conversion?
+    else
+      logger.info("No activity found for #{self}")
     end
     return true # We don't prevent saving
   end
@@ -66,16 +63,10 @@ module SgPermissions
   end
 
   def is_owner?(user)
-    begin
-      activity = self.sg_activity
-    rescue CantFindRootError => e
-      message = e.message
-      activity = nil
-    end
+    activity = self.sg_activity
     if activity.nil?
       message = "can't find owner for #{self} (no activity found)"
       logger.debug message
-      puts message
       return true
     end
     return activity.is_owner?(user)
