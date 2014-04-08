@@ -32,6 +32,19 @@ class ActivitiesController < ApplicationController
     JSON.pretty_generate(Activity.find(params[:id]).runtime_json)
   end
 
+  def errors
+    begin
+      current_url = params['current_url']
+      info = Rails.application.routes.recognize_path current_url
+      model = info[:controller].camelcase.singularize.constantize
+      id    = info[:id].gsub(/^(\d+)/,'\1')
+      @thing = model.find(id)
+      render :text => view_context.activity_errors(@thing)
+    rescue
+      render :nothing => true
+    end
+  end
+
   show_action :author_preview do
     hobo_show do |format|
       format.json {

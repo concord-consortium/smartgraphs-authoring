@@ -1075,7 +1075,9 @@ value="&animation_attribute"/>
 </def>
 
 <def tag="activity-error-tag">
-  <%= activity_errors(@this) %>
+  <div id="activity_errors">
+    <%= activity_errors(@this) %>
+  </div>
 </def>
 
 <extend tag="show-page">

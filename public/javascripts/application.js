@@ -10,3 +10,24 @@
 //          });
 //      }
 // });
+//
+
+var activity_error_url = "/activity_errors";
+var dom_id = "activity_errors";
+var update_activity_status = function() {
+  var current_url = window.location.pathname;
+  new Ajax.Updater(dom_id, activity_error_url, {
+    parameters: {thing: 'one', foo: 2, current_url: current_url }
+  });
+};
+
+Ajax.Responders.register({
+  onComplete: function(request,response) {
+    if (request.url === activity_error_url) {
+      return;
+    }
+    else {
+      update_activity_status();
+    }
+  }
+});
