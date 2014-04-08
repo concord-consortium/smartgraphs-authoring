@@ -1089,8 +1089,7 @@ value="&animation_attribute"/>
   </old-show-page>
 </extend>
 
-<!-- shown at urls like /pages/1-introduction/edit -->
-<def tag="edit-page" for="Page">
+<def tag="edit-page" polymorphic>
   <page merge title="#{ht 'page.edit.title', :default=>['Edit Page'], :name => name(:no_wrapper => true) }">
 
     <body: class="edit-page page" param/>
@@ -1098,9 +1097,7 @@ value="&animation_attribute"/>
     <content:>
       <section param="content-header">
         <h2 param="heading">
-          <ht key="page.edit.heading" name="#{name(:no_wrapper => true)}">
-            Edit Page
-          </ht>
+          Edit <model-name-human/>
         </h2>
       </section>
 
@@ -1109,11 +1106,150 @@ value="&animation_attribute"/>
       </section>
       <section param="content-footer">
         <div class="bottom-actions">
-          <delete-button label="#{ht 'page.actions.delete', :default=>['Remove This Page']}" param/>
+        <delete-button label="Delete" param/>
         </div>
       </section>
       <br/>
     </content:>
 
   </page>
+</def>
+
+<!-- Several edit-page tags -->
+<def tag="edit-page" for="Page">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="EmptyPane">
+  <edit-page merge/>
+</def>
+
+<def tag="edit-page" for="ImagePane">
+  <edit-page merge/>
+</def>
+
+<def tag="edit-page" for="Activity">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="AnimationPane">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="Animation">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="AnnotationInclusion">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="BestFitSequence">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="ConfirmCorrectPrompt">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="ConstructedResponseSequence">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="DataSetPane">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="DataSet">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="EmptyPane">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="GiveUpPrompt">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="GradeLevel">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="GraphLabel">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="ImagePane">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="InitialPromptPrompt">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="InstructionSequence">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="JsonActivity">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="LabelSequence">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="LabelSet">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="LineConstructionSequence">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="LinkedAnimationPane">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="MultipleChoiceChoice">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="MultipleChoiceHint">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="MultipleChoiceSequence">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="NumericSequence">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="PagePane">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="PageSequence">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="Page">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="PickAPointSequence">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="PointAxisLineVisualPrompt">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="PointCircleVisualPrompt">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="PredefinedGraphPane">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="PredictionGraphPane">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="RangeVisualPrompt">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="SensorGraphPane">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="SequenceHint">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="SlopeToolSequence">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="SubjectArea">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="TablePane">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="TextHintPrompt">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="TextHint">
+  <edit-page merge/>
+</def>
+<def tag="edit-page" for="Unit">
+  <edit-page merge/>
 </def>
