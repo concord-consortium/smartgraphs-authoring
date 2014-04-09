@@ -38,6 +38,7 @@ class Converter
         self.output.chomp!
       end
       if (!retval.success?)
+        Rails.logger.warn(error_msgs)
         if error_msgs.match(/^Error:/)
           error_msgs = error_msgs.scan(/^Error:(.*)$/).flatten.join(" ")
         else
