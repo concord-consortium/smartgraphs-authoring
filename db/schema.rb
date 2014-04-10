@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140327180056) do
+ActiveRecord::Schema.define(:version => 20140410211857) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -214,6 +214,7 @@ ActiveRecord::Schema.define(:version => 20140327180056) do
     t.datetime "updated_at"
     t.string   "license"
     t.string   "attribution"
+    t.boolean  "show_full_image"
   end
 
   create_table "initial_prompt_prompts", :force => true do |t|
