@@ -1106,7 +1106,7 @@ value="&animation_attribute"/>
       </section>
       <section param="content-footer">
         <div class="bottom-actions">
-        <delete-button label="Delete #{this.class.name.humanize}" param/>
+        <delete-button label="Delete #{model.model_name.human}" param/>
         </div>
       </section>
       <br/>
