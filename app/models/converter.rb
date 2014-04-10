@@ -32,8 +32,11 @@ class Converter
       Open3.popen3(self.converter_call) do |stdin, stdout, stderr, wait_thr|
         stdin.puts(string)
         stdin.close
-        stderr.each_line { |line| error_msgs << line }
-        stdout.each_line { |line| self.output << line }
+        if stderr.stat.size > 0
+          stderr.each_line { |line| error_msgs << line }
+        else
+          stdout.each_line { |line| self.output << line }
+        end
         retval = wait_thr.value
         self.output.chomp!
       end
