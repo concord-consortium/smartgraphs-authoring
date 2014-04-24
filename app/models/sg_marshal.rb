@@ -20,6 +20,9 @@ module SgMarshal
     def build_object_from_hash(defs, context)
       defs               = Hash[defs.map {|k,v| [k.underscore, v]}]
       object             = self.new(filter_attributes(defs))
+      if object.kind_of? Activity
+        object.update_attribute(:prevent_conversion,true)
+      end
       object.marshal_context = context || object
       object.create_hash = defs
       object.create_collections
@@ -48,7 +51,7 @@ module SgMarshal
   def marshal_context=(context)
     @marshal_context = context
   end
-  
+
   def marshal_context
     @marshal_context ||= self
     return @marshal_context
@@ -119,7 +122,7 @@ module SgMarshal
       self.add_associated(associate)
     end
   end
-      
+
   def create_hash=(defs)
     @create_hash = defs
   end
@@ -131,7 +134,7 @@ module SgMarshal
   def collections
     self.class.reflect_on_all_associations(:has_many)
   end
-  
+
   def associates
     associates  = self.class.reflect_on_all_associations(:has_one)
     associates  + self.class.reflect_on_all_associations(:belongs_to)

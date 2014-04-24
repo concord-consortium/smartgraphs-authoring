@@ -9,14 +9,19 @@ class Activity < ActiveRecord::Base
   # standard owner and admin permissions
   # defined in models/standard_permissions.rb
   include SgMarshal
+  include SgActivityCaching
 
   fields do
-    name        :string, :required
-    author_name :string
+    name               :string, :required
+    author_name        :string
+    activity_errors    :text
+    prevent_conversion         :boolean,  :default => false
     publication_status Activity::PublicationStatus, :default => 'private'
     timestamps
   end
-
+  def field_order
+    "name, author_name, publication_status, grade_levels, subject_areas"
+  end
   scope :public, where("publication_status = 'public'")
   scope :private, where("publication_status = 'private'")
 
@@ -33,6 +38,8 @@ class Activity < ActiveRecord::Base
   has_many   :data_sets
   has_many   :label_sets
   has_many   :animations
+
+  after_update :check_for_field_changes
 
   # --- Class methods --- #
 
@@ -85,7 +92,9 @@ class Activity < ActiveRecord::Base
   def copy_activity(user = self.owner)
     hash_rep = self.to_hash
     the_copy = Activity.from_hash(hash_rep)
+    raise "Activity.prevent_conversion should be true after from_hash" unless the_copy.prevent_conversion?
     the_copy.owner = user
+    the_copy.prevent_conversion = false
     the_copy.save
     return the_copy
   end
@@ -127,5 +136,51 @@ class Activity < ActiveRecord::Base
   def extract_graphs
     graphs = self.pages.map { |p| [p.predefined_graph_panes,p.prediction_graph_panes,p.sensor_graph_panes]}
     graphs.flatten!
+  end
+
+  def validate_runtime_json
+    clear_errors
+    if run_conversion
+      # see RuntimeJsonCaching module
+      delete_cache_entries
+      cache_runtimes # see sg_runtime_caching
+    end
+    return true # Must return true to prevent AR methods from failing
+  end
+
+
+  def add_error(msg)
+    _errors = (activity_errors || "") << msg.to_s << "\n"
+    update_attribute(:activity_errors, _errors)
+  end
+  
+  def clear_errors
+    update_attribute(:activity_errors, nil)
+  end
+
+  def has_errors?
+    return (! activity_errors.nil?)
+  end
+
+  def to_json
+    to_hash.to_json
+  end
+
+  def run_conversion
+    return true if prevent_conversion?
+    converter = Converter.new()
+    converter.convert(to_json)
+    if converter.has_errors?
+      self.add_error "Unable to generate smartgraphs activty."
+      self.add_error converter.error
+      return false
+    end
+    return true
+  end
+
+  def check_for_field_changes
+    if name_changed? || author_name_changed?
+      delete_cache_entries
+    end
   end
 end

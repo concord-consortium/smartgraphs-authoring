@@ -1,7 +1,6 @@
 module SgPermissions
-  
   module ClassMethods
-    # sg_parent :activity  
+    # sg_parent :activity
     # sg_parent :any_sequence
     # sg_parent :any_prompt
     def sg_parent(symbol)
@@ -17,7 +16,7 @@ module SgPermissions
         end
       elsif symbol == :any_prompt
         define_method "sg_parent" do
-          text_hint_prompt || initial_prompt_prompt || confirm_correct_prompt || give_up_prompt 
+          text_hint_prompt || initial_prompt_prompt || confirm_correct_prompt || give_up_prompt
         end
       else
         define_method "sg_parent" do
@@ -29,31 +28,45 @@ module SgPermissions
 
   def sg_activity
     current_top = self
+    last_top = current_top
     while (current_top.respond_to? :sg_parent)
       current_top = current_top.send(:sg_parent)
       if current_top.nil?
-        raise RuntimeError, "Reached top of tree and can't find activity in #{current_top.class.to_s}"
+        return nil
       else
         return current_top if current_top.kind_of? Activity
       end
+      last_top = current_top
     end
+  end
+
+  def mark_activity_dirty
+    # this is method can slow things down in tests.
+    return if ENV['SKIP_ACTIVITY_MARKING'] 
+    activity = self.sg_activity
+    if activity
+      activity.reload
+      activity.validate_runtime_json unless activity.prevent_conversion?
+    else
+      logger.info("No activity found for #{self}")
+    end
+    return true # We don't prevent saving
   end
 
   def self.included(base)
     base.extend(ClassMethods)
-  end
-  
-  def is_owner?(user)
-    begin
-      activity = self.sg_activity
-    rescue RuntimeError => e
-      message = e.message
-      activity = nil
+    base.class_eval do
+      after_update :mark_activity_dirty
+      after_create :mark_activity_dirty
+      after_destroy :mark_activity_dirty
     end
+  end
+
+  def is_owner?(user)
+    activity = self.sg_activity
     if activity.nil?
       message = "can't find owner for #{self} (no activity found)"
       logger.debug message
-      puts message
       return true
     end
     return activity.is_owner?(user)

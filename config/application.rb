@@ -47,5 +47,10 @@ module SgAuthoring
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+    config.middleware.use Rack::Environmental,
+                            :staging     => { :url => /staging\..+$/,
+                                              :color => "blueviolet" },
+                            :development => { :url => /^localhost.+$/,
+                                              :color => "red"        }
   end
 end

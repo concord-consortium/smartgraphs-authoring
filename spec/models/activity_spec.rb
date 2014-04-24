@@ -11,7 +11,7 @@ describe Activity do
   end
 
   describe "publication_status" do
-    before (:each) do
+    before(:each) do
       subject.name = "a valid name"
     end
 
@@ -101,7 +101,7 @@ describe Activity do
 
   describe "copy" do
     subject do
-      @data_set = DataSet.new(:name => "test")
+      @data_set = DataSet.create(:name => "test")
       @graph_label1 = GraphLabel.new(:text => "Graph Label 1", :name => "Label 1", :x_coord => 0.9, :y_coord => 3.2)
       @graph_label2 = GraphLabel.new(:text => "Graph Label 2", :name => "Label 2", :x_coord => 3.9, :y_coord => 5.2)
       @label_set = LabelSet.new(:name => "test label set")
@@ -135,11 +135,11 @@ describe Activity do
       @page.pick_a_point_sequences << @sequence
       @page.predefined_graph_panes << @predefined
       @original = Activity.create({
-        :name => "testing",
-                                    :data_sets => [@data_set],
-                                    :label_sets => [@label_set],
-        :pages => [@page]
-                                  })
+        :name       => "testing",
+        :data_sets  => [@data_set],
+        :label_sets => [@label_set],
+        :pages      => [@page]
+      })
       @original.copy_activity
     end
     let(:derivative) { FactoryGirl.create(:data_set, :name => 'Derivative', :derivative_of_id => @data_set.id) }

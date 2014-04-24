@@ -50,7 +50,7 @@ class SlopeToolSequence < ActiveRecord::Base
       'yMax' => y_max,
       'selectedPointsMustBeAdjacent'      => selected_points_must_be_adjacent,
       'tolerance' => tolerance,
-      'dataSetName' => data_set.name
+      'dataSetName' => data_set.nil? ? "" : data_set.name
     }
   end
 

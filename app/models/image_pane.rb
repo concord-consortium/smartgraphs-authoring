@@ -13,6 +13,7 @@ class ImagePane < ActiveRecord::Base
     url :string
     license :string
     attribution :string
+    show_full_image :boolean
     timestamps
   end
 
@@ -27,7 +28,8 @@ class ImagePane < ActiveRecord::Base
       'name' => name,
       'url' => url,
       'license' => license,
-      'attribution' => attribution
+      'attribution' => attribution,
+      'show_full_image' => show_full_image
     }
   end
 

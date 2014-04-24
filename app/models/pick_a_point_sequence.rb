@@ -96,8 +96,8 @@ class PickAPointSequence < ActiveRecord::Base
       'initialPrompt' => ip_hash,
       'giveUp' => {'text' => give_up.to_s },
       'confirmCorrect' => {'text' => confirm_correct.to_s },
-      'dataSetName' => data_set.name
     }
+    hash['dataSetName'] = data_set_name if data_set_name
     if correct_answer_x && correct_answer_y
       hash['correctAnswerPoint'] = [correct_answer_x, correct_answer_y]
     elsif correct_answer_x_min || correct_answer_y_min || correct_answer_x_max || correct_answer_y_max
@@ -140,5 +140,9 @@ class PickAPointSequence < ActiveRecord::Base
       # The only attribute which should be significant (and included in the semantic JS) is the name. The rest should be (re) built by the runtime when the student adds their label.
       self.graph_label = GraphLabel.create(:name => "Label for #{initial_prompt.to_s}", :text => "Student label", :x_coord => 0, :y_coord => 0)
     end
+  end
+  def data_set_name
+    return data_set.name if data_set
+    return nil
   end
 end

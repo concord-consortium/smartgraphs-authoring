@@ -282,3 +282,11 @@ a.button {
 #page_pane_ordering {
   clear: both;
 }
+.activity-errors {
+ padding: 0.5em;
+ background-color: red;
+ color: white;
+ font-size: 12px;
+ font-weight: bold;
+ width: 80%;
+}

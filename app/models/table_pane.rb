@@ -9,7 +9,7 @@ class TablePane < ActiveRecord::Base
   sg_parent :page
   
   fields do
-    title :string
+    title :string, :required
     x_label :string
     y_label :string
     timestamps

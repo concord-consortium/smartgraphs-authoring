@@ -19,7 +19,7 @@ class ActivitiesController < ApplicationController
   def show
     hobo_show do |format|
       format.json {
-        render :text => JSON.pretty_generate(@activity.to_hash)
+        render :text => @activity.runtime_json
       }
       format.yaml {
         render :text => @activity.to_hash.to_yaml
@@ -27,48 +27,42 @@ class ActivitiesController < ApplicationController
       format.html {}
     end
   end
-  
-  def template_filename
-    "#{Rails.root}/public/smartgraphs-runtime.html"
-  end
-  
-  def sg_runtime_json
-    Converter.new().convert(Activity.find(params[:id]).to_hash.to_json)
-  end
-  
+
   def json_text
-    JSON.pretty_generate(JSON.parse(sg_runtime_json))
+    JSON.pretty_generate(Activity.find(params[:id]).runtime_json)
   end
-  
-  def templated_json(fname, b)
-    template = ERB.new File.open(fname).read
-    template.result b
-  end 
-  
+
+  def errors
+    begin
+      current_url = params['current_url']
+      info = Rails.application.routes.recognize_path current_url
+      model = info[:controller].camelcase.singularize.constantize
+      id    = info[:id].gsub(/^(\d+)/,'\1')
+      @thing = model.find(id)
+      render :text => view_context.activity_errors(@thing)
+    rescue
+      render :nothing => true
+    end
+  end
+
   show_action :author_preview do
     hobo_show do |format|
       format.json {
-        render :text => json_text
+        render :text => @activity.runtime_json
       }
       format.html {
-        authored_activity_json = sg_runtime_json
-        show_outline = true
-        show_edit_button = true
-        render :text => templated_json(template_filename, binding)
+        render :text => @activity.author_runtime_html
       }
     end
   end
-  
+
   show_action :student_preview do
     hobo_show do |format|
       format.json {
-        render :text => json_text
+        render :text => @activity.runtime_json
       }
       format.html {
-        authored_activity_json = sg_runtime_json
-        show_outline = false
-        show_edit_button = false
-        render :text => templated_json(template_filename, binding)
+        render :text => @activity.student_runtime_html
       }
     end
   end
