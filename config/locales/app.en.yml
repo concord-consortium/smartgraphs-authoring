@@ -54,15 +54,15 @@ en:
         x_max: 'highest x value to display on the graph, i.e. the x value at the right edge of the graph'
         y_min: 'lowest y value to display on the graph, i.e. the y value at the bottom edge of the graph'
         y_max: 'highest y value to display on the graph, i.e. the y value at the top edge of the graph'
-        x_ticks: 'intervals (gaps between ticks) on the x axis'
-        y_ticks: 'intervals (gaps between ticks) on the y axis'
+        x_ticks: 'number of intervals (gaps between ticks) on the x axis'
+        y_ticks: 'number of intervals (gaps between ticks) on the y axis'
         expression: 'right hand side of the equation e.g. "3 * x + 3" or "pow(x,10) * (4 * atan( log(x) + 3))"'
         show_graph_grid: 'display grid lines within the graph when checked'
         show_tool_tip_coords: "when the mouse is over the graph, show the mouse pointer's current coordinates"
         graph_labels: "Add a label to the graph which is not part of an existing label set, if any such labels exist"
       linked_animation_pane:
-        x_ticks: 'intervals (gaps between ticks) on the x axis'
-        y_ticks: 'intervals (gaps between ticks) on the y axis'
+        x_ticks: 'number of intervals (gaps between ticks) on the x axis'
+        y_ticks: 'number of intervals (gaps between ticks) on the y axis'
       slope_tool_sequence:
         case_type: |
           Choose one of the following forms for this tool:
