@@ -1,9 +1,4 @@
 #############################################################
-#  Connection:
-#############################################################
-set :gateway, "seymour.concord.org"
-
-#############################################################
 #  Application
 #############################################################
 
@@ -14,6 +9,6 @@ set :branch, "production"
 #  Servers
 #############################################################
 
-set :domain, "ruby-vm10.concord.org"
+set :domain, "smartgraphs-authoring.concord.org"
 server domain, :app, :web
 role :db, domain, :primary => true
