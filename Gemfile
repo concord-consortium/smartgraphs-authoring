@@ -7,6 +7,7 @@ gem "yaml_db", "0.2.2"
 # csv_pirate makes it possible to do CSV exports of models with very little code. However, its "pirate" schtick extends to its method names, which means the code created to use it is difficult to read (it's not at all clear what "Class.weigh_anchor.marooon" does) so if we find a better gem to do this, let's use it.
 gem 'csv_pirate'
 gem 'rack-environmental'
+gem 'mysql2', '~> 0.2.22'
 
 group :development do
   gem 'ffi', '1.0.9'
@@ -51,9 +52,4 @@ group :test, :development do
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'poltergeist'
-end
-
-group :production do
-  # gem 'mysql'
-  gem 'mysql2', '~> 0.2.7'
 end

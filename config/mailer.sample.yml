@@ -1,17 +1,10 @@
---- 
-# change this to :smtp to actually send emails
-:delivery_method: :test
-
-# you'll need to set the hostname
-# this is used as the domain the emails come from
-:default_url_options:
-  :host: example.com
-
-# you might need to do this to use a external smtp server
-:smtp_settings: 
-  password: your_smtp_password
-  address: mail.rigse.org
-  port: 25
-  authentication: :login
-  user_name: your_smtp_username
-  domain: rigse.org
+---
+:delivery_method: :smtp
+:smtp:
+    :domain: concord.org
+    :user_name: XXXXX
+    :password: XXXX
+    :address: email-smtp.us-east-1.amazonaws.com
+    :port: 587
+    :authentication: plain
+    :enable_starttls_auto: true
