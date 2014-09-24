@@ -51,7 +51,7 @@ class ActivitiesController < ApplicationController
         render :text => @activity.runtime_json
       }
       format.html {
-        render :text => @activity.author_runtime_html
+        render :text => @activity.author_runtime_html(I18n.locale)
       }
     end
   end
@@ -62,7 +62,7 @@ class ActivitiesController < ApplicationController
         render :text => @activity.runtime_json
       }
       format.html {
-        render :text => @activity.student_runtime_html
+        render :text => @activity.student_runtime_html(I18n.locale)
       }
     end
   end
