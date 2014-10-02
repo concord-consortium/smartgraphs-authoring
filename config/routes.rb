@@ -1,6 +1,9 @@
 SgAuthoring::Application.routes.draw do
   root :to => 'front#index'
   match '/activity_errors' => 'activities#errors', :as => 'activity_errors'
+
+  match 'test/locale' => "tests#locale"
+  
   # match 'search' => 'front#search', :as => 'site_search'
 
   # The priority is based upon order of creation:

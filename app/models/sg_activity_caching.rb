@@ -28,24 +28,26 @@ module SgActivityCaching
     JSON.pretty_generate(struct)
   end
 
-  def student_runtime_html
-    result = runtime_html
-    cache(result,"student_preview.html")
+  def student_runtime_html(lang='en')
+    result = runtime_html(false,false,lang)
+    cache(result,"student_preview.#{lang}.html")
     result
   end
 
-  def author_runtime_html
-    result = runtime_html(true,true)
-    cache(result,"author_preview.html")
+  def author_runtime_html(lang='en')
+    result = runtime_html(true,true,lang)
+    cache(result,"author_preview.#{lang}.html")
     result
   end
 
-  def cache_runtimes
-    author_runtime_html
-    student_runtime_html
+  def cache_runtimes(langs=['en','es'])
+    langs.each do |lang|
+      author_runtime_html(lang)
+      student_runtime_html(lang)
+    end
   end
 
-  def runtime_html(show_outline = false, show_edit_button = false)
+  def runtime_html(show_outline = false, show_edit_button = false,lang='en')
     authored_activity_json = runtime_json
     template = ERB.new(File.read(RUNTIME_TEMPLATE))
     result = template.result(binding)

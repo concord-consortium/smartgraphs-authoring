@@ -1,6 +1,13 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+
+  before_filter :set_locale
+
+  def set_locale
+    I18n.locale = extract_locale_from_accept_language_header
+  end
+
   class << self
 
     def polymorphic_auto_actions_for(owner_association, actions)
@@ -36,4 +43,10 @@ class ApplicationController < ActionController::Base
     end
     return included
   end
+
+  private
+  def extract_locale_from_accept_language_header
+    request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+  end
+
 end
