@@ -5,7 +5,7 @@ class Activity < ActiveRecord::Base
   has_csv_pirate_ship # This lets us create a CSV serialization using csv_pirate
 
   PublicationStatus  = HoboFields::Types::EnumString.for(:public, :private)
-
+  CCProjectNames = HoboFields::Types::EnumString.for("Smartgraphs", "Graph Literacy") 
   # standard owner and admin permissions
   # defined in models/standard_permissions.rb
   include SgMarshal
@@ -17,11 +17,14 @@ class Activity < ActiveRecord::Base
     activity_errors    :text
     prevent_conversion         :boolean,  :default => false
     publication_status Activity::PublicationStatus, :default => 'private'
+    cc_project_name Activity::CCProjectNames, :default => 'Smartgraphs'
     timestamps
   end
+  
   def field_order
-    "name, author_name, publication_status, grade_levels, subject_areas"
+    "name, author_name, cc_project_name, publication_status, grade_levels, subject_areas"
   end
+
   scope :public, where("publication_status = 'public'")
   scope :private, where("publication_status = 'private'")
 
@@ -61,6 +64,7 @@ class Activity < ActiveRecord::Base
       'type' => 'Activity',
       'name' => name,
       'authorName' => author_name,
+      'ccProjectName' => cc_project_name,
       'pages' => pages.map(&:to_hash),
       'datasets' => data_sets.map(&:to_hash),
       # "Dataset" is a single English word and thus is not camel-cased.

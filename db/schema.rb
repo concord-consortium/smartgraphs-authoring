@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140410211857) do
+ActiveRecord::Schema.define(:version => 20150109211122) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20140410211857) do
     t.string   "publication_status", :default => "private"
     t.text     "activity_errors"
     t.boolean  "prevent_conversion", :default => false
+    t.string   "cc_project_name",    :default => "Smartgraphs"
   end
 
   add_index "activities", ["owner_id"], :name => "index_activities_on_owner_id"
