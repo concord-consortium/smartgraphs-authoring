@@ -1,22 +1,33 @@
+# encoding: UTF-8
+
 module SgPermissions
   module ClassMethods
     # sg_parent :activity
     # sg_parent :any_sequence
-    # sg_parent :any_prompt
     def sg_parent(symbol)
-      if symbol == :any_sequence
+      if (symbol == :any_sequence)
         define_method "sg_parent" do
-          begin
-            numeric_sequence || pick_a_point_sequence || multiple_choice_sequence || best_fit_sequence || slope_tool_sequence || constructed_response_sequence || instruction_sequence
-          rescue NameError
-            # This might be a specific prompt with a join prompt as its parent; let's try going back to its parent, which is probably a sequence
-            local_parent = text_hint_prompt || initial_prompt_prompt || confirm_correct_prompt || give_up_prompt
-            local_parent.sg_parent
+          symbols = %w[
+            numeric_sequence
+            pick_a_point_sequence
+            multiple_choice_sequence
+            best_fit_sequence
+            slope_tool_sequence
+            constructed_response_sequence
+            instruction_sequence
+            text_hint_prompt
+            initial_prompt_prompt
+            confirm_correct_prompt
+            give_up_prompt
+          ].map { |s| s.strip.to_sym }
+          found = symbols.detect do |sym|
+            self.respond_to?(sym) && self.send(sym)
           end
-        end
-      elsif symbol == :any_prompt
-        define_method "sg_parent" do
-          text_hint_prompt || initial_prompt_prompt || confirm_correct_prompt || give_up_prompt
+          if found
+            return self.send found
+          else
+            Rails.logger.error("could not find parent for #{self}")
+          end
         end
       else
         define_method "sg_parent" do
