@@ -24,7 +24,8 @@ class ConstructedResponseSequence < ActiveRecord::Base
 
   def to_hash
     hash = {
-      'type' => 'ConstructedResponseSequence',
+      "title" => title,
+      'type'  => 'ConstructedResponseSequence',
       'initialPrompt' => initial_prompt,
     }
     hash['initialContent'] = initial_content if initial_content

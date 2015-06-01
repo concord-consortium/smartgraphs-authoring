@@ -22,6 +22,7 @@ describe LineConstructionSequence do
 
     it "should produce the correct hash" do
       expected_hash = {
+        "title"               => "new line construction",
         "type"                => "LineConstructionSequence",
         "slope"               => 1.0,
         "slopeTolerance"      => 0.1,

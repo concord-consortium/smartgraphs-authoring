@@ -62,6 +62,7 @@ class LineConstructionSequence < ActiveRecord::Base
 
   def to_hash
     {
+        "title"               => title,
         "type"                => type,
         "slope"               => slope,
         "slopeTolerance"      => slope_tolerance,

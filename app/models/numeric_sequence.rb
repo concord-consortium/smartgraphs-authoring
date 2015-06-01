@@ -74,6 +74,7 @@ class NumericSequence < ActiveRecord::Base
 
   def to_hash
     hash = {
+      'title' => title,
       'type' => 'NumericSequence',
       'initialPrompt' => {'text' => initial_prompt.to_s },
       'correctAnswer' => correct_answer,
@@ -89,9 +90,11 @@ class NumericSequence < ActiveRecord::Base
   def data_set_name_from_hash(definition)
     callback = Proc.new do
       self.reload
-      found_data_set = self.page.activity.data_sets.find_by_name(definition)
-      self.data_set = found_data_set
-      self.save!
+      if self.page
+        found_data_set = self.page.activity.data_sets.find_by_name(definition)
+        self.data_set = found_data_set
+        self.save!
+      end
     end
     self.add_marshal_callback(callback)
   end
