@@ -142,6 +142,7 @@ describe Activity do
       })
       @original.copy_activity
     end
+
     let(:derivative) { FactoryGirl.create(:data_set, :name => 'Derivative', :derivative_of_id => @data_set.id) }
 
     it "should match original" do

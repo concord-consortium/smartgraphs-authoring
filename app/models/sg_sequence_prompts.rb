@@ -70,5 +70,5 @@ module SgSequencePrompts
       hash['confirmCorrect']['visualPrompts'] = confirm_correct_prompts.map {|p| p.prompt.to_hash }
     end
   end
-  
+
 end

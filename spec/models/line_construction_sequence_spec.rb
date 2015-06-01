@@ -43,5 +43,5 @@ describe LineConstructionSequence do
       @instance.to_hash.should == expected_hash
     end
   end
-  
+
 end

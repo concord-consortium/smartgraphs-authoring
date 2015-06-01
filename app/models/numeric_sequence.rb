@@ -1,14 +1,14 @@
 class NumericSequence < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
-  
+
   # standard owner and admin permissions
   # defined in models/standard_permissions.rb
   include SgPermissions
   include SgMarshal
   include SgSequencePrompts
   sg_parent :page
-  
+
   fields do
     title           :string
     initial_prompt  :raw_html
@@ -28,7 +28,7 @@ class NumericSequence < ActiveRecord::Base
   validates :give_up, :presence => true
   validates :confirm_correct, :presence => true
   validates :correct_answer, :presence => true
-  
+
   has_one :page_sequence, :as => :sequence, :dependent => :destroy
 
   has_one :page, :through => :page_sequence
