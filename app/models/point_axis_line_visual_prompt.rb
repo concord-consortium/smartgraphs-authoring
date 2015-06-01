@@ -1,14 +1,13 @@
 class PointAxisLineVisualPrompt < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
-  
+
   # standard owner and admin permissions
   # defined in models/standard_permissions.rb
   include SgPermissions
   include SgMarshal
   include SgVisualPrompt
 
-  # sg_parent :any_prompt
   sg_parent :any_sequence
 
   fields do

@@ -44,6 +44,21 @@ describe NumericSequence do
         subject.should have_key 'dataSetName'
         subject['dataSetName'].should == "dataSetA"
       end
+
+      it "Correctly represents the title" do
+        subject['title'].should == 'pick a point'
+      end
+    end
+
+    describe "from_hash" do
+      let(:the_hash) { @sequence.to_hash }
+      subject do
+        NumericSequence.build_object_from_hash(the_hash,nil)
+      end
+      it "title" do
+        the_hash['title'].should == @sequence.title
+        subject.title.should == @sequence.title
+      end
     end
   end
 
