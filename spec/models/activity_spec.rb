@@ -140,12 +140,51 @@ describe Activity do
         :label_sets => [@label_set],
         :pages      => [@page]
       })
+      @page2 = Page.new(:name => "test-2")
+      @numeric_sequence = NumericSequence.create({
+        :title  => "pick a point",
+        :initial_prompt  => "where is the midpoint",
+        :give_up => "sorry",
+        :confirm_correct => "correct",
+        :correct_answer => 0.3,
+        :data_set       => @data_set
+      })
+      @text_hint = TextHint.create({
+        name: "No",
+        text: "<p> not that one!</p>"
+      })
+      @visual_prompt = RangeVisualPrompt.create({
+        name: "RangeVisualPrompt",
+        x_min: 0,
+        x_max: 10,
+        color: "#fee"
+      })
+      @text_hint_prompt = TextHintPrompt.create({
+        prompt: @visual_prompt
+      })
+      @text_hint.text_hint_prompts << @text_hint_prompt
+      @numeric_sequence.text_hints << @text_hint
+      @page2.numeric_sequences << @numeric_sequence
+      @original.pages << @page2
       @original.copy_activity
     end
+
     let(:derivative) { FactoryGirl.create(:data_set, :name => 'Derivative', :derivative_of_id => @data_set.id) }
 
     it "should match original" do
       subject.to_hash.should == @original.to_hash
+    end
+
+    it "should generate valid json" do
+      subject.validate_runtime_json.should be_true
+    end
+
+    it "should have two pages" do
+      subject.pages.should have(2).pages
+    end
+
+    it "should have a numeric sequence on the second page" do
+      subject.pages[1].numeric_sequences.should have(1).sequence
     end
 
     it "should have a label set with two graph labels" do

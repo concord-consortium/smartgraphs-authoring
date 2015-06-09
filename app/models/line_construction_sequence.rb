@@ -27,9 +27,9 @@ class LineConstructionSequence < ActiveRecord::Base
     y_intercept_tolerance :float,  :default => 0.1
     max_attempts          :integer, :default => 3
     initial_prompt        :raw_html
-    confirm_correct       :raw_html  
-    slope_incorrect       :raw_html  
-    y_intercept_incorrect :raw_html  
+    confirm_correct       :raw_html
+    slope_incorrect       :raw_html
+    y_intercept_incorrect :raw_html
     all_incorrect         :raw_html
     give_up               :raw_html
     timestamps
@@ -42,11 +42,11 @@ class LineConstructionSequence < ActiveRecord::Base
   has_one :page_sequence, :as => :sequence, :dependent => :destroy
   has_one :page, :through => :page_sequence
   reverse_association_of :page, 'Page#line_construction_sequences'
-  
+
   before_validation :default_text_values
 
   belongs_to :data_set
-  
+
   validates :title,                 :presence => true
   validates :initial_prompt,        :presence => true
   validates :confirm_correct,       :presence => true
@@ -62,6 +62,7 @@ class LineConstructionSequence < ActiveRecord::Base
 
   def to_hash
     {
+        "title"               => title,
         "type"                => type,
         "slope"               => slope,
         "slopeTolerance"      => slope_tolerance,
@@ -98,6 +99,6 @@ class LineConstructionSequence < ActiveRecord::Base
       # self.attributes[key] ||= value
       self.send("#{key}=", value) if self.send(key).nil? || self.send(key).empty?
     end
-  end  
+  end
 
 end

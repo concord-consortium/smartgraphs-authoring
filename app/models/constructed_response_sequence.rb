@@ -1,20 +1,20 @@
 class ConstructedResponseSequence < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
-  
+
   # standard owner and admin permissions
   # defined in models/standard_permissions.rb
   include SgPermissions
   include SgMarshal
   sg_parent :page
-  
+
   fields do
     title         :string
     initial_prompt :raw_html
     initial_content :raw_html
     timestamps
   end
-  
+
   validates :title, :presence => true
 
   has_one :page_sequence, :as => :sequence, :dependent => :destroy
@@ -24,7 +24,8 @@ class ConstructedResponseSequence < ActiveRecord::Base
 
   def to_hash
     hash = {
-      'type' => 'ConstructedResponseSequence',
+      "title" => title,
+      'type'  => 'ConstructedResponseSequence',
       'initialPrompt' => initial_prompt,
     }
     hash['initialContent'] = initial_content if initial_content
