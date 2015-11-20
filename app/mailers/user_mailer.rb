@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default :from => "no-reply@#{host}"
+  default :from => "sg-help@concord.org"
 
   def forgot_password(user, key)
     @user, @key = user, key
